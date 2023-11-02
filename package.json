@@ -4,7 +4,13 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.10.3",
+    "i18next": "^23.6.0",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "react-i18next": "^13.3.1"
+  },
   "devDependencies": {
     "lerna": "7.4.2"
   }
