@@ -1,9 +1,13 @@
 {
-  "name": "root",
+  "name": "linkedcare-demonstrator",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "dev": "npx lerna run dev",
+    "build": "npx lerna run build"
+  },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.10.3",
