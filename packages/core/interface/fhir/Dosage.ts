@@ -1,4 +1,7 @@
-export interface DosageInstruction {
+/**
+ * https://hl7.org/fhir/R5/dosage.html#Dosage
+ */
+export interface Dosage {
   sequence?: number;
   text: string;
   timing?: {

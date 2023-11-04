@@ -1,11 +1,14 @@
 import { Medication } from "./Medication";
 import { OrderMedicationRequest } from "./OrderMedicationRequest";
 import { Patient } from "./Patient";
-import { DosageInstruction } from "./fhir/DosageInstruction";
+import { Dosage } from "./fhir/Dosage";
 import { Organization } from "./fhir/Organization";
 import { Reference } from "./fhir/Reference";
 import { Resource } from "./fhir/Resource";
 
+/**
+ * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-linca-dipsense-documentation.html
+ */
 export interface MedicationDispense extends Resource {
   status: "completed";
   medication: Medication;
@@ -18,5 +21,5 @@ export interface MedicationDispense extends Resource {
       code: "FFC" | "FFP";
     }[];
   };
-  dosageInstruction: DosageInstruction[];
+  dosageInstruction: Dosage[];
 }

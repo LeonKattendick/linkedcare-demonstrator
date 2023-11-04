@@ -2,13 +2,16 @@ import { Medication } from "./Medication";
 import { OrderMedicationRequest } from "./OrderMedicationRequest";
 import { Patient } from "./Patient";
 import { RequestOrchestration } from "./RequestOrchestration";
-import { DosageInstruction } from "./fhir/DosageInstruction";
+import { Dosage } from "./fhir/Dosage";
 import { Identifier } from "./fhir/Identifier";
 import { Organization } from "./fhir/Organization";
 import { Practitioner } from "./fhir/Practitioner";
 import { Reference } from "./fhir/Reference";
 import { Resource } from "./fhir/Resource";
 
+/**
+ * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-linca-prescription-medication-request.html
+ */
 export interface PrescriptionMedicationRequest extends Resource {
   intent: "order";
   status: "active" | "ended" | "stopped" | "entered-in-error";
@@ -24,5 +27,5 @@ export interface PrescriptionMedicationRequest extends Resource {
   dispenseRequest: {
     dispenser: Reference<Organization>; // Pharmacy
   };
-  dosageInstruction: DosageInstruction[];
+  dosageInstruction: Dosage[];
 }
