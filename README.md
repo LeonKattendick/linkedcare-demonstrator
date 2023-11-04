@@ -8,7 +8,7 @@ Run `npm install` in the root directory.
 
 ## Development
 
-Run `npx lerna run dev` to start all three applications.
+Run `npm run dev` to start all three applications.
 The applications can be accessed under:
 
 - [Caregiver Dev](http://127.0.0.1:8080/)
@@ -17,4 +17,4 @@ The applications can be accessed under:
 
 ## Production
 
-Run `npx lerna run build` to bundle all three applications.
+Run `npx run build` to bundle all three applications.
