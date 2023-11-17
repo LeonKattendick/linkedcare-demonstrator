@@ -1,6 +1,6 @@
 import { Medication } from "./Medication";
-import { OrderMedicationRequest } from "./OrderMedicationRequest";
 import { Patient } from "./Patient";
+import { PrescriptionMedicationRequest } from "./PrescriptionMedicationRequest";
 import { Dosage } from "./fhir/Dosage";
 import { Organization } from "./fhir/Organization";
 import { Reference } from "./fhir/Reference";
@@ -14,7 +14,7 @@ export interface MedicationDispense extends Resource {
   medication: Medication;
   subject: Reference<Patient>;
   performer: Reference<Organization>; // Pharmacy
-  authorizingPrescription: Reference<OrderMedicationRequest>;
+  authorizingPrescription: Reference<PrescriptionMedicationRequest>;
   type: {
     coding: {
       system: "http://terminology.hl7.org/CodeSystem/v3-ActCode";
