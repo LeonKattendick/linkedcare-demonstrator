@@ -1,6 +1,6 @@
 import { Medication } from "./Medication";
-import { OrderMedicationRequest } from "./OrderMedicationRequest";
 import { Patient } from "./Patient";
+import { PRESCRIPTION_PROFILE_LINK } from "./PrescriptionMedicationRequest";
 import { RequestOrchestration } from "./RequestOrchestration";
 import { Dosage } from "./fhir/Dosage";
 import { Organization } from "./fhir/Organization";
@@ -11,7 +11,7 @@ import { Resource } from "./fhir/Resource";
 export interface BaseMedicationRequest extends Resource {
   intent: "order";
   status: "active" | "ended" | "stopped" | "entered-in-error" | "cancelled" | "unknown";
-  basedOn?: Reference<OrderMedicationRequest>;
+  basedOn?: Reference<BaseMedicationRequest>;
   subject: Reference<Patient>;
   medication: Medication;
   informationSource: Reference<Organization>;
@@ -23,3 +23,7 @@ export interface BaseMedicationRequest extends Resource {
   };
   dosageInstruction: Dosage[];
 }
+
+export const isPrescribed = (request: BaseMedicationRequest) => {
+  return request.meta?.profile?.[0] === PRESCRIPTION_PROFILE_LINK;
+};
