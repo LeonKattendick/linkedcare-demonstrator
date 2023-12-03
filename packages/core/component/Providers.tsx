@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
+import "../util/i18n";
 
 export const ThemeContext = createContext({
   selectedTheme: "light",
@@ -33,7 +34,7 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
           locale={deDE}
           theme={{
             algorithm: selectedTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
-            components: { Layout: { headerPadding: 24 } },
+            components: { Layout: { headerPadding: 24, footerPadding: 18 } },
           }}
         >
           <QueryClientProvider client={queryClient}>

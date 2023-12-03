@@ -12,7 +12,6 @@ export const Header = (props: HeaderProps) => {
   const { t, i18n } = useTranslation();
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
 
-  console.log(i18n.language);
   const isGerman = i18n.language === "de-DE";
   const isLightTheme = selectedTheme === "light";
 
