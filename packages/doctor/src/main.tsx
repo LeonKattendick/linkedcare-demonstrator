@@ -1,13 +1,14 @@
-import { TestButton } from 'core/component/TestButton';
-import 'core/util/i18n';
-import ReactDOM from 'react-dom/client';
+import { Page } from "core/component/Page";
+import { Providers } from "core/component/Providers";
+import "core/util/i18n";
+import ReactDOM from "react-dom/client";
 
 const App = () => {
-  return (
-    <>
-      <TestButton />
-    </>
-  );
+  return <Page title="Doctor LINCA Demo">test</Page>;
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Providers>
+    <App />
+  </Providers>
+);

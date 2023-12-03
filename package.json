@@ -11,11 +11,16 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.10.3",
+    "axios": "^1.6.2",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
-    "react-i18next": "^13.3.1"
+    "react-i18next": "^13.3.1",
+    "react-query": "^3.39.3",
+    "react-router": "^6.20.1",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
+    "@types/node": "^20.10.2",
     "lerna": "7.4.2"
   }
 }
