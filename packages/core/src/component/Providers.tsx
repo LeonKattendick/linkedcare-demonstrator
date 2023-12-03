@@ -34,14 +34,12 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
           locale={deDE}
           theme={{
             algorithm: selectedTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
-            components: { Layout: { headerPadding: 24, footerPadding: 18 } },
+            components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
           }}
         >
           <QueryClientProvider client={queryClient}>
             {props.children}
-            {process.env.NODE_ENV !== "production" && (
-              <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-            )}
+            {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
           </QueryClientProvider>
         </ConfigProvider>
       </ThemeContext.Provider>

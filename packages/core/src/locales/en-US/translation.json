@@ -1,4 +1,6 @@
 {
   "footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
-  "connectionFailed": "Connection not possible"
+  "connectionFailed": "Connection not possible",
+  "changeLanguage": "Change language",
+  "changeTheme": "Change dark/light theme"
 }

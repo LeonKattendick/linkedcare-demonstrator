@@ -54,19 +54,23 @@ export const Header = (props: HeaderProps) => {
             icon={<FireTwoTone twoToneColor={"orange"} />}
           />
         </Tooltip>
-        <Button
-          onClick={() => {
-            i18n.changeLanguage(isGerman ? "en-US" : "de-DE");
-          }}
-          style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-          icon={<Flag country={isGerman ? "AT" : "GB"} size={15} />}
-        />
-        <Button
-          onClick={() => {
-            setSelectedTheme(isLightTheme ? "dark" : "light");
-          }}
-          icon={<BgColorsOutlined />}
-        />
+        <Tooltip title={t("changeLanguage")}>
+          <Button
+            onClick={() => {
+              i18n.changeLanguage(isGerman ? "en-US" : "de-DE");
+            }}
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            icon={<Flag country={isGerman ? "AT" : "GB"} size={15} />}
+          />
+        </Tooltip>
+        <Tooltip title={t("changeTheme")}>
+          <Button
+            onClick={() => {
+              setSelectedTheme(isLightTheme ? "dark" : "light");
+            }}
+            icon={<BgColorsOutlined />}
+          />
+        </Tooltip>
       </Space>
     </Layout.Header>
   );
