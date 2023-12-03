@@ -1,6 +1,6 @@
 import { ConfigProvider, theme } from "antd";
 import deDE from "antd/locale/de_DE";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
@@ -17,12 +17,24 @@ const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, sta
 export const Providers = (props: React.PropsWithChildren<{}>) => {
   const [selectedTheme, setSelectedTheme] = useState("light");
 
+  useEffect(() => {
+    const localTheme = localStorage.getItem("antdTheme");
+    if (localTheme) setSelectedTheme(localTheme);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("antdTheme", selectedTheme);
+  }, [selectedTheme]);
+
   return (
     <HashRouter>
       <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
         <ConfigProvider
           locale={deDE}
-          theme={{ algorithm: selectedTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm }}
+          theme={{
+            algorithm: selectedTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+            components: { Layout: { headerPadding: 24 } },
+          }}
         >
           <QueryClientProvider client={queryClient}>
             {props.children}
