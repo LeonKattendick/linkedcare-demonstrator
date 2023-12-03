@@ -10,10 +10,22 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
+      en: {
+        translation: enUS,
+      },
       "en-US": {
         translation: enUS,
       },
+      "en-GB": {
+        translation: enUS,
+      },
+      de: {
+        translation: deDE,
+      },
       "de-DE": {
+        translation: deDE,
+      },
+      "de-AT": {
         translation: deDE,
       },
     },

@@ -1,6 +1,7 @@
-import { BgColorsOutlined, CommentOutlined } from "@ant-design/icons";
+import { BgColorsOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, Space } from "antd";
 import { useContext } from "react";
+import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Providers";
 
@@ -9,10 +10,10 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
 
-  const isGerman = i18n.language === "de-DE";
+  const isGerman = ["de", "de-DE", "de-AT"].includes(i18n.language);
   const isLightTheme = selectedTheme === "light";
 
   return (
@@ -35,19 +36,15 @@ export const Header = (props: HeaderProps) => {
           onClick={() => {
             i18n.changeLanguage(isGerman ? "en-US" : "de-DE");
           }}
-          icon={<CommentOutlined />}
-        >
-          {isGerman ? t("german") : t("english")}
-        </Button>
+          style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+          icon={<Flag country={isGerman ? "AT" : "GB"} size={15} />}
+        />
         <Button
           onClick={() => {
-            i18n.changeLanguage("en");
             setSelectedTheme(isLightTheme ? "dark" : "light");
           }}
           icon={<BgColorsOutlined />}
-        >
-          {isLightTheme ? t("light") : t("dark")}
-        </Button>
+        />
       </Space>
     </Layout.Header>
   );
