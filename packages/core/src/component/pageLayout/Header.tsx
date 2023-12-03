@@ -1,8 +1,9 @@
-import { BgColorsOutlined } from "@ant-design/icons";
-import { Button, Layout, Menu, Space } from "antd";
+import { BgColorsOutlined, FireTwoTone } from "@ant-design/icons";
+import { Button, Layout, Menu, Space, Tooltip } from "antd";
 import { useContext } from "react";
 import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
+import { useGetMetadata } from "../../hook/useGetMetadata";
 import { ThemeContext } from "../Providers";
 
 interface HeaderProps {
@@ -10,8 +11,9 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
+  const { metadata, isMetadataSuccess } = useGetMetadata();
 
   const isGerman = ["de", "de-DE", "de-AT"].includes(i18n.language);
   const isLightTheme = selectedTheme === "light";
@@ -32,6 +34,26 @@ export const Header = (props: HeaderProps) => {
         })}
       />
       <Space style={{ justifySelf: "flex-end", marginLeft: "auto" }}>
+        <Tooltip
+          title={
+            isMetadataSuccess ? (
+              <>
+                Status: {metadata?.status}
+                <br />
+                FHIR Version: {metadata?.fhirVersion}
+              </>
+            ) : (
+              t("connectionFailed")
+            )
+          }
+        >
+          <Button
+            type="primary"
+            danger={!isMetadataSuccess}
+            style={{ backgroundColor: isMetadataSuccess ? "white" : "" }}
+            icon={<FireTwoTone twoToneColor={"orange"} />}
+          />
+        </Tooltip>
         <Button
           onClick={() => {
             i18n.changeLanguage(isGerman ? "en-US" : "de-DE");

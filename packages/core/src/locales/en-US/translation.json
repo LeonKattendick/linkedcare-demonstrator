@@ -1,3 +1,4 @@
 {
-  "footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien"
+  "footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
+  "connectionFailed": "Connection not possible"
 }
