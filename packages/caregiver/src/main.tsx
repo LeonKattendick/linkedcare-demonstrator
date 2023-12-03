@@ -1,5 +1,5 @@
-import { Page } from "core/component/Page";
-import { Providers } from "core/component/Providers";
+import { Page } from "core/src/component/Page";
+import { Providers } from "core/src/component/Providers";
 import ReactDOM from "react-dom/client";
 
 const App = () => {
