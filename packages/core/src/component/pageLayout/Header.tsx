@@ -1,5 +1,5 @@
 import { BgColorsOutlined, FireTwoTone } from "@ant-design/icons";
-import { Button, Layout, Menu, Space, Tooltip } from "antd";
+import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
 import { useContext } from "react";
 import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ export const Header = (props: HeaderProps) => {
   const { t, i18n } = useTranslation();
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
   const { metadata, isMetadataSuccess } = useGetMetadata();
+  const { token } = theme.useToken();
 
   const isGerman = ["de", "de-DE", "de-AT"].includes(i18n.language);
   const isLightTheme = selectedTheme === "light";
@@ -50,7 +51,10 @@ export const Header = (props: HeaderProps) => {
           <Button
             type="primary"
             danger={!isMetadataSuccess}
-            style={{ backgroundColor: isMetadataSuccess ? "white" : "" }}
+            style={{
+              backgroundColor: isMetadataSuccess ? token.colorBgContainer : "",
+              borderColor: isMetadataSuccess ? token.colorBorder : "",
+            }}
             icon={<FireTwoTone twoToneColor={"orange"} />}
           />
         </Tooltip>
