@@ -3,7 +3,6 @@ import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
 import { useContext } from "react";
 import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
-import { useGetAllPatients } from "../../hook/useGetAllPatients";
 import { useGetMetadata } from "../../hook/useGetMetadata";
 import { ThemeContext } from "../Providers";
 import { AdminButton } from "../admin/AdminButton";
@@ -16,7 +15,6 @@ export const Header = (props: HeaderProps) => {
   const { t, i18n } = useTranslation();
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
   const { metadata, isMetadataSuccess } = useGetMetadata();
-  const {} = useGetAllPatients();
   const { token } = theme.useToken();
 
   const isGerman = ["de", "de-DE", "de-AT"].includes(i18n.language);

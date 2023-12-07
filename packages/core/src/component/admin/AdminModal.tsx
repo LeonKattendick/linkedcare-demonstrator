@@ -13,10 +13,7 @@ export const AdminModal = (props: ModalProps) => {
     createPatient(patient)
       .then((res) => {
         const patient = res.data as Patient;
-        messageApi.open({
-          type: "success",
-          content: t("admin.createPatientSuccess", { name: patient.name[0].text, id: patient.id }),
-        });
+        messageApi.success(t("admin.createPatientSuccess", { name: patient.name[0].text, id: patient.id }));
       })
       .catch(() => messageApi.error(t("admin.createPatientError", { name: patient.name[0].text })));
   };
