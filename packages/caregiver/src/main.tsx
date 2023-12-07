@@ -3,7 +3,11 @@ import { Providers } from "core/src/component/Providers";
 import ReactDOM from "react-dom/client";
 
 const App = () => {
-  return <Page title="Caregiver LINCA Demo">test</Page>;
+  return (
+    <Page title="Caregiver LINCA Demo" rightMenu={<>test</>}>
+      test
+    </Page>
+  );
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

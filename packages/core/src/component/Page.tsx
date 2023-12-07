@@ -6,6 +6,7 @@ import { Header } from "./pageLayout/Header";
 
 interface PageProps {
   title: string;
+  rightMenu?: JSX.Element;
 }
 
 export const Page = (props: React.PropsWithChildren<PageProps>) => {
@@ -14,7 +15,7 @@ export const Page = (props: React.PropsWithChildren<PageProps>) => {
 
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header title={props.title} />
+      <Header title={props.title} rightMenu={props.rightMenu} />
       <Layout.Content style={{ margin: "0 24px", height: "100%" }}>
         <Layout style={{ height: "100%" }}>
           <Breadcrumbs />

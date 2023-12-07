@@ -9,9 +9,6 @@
   },
   "admin": {
     "title": "Administrative Einstellungen",
-    "createOrganizations": "Organisation anlegen",
-    "createOrganizationSuccess": "Organisation {{name}} wurde mit ID {{id}} angelegt",
-    "createOrganizationError": "Organisation {{name}} konnte nicht angelegt werden",
     "createPatients": "Patient anlegen",
     "createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
     "createPatientError": "Patient {{name}} konnte nicht angelegt werden"

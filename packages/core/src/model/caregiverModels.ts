@@ -22,4 +22,4 @@ const vogelsang: Organization = {
   name: "Haus Vogelsang",
 };
 
-export const organizationModels = [immerdar, vogelsang];
+export const caregiverModels = [immerdar, vogelsang];

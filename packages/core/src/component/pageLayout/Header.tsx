@@ -9,6 +9,7 @@ import { AdminButton } from "../admin/AdminButton";
 
 interface HeaderProps {
   title: string;
+  rightMenu?: JSX.Element;
 }
 
 export const Header = (props: HeaderProps) => {
@@ -36,6 +37,7 @@ export const Header = (props: HeaderProps) => {
         })}
       />
       <Space style={{ justifySelf: "flex-end", marginLeft: "auto" }}>
+        {props.rightMenu}
         <Tooltip
           title={
             isMetadataSuccess ? (
