@@ -7,5 +7,5 @@ import { Resource } from "./Resource";
 export interface Organization extends Resource {
   resourceType: "Organization";
   identifier: Identifier[];
-  display: string;
+  name: string;
 }

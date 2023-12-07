@@ -8,7 +8,7 @@ const immerdar: Organization = {
       value: "2.999.40.0.34.1.1.3",
     },
   ],
-  display: "Pflegedienst Immerdar",
+  name: "Pflegedienst Immerdar",
 };
 
 const vogelsang: Organization = {
@@ -19,7 +19,7 @@ const vogelsang: Organization = {
       value: "2.999.40.0.34.1.1.1",
     },
   ],
-  display: "Haus Vogelsang",
+  name: "Haus Vogelsang",
 };
 
 export const organizationModels = [immerdar, vogelsang];

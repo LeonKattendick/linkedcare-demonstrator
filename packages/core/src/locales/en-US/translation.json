@@ -9,8 +9,11 @@
   },
   "admin": {
     "title": "Administrative settings",
+    "createOrganizations": "Create organization",
+    "createOrganizationSuccess": "Organization {{name}} has been created with ID {{id}}",
+    "createOrganizationError": "Organization {{name}} couldn't be created",
     "createPatients": "Create patient",
-    "createPatientSuccess": "{{name}} has been created with ID {{id}}",
-    "createPatientError": "{{name}} couldn't be created"
+    "createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
+    "createPatientError": "Patient {{name}} couldn't be created"
   }
 }
