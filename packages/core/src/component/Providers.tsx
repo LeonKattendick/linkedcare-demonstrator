@@ -4,13 +4,9 @@ import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import "../util/i18n";
-
-export const globalThemeAtom = atom({
-  key: "globalTheme",
-  default: "light",
-});
+import { globalThemeAtom } from "../util/recoilUtil";
 
 export const CACHE_TIME = 1000 * 60 * 15;
 
@@ -33,7 +29,7 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
       <ConfigProvider
         locale={deDE}
         theme={{
-          algorithm: globalTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+          algorithm: globalTheme === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
           components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
         }}
       >

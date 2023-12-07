@@ -4,7 +4,7 @@ import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import { useGetMetadata } from "../../hook/useGetMetadata";
-import { globalThemeAtom } from "../Providers";
+import { globalThemeAtom } from "../../util/recoilUtil";
 import { AdminButton } from "../admin/AdminButton";
 
 interface HeaderProps {
