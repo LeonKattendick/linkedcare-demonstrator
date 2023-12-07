@@ -8,6 +8,9 @@
     "save": "Speichern"
   },
   "admin": {
-    "title": "Administrative Einstellungen"
+    "title": "Administrative Einstellungen",
+    "createPatients": "Patient anlegen",
+    "createPatientSuccess": "{{name}} wurde mit ID {{id}} angelegt",
+    "createPatientError": "{{name}} konnte nicht angelegt werden"
   }
 }

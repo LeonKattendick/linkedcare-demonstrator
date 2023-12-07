@@ -8,6 +8,9 @@
     "save": "Save"
   },
   "admin": {
-    "title": "Administrative settings"
+    "title": "Administrative settings",
+    "createPatients": "Create patient",
+    "createPatientSuccess": "{{name}} has been created with ID {{id}}",
+    "createPatientError": "{{name}} couldn't be created"
   }
 }
