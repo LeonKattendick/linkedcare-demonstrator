@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CapabilityStatement } from "../interface/fhir/CapabilityStatement";
+import { CapabilityStatement } from "../interface/linca/fhir/CapabilityStatement";
 
 export const getMetadata = (): Promise<CapabilityStatement> => {
   return new Promise((res, rej) => {
