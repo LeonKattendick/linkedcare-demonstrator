@@ -1,7 +1,6 @@
 import { Layout, theme } from "antd";
 import "antd/dist/reset.css";
 import { Trans, useTranslation } from "react-i18next";
-import { Breadcrumbs } from "./pageLayout/Breadcrumbs";
 import { Header } from "./pageLayout/Header";
 
 interface PageProps {
@@ -16,16 +15,12 @@ export const Page = (props: React.PropsWithChildren<PageProps>) => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Header title={props.title} rightMenu={props.rightMenu} />
-      <Layout.Content style={{ margin: "0 24px", height: "100%" }}>
+      <Layout.Content style={{ margin: "24px 24px 0 24px", height: "100%" }}>
         <Layout style={{ height: "100%" }}>
-          <Breadcrumbs />
           <div
             style={{
               height: "100%",
-              backgroundColor: token.colorBgContainer,
               color: token.colorText,
-              borderRadius: 4,
-              padding: 12,
             }}
           >
             {props.children}
