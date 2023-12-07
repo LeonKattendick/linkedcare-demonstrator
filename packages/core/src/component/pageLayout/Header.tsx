@@ -1,10 +1,10 @@
 import { BgColorsOutlined, FireTwoTone } from "@ant-design/icons";
 import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
-import { useContext } from "react";
 import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
+import { useRecoilState } from "recoil";
 import { useGetMetadata } from "../../hook/useGetMetadata";
-import { ThemeContext } from "../Providers";
+import { globalThemeAtom } from "../Providers";
 import { AdminButton } from "../admin/AdminButton";
 
 interface HeaderProps {
@@ -14,12 +14,12 @@ interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
   const { t, i18n } = useTranslation();
-  const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
+  const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
   const { metadata, isMetadataSuccess } = useGetMetadata();
   const { token } = theme.useToken();
 
   const isGerman = ["de", "de-DE", "de-AT"].includes(i18n.language);
-  const isLightTheme = selectedTheme === "light";
+  const isLightTheme = globalTheme === "light";
 
   return (
     <Layout.Header style={{ display: "flex", alignItems: "center", color: "white" }}>
@@ -73,7 +73,7 @@ export const Header = (props: HeaderProps) => {
         <Tooltip title={t("changeTheme")}>
           <Button
             onClick={() => {
-              setSelectedTheme(isLightTheme ? "dark" : "light");
+              setGlobalTheme(isLightTheme ? "dark" : "light");
             }}
             icon={<BgColorsOutlined />}
           />

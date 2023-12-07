@@ -1,6 +1,7 @@
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import ReactDOM from "react-dom/client";
+import { RecoilRoot } from "recoil";
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Providers>
-    <App />
-  </Providers>
+  <RecoilRoot>
+    <Providers>
+      <App />
+    </Providers>
+  </RecoilRoot>
 );

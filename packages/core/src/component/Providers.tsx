@@ -1,14 +1,15 @@
 import { ConfigProvider, theme } from "antd";
 import deDE from "antd/locale/de_DE";
-import { createContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
+import { atom, useRecoilState } from "recoil";
 import "../util/i18n";
 
-export const ThemeContext = createContext({
-  selectedTheme: "light",
-  setSelectedTheme: (_t: string) => {},
+export const globalThemeAtom = atom({
+  key: "globalTheme",
+  default: "light",
 });
 
 export const CACHE_TIME = 1000 * 60 * 15;
@@ -16,33 +17,31 @@ export const CACHE_TIME = 1000 * 60 * 15;
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME } } });
 
 export const Providers = (props: React.PropsWithChildren<{}>) => {
-  const [selectedTheme, setSelectedTheme] = useState("light");
+  const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
 
   useEffect(() => {
     const localTheme = localStorage.getItem("antdTheme");
-    if (localTheme) setSelectedTheme(localTheme);
+    if (localTheme) setGlobalTheme(localTheme);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("antdTheme", selectedTheme);
-  }, [selectedTheme]);
+    localStorage.setItem("antdTheme", globalTheme);
+  }, [globalTheme]);
 
   return (
     <HashRouter>
-      <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
-        <ConfigProvider
-          locale={deDE}
-          theme={{
-            algorithm: selectedTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
-            components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
-          }}
-        >
-          <QueryClientProvider client={queryClient}>
-            {props.children}
-            {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
-          </QueryClientProvider>
-        </ConfigProvider>
-      </ThemeContext.Provider>
+      <ConfigProvider
+        locale={deDE}
+        theme={{
+          algorithm: globalTheme == "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+          components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          {props.children}
+          {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
+        </QueryClientProvider>
+      </ConfigProvider>
     </HashRouter>
   );
 };
