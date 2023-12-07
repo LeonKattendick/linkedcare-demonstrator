@@ -8,6 +8,7 @@ import { Resource } from "./Resource";
  * https://hl7.org/fhir/R5/practitioner.html
  */
 export interface Practitioner extends Resource {
+  resourceType: "Practitioner";
   identifier: Identifier[];
   name: HumanName[];
   active: boolean;

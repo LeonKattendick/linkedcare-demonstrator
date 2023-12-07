@@ -9,6 +9,7 @@ import { Reference } from "./fhir/Reference";
 import { Resource } from "./fhir/Resource";
 
 export interface BaseMedicationRequest extends Resource {
+  resourceType: "MedicationRequest";
   intent: "order";
   status: "active" | "ended" | "stopped" | "entered-in-error" | "cancelled" | "unknown";
   basedOn?: Reference<BaseMedicationRequest>;

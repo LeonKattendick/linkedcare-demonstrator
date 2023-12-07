@@ -10,6 +10,7 @@ import { Resource } from "./fhir/Resource";
  * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-at-core-patient.html
  */
 export interface Patient extends Resource {
+  resourceType: "Patient";
   identifier: Identifier[]; // social security number
   name: HumanName[];
   active: boolean;

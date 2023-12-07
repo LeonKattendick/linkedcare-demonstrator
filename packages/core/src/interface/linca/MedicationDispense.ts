@@ -10,6 +10,7 @@ import { Resource } from "./fhir/Resource";
  * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-linca-dipsense-documentation.html
  */
 export interface MedicationDispense extends Resource {
+  resourceType: "MedicationDispense";
   status: "completed";
   medication: Medication;
   subject: Reference<Patient>;
