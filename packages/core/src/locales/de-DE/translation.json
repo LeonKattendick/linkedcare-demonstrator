@@ -2,5 +2,12 @@
   "footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
   "connectionFailed": "Verbindung nicht möglich",
   "changeLanguage": "Sprache ändern",
-  "changeTheme": "Hell/Dunkel umschalten"
+  "changeTheme": "Hell/Dunkel umschalten",
+  "general": {
+    "cancel": "Abbrechen",
+    "save": "Speichern"
+  },
+  "admin": {
+    "title": "Administrative Einstellungen"
+  }
 }

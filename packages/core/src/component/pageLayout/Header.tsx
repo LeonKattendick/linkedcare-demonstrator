@@ -5,6 +5,7 @@ import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
 import { useGetMetadata } from "../../hook/useGetMetadata";
 import { ThemeContext } from "../Providers";
+import { AdminButton } from "../admin/AdminButton";
 
 interface HeaderProps {
   title: string;
@@ -75,6 +76,7 @@ export const Header = (props: HeaderProps) => {
             icon={<BgColorsOutlined />}
           />
         </Tooltip>
+        <AdminButton />
       </Space>
     </Layout.Header>
   );

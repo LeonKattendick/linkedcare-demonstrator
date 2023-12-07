@@ -1,4 +1,4 @@
 export interface ModalProps {
-  visible: boolean;
-  setVisible: (b: boolean) => void;
+  open: boolean;
+  setOpen: (b: boolean) => void;
 }
