@@ -6,6 +6,8 @@ import { Organization } from "./fhir/Organization";
 import { Reference } from "./fhir/Reference";
 import { Resource } from "./fhir/Resource";
 
+export const PATIENT_PROFILE_LINK = "https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-at-core-patient";
+
 /**
  * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-at-core-patient.html
  */

@@ -1,10 +1,10 @@
 import { Identifier } from "./Identifier";
 
-interface InternalReference {
+export interface InternalReference {
   reference?: string;
 }
 
-interface ExternalReference {
+export interface ExternalReference {
   identifier?: Identifier;
   display: string;
 }
@@ -13,7 +13,3 @@ interface ExternalReference {
  * https://hl7.org/fhir/R5/references.html
  */
 export type Reference<_> = InternalReference | ExternalReference;
-
-export const isInternalReference = (r: Reference<any>) => {
-  return !!(r as InternalReference).reference;
-};

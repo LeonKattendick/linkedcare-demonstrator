@@ -1,9 +1,9 @@
-import { Patient } from "../interface/linca/Patient";
+import { PATIENT_PROFILE_LINK, Patient } from "../interface/linca/Patient";
 
 const guenterGuertelthier: Patient = {
   resourceType: "Patient",
   meta: {
-    profile: ["http://fhir.hl7.at/linkedcare/StructureDefinition/at-core-patient"],
+    profile: [PATIENT_PROFILE_LINK],
   },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "2410011234" }],
   active: true,
@@ -40,7 +40,7 @@ const guenterGuertelthier: Patient = {
 const patriziaPlatypus: Patient = {
   resourceType: "Patient",
   meta: {
-    profile: ["http://fhir.hl7.at/linkedcare/StructureDefinition/at-core-patient"],
+    profile: [PATIENT_PROFILE_LINK],
   },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "0707711234" }],
   active: true,
@@ -77,7 +77,7 @@ const patriziaPlatypus: Patient = {
 const renateRuesselOlifant: Patient = {
   resourceType: "Patient",
   meta: {
-    profile: ["http://fhir.hl7.at/linkedcare/StructureDefinition/at-core-patient"],
+    profile: [PATIENT_PROFILE_LINK],
   },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "1238100866" }],
   active: true,
@@ -89,7 +89,7 @@ const renateRuesselOlifant: Patient = {
       given: ["Renate"],
     },
   ],
-  telecom: [{ system: "phone", value: "00436641234568", use: "mobile" }],
+  telecom: [{ system: "phone", value: "00436641234569", use: "mobile" }],
   gender: "female",
   birthDate: "1966-08-10",
   address: [

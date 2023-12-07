@@ -5,6 +5,7 @@
  */
 export interface Resource {
   resourceType?:
+    | "Organization"
     | "Patient"
     | "Practitioner"
     | "RequestOrchestration"
@@ -16,9 +17,5 @@ export interface Resource {
     versionId?: string;
     lastUpdated?: string;
     profile: string[]; // contains link to structure definition
-  };
-  text?: {
-    status: "generated";
-    div: string; // HTML
   };
 }
