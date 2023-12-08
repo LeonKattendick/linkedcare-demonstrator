@@ -7,6 +7,10 @@
     "cancel": "Abbrechen",
     "save": "Speichern"
   },
+  "header": {
+    "searchPatients": "Patienten suchen",
+    "orderOverview": "Bestellungsübersicht"
+  },
   "admin": {
     "title": "Administrative Einstellungen",
     "createPatients": "Patient anlegen",

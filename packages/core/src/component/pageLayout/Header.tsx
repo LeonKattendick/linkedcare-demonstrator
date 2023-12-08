@@ -2,6 +2,7 @@ import { BgColorsOutlined, FireTwoTone } from "@ant-design/icons";
 import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
 import Flag from "react-flagkit";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { useGetMetadata } from "../../hook/useGetMetadata";
 import { globalThemeAtom } from "../../util/recoilUtil";
@@ -9,11 +10,17 @@ import { AdminButton } from "../admin/AdminButton";
 
 interface HeaderProps {
   title: string;
-  rightMenu?: JSX.Element;
+  rightMenu: JSX.Element;
+  navElements: {
+    label: string;
+    path: string;
+  }[];
 }
 
 export const Header = (props: HeaderProps) => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
   const { metadata, isMetadataSuccess } = useGetMetadata();
   const { token } = theme.useToken();
@@ -27,14 +34,13 @@ export const Header = (props: HeaderProps) => {
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={["1"]}
-        items={new Array(5).fill(null).map((_, index) => {
-          const key = index + 1;
-          return {
-            key,
-            label: `nav ${key}`,
-          };
-        })}
+        style={{ flexGrow: "1" }}
+        selectedKeys={[location.pathname]}
+        onSelect={(v) => navigate(v.key)}
+        items={props.navElements.map((v) => ({
+          key: v.path,
+          label: t(v.label),
+        }))}
       />
       <Space style={{ justifySelf: "flex-end", marginLeft: "auto" }}>
         {props.rightMenu}

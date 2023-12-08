@@ -5,9 +5,11 @@ import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
 
+const navElements = [{ label: "header.searchPatients", path: "/" }];
+
 const App = () => {
   return (
-    <Page title="Caregiver LINCA Demo" rightMenu={<CaregiverSelect />}>
+    <Page title="Caregiver LINCA Demo" rightMenu={<CaregiverSelect />} navElements={navElements}>
       <Flex gap={16} vertical style={{ height: "100%" }}>
         <Card>test</Card>
         <Flex gap={16} style={{ height: "100%" }}>

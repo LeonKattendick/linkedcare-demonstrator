@@ -7,6 +7,9 @@
     "cancel": "Cancel",
     "save": "Save"
   },
+  "header": {
+    "searchPatients": "Search patients"
+  },
   "admin": {
     "title": "Administrative settings",
     "createPatients": "Create patient",
