@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { caregiverModels } from "core/src/model/caregiverModels";
 import { useTranslation } from "react-i18next";
-import { useSelectedCaregiverAtom } from "../util/caregiverRecoilUtil";
+import { useSelectedCaregiverAtom } from "../hook/useSelectedCaregiverAtom";
 
 export const CaregiverSelect = () => {
   const { t } = useTranslation();

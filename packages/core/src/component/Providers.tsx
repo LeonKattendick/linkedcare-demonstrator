@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
+import { useGlobalThemeAtom } from "../hook/useGlobalThemeAtom";
 import "../util/i18n";
-import { useGlobalThemeAtom } from "../util/recoilUtil";
 
 export const CACHE_TIME = 1000 * 60 * 15;
 

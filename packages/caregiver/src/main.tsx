@@ -4,7 +4,7 @@ import { Providers } from "core/src/component/Providers";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
-import { useSelectedCaregiverAtom } from "./util/caregiverRecoilUtil";
+import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 
 const navElements = [{ label: "header.searchPatients", path: "/" }];
 
