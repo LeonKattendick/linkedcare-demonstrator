@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from "antd";
+import { App, ConfigProvider, theme } from "antd";
 import deDE from "antd/locale/de_DE";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -32,10 +32,12 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
           components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
         }}
       >
-        <QueryClientProvider client={queryClient}>
-          {props.children}
-          {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
-        </QueryClientProvider>
+        <App>
+          <QueryClientProvider client={queryClient}>
+            {props.children}
+            {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
+          </QueryClientProvider>
+        </App>
       </ConfigProvider>
     </HashRouter>
   );
