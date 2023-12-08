@@ -16,5 +16,8 @@
     "createPatients": "Patient anlegen",
     "createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
     "createPatientError": "Patient {{name}} konnte nicht angelegt werden"
+  },
+  "caregiver": {
+    "selectPlaceholder": "Wähle einen Pflegedienst"
   }
 }

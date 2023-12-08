@@ -4,16 +4,15 @@ import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import "../util/i18n";
-import { globalThemeAtom } from "../util/recoilUtil";
+import { useGlobalThemeAtom } from "../util/recoilUtil";
 
 export const CACHE_TIME = 1000 * 60 * 15;
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME } } });
 
 export const Providers = (props: React.PropsWithChildren<{}>) => {
-  const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
+  const { globalTheme, setGlobalTheme } = useGlobalThemeAtom();
 
   useEffect(() => {
     const localTheme = localStorage.getItem("antdTheme");

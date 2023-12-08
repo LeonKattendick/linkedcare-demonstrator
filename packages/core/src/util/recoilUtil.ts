@@ -1,6 +1,11 @@
-import { atom } from "recoil";
+import { atom, useRecoilState } from "recoil";
 
-export const globalThemeAtom = atom({
+const globalThemeAtom = atom({
   key: "globalThemeAtom",
   default: "light",
 });
+
+export const useGlobalThemeAtom = () => {
+  const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
+  return { globalTheme, setGlobalTheme };
+};

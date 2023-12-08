@@ -1,9 +1,9 @@
 import { Button, Divider, Modal, Space, message } from "antd";
 import { useTranslation } from "react-i18next";
-import { ModalProps } from "../../interface/ModalProps";
-import { Patient } from "../../interface/linca/Patient";
-import { patientModels } from "../../model/patientModels";
-import { createPatient } from "../../service/patientService";
+import { ModalProps } from "../../../interface/ModalProps";
+import { Patient } from "../../../interface/linca/Patient";
+import { patientModels } from "../../../model/patientModels";
+import { createPatient } from "../../../service/patientService";
 
 export const AdminModal = (props: ModalProps) => {
   const { t } = useTranslation();

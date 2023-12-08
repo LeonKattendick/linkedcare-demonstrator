@@ -2,7 +2,7 @@ import { ToolOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AdminModal } from "./AdminModal";
+import { AdminModal } from "../modal/AdminModal";
 
 export const AdminButton = () => {
   const { t } = useTranslation();

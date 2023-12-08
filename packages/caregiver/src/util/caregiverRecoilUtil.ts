@@ -1,7 +1,12 @@
 import { Organization } from "core/src/interface/linca/fhir/Organization";
-import { atom } from "recoil";
+import { atom, useRecoilState } from "recoil";
 
-export const selectedCaregiverAtom = atom<Organization | null>({
+const selectedCaregiverAtom = atom<Organization | null>({
   key: "selectedCaregiverAtom",
   default: null,
 });
+
+export const useSelectedCaregiverAtom = () => {
+  const [selectedCaregiver, setSelectedCaregiver] = useRecoilState(selectedCaregiverAtom);
+  return { selectedCaregiver, setSelectedCaregiver };
+};

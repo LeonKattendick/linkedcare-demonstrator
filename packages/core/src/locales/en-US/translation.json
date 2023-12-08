@@ -15,5 +15,8 @@
     "createPatients": "Create patient",
     "createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
     "createPatientError": "Patient {{name}} couldn't be created"
+  },
+  "caregiver": {
+    "selectPlaceholder": "Select a caregiver"
   }
 }

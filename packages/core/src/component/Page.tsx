@@ -1,7 +1,7 @@
 import { Layout, theme } from "antd";
 import "antd/dist/reset.css";
 import { Trans, useTranslation } from "react-i18next";
-import { Header } from "./pageLayout/Header";
+import { Header } from "./header/Header";
 
 interface PageProps {
   title: string;
