@@ -1,16 +1,9 @@
 import { Layout, theme } from "antd";
 import "antd/dist/reset.css";
 import { Trans, useTranslation } from "react-i18next";
-import { Header } from "./header/Header";
+import { Header, HeaderProps } from "./header/Header";
 
-interface PageProps {
-  title: string;
-  rightMenu: JSX.Element;
-  navElements: {
-    label: string;
-    path: string;
-  }[];
-}
+type PageProps = HeaderProps;
 
 export const Page = (props: React.PropsWithChildren<PageProps>) => {
   const { token } = theme.useToken();

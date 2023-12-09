@@ -12,6 +12,10 @@
     "doctorTitle": "Doctor LINCA Demo",
     "pharmacyTitle": "Pharmacy LINCA Demo",
     "searchPatients": "Search patients",
+    "viewPatient": "View patient",
+    "medicationPlan": "Medication plan",
+    "newOrder": "Create new order",
+    "viewOrder": "Edit order",
     "orderOverview": "Order overview"
   },
   "admin": {
@@ -22,9 +26,9 @@
   },
   "login": {
     "title": "Select a user",
-    "subtitle": "To continue the process, you must log in by selecting a created user."
+    "subtitle": "To continue the process, you must log in by selecting an already created user"
   },
   "caregiver": {
-    "selectPlaceholder": "Select a caregiver"
+    "selectPlaceholder": "Select a careservice"
   }
 }

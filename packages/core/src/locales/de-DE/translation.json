@@ -12,6 +12,10 @@
     "doctorTitle": "Hausarzt LINCA Demo",
     "pharmacyTitle": "Apotheke LINCA Demo",
     "searchPatients": "Patienten suchen",
+    "viewPatient": "Patient ansehen",
+    "medicationPlan": "Medikationsplan",
+    "newOrder": "Neue Bestellung anlegen",
+    "viewOrder": "Bestellung bearbeiten",
     "orderOverview": "Bestellungsübersicht"
   },
   "admin": {

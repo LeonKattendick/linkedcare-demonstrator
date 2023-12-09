@@ -1,14 +1,24 @@
-import { Card, Flex } from "antd";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { SelectionError } from "core/src/component/SelectionError";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes } from "react-router";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
+import { MedicationPlan } from "./component/page/MedicationPlan";
+import { Order } from "./component/page/Order";
+import { SearchPatients } from "./component/page/SearchPatients";
+import { ViewPatient } from "./component/page/ViewPatient";
 import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 
-const navElements = [{ label: "header.searchPatients", path: "/" }];
+const navElements = [
+  { key: "", label: "header.searchPatients" },
+  { key: "patient", label: "header.viewPatient", showOnVisit: true },
+  { key: "plan", label: "header.medicationPlan", showOnVisit: true },
+  { key: "create", label: "header.newOrder", showOnVisit: true },
+  { key: "order", label: "header.viewOrder", showOnVisit: true },
+];
 
 const App = () => {
   const { t } = useTranslation();
@@ -17,16 +27,14 @@ const App = () => {
   return (
     <Page title={t("header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
       {selectedCaregiver ? (
-        <Flex gap={16} vertical style={{ height: "100%" }}>
-          <Card>test</Card>
-          <Flex gap={16} style={{ height: "100%" }}>
-            <Card style={{ width: "100%", height: "100%" }}>test</Card>
-            <Flex gap={16} vertical style={{ width: "100%", height: "100%" }}>
-              <Card style={{ height: "100%" }}>test</Card>
-              <Card style={{ height: "100%" }}>test</Card>
-            </Flex>
-          </Flex>
-        </Flex>
+        <Routes>
+          <Route path="/" element={<SearchPatients />} />
+          <Route path="/patient/:patientId" element={<ViewPatient />} />
+          <Route path="/plan/:patientId" element={<MedicationPlan />} />
+          <Route path="/create" element={<Order />} />
+          <Route path="/order/:orderId" element={<Order />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       ) : (
         <SelectionError extra={<CaregiverSelect />} />
       )}
