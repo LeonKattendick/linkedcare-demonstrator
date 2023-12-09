@@ -3,7 +3,7 @@ import deDE from "antd/locale/de_DE";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { useGlobalThemeAtom } from "../hook/useGlobalThemeAtom";
 import "../util/i18n";
 
@@ -24,7 +24,7 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
   }, [globalTheme]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ConfigProvider
         locale={deDE}
         theme={{
@@ -39,6 +39,6 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
           </QueryClientProvider>
         </App>
       </ConfigProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 };

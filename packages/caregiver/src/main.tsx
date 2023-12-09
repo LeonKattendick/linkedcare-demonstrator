@@ -1,6 +1,7 @@
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { SelectionError } from "core/src/component/SelectionError";
+import { HeaderProps } from "core/src/component/header/Header";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
@@ -12,7 +13,7 @@ import { SearchPatients } from "./component/page/SearchPatients";
 import { ViewPatient } from "./component/page/ViewPatient";
 import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 
-const navElements = [
+const navElements: HeaderProps["navElements"] = [
   { key: "", label: "header.searchPatients" },
   { key: "patient", label: "header.viewPatient", showOnVisit: true },
   { key: "plan", label: "header.medicationPlan", showOnVisit: true },
@@ -31,7 +32,7 @@ const App = () => {
           <Route path="/" element={<SearchPatients />} />
           <Route path="/patient/:patientId" element={<ViewPatient />} />
           <Route path="/plan/:patientId" element={<MedicationPlan />} />
-          <Route path="/create" element={<Order />} />
+          <Route path="/create/:patientId" element={<Order />} />
           <Route path="/order/:orderId" element={<Order />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

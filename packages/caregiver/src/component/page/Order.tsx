@@ -1,12 +1,12 @@
 import { useParams } from "react-router";
 
 export const Order = () => {
-  const { orderId } = useParams();
-  const isNew = !orderId;
+  const { patientId, orderId } = useParams();
+  const isNew = !orderId && !!patientId;
 
   return (
     <>
-      Order: {orderId}, Neu: {isNew ? "Ja" : "Nein"}
+      Order: {orderId}, Patient: {patientId}, Neu: {isNew ? "Ja" : "Nein"}
     </>
   );
 };

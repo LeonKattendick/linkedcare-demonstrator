@@ -1,16 +1,20 @@
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
+import { HeaderProps } from "core/src/component/header/Header";
 import ReactDOM from "react-dom/client";
+import { useTranslation } from "react-i18next";
 import { RecoilRoot } from "recoil";
 
-const navElements = [
-  { label: "header.searchPatients", path: "/" },
-  { label: "header.orderOverview", path: "/orders" },
+const navElements: HeaderProps["navElements"] = [
+  { key: "", label: "header.searchPatients" },
+  { key: "orders", label: "header.orderOverview" },
 ];
 
 const App = () => {
+  const { t } = useTranslation();
+
   return (
-    <Page title="Doctor LINCA Demo" rightMenu={<></>} navElements={navElements}>
+    <Page title={t("header.doctorTitle")} rightMenu={<></>} navElements={navElements}>
       test
     </Page>
   );
