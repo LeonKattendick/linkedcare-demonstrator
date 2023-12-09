@@ -2,7 +2,7 @@ import { atom, useRecoilState } from "recoil";
 
 const globalThemeAtom = atom({
   key: "globalThemeAtom",
-  default: "light",
+  default: "dark",
 });
 
 export const useGlobalThemeAtom = () => {

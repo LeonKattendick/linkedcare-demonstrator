@@ -3,6 +3,7 @@ import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { SelectionError } from "core/src/component/SelectionError";
 import ReactDOM from "react-dom/client";
+import { useTranslation } from "react-i18next";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
 import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
@@ -10,10 +11,11 @@ import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 const navElements = [{ label: "header.searchPatients", path: "/" }];
 
 const App = () => {
+  const { t } = useTranslation();
   const { selectedCaregiver } = useSelectedCaregiverAtom();
 
   return (
-    <Page title="Caregiver LINCA Demo" rightMenu={<CaregiverSelect />} navElements={navElements}>
+    <Page title={t("header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
       {selectedCaregiver ? (
         <Flex gap={16} vertical style={{ height: "100%" }}>
           <Card>test</Card>

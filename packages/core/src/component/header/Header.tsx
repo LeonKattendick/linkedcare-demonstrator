@@ -1,4 +1,5 @@
 import { Layout, Menu, Space } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 import { AdminButton } from "./button/AdminButton";
@@ -16,9 +17,13 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = t(props.title);
+  }, [i18n.language]);
 
   return (
     <Layout.Header style={{ display: "flex", alignItems: "center", color: "white" }}>

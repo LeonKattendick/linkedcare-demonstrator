@@ -8,6 +8,9 @@
     "save": "Speichern"
   },
   "header": {
+    "caregiverTitle": "Pflegekraft LINCA Demo",
+    "doctorTitle": "Hausarzt LINCA Demo",
+    "pharmacyTitle": "Apotheke LINCA Demo",
     "searchPatients": "Patienten suchen",
     "orderOverview": "Bestellungsübersicht"
   },
@@ -19,7 +22,7 @@
   },
   "login": {
     "title": "Wählen Sie einen Benutzer aus",
-    "subtitle": "Um den Vorgang fortzusetzen, musst du dich einloggen, indem du einen erstellten Benutzer auswählst."
+    "subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen"
   },
   "caregiver": {
     "selectPlaceholder": "Wähle einen Pflegedienst"

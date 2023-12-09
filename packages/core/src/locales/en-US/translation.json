@@ -8,7 +8,11 @@
     "save": "Save"
   },
   "header": {
-    "searchPatients": "Search patients"
+    "caregiverTitle": "Caregiver LINCA Demo",
+    "doctorTitle": "Doctor LINCA Demo",
+    "pharmacyTitle": "Pharmacy LINCA Demo",
+    "searchPatients": "Search patients",
+    "orderOverview": "Order overview"
   },
   "admin": {
     "title": "Administrative settings",
