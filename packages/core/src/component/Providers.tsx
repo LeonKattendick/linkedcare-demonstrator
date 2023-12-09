@@ -12,7 +12,7 @@ export const CACHE_TIME = 1000 * 60 * 15;
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME } } });
 
 export const Providers = (props: React.PropsWithChildren<{}>) => {
-  const { globalTheme, setGlobalTheme } = useGlobalThemeAtom();
+  const { globalTheme, setGlobalTheme, isLightTheme } = useGlobalThemeAtom();
 
   useEffect(() => {
     const localTheme = localStorage.getItem("antdTheme");
@@ -28,7 +28,7 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
       <ConfigProvider
         locale={deDE}
         theme={{
-          algorithm: globalTheme === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+          algorithm: isLightTheme ? theme.defaultAlgorithm : theme.darkAlgorithm,
           components: { Layout: { headerPadding: 24, footerPadding: "18px 24px 18px 18px" } },
         }}
       >

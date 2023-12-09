@@ -17,6 +17,10 @@
     "createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
     "createPatientError": "Patient {{name}} konnte nicht angelegt werden"
   },
+  "login": {
+    "title": "Wählen Sie einen Benutzer aus",
+    "subtitle": "Um den Vorgang fortzusetzen, musst du dich einloggen, indem du einen erstellten Benutzer auswählst."
+  },
   "caregiver": {
     "selectPlaceholder": "Wähle einen Pflegedienst"
   }

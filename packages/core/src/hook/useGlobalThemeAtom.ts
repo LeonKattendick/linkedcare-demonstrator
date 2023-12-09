@@ -7,5 +7,7 @@ const globalThemeAtom = atom({
 
 export const useGlobalThemeAtom = () => {
   const [globalTheme, setGlobalTheme] = useRecoilState(globalThemeAtom);
-  return { globalTheme, setGlobalTheme };
+  const isLightTheme = globalTheme === "light";
+
+  return { globalTheme, setGlobalTheme, isLightTheme };
 };

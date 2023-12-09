@@ -5,9 +5,7 @@ import { useGlobalThemeAtom } from "../../../hook/useGlobalThemeAtom";
 
 export const ThemeButton = () => {
   const { t } = useTranslation();
-  const { globalTheme, setGlobalTheme } = useGlobalThemeAtom();
-
-  const isLightTheme = globalTheme === "light";
+  const { setGlobalTheme, isLightTheme } = useGlobalThemeAtom();
 
   return (
     <Tooltip title={t("changeTheme")}>

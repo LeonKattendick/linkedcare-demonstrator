@@ -16,6 +16,10 @@
     "createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
     "createPatientError": "Patient {{name}} couldn't be created"
   },
+  "login": {
+    "title": "Select a user",
+    "subtitle": "To continue the process, you must log in by selecting a created user."
+  },
   "caregiver": {
     "selectPlaceholder": "Select a caregiver"
   }

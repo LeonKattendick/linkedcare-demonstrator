@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import { caregiverModels } from "core/src/model/caregiverModels";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelectedCaregiverAtom } from "../hook/useSelectedCaregiverAtom";
 
@@ -7,11 +8,27 @@ export const CaregiverSelect = () => {
   const { t } = useTranslation();
   const { selectedCaregiver, setSelectedCaregiver } = useSelectedCaregiverAtom();
 
+  useEffect(() => {
+    const localCaregiver = localStorage.getItem("selectedCaregiver");
+    if (localCaregiver) handleSetSelectedCaregiver(localCaregiver);
+  }, []);
+
+  useEffect(() => {
+    const id = selectedCaregiver?.identifier[0].value ?? null;
+
+    if (id) localStorage.setItem("selectedCaregiver", id);
+    else localStorage.removeItem("selectedCaregiver");
+  }, [selectedCaregiver]);
+
+  const handleSetSelectedCaregiver = (id: string) => {
+    setSelectedCaregiver(caregiverModels.find((v) => v.identifier[0].value == id) ?? null);
+  };
+
   return (
     <Select
-      style={{ width: 220 }}
+      style={{ width: 220, textAlign: "left" }}
       options={caregiverModels.map((v) => ({ value: v.identifier[0].value, label: v.name }))}
-      onSelect={(v) => setSelectedCaregiver(caregiverModels.find((w) => w.identifier[0].value == v) ?? null)}
+      onSelect={(v) => handleSetSelectedCaregiver(v)}
       allowClear
       value={selectedCaregiver?.identifier[0].value}
       onClear={() => setSelectedCaregiver(null)}

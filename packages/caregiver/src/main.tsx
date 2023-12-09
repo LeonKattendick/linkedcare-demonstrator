@@ -1,6 +1,7 @@
 import { Card, Flex } from "antd";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
+import { SelectionError } from "core/src/component/SelectionError";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
@@ -25,7 +26,7 @@ const App = () => {
           </Flex>
         </Flex>
       ) : (
-        "Nicht ausgewählt"
+        <SelectionError extra={<CaregiverSelect />} />
       )}
     </Page>
   );
