@@ -5,6 +5,10 @@ import { initReactI18next } from "react-i18next";
 import deDE from "../locales/de-DE/translation.json";
 import enUS from "../locales/en-US/translation.json";
 
+export const isGerman = (l: string) => {
+  return ["de", "de-DE", "de-AT"].includes(l);
+};
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
