@@ -40,7 +40,9 @@
       "male": "Männlich",
       "female": "Weiblich",
       "birthDate": "Geburtsdatum",
-      "address": "Adresse"
+      "address": "Adresse",
+      "tooltipView": "Patient einsehen",
+      "tooltipCreate": "Neue Bestellung anlegen"
     }
   }
 }

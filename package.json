@@ -12,6 +12,7 @@
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.10.3",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-localstorage-backend": "^4.2.0",

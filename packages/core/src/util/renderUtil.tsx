@@ -1,7 +1,8 @@
+import dayjs from "dayjs";
 import { Address } from "../interface/linca/fhir/Address";
 
 export const renderBirthDate = (b: string) => {
-  return b;
+  return dayjs(b).format("DD.MM.YYYY");
 };
 
 export const renderAddress = (a: Address) => {

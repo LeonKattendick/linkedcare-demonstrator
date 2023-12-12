@@ -40,7 +40,9 @@
       "male": "Male",
       "female": "Female",
       "birthDate": "Birthdate",
-      "address": "Address"
+      "address": "Address",
+      "tooltipView": "View patient",
+      "tooltipCreate": "Create new order"
     }
   }
 }

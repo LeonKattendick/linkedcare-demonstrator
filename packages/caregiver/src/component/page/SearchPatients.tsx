@@ -1,8 +1,11 @@
-import { Card, Input, Space, Table } from "antd";
+import { EyeOutlined, MedicineBoxOutlined } from "@ant-design/icons";
+import { Button, Card, Input, Space, Table, Tooltip } from "antd";
 import { Patient } from "core/src/interface/linca/Patient";
 import { renderAddress, renderBirthDate } from "core/src/util/renderUtil";
+import dayjs from "dayjs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { useGetCaregiverPatients } from "../../hook/useGetCaregiverPatients";
 
 const compare = (search: string, patient: Patient) => {
@@ -15,6 +18,7 @@ const compare = (search: string, patient: Patient) => {
 
 export const SearchPatients = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { patients, isPatientsLoading } = useGetCaregiverPatients();
 
   const [search, setSearch] = useState("");
@@ -33,20 +37,48 @@ export const SearchPatients = () => {
           placeholder={t("searchPatients.placeholder")}
         />
         <Table dataSource={filteredPatients} bordered loading={isPatientsLoading} size="middle">
-          <Table.Column title={t("searchPatients.table.name")} render={(_, record: Patient) => record.name[0].text} />
+          <Table.Column
+            title={t("searchPatients.table.name")}
+            render={(_, record: Patient) => record.name[0].text}
+            sorter={(a, b) => a.name[0].text.localeCompare(b.name[0].text)}
+          />
           <Table.Column
             title={t("searchPatients.table.gender")}
             render={(_, record: Patient) => t(`searchPatients.table.${record.gender}`)}
+            sorter={(a, b) => a.gender.localeCompare(b.gender)}
           />
           <Table.Column
             title={t("searchPatients.table.birthDate")}
             render={(_, record: Patient) => renderBirthDate(record.birthDate)}
+            sorter={(a, b) => (dayjs(a.birthDate).isBefore(dayjs(b.birthDate)) ? -1 : 1)}
           />
           <Table.Column
             title={t("searchPatients.table.address")}
             render={(_, record: Patient) => renderAddress(record.address[0])}
           />
-          <Table.Column title={t("general.actions")} render={(_, record: Patient) => <>{record.id}</>} />
+          <Table.Column
+            title={t("general.actions")}
+            render={(_, record: Patient) => (
+              <Space>
+                <Tooltip title={t("searchPatients.table.tooltipView")}>
+                  <Button
+                    type="primary"
+                    icon={<EyeOutlined />}
+                    size="small"
+                    onClick={() => navigate(`/patient/${record.id}`)}
+                  />
+                </Tooltip>
+                <Tooltip title={t("searchPatients.table.tooltipCreate")}>
+                  <Button
+                    type="primary"
+                    icon={<MedicineBoxOutlined />}
+                    size="small"
+                    onClick={() => navigate(`/create/${record.id}`)}
+                  />
+                </Tooltip>
+              </Space>
+            )}
+          />
         </Table>
       </Space>
     </Card>
