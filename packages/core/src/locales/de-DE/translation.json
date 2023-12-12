@@ -5,7 +5,8 @@
   "changeTheme": "Hell/Dunkel umschalten",
   "general": {
     "cancel": "Abbrechen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "actions": "Aktionen"
   },
   "header": {
     "caregiverTitle": "Pflegekraft LINCA Demo",
@@ -30,5 +31,16 @@
   },
   "caregiver": {
     "selectPlaceholder": "Wähle einen Pflegedienst"
+  },
+  "searchPatients": {
+    "placeholder": "Vor- / Nachnamen eines Patienten eingeben",
+    "table": {
+      "name": "Name",
+      "gender": "Geschlecht",
+      "male": "Männlich",
+      "female": "Weiblich",
+      "birthDate": "Geburtsdatum",
+      "address": "Adresse"
+    }
   }
 }

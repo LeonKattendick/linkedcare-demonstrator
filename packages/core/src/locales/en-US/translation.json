@@ -5,7 +5,8 @@
   "changeTheme": "Change dark/light theme",
   "general": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "actions": "Actions"
   },
   "header": {
     "caregiverTitle": "Caregiver LINCA Demo",
@@ -30,5 +31,16 @@
   },
   "caregiver": {
     "selectPlaceholder": "Select a careservice"
+  },
+  "searchPatients": {
+    "placeholder": "Enter the name of a patient",
+    "table": {
+      "name": "Name",
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "birthDate": "Birthdate",
+      "address": "Address"
+    }
   }
 }
