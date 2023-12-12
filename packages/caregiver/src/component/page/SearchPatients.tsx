@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { useGetCaregiverPatients } from "../../hook/useGetCaregiverPatients";
 
 const compare = (search: string, patient: Patient) => {
@@ -39,7 +40,11 @@ export const SearchPatients = () => {
         <Table dataSource={filteredPatients} bordered loading={isPatientsLoading} size="middle">
           <Table.Column
             title={t("searchPatients.table.name")}
-            render={(_, record: Patient) => record.name[0].text}
+            render={(_, record: Patient) => (
+              <Tooltip title={t("searchPatients.table.tooltipView")}>
+                <Link to={`/patient/${record.id}`}>{record.name[0].text}</Link>
+              </Tooltip>
+            )}
             sorter={(a, b) => a.name[0].text.localeCompare(b.name[0].text)}
           />
           <Table.Column
