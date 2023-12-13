@@ -19,3 +19,7 @@ jobs:
             cd /home/linkedcare-demonstrator/
             git pull
             npm run build
+            rm -rf /var/www/html/caregiver/
+            rm -rf /var/www/html/doctor/
+            rm -rf /var/www/html/pharmacy/
+            cp -a /dist/. /var/www/html/
