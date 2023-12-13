@@ -44,5 +44,10 @@
       "tooltipView": "Patient einsehen",
       "tooltipCreate": "Neue Bestellung anlegen"
     }
+  },
+  "viewPatient": {
+    "notFoundTitle": "Patient nicht gefunden",
+    "notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
+    "medicationPlan": "Medikationsplan"
   }
 }

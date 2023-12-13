@@ -20,6 +20,7 @@ const compare = (search: string, patient: Patient) => {
 export const SearchPatients = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const { patients, isPatientsLoading } = useGetCaregiverPatients();
 
   const [search, setSearch] = useState("");
@@ -42,10 +43,14 @@ export const SearchPatients = () => {
             title={t("searchPatients.table.name")}
             render={(_, record: Patient) => (
               <Tooltip title={t("searchPatients.table.tooltipView")}>
-                <Link to={`/patient/${record.id}`}>{record.name[0].text}</Link>
+                <Link to={`/patient/${record.id}`}>{record.name.find((v) => v.use === "official")!.text}</Link>
               </Tooltip>
             )}
-            sorter={(a, b) => a.name[0].text.localeCompare(b.name[0].text)}
+            sorter={(a, b) =>
+              a.name
+                .find((v) => v.use === "official")!
+                .text.localeCompare(b.name.find((v) => v.use === "official")!.text)
+            }
           />
           <Table.Column
             title={t("searchPatients.table.gender")}

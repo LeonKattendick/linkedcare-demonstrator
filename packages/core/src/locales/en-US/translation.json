@@ -44,5 +44,10 @@
       "tooltipView": "View patient",
       "tooltipCreate": "Create new order"
     }
+  },
+  "viewPatient": {
+    "notFoundTitle": "Patient not found",
+    "notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
+    "medicationPlan": "Medication plan"
   }
 }
