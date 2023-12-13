@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build:
-    name: Building Project
+    name: Deploying Frontends
     runs-on: ubuntu-latest
     steps:
       - name: Executing SSH
