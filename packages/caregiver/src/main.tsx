@@ -1,7 +1,7 @@
 import { SelectionError } from "core/src/component/Error/SelectionError";
+import { HeaderProps } from "core/src/component/Header";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
-import { HeaderProps } from "core/src/component/header/Header";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";

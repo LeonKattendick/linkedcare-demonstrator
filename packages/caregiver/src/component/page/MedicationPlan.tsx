@@ -1,5 +1,5 @@
 import { Card, Flex, Space } from "antd";
-import { Error } from "core/src/component/Error/Error";
+import { Error } from "core/src/component/Error";
 import { Loading } from "core/src/component/Loading";
 import { useGetPatientById } from "core/src/hook/useGetPatientById";
 import { useTranslation } from "react-i18next";
