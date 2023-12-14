@@ -6,6 +6,7 @@ import { useSelectedCaregiverAtom } from "../hook/useSelectedCaregiverAtom";
 
 export const CaregiverSelect = () => {
   const { t } = useTranslation();
+
   const { selectedCaregiver, setSelectedCaregiver } = useSelectedCaregiverAtom();
 
   useEffect(() => {

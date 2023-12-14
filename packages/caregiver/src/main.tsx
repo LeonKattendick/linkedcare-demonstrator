@@ -1,6 +1,6 @@
+import { SelectionError } from "core/src/component/Error/SelectionError";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
-import { SelectionError } from "core/src/component/error/SelectionError";
 import { HeaderProps } from "core/src/component/header/Header";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";

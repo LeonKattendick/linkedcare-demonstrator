@@ -1,7 +1,7 @@
 import { Layout, theme } from "antd";
 import "antd/dist/reset.css";
 import { Trans, useTranslation } from "react-i18next";
-import { Header, HeaderProps } from "./header/Header";
+import { Header, HeaderProps } from "./Header";
 
 type PageProps = HeaderProps;
 

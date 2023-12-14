@@ -54,7 +54,7 @@ export const SearchPatients = () => {
           />
           <Table.Column
             title={t("searchPatients.table.gender")}
-            render={(_, record: Patient) => t(`searchPatients.table.${record.gender}`)}
+            render={(_, record: Patient) => t(`general.gender.${record.gender}`)}
             sorter={(a, b) => a.gender.localeCompare(b.gender)}
           />
           <Table.Column

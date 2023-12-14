@@ -1,7 +1,7 @@
 import { Menu } from "antd";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-import { HeaderProps } from "./Header";
+import { HeaderProps } from ".";
 
 type HeaderMenuProps = { navElements: HeaderProps["navElements"] };
 

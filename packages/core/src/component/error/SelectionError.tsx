@@ -1,6 +1,6 @@
 import { LockOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { Error } from "./Error";
+import { Error } from ".";
 
 interface SelectionErrorProps {
   extra: JSX.Element;

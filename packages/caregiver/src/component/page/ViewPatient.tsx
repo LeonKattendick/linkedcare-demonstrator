@@ -1,15 +1,18 @@
 import { Button, Card, Flex, Space, Table } from "antd";
-import { Error } from "core/src/component/error/Error";
+import { Error } from "core/src/component/Error";
 import { Loading } from "core/src/component/Loading";
 import { useGetPatientById } from "core/src/hook/useGetPatientById";
+import { organizationEqualsReference } from "core/src/util/matchingUtil";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
+import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
 
 export const ViewPatient = () => {
   const { t } = useTranslation();
   const { patientId } = useParams();
   const navigate = useNavigate();
 
+  const { selectedCaregiver } = useSelectedCaregiverAtom();
   const { patient, isPatientLoading } = useGetPatientById(patientId);
 
   if (isPatientLoading) return <Loading />;
@@ -21,6 +24,7 @@ export const ViewPatient = () => {
         status="error"
       />
     );
+  if (!organizationEqualsReference(selectedCaregiver, patient.managingOrganization)) return <Navigate to="/" />;
 
   return (
     <Flex gap={16} vertical style={{ height: "100%" }}>
