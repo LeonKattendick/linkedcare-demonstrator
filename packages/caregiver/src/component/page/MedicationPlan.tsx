@@ -25,9 +25,7 @@ export const MedicationPlan = () => {
     <Flex gap={16} vertical style={{ height: "100%" }}>
       <Card>
         <Space size="large">
-          <span style={{ fontSize: 20, fontWeight: "bold" }}>
-            {patient.name.find((v) => v.use === "official")?.text}
-          </span>
+          <span style={{ fontSize: 20, fontWeight: "bold" }}>{patient.name[0]?.text}</span>
         </Space>
       </Card>
       <Card style={{ height: "100%" }}>test</Card>

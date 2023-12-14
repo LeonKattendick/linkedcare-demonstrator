@@ -52,6 +52,21 @@
   "viewPatient": {
     "notFoundTitle": "Patient nicht gefunden",
     "notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
-    "medicationPlan": "Medikationsplan"
+    "medicationPlan": "Medikationsplan",
+    "patientInfo": {
+      "socialSecurityNumber": "Sozialversicherungsnummer",
+      "name": "Vor- und Nachnamen",
+      "gender": "Geschlecht",
+      "birthDate": "Geburtsdatum",
+      "contacts": "Kontaktdaten",
+      "contactSystem": "System",
+      "contactValue": "Wert",
+      "contactSystems": {
+        "phone": "Telefon",
+        "email": "E-Mail"
+      },
+      "contactUses": { "mobile": "Mobil", "home": "Zuhause", "work": "Arbeit" },
+      "address": "Adresse"
+    }
   }
 }
