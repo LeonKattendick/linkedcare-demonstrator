@@ -6,5 +6,7 @@ interface OrderTableProps {
 }
 
 export const OrderTable = ({ patient }: OrderTableProps) => {
+  console.log(patient);
+
   return <Table />;
 };
