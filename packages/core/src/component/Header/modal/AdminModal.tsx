@@ -13,15 +13,21 @@ export const AdminModal = (props: ModalProps) => {
     createPatient(patient)
       .then((res) => {
         const patient = res.data as Patient;
-        message.success(t("admin.createPatientSuccess", { name: patient.name[0].text, id: patient.id }));
+        message.success(t("translation:admin.createPatientSuccess", { name: patient.name[0].text, id: patient.id }));
       })
-      .catch(() => message.error(t("admin.createPatientError", { name: patient.name[0].text })));
+      .catch(() => message.error(t("translation:admin.createPatientError", { name: patient.name[0].text })));
   };
 
   return (
     <>
-      <Modal open={props.open} onCancel={() => props.setOpen(false)} title={t("admin.title")} footer={null} width="40%">
-        <Divider orientation="left">{t("admin.createPatients")}</Divider>
+      <Modal
+        open={props.open}
+        onCancel={() => props.setOpen(false)}
+        title={t("translation:admin.title")}
+        footer={null}
+        width="40%"
+      >
+        <Divider orientation="left">{t("translation:admin.createPatients")}</Divider>
         <Space>
           {patientModels.map((v, i) => (
             <Button type="primary" key={i} onClick={() => handleCreatePatient(v)}>

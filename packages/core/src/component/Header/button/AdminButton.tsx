@@ -12,7 +12,7 @@ export const AdminButton = () => {
   return (
     <>
       <AdminModal open={open} setOpen={setOpen} />
-      <Tooltip title={t("admin.title")}>
+      <Tooltip title={t("translation:admin.title")}>
         <Button icon={<ToolOutlined />} onClick={() => setOpen(true)} />
       </Tooltip>
     </>

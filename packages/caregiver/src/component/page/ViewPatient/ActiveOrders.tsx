@@ -19,7 +19,7 @@ export const ActiveOrders = ({ patient }: ActiveOrdersProps) => {
         patient={patient}
         title={
           <>
-            {t("viewPatient.activeOrders.title")}
+            {t("translation:viewPatient.activeOrders.title")}
             <Button
               type="primary"
               size="small"
@@ -27,7 +27,7 @@ export const ActiveOrders = ({ patient }: ActiveOrdersProps) => {
               style={{ float: "right" }}
               onClick={() => navigate(`/create/${patient.id}`)}
             >
-              {t("viewPatient.activeOrders.add")}
+              {t("translation:viewPatient.activeOrders.add")}
             </Button>
           </>
         }

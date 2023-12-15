@@ -15,8 +15,8 @@ export const MedicationPlan = () => {
   if (!patient)
     return (
       <Error
-        title={t("viewPatient.notFoundTitle")}
-        subtitle={t("viewPatient.notFoundSubtitle", { id: patientId })}
+        title={t("translation:viewPatient.notFoundTitle")}
+        subtitle={t("translation:viewPatient.notFoundSubtitle", { id: patientId })}
         status="error"
       />
     );

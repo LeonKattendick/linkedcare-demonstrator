@@ -9,5 +9,12 @@ interface SelectionErrorProps {
 export const SelectionError = (props: SelectionErrorProps) => {
   const { t } = useTranslation();
 
-  return <Error title={t("login.title")} subtitle={t("login.subtitle")} icon={<LockOutlined />} extra={props.extra} />;
+  return (
+    <Error
+      title={t("translation:login.title")}
+      subtitle={t("translation:login.subtitle")}
+      icon={<LockOutlined />}
+      extra={props.extra}
+    />
+  );
 };

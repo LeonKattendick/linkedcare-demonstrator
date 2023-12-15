@@ -11,7 +11,7 @@ const App = () => {
   const { t } = useTranslation();
 
   return (
-    <Page title={t("header.pharmacyTitle")} rightMenu={<></>} navElements={navElements}>
+    <Page title={t("translation:header.pharmacyTitle")} rightMenu={<></>} navElements={navElements}>
       test
     </Page>
   );

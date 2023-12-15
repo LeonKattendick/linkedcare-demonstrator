@@ -33,7 +33,7 @@ export const CaregiverSelect = () => {
       allowClear
       value={selectedCaregiver?.identifier[0].value}
       onClear={() => setSelectedCaregiver(null)}
-      placeholder={t("caregiver.selectPlaceholder")}
+      placeholder={t("translation:caregiver.selectPlaceholder")}
     />
   );
 };

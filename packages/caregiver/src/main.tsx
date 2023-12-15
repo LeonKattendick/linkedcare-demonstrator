@@ -26,7 +26,7 @@ const App = () => {
   const { selectedCaregiver } = useSelectedCaregiverAtom();
 
   return (
-    <Page title={t("header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
+    <Page title={t("translation:header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
       {selectedCaregiver ? (
         <Routes>
           <Route path="/" element={<SearchPatients />} />

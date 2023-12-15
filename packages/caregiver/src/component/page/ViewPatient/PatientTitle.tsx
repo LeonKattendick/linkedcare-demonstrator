@@ -23,7 +23,7 @@ export const PatientTitle = ({ patient }: PatientTitleProps) => {
           icon={<MedicineBoxOutlined />}
           size="small"
         >
-          {t("viewPatient.medicationPlan")}
+          {t("translation:viewPatient.medicationPlan")}
         </Button>
       </Flex>
     </Card>

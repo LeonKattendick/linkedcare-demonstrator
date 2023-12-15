@@ -16,23 +16,23 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
   return (
     <Card style={{ width: "70%", height: "100%" }}>
       <Row gutter={[0, 16]}>
-        <Col span={8}>{t("viewPatient.patientInfo.socialSecurityNumber")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.socialSecurityNumber")}</Col>
         <Col span={16}>
           <Input value={patient.identifier[0].value} readOnly />
         </Col>
-        <Col span={8}>{t("viewPatient.patientInfo.name")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.name")}</Col>
         <Col span={16}>
           <Input value={patient.name[0].text} readOnly />
         </Col>
-        <Col span={8}>{t("viewPatient.patientInfo.gender")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.gender")}</Col>
         <Col span={16}>
           <Input value={t(`general.gender.${patient.gender}`)} readOnly />
         </Col>
-        <Col span={8}>{t("viewPatient.patientInfo.birthDate")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.birthDate")}</Col>
         <Col span={16}>
           <Input value={renderBirthDate(patient.birthDate)} readOnly />
         </Col>
-        <Col span={8}>{t("viewPatient.patientInfo.contacts")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.contacts")}</Col>
         <Col span={16}>
           <Table
             dataSource={patient.telecom.map((v, i) => ({ key: i, ...v }))}
@@ -41,7 +41,7 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
             pagination={false}
           >
             <Table.Column
-              title={t("viewPatient.patientInfo.contactSystem")}
+              title={t("translation:viewPatient.patientInfo.contactSystem")}
               render={(_, record: ContactPoint) => (
                 <>
                   {t(`viewPatient.patientInfo.contactSystems.${record.system}`)} (
@@ -49,10 +49,10 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
                 </>
               )}
             />
-            <Table.Column title={t("viewPatient.patientInfo.contactValue")} dataIndex="value" />
+            <Table.Column title={t("translation:viewPatient.patientInfo.contactValue")} dataIndex="value" />
           </Table>
         </Col>
-        <Col span={8}>{t("viewPatient.patientInfo.address")}</Col>
+        <Col span={8}>{t("translation:viewPatient.patientInfo.address")}</Col>
         <Col span={16}>
           <Input.TextArea
             value={`${address.line.join("\n")}\n${address.postalCode} ${address.city} (${address.country})`}

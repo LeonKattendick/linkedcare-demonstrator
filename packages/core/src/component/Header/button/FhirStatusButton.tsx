@@ -18,7 +18,7 @@ export const FhirStatusButton = () => {
             FHIR Version: {metadata?.fhirVersion}
           </>
         ) : (
-          t("connectionFailed")
+          t("translation:connectionFailed")
         )
       }
     >

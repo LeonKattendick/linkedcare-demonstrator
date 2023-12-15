@@ -36,37 +36,37 @@ export const SearchPatients = () => {
           style={{ width: "25%" }}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder={t("searchPatients.placeholder")}
+          placeholder={t("translation:searchPatients.placeholder")}
         />
         <Table dataSource={filteredPatients} bordered loading={isPatientsLoading} size="middle">
           <Table.Column
-            title={t("searchPatients.table.name")}
+            title={t("translation:searchPatients.table.name")}
             render={(_, record: Patient) => (
-              <Tooltip title={t("searchPatients.table.tooltipView")}>
+              <Tooltip title={t("translation:searchPatients.table.tooltipView")}>
                 <Link to={`/patient/${record.id}`}>{record.name[0]?.text}</Link>
               </Tooltip>
             )}
             sorter={(a, b) => a.name[0]?.text.localeCompare(b.name[0]?.text)}
           />
           <Table.Column
-            title={t("searchPatients.table.gender")}
+            title={t("translation:searchPatients.table.gender")}
             render={(_, record: Patient) => t(`general.gender.${record.gender}`)}
             sorter={(a, b) => a.gender.localeCompare(b.gender)}
           />
           <Table.Column
-            title={t("searchPatients.table.birthDate")}
+            title={t("translation:searchPatients.table.birthDate")}
             render={(_, record: Patient) => renderBirthDate(record.birthDate)}
             sorter={(a, b) => (dayjs(a.birthDate).isBefore(dayjs(b.birthDate)) ? -1 : 1)}
           />
           <Table.Column
-            title={t("searchPatients.table.address")}
+            title={t("translation:searchPatients.table.address")}
             render={(_, record: Patient) => renderAddress(record.address[0])}
           />
           <Table.Column
-            title={t("general.actions")}
+            title={t("translation:general.actions")}
             render={(_, record: Patient) => (
               <Space>
-                <Tooltip title={t("searchPatients.table.tooltipView")}>
+                <Tooltip title={t("translation:searchPatients.table.tooltipView")}>
                   <Button
                     type="primary"
                     icon={<EyeOutlined />}
@@ -74,7 +74,7 @@ export const SearchPatients = () => {
                     onClick={() => navigate(`/patient/${record.id}`)}
                   />
                 </Tooltip>
-                <Tooltip title={t("searchPatients.table.tooltipCreate")}>
+                <Tooltip title={t("translation:searchPatients.table.tooltipCreate")}>
                   <Button
                     type="primary"
                     icon={<FileAddOutlined />}

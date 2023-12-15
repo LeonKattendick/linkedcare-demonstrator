@@ -8,7 +8,7 @@ export const ThemeButton = () => {
   const { setGlobalTheme, isLightTheme } = useGlobalThemeAtom();
 
   return (
-    <Tooltip title={t("changeTheme")}>
+    <Tooltip title={t("translation:changeTheme")}>
       <Button
         onClick={() => {
           setGlobalTheme(isLightTheme ? "dark" : "light");

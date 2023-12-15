@@ -7,7 +7,7 @@ export const LanguageButton = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <Tooltip title={t("changeLanguage")}>
+    <Tooltip title={t("translation:changeLanguage")}>
       <Button
         onClick={() => {
           i18n.changeLanguage(isGerman(i18n.language) ? "en-US" : "de-DE");
