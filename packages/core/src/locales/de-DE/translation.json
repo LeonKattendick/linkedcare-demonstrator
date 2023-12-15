@@ -1,72 +1,82 @@
 {
-  "footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
-  "connectionFailed": "Verbindung nicht möglich",
-  "changeLanguage": "Sprache ändern",
-  "changeTheme": "Hell/Dunkel umschalten",
-  "general": {
-    "cancel": "Abbrechen",
-    "save": "Speichern",
-    "actions": "Aktionen",
-    "gender": {
-      "male": "Männlich",
-      "female": "Weiblich",
-      "other": "Divers",
-      "unknown": "Unbekannt"
-    }
-  },
-  "header": {
-    "caregiverTitle": "Pflegedienst LINCA Demo",
-    "doctorTitle": "Hausarzt LINCA Demo",
-    "pharmacyTitle": "Apotheke LINCA Demo",
-    "searchPatients": "Patienten suchen",
-    "viewPatient": "Patient ansehen",
-    "medicationPlan": "Medikationsplan",
-    "newOrder": "Neue Bestellung anlegen",
-    "viewOrder": "Bestellung bearbeiten",
-    "orderOverview": "Bestellungsübersicht"
-  },
-  "admin": {
-    "title": "Administrative Einstellungen",
-    "createPatients": "Patient anlegen",
-    "createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
-    "createPatientError": "Patient {{name}} konnte nicht angelegt werden"
-  },
-  "login": {
-    "title": "Wählen Sie einen Benutzer aus",
-    "subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen"
-  },
-  "caregiver": {
-    "selectPlaceholder": "Wähle einen Pflegedienst"
-  },
-  "searchPatients": {
-    "placeholder": "Vor- / Nachnamen eines Patienten eingeben",
-    "table": {
-      "name": "Name",
-      "gender": "Geschlecht",
-      "birthDate": "Geburtsdatum",
-      "address": "Adresse",
-      "tooltipView": "Patient einsehen",
-      "tooltipCreate": "Neue Bestellung anlegen"
-    }
-  },
-  "viewPatient": {
-    "notFoundTitle": "Patient nicht gefunden",
-    "notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
-    "medicationPlan": "Medikationsplan",
-    "patientInfo": {
-      "socialSecurityNumber": "Sozialversicherungsnummer",
-      "name": "Vor- und Nachnamen",
-      "gender": "Geschlecht",
-      "birthDate": "Geburtsdatum",
-      "contacts": "Kontaktdaten",
-      "contactSystem": "System",
-      "contactValue": "Wert",
-      "contactSystems": {
-        "phone": "Telefon",
-        "email": "E-Mail"
-      },
-      "contactUses": { "mobile": "Mobil", "home": "Zuhause", "work": "Arbeit" },
-      "address": "Adresse"
-    }
-  }
+	"admin": {
+		"createPatientError": "Patient {{name}} konnte nicht angelegt werden",
+		"createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
+		"createPatients": "Patient anlegen",
+		"title": "Administrative Einstellungen"
+	},
+	"caregiver": {
+		"selectPlaceholder": "Wähle einen Pflegedienst"
+	},
+	"changeLanguage": "Sprache ändern",
+	"changeTheme": "Hell/Dunkel umschalten",
+	"connectionFailed": "Verbindung nicht möglich",
+	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
+	"general": {
+		"actions": "Aktionen",
+		"cancel": "Abbrechen",
+		"gender": {
+			"female": "Weiblich",
+			"male": "Männlich",
+			"other": "Divers",
+			"unknown": "Unbekannt"
+		},
+		"save": "Speichern"
+	},
+	"header": {
+		"caregiverTitle": "Pflegedienst LINCA Demo",
+		"doctorTitle": "Hausarzt LINCA Demo",
+		"medicationPlan": "Medikationsplan",
+		"newOrder": "Neue Bestellung anlegen",
+		"orderOverview": "Bestellungsübersicht",
+		"pharmacyTitle": "Apotheke LINCA Demo",
+		"searchPatients": "Patienten suchen",
+		"viewOrder": "Bestellung bearbeiten",
+		"viewPatient": "Patient ansehen"
+	},
+	"login": {
+		"subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen",
+		"title": "Wählen Sie einen Benutzer aus"
+	},
+	"searchPatients": {
+		"placeholder": "Vor- / Nachnamen eines Patienten eingeben",
+		"table": {
+			"address": "Adresse",
+			"birthDate": "Geburtsdatum",
+			"female": "",
+			"gender": "Geschlecht",
+			"male": "",
+			"name": "Name",
+			"tooltipCreate": "Neue Bestellung anlegen",
+			"tooltipView": "Patient einsehen"
+		}
+	},
+	"viewPatient": {
+		"activeOrders": {
+			"add": "Hinzufügen",
+			"title": "Offene Bestellungen"
+		},
+		"medicationPlan": "Medikationsplan",
+		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
+		"notFoundTitle": "Patient nicht gefunden",
+		"patientInfo": {
+			"address": "Adresse",
+			"birthDate": "Geburtsdatum",
+			"contactSystem": "System",
+			"contactSystems": {
+				"email": "E-Mail",
+				"phone": "Telefon"
+			},
+			"contactUses": {
+				"home": "Zuhause",
+				"mobile": "Mobil",
+				"work": "Arbeit"
+			},
+			"contactValue": "Wert",
+			"contacts": "Kontaktdaten",
+			"gender": "Geschlecht",
+			"name": "Vor- und Nachnamen",
+			"socialSecurityNumber": "Sozialversicherungsnummer"
+		}
+	}
 }

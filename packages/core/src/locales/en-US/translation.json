@@ -1,74 +1,82 @@
 {
-  "footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
-  "connectionFailed": "Connection not possible",
-  "changeLanguage": "Change language",
-  "changeTheme": "Change dark/light theme",
-  "general": {
-    "cancel": "Cancel",
-    "save": "Save",
-    "actions": "Actions",
-    "gender": {
-      "male": "Male",
-      "female": "Female",
-      "other": "Diverse",
-      "unknown": "Unknown"
-    }
-  },
-  "header": {
-    "caregiverTitle": "Careservice LINCA Demo",
-    "doctorTitle": "Doctor LINCA Demo",
-    "pharmacyTitle": "Pharmacy LINCA Demo",
-    "searchPatients": "Search patients",
-    "viewPatient": "View patient",
-    "medicationPlan": "Medication plan",
-    "newOrder": "Create new order",
-    "viewOrder": "Edit order",
-    "orderOverview": "Order overview"
-  },
-  "admin": {
-    "title": "Administrative settings",
-    "createPatients": "Create patient",
-    "createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
-    "createPatientError": "Patient {{name}} couldn't be created"
-  },
-  "login": {
-    "title": "Select a user",
-    "subtitle": "To continue the process, you must log in by selecting an already created user"
-  },
-  "caregiver": {
-    "selectPlaceholder": "Select a careservice"
-  },
-  "searchPatients": {
-    "placeholder": "Enter the name of a patient",
-    "table": {
-      "name": "Name",
-      "gender": "Gender",
-      "male": "Male",
-      "female": "Female",
-      "birthDate": "Birthdate",
-      "address": "Address",
-      "tooltipView": "View patient",
-      "tooltipCreate": "Create new order"
-    }
-  },
-  "viewPatient": {
-    "notFoundTitle": "Patient not found",
-    "notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
-    "medicationPlan": "Medication plan",
-    "patientInfo": {
-      "socialSecurityNumber": "Social security number",
-      "name": "First and surnames",
-      "gender": "Gender",
-      "birthDate": "Birthdate",
-      "contacts": "Contact information",
-      "contactSystem": "System",
-      "contactValue": "Value",
-      "contactSystems": {
-        "phone": "Phone",
-        "email": "E-Mail"
-      },
-      "contactUses": { "mobile": "Mobile", "home": "Home", "work": "Work" },
-      "address": "Address"
-    }
-  }
+	"admin": {
+		"createPatientError": "Patient {{name}} couldn't be created",
+		"createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
+		"createPatients": "Create patient",
+		"title": "Administrative settings"
+	},
+	"caregiver": {
+		"selectPlaceholder": "Select a careservice"
+	},
+	"changeLanguage": "Change language",
+	"changeTheme": "Change dark/light theme",
+	"connectionFailed": "Connection not possible",
+	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
+	"general": {
+		"actions": "Actions",
+		"cancel": "Cancel",
+		"gender": {
+			"female": "Female",
+			"male": "Male",
+			"other": "Diverse",
+			"unknown": "Unknown"
+		},
+		"save": "Save"
+	},
+	"header": {
+		"caregiverTitle": "Careservice LINCA Demo",
+		"doctorTitle": "Doctor LINCA Demo",
+		"medicationPlan": "Medication plan",
+		"newOrder": "Create new order",
+		"orderOverview": "Order overview",
+		"pharmacyTitle": "Pharmacy LINCA Demo",
+		"searchPatients": "Search patients",
+		"viewOrder": "Edit order",
+		"viewPatient": "View patient"
+	},
+	"login": {
+		"subtitle": "To continue the process, you must log in by selecting an already created user",
+		"title": "Select a user"
+	},
+	"searchPatients": {
+		"placeholder": "Enter the name of a patient",
+		"table": {
+			"address": "Address",
+			"birthDate": "Birthdate",
+			"female": "Female",
+			"gender": "Gender",
+			"male": "Male",
+			"name": "Name",
+			"tooltipCreate": "Create new order",
+			"tooltipView": "View patient"
+		}
+	},
+	"viewPatient": {
+		"activeOrders": {
+			"add": "Add",
+			"title": "Open orders"
+		},
+		"medicationPlan": "Medication plan",
+		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
+		"notFoundTitle": "Patient not found",
+		"patientInfo": {
+			"address": "Address",
+			"birthDate": "Birthdate",
+			"contactSystem": "System",
+			"contactSystems": {
+				"email": "E-Mail",
+				"phone": "Phone"
+			},
+			"contactUses": {
+				"home": "Home",
+				"mobile": "Mobile",
+				"work": "Work"
+			},
+			"contactValue": "Value",
+			"contacts": "Contact information",
+			"gender": "Gender",
+			"name": "First and surnames",
+			"socialSecurityNumber": "Social security number"
+		}
+	}
 }
