@@ -76,7 +76,8 @@
 			"contacts": "Kontaktdaten",
 			"gender": "Geschlecht",
 			"name": "Vor- und Nachnamen",
-			"socialSecurityNumber": "Sozialversicherungsnummer"
+			"socialSecurityNumber": "Sozialversicherungsnummer",
+			"title": "Patientendaten"
 		}
 	}
 }

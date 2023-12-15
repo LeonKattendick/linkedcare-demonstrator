@@ -76,7 +76,8 @@
 			"contacts": "Contact information",
 			"gender": "Gender",
 			"name": "First and surnames",
-			"socialSecurityNumber": "Social security number"
+			"socialSecurityNumber": "Social security number",
+			"title": "Patient data"
 		}
 	}
 }
