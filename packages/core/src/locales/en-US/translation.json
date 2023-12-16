@@ -11,6 +11,9 @@
 	"changeLanguage": "Change language",
 	"changeTheme": "Change dark/light theme",
 	"connectionFailed": "Connection not possible",
+	"createOrder": {
+		"title": "Create a new order"
+	},
 	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
 	"general": {
 		"actions": "Actions",
@@ -38,6 +41,11 @@
 		"subtitle": "To continue the process, you must log in by selecting an already created user",
 		"title": "Select a user"
 	},
+	"patient": {
+		"medicationPlan": "Medication plan",
+		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
+		"notFoundTitle": "Patient not found"
+	},
 	"searchPatients": {
 		"placeholder": "Enter the name of a patient",
 		"table": {
@@ -57,8 +65,6 @@
 			"title": "Open orders"
 		},
 		"medicationPlan": "Medication plan",
-		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
-		"notFoundTitle": "Patient not found",
 		"patientInfo": {
 			"address": "Address",
 			"birthDate": "Birthdate",
@@ -76,8 +82,8 @@
 			"contacts": "Contact information",
 			"gender": "Gender",
 			"name": "First and surnames",
-			"socialSecurityNumber": "Social security number",
-			"title": "Patient data"
-		}
+			"socialSecurityNumber": "Social security number"
+		},
+		"title": "Patient data"
 	}
 }

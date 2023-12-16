@@ -9,7 +9,7 @@ interface CompletedOrdersProps {
 export const CompletedOrders = ({ patient }: CompletedOrdersProps) => {
   return (
     <Card style={{ height: "100%" }}>
-      <OrderTable patient={patient} />
+      <OrderTable patient={patient} title={<></>} />
     </Card>
   );
 };

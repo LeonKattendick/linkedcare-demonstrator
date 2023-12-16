@@ -11,6 +11,9 @@
 	"changeLanguage": "Sprache ändern",
 	"changeTheme": "Hell/Dunkel umschalten",
 	"connectionFailed": "Verbindung nicht möglich",
+	"createOrder": {
+		"title": "Bestellungen anlegen"
+	},
 	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
 	"general": {
 		"actions": "Aktionen",
@@ -38,6 +41,11 @@
 		"subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen",
 		"title": "Wählen Sie einen Benutzer aus"
 	},
+	"patient": {
+		"medicationPlan": "Medikationsplan",
+		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
+		"notFoundTitle": "Patient nicht gefunden"
+	},
 	"searchPatients": {
 		"placeholder": "Vor- / Nachnamen eines Patienten eingeben",
 		"table": {
@@ -57,8 +65,6 @@
 			"title": "Offene Bestellungen"
 		},
 		"medicationPlan": "Medikationsplan",
-		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
-		"notFoundTitle": "Patient nicht gefunden",
 		"patientInfo": {
 			"address": "Adresse",
 			"birthDate": "Geburtsdatum",
@@ -76,8 +82,8 @@
 			"contacts": "Kontaktdaten",
 			"gender": "Geschlecht",
 			"name": "Vor- und Nachnamen",
-			"socialSecurityNumber": "Sozialversicherungsnummer",
-			"title": "Patientendaten"
-		}
+			"socialSecurityNumber": "Sozialversicherungsnummer"
+		},
+		"title": "Patientendaten"
 	}
 }
