@@ -7,7 +7,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { useGetCaregiverPatients } from "../../hook/useGetCaregiverPatients";
+
+interface SearchPatientsProps {
+  patients: Patient[];
+  isPatientsLoading: boolean;
+}
 
 const compare = (search: string, patient: Patient) => {
   if (!search) return true;
@@ -17,11 +21,9 @@ const compare = (search: string, patient: Patient) => {
   return includesName;
 };
 
-export const SearchPatients = () => {
+export const SearchPatients = ({ patients, isPatientsLoading }: SearchPatientsProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const { patients, isPatientsLoading } = useGetCaregiverPatients();
 
   const [search, setSearch] = useState("");
 

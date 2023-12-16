@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
-import { MedicationPlan } from "./component/page/MedicationPlan";
-import { Order } from "./component/page/Order";
-import { SearchPatients } from "./component/page/SearchPatients";
-import { ViewPatient } from "./component/page/ViewPatient";
+import { CaregiverMedicationPlan } from "./component/page/CaregiverMedicationPlan";
+import { CaregiverOrder } from "./component/page/CaregiverOrder";
+import { CaregiverSearchPatients } from "./component/page/CaregiverSearchPatients";
+import { CaregiverViewPatient } from "./component/page/CaregiverViewPatient";
 import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 
 const navElements: HeaderProps["navElements"] = [
@@ -29,11 +29,11 @@ const App = () => {
     <Page title={t("translation:header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
       {selectedCaregiver ? (
         <Routes>
-          <Route path="/" element={<SearchPatients />} />
-          <Route path="/patient/:patientId" element={<ViewPatient />} />
-          <Route path="/plan/:patientId" element={<MedicationPlan />} />
-          <Route path="/create/:patientId" element={<Order />} />
-          <Route path="/order/:orderId" element={<Order />} />
+          <Route path="/" element={<CaregiverSearchPatients />} />
+          <Route path="/patient/:patientId" element={<CaregiverViewPatient />} />
+          <Route path="/plan/:patientId" element={<CaregiverMedicationPlan />} />
+          <Route path="/create/:patientId" element={<CaregiverOrder />} />
+          <Route path="/order/:orderId" element={<CaregiverOrder />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       ) : (

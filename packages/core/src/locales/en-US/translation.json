@@ -61,7 +61,7 @@
 	},
 	"viewPatient": {
 		"activeOrders": {
-			"add": "Add",
+			"add": "Create new order",
 			"title": "Open orders"
 		},
 		"medicationPlan": "Medication plan",
