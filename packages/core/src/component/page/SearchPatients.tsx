@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 interface SearchPatientsProps {
   patients: Patient[];
   isPatientsLoading: boolean;
+  showCreateButton?: boolean;
 }
 
 const compare = (search: string, patient: Patient) => {
@@ -21,7 +22,7 @@ const compare = (search: string, patient: Patient) => {
   return includesName;
 };
 
-export const SearchPatients = ({ patients, isPatientsLoading }: SearchPatientsProps) => {
+export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }: SearchPatientsProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -76,14 +77,16 @@ export const SearchPatients = ({ patients, isPatientsLoading }: SearchPatientsPr
                     onClick={() => navigate(`/patient/${record.id}`)}
                   />
                 </Tooltip>
-                <Tooltip title={t("translation:searchPatients.table.tooltipCreate")}>
-                  <Button
-                    type="primary"
-                    icon={<FileAddOutlined />}
-                    size="small"
-                    onClick={() => navigate(`/create/${record.id}`)}
-                  />
-                </Tooltip>
+                {showCreateButton && (
+                  <Tooltip title={t("translation:searchPatients.table.tooltipCreate")}>
+                    <Button
+                      type="primary"
+                      icon={<FileAddOutlined />}
+                      size="small"
+                      onClick={() => navigate(`/create/${record.id}`)}
+                    />
+                  </Tooltip>
+                )}
               </Space>
             )}
           />

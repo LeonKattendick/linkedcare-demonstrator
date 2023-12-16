@@ -4,5 +4,5 @@ import { useGetCaregiverPatients } from "../../hook/useGetCaregiverPatients";
 export const CaregiverSearchPatients = () => {
   const { patients, isPatientsLoading } = useGetCaregiverPatients();
 
-  return <SearchPatients patients={patients} isPatientsLoading={isPatientsLoading} />;
+  return <SearchPatients patients={patients} isPatientsLoading={isPatientsLoading} showCreateButton />;
 };
