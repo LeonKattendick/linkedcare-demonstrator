@@ -43,7 +43,7 @@
 	},
 	"patient": {
 		"medicationPlan": "Medikationsplan",
-		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nich in FHIR gefunden werden",
+		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nicht in FHIR gefunden werden",
 		"notFoundTitle": "Patient nicht gefunden"
 	},
 	"searchPatients": {

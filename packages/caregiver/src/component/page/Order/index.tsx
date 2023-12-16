@@ -6,7 +6,7 @@ import { useGetPatientById } from "core/src/hook/useGetPatientById";
 import { organizationEqualsReference } from "core/src/util/matchingUtil";
 import { t } from "i18next";
 import { Navigate, useParams } from "react-router";
-import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
+import { useSelectedCaregiverAtom } from "../../../hook/useSelectedCaregiverAtom";
 
 export const Order = () => {
   const { patientId, orderId } = useParams();
