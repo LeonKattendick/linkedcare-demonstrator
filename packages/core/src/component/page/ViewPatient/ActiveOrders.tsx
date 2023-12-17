@@ -14,24 +14,16 @@ export const ActiveOrders = ({ patient }: ActiveOrdersProps) => {
   const navigate = useNavigate();
 
   return (
-    <Card style={{ height: "100%" }}>
-      <OrderTable
-        patient={patient}
-        title={
-          <>
-            {t("translation:viewPatient.activeOrders.title")}
-            <Button
-              type="primary"
-              size="small"
-              icon={<FileAddOutlined />}
-              style={{ float: "right" }}
-              onClick={() => navigate(`/create/${patient.id}`)}
-            >
-              {t("translation:viewPatient.activeOrders.add")}
-            </Button>
-          </>
-        }
-      />
+    <Card
+      style={{ height: "100%" }}
+      title={t("translation:viewPatient.activeOrders.title")}
+      extra={
+        <Button type="primary" icon={<FileAddOutlined />} onClick={() => navigate(`/create/${patient.id}`)}>
+          {t("translation:viewPatient.activeOrders.add")}
+        </Button>
+      }
+    >
+      <OrderTable patient={patient} />
     </Card>
   );
 };

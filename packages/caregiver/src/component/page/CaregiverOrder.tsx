@@ -7,8 +7,8 @@ import { Navigate, useParams } from "react-router";
 import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
 
 export const CaregiverOrder = () => {
-  const { patientId } = useParams();
-  // const isNew = !orderId && !!patientId;
+  const { patientId, orderId } = useParams();
+  const isNew = !orderId && !!patientId;
 
   const { selectedCaregiver } = useSelectedCaregiverAtom();
   const { patient, isPatientLoading } = useGetPatientById(patientId);
@@ -17,5 +17,5 @@ export const CaregiverOrder = () => {
   if (!patient) return <PatientNotFoundError patientId={patientId} />;
   if (!organizationEqualsReference(selectedCaregiver, patient.managingOrganization)) return <Navigate to="/" />;
 
-  return <Order patient={patient} order={undefined} />;
+  return <Order patient={patient} order={null} caregiver={selectedCaregiver!} isNew={isNew} />;
 };

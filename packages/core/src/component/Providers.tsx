@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { useGlobalThemeAtom } from "../hook/useGlobalThemeAtom";
 import "../util/i18n";
 import { isGerman } from "../util/i18n";
@@ -28,7 +28,7 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
   }, [globalTheme]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ConfigProvider
         locale={isGerman(i18n.language) ? deDE : enUS}
         theme={{
@@ -43,6 +43,6 @@ export const Providers = (props: React.PropsWithChildren<{}>) => {
           </QueryClientProvider>
         </App>
       </ConfigProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };

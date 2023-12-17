@@ -2,6 +2,10 @@
 
 This demonstrator simulates the process of giving out medication for caregivers.
 
+## Minimum Browser Requirements
+
+Chrome v98, Edge v98, Safari v15.4, Firefox v94, Opera v84
+
 ## Installation
 
 Run `npm install` in the root directory.

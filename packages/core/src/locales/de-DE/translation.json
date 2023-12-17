@@ -41,6 +41,13 @@
 		"subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen",
 		"title": "Wählen Sie einen Benutzer aus"
 	},
+	"order": {
+		"steps": {
+			"caregiver": "Bestellung",
+			"doctor": "Verschreibung",
+			"pharmacy": "Ausgabe"
+		}
+	},
 	"patient": {
 		"medicationPlan": "Medikationsplan",
 		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nicht in FHIR gefunden werden",
@@ -61,7 +68,7 @@
 	},
 	"viewPatient": {
 		"activeOrders": {
-			"add": "Neue Bestellung erstellen",
+			"add": "Neue Bestellung anlegen",
 			"title": "Offene Bestellungen"
 		},
 		"medicationPlan": "Medikationsplan",

@@ -41,6 +41,13 @@
 		"subtitle": "To continue the process, you must log in by selecting an already created user",
 		"title": "Select a user"
 	},
+	"order": {
+		"steps": {
+			"caregiver": "Order",
+			"doctor": "",
+			"pharmacy": "Output"
+		}
+	},
 	"patient": {
 		"medicationPlan": "Medication plan",
 		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
