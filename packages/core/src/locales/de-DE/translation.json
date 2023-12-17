@@ -58,9 +58,7 @@
 		"table": {
 			"address": "Adresse",
 			"birthDate": "Geburtsdatum",
-			"female": "",
 			"gender": "Geschlecht",
-			"male": "",
 			"name": "Name",
 			"tooltipCreate": "Neue Bestellung anlegen",
 			"tooltipView": "Patient einsehen"

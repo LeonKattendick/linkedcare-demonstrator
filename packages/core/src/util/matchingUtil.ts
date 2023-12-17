@@ -8,9 +8,19 @@ export const identifiersEqual = (i1: Identifier | undefined, i2: Identifier | un
   return i1.system === i2.system && i1.value === i2.value;
 };
 
-export const organizationEqualsReference = (o: Organization | null, r: Reference<Organization>) => {
-  if (!o || !r) return false;
+export const referencesEqual = (r1: Reference<any>, r2: Reference<any>) => {
+  if (!r1 || !r2) return false;
 
-  if (isInternalReference(r)) return (r as InternalReference).reference === o.id;
-  else return identifiersEqual((r as ExternalReference).identifier, o.identifier[0]);
+  if (isInternalReference(r1) && isInternalReference(r2)) {
+    return (r1 as InternalReference).reference === (r2 as InternalReference).reference;
+  } else if (!isInternalReference(r1) && !isInternalReference(r2)) {
+    return identifiersEqual((r1 as ExternalReference).identifier, (r2 as ExternalReference).identifier);
+  } else {
+    throw new Error(`Can't compare ${r1} and ${r2}!`);
+  }
+};
+
+export const caregiverIsFromOrganization = (caregiver: Organization | null, organization: Reference<Organization>) => {
+  if (!caregiver || !organization || !caregiver.partOf) return false;
+  return referencesEqual(caregiver.partOf, organization);
 };

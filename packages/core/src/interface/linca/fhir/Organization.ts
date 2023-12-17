@@ -1,4 +1,5 @@
 import { Identifier } from "./Identifier";
+import { Reference } from "./Reference";
 import { Resource } from "./Resource";
 
 /**
@@ -8,4 +9,5 @@ export interface Organization extends Resource {
   resourceType: "Organization";
   identifier: Identifier[];
   name: string;
+  partOf?: Reference<Organization>;
 }

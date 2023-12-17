@@ -5,10 +5,18 @@ const immerdar: Organization = {
   identifier: [
     {
       system: "urn:oid:1.2.40.0.34.5.2",
-      value: "2.999.40.0.34.1.1.3",
+      value: "2.999.40.0.34.1.3.1",
     },
   ],
-  name: "Pflegedienst Immerdar",
+  name: "DGKP Susanne Allzeit",
+  partOf: {
+    identifier: {
+      system: "urn:oid:1.2.40.0.34.5.2",
+      value: "2.999.40.0.34.1.1.3",
+    },
+
+    display: "Pflegedienst Immerdar",
+  },
 };
 
 const vogelsang: Organization = {
@@ -16,10 +24,18 @@ const vogelsang: Organization = {
   identifier: [
     {
       system: "urn:oid:1.2.40.0.34.5.2",
-      value: "2.999.40.0.34.1.1.1",
+      value: "2.999.40.0.34.1.3.2",
     },
   ],
-  name: "Haus Vogelsang",
+  name: "DGKP Walter Specht",
+  partOf: {
+    identifier: {
+      system: "urn:oid:1.2.40.0.34.5.2",
+      value: "2.999.40.0.34.1.1.1",
+    },
+
+    display: "Haus Vogelsang",
+  },
 };
 
 export const caregiverModels = [immerdar, vogelsang];

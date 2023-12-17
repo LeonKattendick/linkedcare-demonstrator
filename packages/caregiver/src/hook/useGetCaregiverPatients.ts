@@ -1,5 +1,5 @@
 import { useGetAllPatients } from "core/src/hook/useGetAllPatients";
-import { organizationEqualsReference } from "core/src/util/matchingUtil";
+import { caregiverIsFromOrganization } from "core/src/util/matchingUtil";
 import { useSelectedCaregiverAtom } from "./useSelectedCaregiverAtom";
 
 export const useGetCaregiverPatients = () => {
@@ -7,7 +7,7 @@ export const useGetCaregiverPatients = () => {
   const { patients, isPatientsLoading } = useGetAllPatients();
 
   return {
-    patients: patients.filter((v) => organizationEqualsReference(selectedCaregiver, v.managingOrganization)),
+    patients: patients.filter((v) => caregiverIsFromOrganization(selectedCaregiver, v.managingOrganization)),
     isPatientsLoading,
   };
 };
