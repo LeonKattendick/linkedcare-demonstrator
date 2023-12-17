@@ -42,6 +42,15 @@
 		"title": "Select a user"
 	},
 	"order": {
+		"buttonRow": {
+			"cancel": "Cancel order",
+			"create": "Create order",
+			"edit": "Update order"
+		},
+		"medicationTable": {
+			"add": "Add Medication",
+			"title": "Ordered Medication"
+		},
 		"steps": {
 			"caregiver": "Order",
 			"doctor": "Prescription",

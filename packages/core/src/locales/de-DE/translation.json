@@ -42,6 +42,15 @@
 		"title": "Wählen Sie einen Benutzer aus"
 	},
 	"order": {
+		"buttonRow": {
+			"cancel": "Bestellung stornieren",
+			"create": "Bestellung erstellen",
+			"edit": "Bestellung ändern"
+		},
+		"medicationTable": {
+			"add": "Medikation hinzufügen",
+			"title": "Bestellte Medikation"
+		},
 		"steps": {
 			"caregiver": "Bestellung",
 			"doctor": "Verschreibung",
