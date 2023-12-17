@@ -49,6 +49,13 @@
 		},
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
+			"modal": {
+				"addTitle": "Medikation bearbeiten",
+				"createTitle": "Medikation erstellen",
+				"detailsDivider": "Details der Medikation",
+				"medication": "Medikation",
+				"selectsDivider": "Medikation ausfüllen"
+			},
 			"title": "Bestellte Medikation"
 		},
 		"steps": {
@@ -63,7 +70,7 @@
 		"notFoundTitle": "Patient nicht gefunden"
 	},
 	"searchPatients": {
-		"placeholder": "Vor- / Nachnamen eines Patienten eingeben",
+		"placeholder": "Vor- / Nachname oder Geburtsdatum eines Patienten eingeben",
 		"table": {
 			"address": "Adresse",
 			"birthDate": "Geburtsdatum",

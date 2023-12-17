@@ -20,6 +20,7 @@ interface MedicationTableProps {
 export const MedicationTable = (props: MedicationTableProps) => {
   const { t } = useTranslation();
 
+  const [isCreate, setIsCreate] = useState(false);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -27,12 +28,19 @@ export const MedicationTable = (props: MedicationTableProps) => {
     setEditRequest(
       createNewProposalMedicationRequest(props.patient, { caregiver: props.caregiver, doctor: props.doctor })
     );
+    setIsCreate(true);
     setModalOpen(true);
   };
 
   return (
     <>
-      <MedicationModal open={modalOpen} setOpen={setModalOpen} request={editRequest} setRequest={setEditRequest} />
+      <MedicationModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        isCreate={isCreate}
+        request={editRequest}
+        setRequest={setEditRequest}
+      />
       <Table
         dataSource={props.requests}
         title={() => (

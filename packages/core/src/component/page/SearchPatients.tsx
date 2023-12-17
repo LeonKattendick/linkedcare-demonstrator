@@ -18,8 +18,9 @@ const compare = (search: string, patient: Patient) => {
   if (!search) return true;
 
   const includesName = !!patient.name.find((v) => v.text.toLowerCase().includes(search));
+  const includesBirthDate = dayjs(patient.birthDate).format("DD.MM.YYYY").includes(search);
 
-  return includesName;
+  return includesName || includesBirthDate;
 };
 
 export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }: SearchPatientsProps) => {

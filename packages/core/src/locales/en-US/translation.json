@@ -49,6 +49,13 @@
 		},
 		"medicationTable": {
 			"add": "Add Medication",
+			"modal": {
+				"addTitle": "Edit medication",
+				"createTitle": "Create medication",
+				"detailsDivider": "Medication details",
+				"medication": "Medication",
+				"selectsDivider": "Fill out medication"
+			},
 			"title": "Ordered Medication"
 		},
 		"steps": {
@@ -63,7 +70,7 @@
 		"notFoundTitle": "Patient not found"
 	},
 	"searchPatients": {
-		"placeholder": "Enter the name of a patient",
+		"placeholder": "Enter a patient's first name, surname or date of birth",
 		"table": {
 			"address": "Address",
 			"birthDate": "Birthdate",

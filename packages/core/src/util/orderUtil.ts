@@ -43,6 +43,7 @@ export const createNewProposalMedicationRequest = (
     },
     informationSource: informationSource,
     requester: requester,
+    performer: undefined as any,
     dispenseRequest: {},
     dosageInstruction: [],
   });
