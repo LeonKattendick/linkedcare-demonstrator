@@ -9,5 +9,5 @@ export interface Organization extends Resource {
   resourceType: "Organization";
   identifier: Identifier[];
   name: string;
-  partOf?: Reference<Organization>;
+  partOf?: Reference<Organization>; // Caregiver - Careservice linking
 }

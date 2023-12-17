@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import { ExternalReference } from "core/src/interface/linca/fhir/Reference";
 import { caregiverModels } from "core/src/model/caregiverModels";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,8 +28,11 @@ export const CaregiverSelect = () => {
 
   return (
     <Select
-      style={{ width: 220, textAlign: "left" }}
-      options={caregiverModels.map((v) => ({ value: v.identifier[0].value, label: v.name }))}
+      style={{ width: 335, textAlign: "left" }}
+      options={caregiverModels.map((v) => ({
+        value: v.identifier[0].value,
+        label: `${v.name} (${(v.partOf as ExternalReference).display})`,
+      }))}
       onSelect={(v) => handleSetSelectedCaregiver(v)}
       allowClear
       value={selectedCaregiver?.identifier[0].value}

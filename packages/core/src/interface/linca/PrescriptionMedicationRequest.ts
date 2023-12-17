@@ -1,5 +1,5 @@
 import { BaseMedicationRequest } from "./BaseMedicationRequest";
-import { OrderMedicationRequest } from "./OrderMedicationRequest";
+import { ProposalMedicationRequest } from "./ProposalMedicationRequest";
 import { Identifier } from "./fhir/Identifier";
 import { Reference } from "./fhir/Reference";
 
@@ -11,6 +11,6 @@ export const PRESCRIPTION_PROFILE_LINK =
  */
 export interface PrescriptionMedicationRequest extends BaseMedicationRequest {
   status: "active" | "ended" | "stopped" | "entered-in-error";
-  priorPrescription?: Reference<OrderMedicationRequest>; // Used for modification
+  priorPrescription?: Reference<ProposalMedicationRequest>; // Used for modification
   groupIdentifier: Identifier; // eRezeptID
 }

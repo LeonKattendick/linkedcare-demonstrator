@@ -1,5 +1,10 @@
 import { Organization } from "../interface/linca/fhir/Organization";
 
+/**
+ * All partOf organizations always need to be created with an external identifier.
+ * The organizations are not fetched inside the application and therefore no name would be displayed.
+ */
+
 const immerdar: Organization = {
   resourceType: "Organization",
   identifier: [
