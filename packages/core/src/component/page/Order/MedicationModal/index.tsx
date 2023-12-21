@@ -1,10 +1,11 @@
-import { Divider, Form, Modal, Select } from "antd";
+import { Divider, Form, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
 import { ModalProps } from "../../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
+import { MedicationSelect } from "./MedicationSelect";
 import { SelectFromMedicationPlan } from "./SelectFromMedicationPlan";
 import { SelectFromOtherOrders } from "./SelectFromOtherOrders";
 import { SequenceTable } from "./SequenceTable";
@@ -14,10 +15,6 @@ interface MedicationModalProps extends ModalProps {
   request?: BaseMedicationRequest;
   setRequest: (r: BaseMedicationRequest) => void;
 }
-
-const compare = (input: string, label: string) => {
-  return input.split(" ").filter((v) => !label.includes(v)).length === 0;
-};
 
 export const MedicationModal = (props: MedicationModalProps) => {
   const { t } = useTranslation();
@@ -62,7 +59,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
           ? "translation:order.medicationTable.modal.createTitle"
           : "translation:order.medicationTable.modal.addTitle"
       )}
-      width="60%"
+      width="65%"
       okText={t("translation:general.save")}
       onOk={handleOk}
     >
@@ -75,24 +72,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
       )}
       <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
       <Form form={form}>
-        <Form.Item
-          name="medicationIndex"
-          label={t("translation:order.medicationTable.modal.medication")}
-          hasFeedback
-          labelCol={{ span: 4 }}
-          labelAlign="left"
-          rules={[{ required: true, message: t("translation:order.medicationTable.modal.errorNoMedication") }]}
-        >
-          <Select
-            options={medicationData.map((v, i) => ({
-              value: i,
-              label: `${v.approvalName} (${v.dosageForm}, ${v.dosageSize})`,
-            }))}
-            style={{ width: "100%" }}
-            showSearch
-            filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
-          />
-        </Form.Item>
+        <MedicationSelect />
         <SequenceTable />
       </Form>
     </Modal>

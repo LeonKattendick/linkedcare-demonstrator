@@ -1,0 +1,32 @@
+import { Form, Select } from "antd";
+import { useTranslation } from "react-i18next";
+import medicationData from "../../../../data/medication.json";
+
+const compare = (input: string, label: string) => {
+  return input.split(" ").filter((v) => !label.includes(v)).length === 0;
+};
+
+export const MedicationSelect = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Form.Item
+      name="medicationIndex"
+      label={t("translation:order.medicationTable.modal.medication")}
+      hasFeedback
+      labelCol={{ span: 4 }}
+      labelAlign="left"
+      rules={[{ required: true, message: t("translation:order.medicationTable.modal.errorNoMedication") }]}
+    >
+      <Select
+        options={medicationData.map((v, i) => ({
+          value: i,
+          label: `${v.approvalName} (${v.dosageForm}, ${v.dosageSize})`,
+        }))}
+        style={{ width: "100%" }}
+        showSearch
+        filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
+      />
+    </Form.Item>
+  );
+};

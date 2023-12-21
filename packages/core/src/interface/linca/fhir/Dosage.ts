@@ -11,7 +11,7 @@ export interface Dosage {
         code: "h" | "d" | "wk" | "mo" | "a";
       };
       frequency: number; // Number of repetions per period
-      period: number; //
+      period: number;
       periodUnit: "h" | "d" | "wk" | "mo" | "a";
       dayOfWeek?: ("mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun")[];
     };

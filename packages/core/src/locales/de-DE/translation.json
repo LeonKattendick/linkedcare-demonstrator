@@ -58,7 +58,18 @@
 				"errorNoMedication": "Es muss eine Medikation aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
 				"medication": "Medikation",
-				"selectsDivider": "Medikation ausfüllen"
+				"selectsDivider": "Medikation ausfüllen",
+				"table": {
+					"bounds": "Einnahmegrenze",
+					"dose": "Dosis",
+					"doseRate": "Dosisrate",
+					"doseType": "Dosistyp",
+					"frequency": "Frequenz",
+					"period": "Periode",
+					"sequence": "Sequenz",
+					"title": "Einnahmesequenzen",
+					"weekDays": "Wochentage"
+				}
 			},
 			"title": "Bestellte Medikation"
 		},

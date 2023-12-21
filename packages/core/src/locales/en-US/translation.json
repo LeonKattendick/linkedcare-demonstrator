@@ -58,7 +58,18 @@
 				"errorNoMedication": "A medication must be selected from the list.",
 				"errorNoSequence": "At least one sequence with dosage must be created.",
 				"medication": "Medication",
-				"selectsDivider": "Fill out medication"
+				"selectsDivider": "Fill out medication",
+				"table": {
+					"bounds": "Take-In duration",
+					"dose": "Dose",
+					"doseRate": "Dose rate",
+					"doseType": "Dose type",
+					"frequency": "Frequency",
+					"period": "Period",
+					"sequence": "Sequence",
+					"title": "Ingestion sequences",
+					"weekDays": "Weekdays"
+				}
 			},
 			"title": "Ordered Medication"
 		},
