@@ -1,6 +1,5 @@
 import { Divider, Form, Modal, Select } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
 import { ModalProps } from "../../../../interface/ModalProps";
@@ -24,11 +23,9 @@ export const MedicationModal = (props: MedicationModalProps) => {
   const { t } = useTranslation();
 
   const [form] = useForm();
-  const [sequences, setSequences] = useState<Dosage[]>([]);
 
   const handleCancel = () => {
     form.resetFields();
-    setSequences([]);
     props.setOpen(false);
   };
 
@@ -65,7 +62,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
           ? "translation:order.medicationTable.modal.createTitle"
           : "translation:order.medicationTable.modal.addTitle"
       )}
-      width="50%"
+      width="60%"
       okText={t("translation:general.save")}
       onOk={handleOk}
     >
@@ -96,8 +93,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
             filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
           />
         </Form.Item>
-
-        <SequenceTable sequences={sequences} setSequences={setSequences} />
+        <SequenceTable />
       </Form>
     </Modal>
   );

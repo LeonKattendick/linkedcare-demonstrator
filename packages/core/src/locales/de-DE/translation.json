@@ -50,9 +50,11 @@
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
 			"modal": {
+				"addSequence": "Sequenz hinzufügen",
 				"addTitle": "Medikation bearbeiten",
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
+				"errorEmptySequenceText": "Der Text einer Sequenz ist leer.",
 				"errorNoMedication": "Es muss eine Medikation aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
 				"medication": "Medikation",
