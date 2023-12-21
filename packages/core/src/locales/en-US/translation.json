@@ -79,10 +79,14 @@
 				"addTitle": "Edit medication",
 				"createTitle": "Create medication",
 				"detailsDivider": "Medication details",
+				"doctor": "Responsible family doctor",
 				"errorEmptySequenceText": "The text of a sequence is empty.",
-				"errorNoMedication": "A medication must be selected from the list.",
+				"errorNoDoctor": "A medication must be selected from the list.",
+				"errorNoMedication": "A family doctor must be selected from the list.",
 				"errorNoSequence": "At least one sequence with dosage must be created.",
 				"medication": "Medication",
+				"pharmacy": "Responsible pharmacy",
+				"responsibleDivider": "Responsible parties",
 				"selectsDivider": "Fill out medication",
 				"table": {
 					"bounds": "Take-In duration",
@@ -100,7 +104,9 @@
 					"weekDays": "Weekdays"
 				}
 			},
-			"title": "Ordered Medication"
+			"name": "Name",
+			"status": "Status",
+			"title": "Medication"
 		},
 		"steps": {
 			"caregiver": "Order",

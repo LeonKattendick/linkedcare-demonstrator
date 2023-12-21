@@ -1,11 +1,15 @@
 import { Divider, Form, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
 import { ModalProps } from "../../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
+import { ExternalReference } from "../../../../interface/linca/fhir/Reference";
+import { DoctorSelect } from "./DoctorSelect";
 import { MedicationSelect } from "./MedicationSelect";
+import { PharmacySelect } from "./PharmacySelect";
 import { SelectFromMedicationPlan } from "./SelectFromMedicationPlan";
 import { SelectFromOtherOrders } from "./SelectFromOtherOrders";
 import { SequenceTable } from "./SequenceTable";
@@ -16,10 +20,28 @@ interface MedicationModalProps extends ModalProps {
   saveRequest: (r: BaseMedicationRequest) => void;
 }
 
+interface FormResult {
+  medicationIndex: number;
+  sequences: Dosage[];
+  doctorIdentifier: string;
+  pharmacyIdentifier: string;
+}
+
 export const MedicationModal = (props: MedicationModalProps) => {
   const { t } = useTranslation();
 
   const [form] = useForm();
+
+  useEffect(() => {
+    if (!props.open) return;
+
+    form.setFieldsValue({
+      medicationIndex: props.request?.medication.concept.coding[0]?.code,
+      sequences: props.request?.dosageInstruction,
+      doctorIdentifier: (props.request?.performer as ExternalReference)?.identifier?.value,
+      pharmacyIdentifier: (props.request?.dispenseRequest?.dispenser as ExternalReference)?.identifier?.value,
+    });
+  }, [props.open]);
 
   const handleCancel = () => {
     form.resetFields();
@@ -27,7 +49,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
   };
 
   const handleOk = () => {
-    form.validateFields().then((res: { medicationIndex: number; sequences: Dosage[] }) => {
+    form.validateFields().then((res: FormResult) => {
       if (!props.request) return;
 
       const medication = medicationData[res.medicationIndex];
@@ -71,14 +93,11 @@ export const MedicationModal = (props: MedicationModalProps) => {
           <SelectFromMedicationPlan />
         </>
       )}
-      <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
-      <Form
-        form={form}
-        initialValues={{
-          medicationIndex: props.request?.medication.concept.coding[0]?.code,
-          sequences: props.request?.dosageInstruction,
-        }}
-      >
+      <Form form={form}>
+        <Divider orientation="left">{t("translation:order.medicationTable.modal.responsibleDivider")}</Divider>
+        <DoctorSelect />
+        <PharmacySelect />
+        <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
         <MedicationSelect />
         <SequenceTable form={form} />
       </Form>

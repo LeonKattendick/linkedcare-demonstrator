@@ -69,7 +69,16 @@ export const MedicationTable = (props: MedicationTableProps) => {
         )}
         bordered
         size="small"
-      />
+      >
+        <Table.Column
+          title={t("translation:order.medicationTable.name")}
+          render={(_, record: BaseMedicationRequest) => record.medication.concept.coding[0].display}
+        />
+        <Table.Column
+          title={t("translation:order.medicationTable.status")}
+          render={(_, record: BaseMedicationRequest) => record.status}
+        />
+      </Table>
     </>
   );
 };

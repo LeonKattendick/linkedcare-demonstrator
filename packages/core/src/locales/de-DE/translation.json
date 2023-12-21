@@ -79,10 +79,14 @@
 				"addTitle": "Medikation bearbeiten",
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
+				"doctor": "Verantwortlicher Hausarzt",
 				"errorEmptySequenceText": "Der Text einer Sequenz ist leer.",
-				"errorNoMedication": "Es muss eine Medikation aus der Liste ausgewählt werden.",
+				"errorNoDoctor": "Es muss eine Medikation aus der Liste ausgewählt werden.",
+				"errorNoMedication": "Es muss ein Hausarzt aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
 				"medication": "Medikation",
+				"pharmacy": "Verantwortliche Apotheke",
+				"responsibleDivider": "Verantwortliche Parteien",
 				"selectsDivider": "Medikation ausfüllen",
 				"table": {
 					"bounds": "Einnahmegrenze",
@@ -100,7 +104,9 @@
 					"weekDays": "Wochentage"
 				}
 			},
-			"title": "Bestellte Medikation"
+			"name": "Name",
+			"status": "Status",
+			"title": "Medikation"
 		},
 		"steps": {
 			"caregiver": "Bestellung",

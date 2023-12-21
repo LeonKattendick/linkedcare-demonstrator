@@ -23,7 +23,6 @@ export const MedicationSelect = () => {
           value: i,
           label: `${v.approvalName} (${v.dosageForm}, ${v.dosageSize})`,
         }))}
-        style={{ width: "100%" }}
         showSearch
         filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
       />

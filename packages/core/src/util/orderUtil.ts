@@ -4,6 +4,7 @@ import { RequestOrchestration } from "../interface/linca/RequestOrchestration";
 import { Organization } from "../interface/linca/fhir/Organization";
 import { Practitioner } from "../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../interface/linca/fhir/Reference";
+import { doctorModels } from "../model/doctorModels";
 
 export const createNewRequestOrchestration = (caregiver: Organization): RequestOrchestration => {
   return structuredClone({
@@ -43,7 +44,7 @@ export const createNewProposalMedicationRequest = (
     },
     informationSource: informationSource,
     requester: requester,
-    performer: undefined as any,
+    performer: { identifier: doctorModels[0].identifier[0], display: doctorModels[0].name[0].text },
     dispenseRequest: {},
     dosageInstruction: [],
   });
