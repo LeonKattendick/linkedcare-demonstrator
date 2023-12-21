@@ -1,11 +1,12 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
+import { ExternalReference } from "../../../interface/linca/fhir/Reference";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { MedicationModal } from "./MedicationModal";
 
@@ -25,10 +26,16 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleCreateNew = () => {
+    setEditRequestIndex(-1);
     setEditRequest(
       createNewProposalMedicationRequest(props.patient, { caregiver: props.caregiver, doctor: props.doctor })
     );
-    setEditRequestIndex(-1);
+    setModalOpen(true);
+  };
+
+  const handleEdit = (index: number) => {
+    setEditRequestIndex(index);
+    setEditRequest(structuredClone(props.requests[index]));
     setModalOpen(true);
   };
 
@@ -77,6 +84,29 @@ export const MedicationTable = (props: MedicationTableProps) => {
         <Table.Column
           title={t("translation:order.medicationTable.status")}
           render={(_, record: BaseMedicationRequest) => record.status}
+        />
+        <Table.Column
+          title={t("translation:order.medicationTable.doctor")}
+          render={(_, record: BaseMedicationRequest) => (record.performer as ExternalReference).display}
+        />
+        <Table.Column
+          title={t("translation:order.medicationTable.pharmacy")}
+          render={(_, record: BaseMedicationRequest) =>
+            (record.dispenseRequest.dispenser as ExternalReference)?.display
+          }
+        />
+        <Table.Column
+          title={t("translation:order.medicationTable.dosage")}
+          render={(_, record: BaseMedicationRequest) => record.dosageInstruction.length}
+        />
+        <Table.Column
+          title={t("translation:general.actions")}
+          render={(_, _record: BaseMedicationRequest, index) => (
+            <Space>
+              <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
+              <Button type="primary" danger icon={<DeleteOutlined />} size="small" />
+            </Space>
+          )}
         />
       </Table>
     </>

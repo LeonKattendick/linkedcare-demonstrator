@@ -29,6 +29,12 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
 
   const [sequences, setSequences] = useState<Dosage[]>([]);
 
+  // sets initial values of form into the useState
+  useEffect(() => {
+    setSequences(form.getFieldValue("sequences") ?? []);
+  }, [form]);
+
+  // sets changed values back into the form
   useEffect(() => {
     form.setFieldValue("sequences", sequences);
   }, [sequences]);

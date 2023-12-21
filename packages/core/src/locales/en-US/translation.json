@@ -74,6 +74,8 @@
 		},
 		"medicationTable": {
 			"add": "Add Medication",
+			"doctor": "Responsible family doctor",
+			"dosage": "Dosage",
 			"modal": {
 				"addSequence": "Add sequence",
 				"addTitle": "Edit medication",
@@ -105,6 +107,7 @@
 				}
 			},
 			"name": "Name",
+			"pharmacy": "Responsible pharmacy",
 			"status": "Status",
 			"title": "Medication"
 		},

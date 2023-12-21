@@ -74,18 +74,20 @@
 		},
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
+			"doctor": "Zuständiger Hausarzt",
+			"dosage": "Dosierung",
 			"modal": {
 				"addSequence": "Sequenz hinzufügen",
 				"addTitle": "Medikation bearbeiten",
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
-				"doctor": "Verantwortlicher Hausarzt",
+				"doctor": "Zuständiger Hausarzt",
 				"errorEmptySequenceText": "Der Text einer Sequenz ist leer.",
 				"errorNoDoctor": "Es muss eine Medikation aus der Liste ausgewählt werden.",
 				"errorNoMedication": "Es muss ein Hausarzt aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
 				"medication": "Medikation",
-				"pharmacy": "Verantwortliche Apotheke",
+				"pharmacy": "Zuständige Apotheke",
 				"responsibleDivider": "Verantwortliche Parteien",
 				"selectsDivider": "Medikation ausfüllen",
 				"table": {
@@ -105,6 +107,7 @@
 				}
 			},
 			"name": "Name",
+			"pharmacy": "Zuständige Apotheke",
 			"status": "Status",
 			"title": "Medikation"
 		},

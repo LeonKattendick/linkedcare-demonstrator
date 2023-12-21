@@ -21,7 +21,7 @@ interface MedicationModalProps extends ModalProps {
 }
 
 interface FormResult {
-  medicationIndex: number;
+  medicationIndex: string;
   sequences: Dosage[];
   doctorIdentifier: string;
   pharmacyIdentifier: string;
@@ -44,7 +44,6 @@ export const MedicationModal = (props: MedicationModalProps) => {
   }, [props.open]);
 
   const handleCancel = () => {
-    form.resetFields();
     props.setOpen(false);
   };
 
@@ -52,7 +51,9 @@ export const MedicationModal = (props: MedicationModalProps) => {
     form.validateFields().then((res: FormResult) => {
       if (!props.request) return;
 
-      const medication = medicationData[res.medicationIndex];
+      const medication = medicationData.find((v) => v.code === res.medicationIndex);
+      if (!medication) return;
+
       props.saveRequest({
         ...props.request,
         medication: {

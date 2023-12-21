@@ -19,8 +19,8 @@ export const MedicationSelect = () => {
       rules={[{ required: true, message: t("translation:order.medicationTable.modal.errorNoMedication") }]}
     >
       <Select
-        options={medicationData.map((v, i) => ({
-          value: i,
+        options={medicationData.map((v) => ({
+          value: v.code,
           label: `${v.approvalName} (${v.dosageForm}, ${v.dosageSize})`,
         }))}
         showSearch
