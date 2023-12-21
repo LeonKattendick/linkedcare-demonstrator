@@ -59,7 +59,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
           ? "translation:order.medicationTable.modal.createTitle"
           : "translation:order.medicationTable.modal.addTitle"
       )}
-      width="65%"
+      width="70%"
       okText={t("translation:general.save")}
       onOk={handleOk}
     >

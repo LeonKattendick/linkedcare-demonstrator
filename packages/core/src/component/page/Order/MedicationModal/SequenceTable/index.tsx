@@ -1,9 +1,21 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, InputNumber, Select, Space, Table } from "antd";
+import { Button, Form, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import dosageData from "../../../../data/dosage.json";
-import { Dosage } from "../../../../interface/linca/fhir/Dosage";
+import dosageData from "../../../../../data/dosage.json";
+import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
+import { BoundsColumn } from "./BoundsColumn";
+import { DoseColumn } from "./DoseColumn";
+import { DoseRateColumn } from "./DoseRateColumn";
+import { DoseTypeColumn } from "./DoseTypeColumn";
+import { FrequencyColumn } from "./FrequencyColumn";
+import { PeriodColumn } from "./PeriodColumn";
+import { WeekDayColumn } from "./WeekDayColumn";
+
+export interface SequenceTableColumnProps {
+  dosage: Dosage;
+  handleChangeSequence: (d: Dosage) => void;
+}
 
 export const SequenceTable = () => {
   const { t } = useTranslation();
@@ -35,6 +47,14 @@ export const SequenceTable = () => {
         ],
       },
     ]);
+  };
+
+  const createHandleChangeSequence = (index: number) => {
+    return (dosage: Dosage) => {
+      const temp = [...sequences];
+      temp[index] = dosage;
+      setSequences(temp);
+    };
   };
 
   return (
@@ -72,64 +92,51 @@ export const SequenceTable = () => {
         <Table.Column title={"#"} width="3%" dataIndex="sequence" />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.bounds")}
-          width="10%"
-          render={(_, record: Dosage) => (
-            <Space>
-              <InputNumber
-                value={record.timing?.repeat.boundsDuration.value}
-                size="small"
-                addonAfter={<Select value={record.timing?.repeat.boundsDuration.code} size="small" />}
-              />
-            </Space>
+          width="13%"
+          render={(_, record: Dosage, index) => (
+            <BoundsColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.frequency")}
           width="7%"
-          render={(_, record: Dosage) => (
-            <InputNumber value={record.timing?.repeat.frequency} size="small" style={{ width: "100%" }} />
+          render={(_, record: Dosage, index) => (
+            <FrequencyColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.period")}
-          width="12%"
-          render={(_, record: Dosage) => (
-            <Space>
-              <InputNumber
-                value={record.timing?.repeat.period}
-                size="small"
-                addonAfter={<Select value={record.timing?.repeat.periodUnit} size="small" />}
-              />
-            </Space>
+          width="13%"
+          render={(_, record: Dosage, index) => (
+            <PeriodColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.weekDays")}
-          render={(_, record: Dosage) => (
-            <Select value={record.timing?.repeat.dayOfWeek} mode="multiple" size="small" />
+          width="20%"
+          render={(_, record: Dosage, index) => (
+            <WeekDayColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.dose")}
           width="7%"
-          render={(_, record: Dosage) => (
-            <InputNumber value={record.doseAndRate?.[0].doseQuantity.value} size="small" style={{ width: "100%" }} />
+          render={(_, record: Dosage, index) => (
+            <DoseColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.doseType")}
-          render={(_, record: Dosage) => (
-            <Select
-              value={record.doseAndRate?.[0].doseQuantity.code}
-              size="small"
-              options={dosageData.map((v) => ({ value: v.code, label: v.display }))}
-            />
+          render={(_, record: Dosage, index) => (
+            <DoseTypeColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.doseRate")}
           width="12%"
-          render={(_, record: Dosage) => <Select value={record.doseAndRate?.[0].type.coding[0].code} size="small" />}
+          render={(_, record: Dosage, index) => (
+            <DoseRateColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+          )}
         />
         <Table.Column
           title={t("translation:general.actions")}

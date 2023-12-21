@@ -24,7 +24,32 @@
 			"other": "Diverse",
 			"unknown": "Unknown"
 		},
-		"save": "Save"
+		"save": "Save",
+		"shortWeekDays": {
+			"fri": "Fri",
+			"mon": "Mon",
+			"sat": "Sat",
+			"sun": "Sun",
+			"thu": "Thu",
+			"tue": "Tue",
+			"wed": "Wed"
+		},
+		"time": {
+			"a": "Year",
+			"d": "Day",
+			"h": "Hour",
+			"mo": "Month",
+			"wk": "Week"
+		},
+		"weekDays": {
+			"fri": "Friday",
+			"mon": "Monday",
+			"sat": "Saturday",
+			"sun": "Sunday",
+			"thu": "Thursday",
+			"tue": "Tuesday",
+			"wed": "Wednesday"
+		}
 	},
 	"header": {
 		"caregiverTitle": "Careservice LINCA Demo",
@@ -63,6 +88,10 @@
 					"bounds": "Take-In duration",
 					"dose": "Dose",
 					"doseRate": "Dose rate",
+					"doseRateTypes": {
+						"calculated": "Calculated",
+						"ordered": "Ordered"
+					},
 					"doseType": "Dose type",
 					"frequency": "Frequency",
 					"period": "Period",

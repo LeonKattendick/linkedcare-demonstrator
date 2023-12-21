@@ -24,7 +24,32 @@
 			"other": "Divers",
 			"unknown": "Unbekannt"
 		},
-		"save": "Speichern"
+		"save": "Speichern",
+		"shortWeekDays": {
+			"fri": "Fr",
+			"mon": "Mo",
+			"sat": "Sa",
+			"sun": "So",
+			"thu": "Do",
+			"tue": "Di",
+			"wed": "Mi"
+		},
+		"time": {
+			"a": "Jahr",
+			"d": "Tag",
+			"h": "Stunde",
+			"mo": "Monat",
+			"wk": "Woche"
+		},
+		"weekDays": {
+			"fri": "Freitag",
+			"mon": "Montag",
+			"sat": "Samstag",
+			"sun": "Sonntag",
+			"thu": "Donnerstag",
+			"tue": "Dienstag",
+			"wed": "Mittwoch"
+		}
 	},
 	"header": {
 		"caregiverTitle": "Pflegedienst LINCA Demo",
@@ -63,6 +88,10 @@
 					"bounds": "Einnahmegrenze",
 					"dose": "Dosis",
 					"doseRate": "Dosisrate",
+					"doseRateTypes": {
+						"calculated": "Berechnet",
+						"ordered": "Bestellt"
+					},
 					"doseType": "Dosistyp",
 					"frequency": "Frequenz",
 					"period": "Periode",
