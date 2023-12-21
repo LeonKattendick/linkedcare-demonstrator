@@ -12,8 +12,7 @@ export const AdminModal = (props: ModalProps) => {
   const handleCreatePatient = (patient: Patient) => {
     createPatient(patient)
       .then((res) => {
-        const patient = res.data as Patient;
-        message.success(t("translation:admin.createPatientSuccess", { name: patient.name[0].text, id: patient.id }));
+        message.success(t("translation:admin.createPatientSuccess", { name: res.data.name[0].text, id: res.data.id }));
       })
       .catch(() => message.error(t("translation:admin.createPatientError", { name: patient.name[0].text })));
   };

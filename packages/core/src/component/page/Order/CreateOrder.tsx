@@ -5,6 +5,7 @@ import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRe
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
+import { createRequestOrchestration } from "../../../service/requestOrchestrationService";
 import { createNewRequestOrchestration } from "../../../util/orderUtil";
 import { MedicationTable } from "./MedicationTable";
 
@@ -22,6 +23,12 @@ export const CreateOrder = (props: CreateOrderProps) => {
     setOrder({ ...order, contained: r });
   };
 
+  const handleCreate = () => {
+    createRequestOrchestration(order)
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
       <MedicationTable
@@ -31,7 +38,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
         caregiver={props.caregiver}
       />
       <Space style={{ float: "right" }}>
-        <Button type="primary" disabled={order.contained.length === 0}>
+        <Button type="primary" disabled={order.contained.length === 0} onClick={handleCreate}>
           {t("translation:order.buttonRow.create")}
         </Button>
       </Space>

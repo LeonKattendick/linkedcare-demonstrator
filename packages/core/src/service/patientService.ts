@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
 import { Patient } from "../interface/linca/Patient";
 import { Bundle } from "../interface/linca/fhir/Bundle";
 
-export const createPatient = (patient: Patient) => {
+export const createPatient = (patient: Patient): AxiosPromise<Patient> => {
   return axios.post("/fhir/Patient", patient);
 };
 
