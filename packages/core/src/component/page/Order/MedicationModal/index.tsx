@@ -7,6 +7,8 @@ import { ModalProps } from "../../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { ExternalReference } from "../../../../interface/linca/fhir/Reference";
+import { doctorModels } from "../../../../model/doctorModels";
+import { pharmacyModels } from "../../../../model/pharmacyModels";
 import { DoctorSelect } from "./DoctorSelect";
 import { MedicationSelect } from "./MedicationSelect";
 import { PharmacySelect } from "./PharmacySelect";
@@ -54,8 +56,14 @@ export const MedicationModal = (props: MedicationModalProps) => {
       const medication = medicationData.find((v) => v.code === res.medicationIndex);
       if (!medication) return;
 
+      const doctor = doctorModels.find((v) => v.identifier[0].value === res.doctorIdentifier);
+      if (!doctor) return;
+
+      const pharmacy = pharmacyModels.find((v) => v.identifier[0].value === res.pharmacyIdentifier);
+
       props.saveRequest({
         ...props.request,
+
         medication: {
           concept: {
             coding: [
@@ -65,6 +73,16 @@ export const MedicationModal = (props: MedicationModalProps) => {
                 display: `${medication.approvalName} (${medication.dosageForm}, ${medication.dosageSize})`,
               },
             ],
+          },
+        },
+        performer: {
+          identifier: doctor.identifier[0],
+          display: doctor.name[0].text,
+        },
+        dispenseRequest: {
+          dispenser: pharmacy && {
+            identifier: pharmacy.identifier[0],
+            display: pharmacy.name,
           },
         },
         dosageInstruction: [...res.sequences],

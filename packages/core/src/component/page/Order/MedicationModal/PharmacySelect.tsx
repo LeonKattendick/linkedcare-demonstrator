@@ -18,6 +18,7 @@ export const PharmacySelect = () => {
           value: v.identifier[0].value,
           label: v.name,
         }))}
+        allowClear
       />
     </Form.Item>
   );

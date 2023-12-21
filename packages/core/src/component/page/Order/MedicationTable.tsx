@@ -76,6 +76,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
         )}
         bordered
         size="small"
+        pagination={false}
       >
         <Table.Column
           title={t("translation:order.medicationTable.name")}
