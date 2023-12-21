@@ -27,8 +27,9 @@ export interface Dosage {
       ];
     };
     doseQuantity: {
-      value: number;
+      system: "https://termgit.elga.gv.at/ValueSet/elga-medikationdarreichungsform";
       code: string;
+      value: number;
     };
   }[];
 }

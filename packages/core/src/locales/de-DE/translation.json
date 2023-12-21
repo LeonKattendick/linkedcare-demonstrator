@@ -53,6 +53,8 @@
 				"addTitle": "Medikation bearbeiten",
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
+				"errorNoMedication": "Es muss eine Medikation aus der Liste ausgewählt werden.",
+				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
 				"medication": "Medikation",
 				"selectsDivider": "Medikation ausfüllen"
 			},

@@ -53,6 +53,8 @@
 				"addTitle": "Edit medication",
 				"createTitle": "Create medication",
 				"detailsDivider": "Medication details",
+				"errorNoMedication": "A medication must be selected from the list.",
+				"errorNoSequence": "At least one sequence with dosage must be created.",
 				"medication": "Medication",
 				"selectsDivider": "Fill out medication"
 			},
