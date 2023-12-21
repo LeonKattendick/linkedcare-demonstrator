@@ -1,6 +1,6 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Table } from "antd";
-import { useState } from "react";
+import { Button, Form, FormInstance, Table } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import dosageData from "../../../../../data/dosage.json";
 import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
@@ -17,16 +17,27 @@ export interface SequenceTableColumnProps {
   handleChangeSequence: (d: Dosage) => void;
 }
 
-export const SequenceTable = () => {
+const calculateFreeSequence = (numbers: number[]) => {
+  let i = 0;
+  while (++i) {
+    if (!numbers.includes(i)) return i;
+  }
+};
+
+export const SequenceTable = ({ form }: { form: FormInstance }) => {
   const { t } = useTranslation();
 
   const [sequences, setSequences] = useState<Dosage[]>([]);
+
+  useEffect(() => {
+    form.setFieldValue("sequences", sequences);
+  }, [sequences]);
 
   const handleAdd = () => {
     setSequences([
       ...sequences,
       {
-        sequence: sequences.length + 1,
+        sequence: calculateFreeSequence(sequences.map((v) => v.sequence!)),
         text: "",
         timing: {
           repeat: { boundsDuration: { value: 1, code: "mo" }, frequency: 1, period: 1, periodUnit: "d", dayOfWeek: [] },
@@ -49,6 +60,11 @@ export const SequenceTable = () => {
     ]);
   };
 
+  const handleDelete = (index: number) => {
+    const temp = [...sequences];
+    setSequences(temp.filter((_, i) => i !== index));
+  };
+
   const createHandleChangeSequence = (index: number) => {
     return (dosage: Dosage) => {
       const temp = [...sequences];
@@ -66,12 +82,12 @@ export const SequenceTable = () => {
           message: t("translation:order.medicationTable.modal.errorNoSequence"),
           validator: () => (sequences.length > 0 ? Promise.resolve(sequences) : Promise.reject()),
         },
-        {
+        /*{
           required: true,
           message: t("translation:order.medicationTable.modal.errorEmptySequenceText"),
           validator: () =>
             !sequences.find((v) => v.text.trim().length === 0) ? Promise.resolve(sequences) : Promise.reject(),
-        },
+        },*/
       ]}
       onReset={() => setSequences([])}
     >
@@ -141,7 +157,9 @@ export const SequenceTable = () => {
         <Table.Column
           title={t("translation:general.actions")}
           width="7%"
-          render={(_, _record: Dosage) => <Button type="primary" danger icon={<DeleteOutlined />} size="small" />}
+          render={(_, _record: Dosage, index) => (
+            <Button type="primary" danger icon={<DeleteOutlined />} size="small" onClick={() => handleDelete(index)} />
+          )}
         />
       </Table>
     </Form.Item>

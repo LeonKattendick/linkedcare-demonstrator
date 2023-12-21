@@ -13,7 +13,7 @@ import { SequenceTable } from "./SequenceTable";
 interface MedicationModalProps extends ModalProps {
   isCreate: boolean;
   request?: BaseMedicationRequest;
-  setRequest: (r: BaseMedicationRequest) => void;
+  saveRequest: (r: BaseMedicationRequest) => void;
 }
 
 export const MedicationModal = (props: MedicationModalProps) => {
@@ -31,7 +31,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
       if (!props.request) return;
 
       const medication = medicationData[res.medicationIndex];
-      props.setRequest({
+      props.saveRequest({
         ...props.request,
         medication: {
           concept: {
@@ -62,8 +62,9 @@ export const MedicationModal = (props: MedicationModalProps) => {
       width="70%"
       okText={t("translation:general.save")}
       onOk={handleOk}
+      destroyOnClose
     >
-      {!props.isCreate && (
+      {props.isCreate && (
         <>
           <Divider orientation="left">{t("translation:order.medicationTable.modal.selectsDivider")}</Divider>
           <SelectFromOtherOrders />
@@ -71,9 +72,15 @@ export const MedicationModal = (props: MedicationModalProps) => {
         </>
       )}
       <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
-      <Form form={form}>
+      <Form
+        form={form}
+        initialValues={{
+          medicationIndex: props.request?.medication.concept.coding[0]?.code,
+          sequences: props.request?.dosageInstruction,
+        }}
+      >
         <MedicationSelect />
-        <SequenceTable />
+        <SequenceTable form={form} />
       </Form>
     </Modal>
   );
