@@ -6,7 +6,7 @@ export const PeriodColumn = ({ dosage, handleChangeSequence }: SequenceTableColu
   const { t } = useTranslation();
 
   const handleChangeNumber = (value: number | null) => {
-    if (!value) value = 1;
+    if (!value) return;
     handleChangeSequence({
       ...dosage,
       timing: {

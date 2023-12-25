@@ -3,7 +3,7 @@ import { SequenceTableColumnProps } from ".";
 
 export const DoseColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
   const handleChange = (value: number | null) => {
-    if (!value) value = 1;
+    if (!value) return;
     handleChangeSequence({
       ...dosage,
       doseAndRate: [
