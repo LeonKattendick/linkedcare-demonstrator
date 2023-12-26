@@ -10,7 +10,7 @@ export const createNewRequestOrchestration = (caregiver: Organization): RequestO
   return structuredClone({
     resourceType: "RequestOrchestration",
     status: "active",
-    intent: "order",
+    intent: "proposal",
     subject: { identifier: { ...caregiver.identifier[0] }, display: caregiver.name },
     contained: [],
   });
@@ -33,7 +33,7 @@ export const createNewProposalMedicationRequest = (
   return structuredClone({
     resourceType: "MedicationRequest",
     status: "active",
-    intent: "order",
+    intent: "proposal",
     subject: {
       reference: `Patient/${patient.id}`,
     },

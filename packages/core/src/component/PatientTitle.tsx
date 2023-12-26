@@ -8,18 +8,17 @@ interface PatientTitleProps {
   patient: Patient;
   title: string;
   hideMedicationPlanButton?: boolean;
-  currentState?: "caregiver" | "doctor" | "returned" | "pharmacy" | "completed";
+  currentState?: "caregiver" | "doctor" | "pharmacy" | "completed";
 }
 
 const caregiverSteps = {
   caregiver: "process",
   doctor: "finish",
-  returned: "process",
   pharmacy: "finish",
   completed: "finish",
 };
 
-const doctorSteps = { doctor: "process", returned: "error", pharmacy: "finish", completed: "finish" };
+const doctorSteps = { doctor: "process", pharmacy: "finish", completed: "finish" };
 
 const pharmacySteps = { pharmacy: "process", completed: "finish" };
 
@@ -55,7 +54,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                 {
                   title: t("translation:order.steps.caregiver"),
                   status: caregiverSteps[props.currentState],
-                  icon: ["caregiver", "returned"].includes(props.currentState) ? <LoadingOutlined /> : <UserOutlined />,
+                  icon: props.currentState === "caregiver" ? <LoadingOutlined /> : <UserOutlined />,
                 },
                 {
                   title: t("translation:order.steps.doctor"),
