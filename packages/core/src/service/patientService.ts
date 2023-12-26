@@ -1,9 +1,17 @@
-import axios, { AxiosPromise } from "axios";
+import axios from "axios";
 import { Patient } from "../interface/linca/Patient";
 import { Bundle } from "../interface/linca/fhir/Bundle";
 
-export const createPatient = (patient: Patient): AxiosPromise<Patient> => {
-  return axios.post("/fhir/Patient", patient);
+export const createPatient = (patient: Patient): Promise<Patient> => {
+  return new Promise((res, rej) => {
+    axios
+      .post("/fhir/Patient", patient)
+      .then((r) => res(r.data))
+      .catch((e) => {
+        console.error("createPatient", e);
+        rej(e);
+      });
+  });
 };
 
 export const getAllPatients = (): Promise<Patient[]> => {

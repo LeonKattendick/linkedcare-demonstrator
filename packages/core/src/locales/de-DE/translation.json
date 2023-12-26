@@ -72,6 +72,12 @@
 			"create": "Bestellung erstellen",
 			"edit": "Bestellung ändern"
 		},
+		"create": {
+			"error": "Die Bestellung konnte nicht angelegt werden",
+			"errorMedication": "Medikation {{name}} konnte nicht angelegt werden",
+			"success": "Die Bestellung wurde mit ID {{id}} angelegt",
+			"successMedication": "Medikation {{name}} mit der ID {{id}} angelegt"
+		},
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
 			"doctor": "Zuständiger Hausarzt",

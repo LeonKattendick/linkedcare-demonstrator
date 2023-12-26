@@ -72,6 +72,12 @@
 			"create": "Create order",
 			"edit": "Update order"
 		},
+		"create": {
+			"error": "The order could not be created",
+			"errorMedication": "Medication {{name}} could not be created",
+			"success": "The order was created with ID {{id}} ",
+			"successMedication": "Medication {{name}} created with ID {{id}} "
+		},
 		"medicationTable": {
 			"add": "Add Medication",
 			"doctor": "Responsible doctor",
