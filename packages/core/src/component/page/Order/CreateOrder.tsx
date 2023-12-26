@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
-import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { createRequestOrchestration } from "../../../service/requestOrchestrationService";
 import { createNewRequestOrchestration } from "../../../util/orderUtil";
@@ -17,14 +16,10 @@ interface CreateOrderProps {
 export const CreateOrder = (props: CreateOrderProps) => {
   const { t } = useTranslation();
 
-  const [order, setOrder] = useState<RequestOrchestration>(createNewRequestOrchestration(props.caregiver));
-
-  const setRequests = (r: BaseMedicationRequest[]) => {
-    setOrder({ ...order, contained: r });
-  };
+  const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
   const handleCreate = () => {
-    createRequestOrchestration(order)
+    createRequestOrchestration(createNewRequestOrchestration(props.caregiver))
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
   };
@@ -32,13 +27,13 @@ export const CreateOrder = (props: CreateOrderProps) => {
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
       <MedicationTable
-        requests={order.contained}
+        requests={requests}
         setRequests={setRequests}
         patient={props.patient}
         caregiver={props.caregiver}
       />
       <Space style={{ float: "right" }}>
-        <Button type="primary" disabled={order.contained.length === 0} onClick={handleCreate}>
+        <Button type="primary" disabled={requests.length === 0} onClick={handleCreate}>
           {t("translation:order.buttonRow.create")}
         </Button>
       </Space>

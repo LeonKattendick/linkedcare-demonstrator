@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
-import { MedicationModal } from "./MedicationModal";
+import { MedicationModal, MedicationModalState } from "./MedicationModal";
 
 interface MedicationTableProps {
   patient: Patient;
@@ -21,15 +21,21 @@ interface MedicationTableProps {
 export const MedicationTable = (props: MedicationTableProps) => {
   const { t } = useTranslation();
 
-  const [editRequestIndex, setEditRequestIndex] = useState<number>(-1);
+  const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleCreateNew = () => {
-    setEditRequestIndex(-1);
+  const handleCreate = () => {
+    setEditRequestIndex(MedicationModalState.CREATE);
     setEditRequest(
       createNewProposalMedicationRequest(props.patient, { caregiver: props.caregiver, doctor: props.doctor })
     );
+    setModalOpen(true);
+  };
+
+  const handleView = (index: number) => {
+    setEditRequestIndex(MedicationModalState.VIEW);
+    setEditRequest(structuredClone(props.requests[index]));
     setModalOpen(true);
   };
 
@@ -54,7 +60,13 @@ export const MedicationTable = (props: MedicationTableProps) => {
       <MedicationModal
         open={modalOpen}
         setOpen={setModalOpen}
-        isCreate={editRequestIndex === -1}
+        state={
+          editRequestIndex === MedicationModalState.VIEW
+            ? MedicationModalState.VIEW
+            : editRequestIndex === MedicationModalState.CREATE
+            ? MedicationModalState.CREATE
+            : MedicationModalState.EDIT
+        }
         request={editRequest}
         saveRequest={handleSave}
       />
@@ -68,7 +80,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
               style={{ float: "right" }}
               size="small"
               icon={<PlusOutlined />}
-              onClick={handleCreateNew}
+              onClick={handleCreate}
             >
               {t("translation:order.medicationTable.add")}
             </Button>
@@ -104,6 +116,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
           title={t("translation:general.actions")}
           render={(_, _record: BaseMedicationRequest, index) => (
             <Space>
+              <Button type="primary" icon={<EyeOutlined />} size="small" onClick={() => handleView(index)} />
               <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
               <Button type="primary" danger icon={<DeleteOutlined />} size="small" />
             </Space>

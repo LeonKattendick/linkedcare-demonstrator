@@ -1,4 +1,4 @@
-import { Divider, Form, Modal } from "antd";
+import { Button, Divider, Form, Modal } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,8 +16,14 @@ import { SelectFromMedicationPlan } from "./SelectFromMedicationPlan";
 import { SelectFromOtherOrders } from "./SelectFromOtherOrders";
 import { SequenceTable } from "./SequenceTable";
 
+export enum MedicationModalState {
+  VIEW = -2,
+  CREATE = -1,
+  EDIT = 0,
+}
+
 interface MedicationModalProps extends ModalProps {
-  isCreate: boolean;
+  state: MedicationModalState;
   request?: BaseMedicationRequest;
   saveRequest: (r: BaseMedicationRequest) => void;
 }
@@ -49,7 +55,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
     props.setOpen(false);
   };
 
-  const handleOk = () => {
+  const handleSave = () => {
     form.validateFields().then((res: FormResult) => {
       if (!props.request) return;
 
@@ -63,7 +69,6 @@ export const MedicationModal = (props: MedicationModalProps) => {
 
       props.saveRequest({
         ...props.request,
-
         medication: {
           concept: {
             coding: [
@@ -96,16 +101,24 @@ export const MedicationModal = (props: MedicationModalProps) => {
       open={props.open}
       onCancel={handleCancel}
       title={t(
-        props.isCreate
+        props.state === MedicationModalState.CREATE
           ? "translation:order.medicationTable.modal.createTitle"
           : "translation:order.medicationTable.modal.addTitle"
       )}
       width="70%"
-      okText={t("translation:general.save")}
-      onOk={handleOk}
+      footer={[
+        <Button key="cancel" onClick={handleCancel}>
+          {t("translation:general.cancel")}
+        </Button>,
+        props.state !== MedicationModalState.VIEW && (
+          <Button type="primary" key="save" onClick={handleSave}>
+            {t("translation:general.save")}
+          </Button>
+        ),
+      ]}
       destroyOnClose
     >
-      {props.isCreate && (
+      {props.state === MedicationModalState.CREATE && (
         <>
           <Divider orientation="left">{t("translation:order.medicationTable.modal.selectsDivider")}</Divider>
           <SelectFromOtherOrders />
