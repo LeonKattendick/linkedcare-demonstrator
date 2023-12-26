@@ -10,7 +10,6 @@ import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
 
 export const CaregiverOrder = () => {
   const { patientId, orderId } = useParams();
-  const isNew = !orderId && !!patientId;
 
   const { selectedCaregiver } = useSelectedCaregiverAtom();
   const { patient, isPatientLoading } = useGetPatientById(patientId);
@@ -26,5 +25,5 @@ export const CaregiverOrder = () => {
     if (!identifierEqualsReference(selectedCaregiver!.identifier[0], orchestration.subject)) return <Navigate to="/" />;
   }
 
-  return <Order patient={patient} order={orchestration} caregiver={selectedCaregiver!} isNew={isNew} />;
+  return <Order patient={patient} order={orchestration} caregiver={selectedCaregiver!} />;
 };

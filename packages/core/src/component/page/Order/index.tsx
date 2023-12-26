@@ -13,7 +13,6 @@ interface OrderProps {
   order: RequestOrchestration | null;
   caregiver?: Organization;
   doctor?: Practitioner;
-  isNew?: boolean;
 }
 
 export const Order = (props: OrderProps) => {
@@ -25,10 +24,10 @@ export const Order = (props: OrderProps) => {
         patient={props.patient}
         hideMedicationPlanButton
         title={t("translation:createOrder.title")}
-        currentState={props.isNew ? "caregiver" : "doctor"}
+        currentState={!props.order ? "caregiver" : "doctor"}
       />
       <Card style={{ height: "100%" }}>
-        {props.isNew ? (
+        {!props.order ? (
           <CreateOrder patient={props.patient} caregiver={props.caregiver!} />
         ) : (
           <EditOrder patient={props.patient} order={props.order!} caregiver={props.caregiver} doctor={props.doctor} />

@@ -1,6 +1,5 @@
-import { Card } from "antd";
 import { Patient } from "core/src/interface/linca/Patient";
-import { useTranslation } from "react-i18next";
+import { useGetAllRequestOrchestrations } from "../../../hook/useGetAllRequestOrchestrations";
 import { OrderTable } from "./OrderTable";
 
 interface CompletedOrdersProps {
@@ -8,11 +7,7 @@ interface CompletedOrdersProps {
 }
 
 export const CompletedOrders = ({ patient }: CompletedOrdersProps) => {
-  const { t } = useTranslation();
+  const { orchestrations, isOrchestrationsLoading } = useGetAllRequestOrchestrations();
 
-  return (
-    <Card style={{ height: "100%" }} title={t("translation:viewPatient.activeOrders.title")}>
-      <OrderTable patient={patient} />
-    </Card>
-  );
+  return <OrderTable patient={patient} orders={orchestrations} isOrdersLoading={isOrchestrationsLoading} />;
 };

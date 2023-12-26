@@ -142,11 +142,14 @@
 		}
 	},
 	"viewPatient": {
-		"activeOrders": {
+		"medicationPlan": "Medikationsplan",
+		"orders": {
 			"add": "Neue Bestellung anlegen",
+			"completedTitle": "Abgeschlossene Bestellungen",
+			"date": "Datum",
+			"status": "Status",
 			"title": "Offene Bestellungen"
 		},
-		"medicationPlan": "Medikationsplan",
 		"patientInfo": {
 			"address": "Adresse",
 			"birthDate": "Geburtsdatum",

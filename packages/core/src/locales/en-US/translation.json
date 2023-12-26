@@ -142,11 +142,14 @@
 		}
 	},
 	"viewPatient": {
-		"activeOrders": {
+		"medicationPlan": "Medication plan",
+		"orders": {
 			"add": "Create new order",
+			"completedTitle": "Completed orders",
+			"date": "Date",
+			"status": "Status",
 			"title": "Open orders"
 		},
-		"medicationPlan": "Medication plan",
 		"patientInfo": {
 			"address": "Address",
 			"birthDate": "Birthdate",
