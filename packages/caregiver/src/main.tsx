@@ -1,7 +1,10 @@
 import { SelectionError } from "core/src/component/Error/SelectionError";
 import { HeaderProps } from "core/src/component/Header";
+import { Loading } from "core/src/component/Loading";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
+import { UserType, useUserTypeAtom } from "core/src/hook/useUserTypeAtom";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
@@ -24,20 +27,29 @@ const navElements: HeaderProps["navElements"] = [
 const App = () => {
   const { t } = useTranslation();
   const { selectedCaregiver } = useSelectedCaregiverAtom();
+  const { userType, setUserType } = useUserTypeAtom();
+
+  useEffect(() => {
+    setUserType(UserType.CAREGIVER);
+  }, []);
 
   return (
     <Page title={t("translation:header.caregiverTitle")} rightMenu={<CaregiverSelect />} navElements={navElements}>
-      {selectedCaregiver ? (
-        <Routes>
-          <Route path="/" element={<CaregiverSearchPatients />} />
-          <Route path="/patient/:patientId" element={<CaregiverViewPatient />} />
-          <Route path="/plan/:patientId" element={<CaregiverMedicationPlan />} />
-          <Route path="/create/:patientId" element={<CaregiverOrder />} />
-          <Route path="/order/:orderId" element={<CaregiverOrder />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+      {userType ? (
+        selectedCaregiver ? (
+          <Routes>
+            <Route path="/" element={<CaregiverSearchPatients />} />
+            <Route path="/patient/:patientId" element={<CaregiverViewPatient />} />
+            <Route path="/plan/:patientId" element={<CaregiverMedicationPlan />} />
+            <Route path="/create/:patientId" element={<CaregiverOrder />} />
+            <Route path="/order/:orderId" element={<CaregiverOrder />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        ) : (
+          <SelectionError extra={<CaregiverSelect />} />
+        )
       ) : (
-        <SelectionError extra={<CaregiverSelect />} />
+        <Loading />
       )}
     </Page>
   );

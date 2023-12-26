@@ -1,6 +1,9 @@
 import { HeaderProps } from "core/src/component/Header";
+import { Loading } from "core/src/component/Loading";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
+import { UserType, useUserTypeAtom } from "core/src/hook/useUserTypeAtom";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { RecoilRoot } from "recoil";
@@ -12,10 +15,15 @@ const navElements: HeaderProps["navElements"] = [
 
 const App = () => {
   const { t } = useTranslation();
+  const { userType, setUserType } = useUserTypeAtom();
+
+  useEffect(() => {
+    setUserType(UserType.DOCTOR);
+  }, []);
 
   return (
     <Page title={t("translation:header.doctorTitle")} rightMenu={<></>} navElements={navElements}>
-      test
+      {userType ? <>test</> : <Loading />}
     </Page>
   );
 };
