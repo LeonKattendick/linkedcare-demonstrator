@@ -1,163 +1,163 @@
 {
-  "admin": {
-    "createPatientError": "Patient {{name}} couldn't be created",
-    "createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
-    "createPatients": "Create patient",
-    "title": "Administrative settings"
-  },
-  "caregiver": {
-    "selectPlaceholder": "Select a careservice"
-  },
-  "changeLanguage": "Change language",
-  "changeTheme": "Change dark/light theme",
-  "connectionFailed": "Connection not possible",
-  "createOrder": {
-    "title": "Create a new order"
-  },
-  "footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
-  "general": {
-    "actions": "Actions",
-    "cancel": "Cancel",
-    "gender": {
-      "female": "Female",
-      "male": "Male",
-      "other": "Diverse",
-      "unknown": "Unknown"
-    },
-    "save": "Save",
-    "shortWeekDays": {
-      "fri": "Fri",
-      "mon": "Mon",
-      "sat": "Sat",
-      "sun": "Sun",
-      "thu": "Thu",
-      "tue": "Tue",
-      "wed": "Wed"
-    },
-    "time": {
-      "a": "Year",
-      "d": "Day",
-      "h": "Hour",
-      "mo": "Month",
-      "wk": "Week"
-    },
-    "weekDays": {
-      "fri": "Friday",
-      "mon": "Monday",
-      "sat": "Saturday",
-      "sun": "Sunday",
-      "thu": "Thursday",
-      "tue": "Tuesday",
-      "wed": "Wednesday"
-    }
-  },
-  "header": {
-    "caregiverTitle": "Careservice LINCA Demo",
-    "doctorTitle": "Doctor LINCA Demo",
-    "medicationPlan": "Medication plan",
-    "newOrder": "Create new order",
-    "orderOverview": "Order overview",
-    "pharmacyTitle": "Pharmacy LINCA Demo",
-    "searchPatients": "Search patients",
-    "viewOrder": "Edit order",
-    "viewPatient": "View patient"
-  },
-  "login": {
-    "subtitle": "To continue the process, you must log in by selecting an already created user",
-    "title": "Select a user"
-  },
-  "order": {
-    "buttonRow": {
-      "cancel": "Cancel order",
-      "create": "Create order",
-      "edit": "Update order"
-    },
-    "medicationTable": {
-      "add": "Add Medication",
-      "doctor": "Responsible doctor",
-      "dosage": "Dosage",
-      "modal": {
-        "addSequence": "Add sequence",
-        "addTitle": "Edit medication",
-        "createTitle": "Create medication",
-        "detailsDivider": "Medication details",
-        "doctor": "Responsible doctor",
-        "errorEmptySequenceText": "The text of a sequence is empty.",
-        "errorNoDoctor": "A medication must be selected from the list.",
-        "errorNoMedication": "A family doctor must be selected from the list.",
-        "errorNoSequence": "At least one sequence with dosage must be created.",
-        "medication": "Medication",
-        "pharmacy": "Responsible pharmacy",
-        "responsibleDivider": "Responsible parties",
-        "selectsDivider": "Fill out medication",
-        "table": {
-          "bounds": "Take-In duration",
-          "dose": "Dose",
-          "doseRate": "Dose rate",
-          "doseRateTypes": {
-            "calculated": "Calculated",
-            "ordered": "Ordered"
-          },
-          "doseType": "Dose type",
-          "frequency": "Frequency",
-          "period": "Period",
-          "sequence": "Sequence",
-          "title": "Ingestion sequences",
-          "weekDays": "Weekdays"
-        }
-      },
-      "name": "Name",
-      "pharmacy": "Responsible pharmacy",
-      "status": "Status",
-      "title": "Medication"
-    },
-    "steps": {
-      "caregiver": "Order",
-      "doctor": "Prescription",
-      "pharmacy": "Output"
-    }
-  },
-  "patient": {
-    "medicationPlan": "Medication plan",
-    "notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
-    "notFoundTitle": "Patient not found"
-  },
-  "searchPatients": {
-    "placeholder": "Enter a patient's first name, surname or date of birth",
-    "table": {
-      "address": "Address",
-      "birthDate": "Birthdate",
-      "gender": "Gender",
-      "name": "Name",
-      "tooltipCreate": "Create new order",
-      "tooltipView": "View patient"
-    }
-  },
-  "viewPatient": {
-    "activeOrders": {
-      "add": "Create new order",
-      "title": "Open orders"
-    },
-    "medicationPlan": "Medication plan",
-    "patientInfo": {
-      "address": "Address",
-      "birthDate": "Birthdate",
-      "contactSystem": "System",
-      "contactSystems": {
-        "email": "E-Mail",
-        "phone": "Phone"
-      },
-      "contactUses": {
-        "home": "Home",
-        "mobile": "Mobile",
-        "work": "Work"
-      },
-      "contactValue": "Value",
-      "contacts": "Contact information",
-      "gender": "Gender",
-      "name": "First and surnames",
-      "socialSecurityNumber": "Social security number"
-    },
-    "title": "Patient data"
-  }
+	"admin": {
+		"createPatientError": "Patient {{name}} couldn't be created",
+		"createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
+		"createPatients": "Create patient",
+		"title": "Administrative settings"
+	},
+	"caregiver": {
+		"selectPlaceholder": "Select a careservice"
+	},
+	"changeLanguage": "Change language",
+	"changeTheme": "Change dark/light theme",
+	"connectionFailed": "Connection not possible",
+	"createOrder": {
+		"title": "Create a new order"
+	},
+	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
+	"general": {
+		"actions": "Actions",
+		"cancel": "Cancel",
+		"gender": {
+			"female": "Female",
+			"male": "Male",
+			"other": "Diverse",
+			"unknown": "Unknown"
+		},
+		"save": "Save",
+		"shortWeekDays": {
+			"fri": "Fri",
+			"mon": "Mon",
+			"sat": "Sat",
+			"sun": "Sun",
+			"thu": "Thu",
+			"tue": "Tue",
+			"wed": "Wed"
+		},
+		"time": {
+			"a": "Year",
+			"d": "Day",
+			"h": "Hour",
+			"mo": "Month",
+			"wk": "Week"
+		},
+		"weekDays": {
+			"fri": "Friday",
+			"mon": "Monday",
+			"sat": "Saturday",
+			"sun": "Sunday",
+			"thu": "Thursday",
+			"tue": "Tuesday",
+			"wed": "Wednesday"
+		}
+	},
+	"header": {
+		"caregiverTitle": "Careservice LINCA Demo",
+		"doctorTitle": "Doctor LINCA Demo",
+		"medicationPlan": "Medication plan",
+		"newOrder": "Create new order",
+		"orderOverview": "Order overview",
+		"pharmacyTitle": "Pharmacy LINCA Demo",
+		"searchPatients": "Search patients",
+		"viewOrder": "Edit order",
+		"viewPatient": "View patient"
+	},
+	"login": {
+		"subtitle": "To continue the process, you must log in by selecting an already created user",
+		"title": "Select a user"
+	},
+	"order": {
+		"buttonRow": {
+			"cancel": "Cancel order",
+			"create": "Create order",
+			"edit": "Update order"
+		},
+		"medicationTable": {
+			"add": "Add Medication",
+			"doctor": "Responsible doctor",
+			"dosage": "Dosage",
+			"modal": {
+				"addSequence": "Add sequence",
+				"addTitle": "Edit medication",
+				"createTitle": "Create medication",
+				"detailsDivider": "Medication details",
+				"doctor": "Responsible doctor",
+				"errorEmptySequenceText": "The text of a sequence is empty.",
+				"errorNoDoctor": "A medication must be selected from the list.",
+				"errorNoMedication": "A family doctor must be selected from the list.",
+				"errorNoSequence": "At least one sequence with dosage must be created.",
+				"medication": "Medication",
+				"pharmacy": "Responsible pharmacy",
+				"responsibleDivider": "Responsible parties",
+				"selectsDivider": "Fill out medication",
+				"table": {
+					"bounds": "Take-In duration",
+					"dose": "Dose",
+					"doseRate": "Dose rate",
+					"doseRateTypes": {
+						"calculated": "Calculated",
+						"ordered": "Ordered"
+					},
+					"doseType": "Dose type",
+					"frequency": "Frequency",
+					"period": "Period",
+					"sequence": "Sequence",
+					"title": "Ingestion sequences",
+					"weekDays": "Weekdays"
+				}
+			},
+			"name": "Name",
+			"pharmacy": "Responsible pharmacy",
+			"status": "Status",
+			"title": "Medication"
+		},
+		"steps": {
+			"caregiver": "Order",
+			"doctor": "Prescription",
+			"pharmacy": "Output"
+		}
+	},
+	"patient": {
+		"medicationPlan": "Medication plan",
+		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
+		"notFoundTitle": "Patient not found"
+	},
+	"searchPatients": {
+		"placeholder": "Enter a patient's first name, surname or date of birth",
+		"table": {
+			"address": "Address",
+			"birthDate": "Birthdate",
+			"gender": "Gender",
+			"name": "Name",
+			"tooltipCreate": "Create new order",
+			"tooltipView": "View patient"
+		}
+	},
+	"viewPatient": {
+		"activeOrders": {
+			"add": "Create new order",
+			"title": "Open orders"
+		},
+		"medicationPlan": "Medication plan",
+		"patientInfo": {
+			"address": "Address",
+			"birthDate": "Birthdate",
+			"contactSystem": "System",
+			"contactSystems": {
+				"email": "E-Mail",
+				"phone": "Phone"
+			},
+			"contactUses": {
+				"home": "Home",
+				"mobile": "Mobile",
+				"work": "Work"
+			},
+			"contactValue": "Value",
+			"contacts": "Contact information",
+			"gender": "Gender",
+			"name": "First and surnames",
+			"socialSecurityNumber": "Social security number"
+		},
+		"title": "Patient data"
+	}
 }
