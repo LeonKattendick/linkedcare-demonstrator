@@ -117,6 +117,8 @@
 			"status": "Status",
 			"title": "Medication"
 		},
+		"notFoundSubtitle": "The order with id {{id}} couldn't be found in FHIR",
+		"notFoundTitle": "Order not found",
 		"steps": {
 			"caregiver": "Order",
 			"doctor": "Prescription",

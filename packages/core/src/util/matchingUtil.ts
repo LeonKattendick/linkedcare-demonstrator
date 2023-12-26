@@ -24,3 +24,8 @@ export const caregiverIsFromOrganization = (caregiver: Organization | null, orga
   if (!caregiver || !organization || !caregiver.partOf) return false;
   return referencesEqual(caregiver.partOf, organization);
 };
+
+export const identifierEqualsReference = (identifier: Identifier, reference: Reference<any>) => {
+  if (!identifier || !reference) return false;
+  return referencesEqual({ identifier, display: "" }, reference);
+};

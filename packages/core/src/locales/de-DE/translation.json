@@ -117,6 +117,8 @@
 			"status": "Status",
 			"title": "Medikation"
 		},
+		"notFoundSubtitle": "Die Bestellung mit der ID {{id}} konnte nicht in FHIR gefunden werden",
+		"notFoundTitle": "Bestellung nicht gefunden",
 		"steps": {
 			"caregiver": "Bestellung",
 			"doctor": "Verschreibung",

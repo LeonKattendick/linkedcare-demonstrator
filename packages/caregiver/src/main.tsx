@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/patient/:patientId" element={<CaregiverViewPatient />} />
             <Route path="/plan/:patientId" element={<CaregiverMedicationPlan />} />
             <Route path="/create/:patientId" element={<CaregiverOrder />} />
-            <Route path="/order/:orderId" element={<CaregiverOrder />} />
+            <Route path="/order/:patientId/:orderId" element={<CaregiverOrder />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ) : (

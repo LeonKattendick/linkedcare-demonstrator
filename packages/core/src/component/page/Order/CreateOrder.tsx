@@ -49,7 +49,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
             );
           }
         }
-        navigate(`/order/${r.id}`);
+        navigate(`/order/${props.patient.id}/${r.id}`);
       })
       .catch(() => message.error(t("translation:order.create.error")));
   };

@@ -18,17 +18,10 @@ interface EditOrderProps {
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
 
-  const [order, _setOrder] = useState<RequestOrchestration>(structuredClone(props.order));
-  const [requests, setRequests] = useState<BaseMedicationRequest[]>([...order.contained]);
+  const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
-      <Space>
-        <Button type="primary">{t("translation:order.buttonRow.edit")}</Button>
-        <Button type="primary" danger>
-          {t("translation:order.buttonRow.cancel")}
-        </Button>
-      </Space>
       <MedicationTable
         requests={requests}
         setRequests={setRequests}
@@ -36,6 +29,12 @@ export const EditOrder = (props: EditOrderProps) => {
         caregiver={props.caregiver}
         doctor={props.doctor}
       />
+      <Space style={{ float: "right" }}>
+        <Button type="primary">{t("translation:order.buttonRow.edit")}</Button>
+        <Button type="primary" danger>
+          {t("translation:order.buttonRow.cancel")}
+        </Button>
+      </Space>
     </Space>
   );
 };

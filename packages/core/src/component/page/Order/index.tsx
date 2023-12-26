@@ -25,7 +25,7 @@ export const Order = (props: OrderProps) => {
         patient={props.patient}
         hideMedicationPlanButton
         title={t("translation:createOrder.title")}
-        currentState={props.isNew ? "caregiver" : "completed"}
+        currentState={props.isNew ? "caregiver" : "doctor"}
       />
       <Card style={{ height: "100%" }}>
         {props.isNew ? (
