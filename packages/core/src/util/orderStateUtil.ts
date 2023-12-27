@@ -10,5 +10,14 @@ export enum OrderState {
 }
 
 export const calculateOrderState = (r: BaseMedicationRequest[]) => {
-  return OrderState.CAREGIVER;
+  if (r.length === 0) return OrderState.CAREGIVER;
+
+  const activeProposals = r.filter((v) => v.intent === "proposal" && v.status === "active");
+  const activeOrders = r.filter((v) => v.intent === "order" && v.status === "active");
+
+  if (activeOrders.length > 0 && activeProposals.length > 0) return OrderState.BOTH;
+  if (activeProposals.length > 0) return OrderState.DOCTOR;
+  if (activeOrders.length > 0) return OrderState.PHARMACY;
+
+  return OrderState.COMPLETED;
 };
