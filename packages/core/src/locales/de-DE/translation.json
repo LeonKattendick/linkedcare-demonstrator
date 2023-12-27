@@ -14,6 +14,9 @@
 	"createOrder": {
 		"title": "Bestellungen anlegen"
 	},
+	"editOrder": {
+		"title": "Bestellung bearbeiten"
+	},
 	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
 	"general": {
 		"actions": "Aktionen",

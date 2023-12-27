@@ -17,17 +17,18 @@ interface OrderProps {
 
 export const Order = (props: OrderProps) => {
   const { t } = useTranslation();
+  const isNew = !props.order;
 
   return (
     <Flex gap={16} vertical style={{ height: "100%" }}>
       <PatientTitle
         patient={props.patient}
         hideMedicationPlanButton
-        title={t("translation:createOrder.title")}
-        currentState={!props.order ? "caregiver" : "doctor"}
+        title={isNew ? t("translation:createOrder.title") : t("translation:editOrder.title")}
+        currentState={isNew ? "caregiver" : "doctor"}
       />
       <Card style={{ height: "100%" }}>
-        {!props.order ? (
+        {isNew ? (
           <CreateOrder patient={props.patient} caregiver={props.caregiver!} />
         ) : (
           <EditOrder patient={props.patient} order={props.order!} caregiver={props.caregiver} doctor={props.doctor} />

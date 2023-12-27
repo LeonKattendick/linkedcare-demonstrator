@@ -14,6 +14,9 @@
 	"createOrder": {
 		"title": "Create a new order"
 	},
+	"editOrder": {
+		"title": "Edit order"
+	},
 	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
 	"general": {
 		"actions": "Actions",

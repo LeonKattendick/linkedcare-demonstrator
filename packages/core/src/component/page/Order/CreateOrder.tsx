@@ -30,7 +30,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
         const promises = [...requests]
           .map((v) => ({
             ...v,
-            supportingInformation: { reference: `RequestOrchestration/${r.id}` },
+            supportingInformation: [{ reference: `RequestOrchestration/${r.id}` }],
           }))
           .map(createMedicationRequest);
 
