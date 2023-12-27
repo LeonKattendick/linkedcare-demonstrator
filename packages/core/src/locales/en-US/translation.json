@@ -71,9 +71,11 @@
 	},
 	"order": {
 		"buttonRow": {
-			"cancel": "Cancel order",
+			"cancel": "Cancel {{amount}} medication",
+			"complete": "Mark {{amount}} medication as \"dispensed\"",
 			"create": "Create order",
-			"edit": "Update order"
+			"edit": "Save changes",
+			"prescribe": "Prescribe {{amount}} medication"
 		},
 		"create": {
 			"error": "The order could not be created",

@@ -3,24 +3,26 @@ import { Button, Card, Col, Flex, Row, Space, Steps } from "antd";
 import { Patient } from "core/src/interface/linca/Patient";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { OrderState } from "../util/orderStateUtil";
 
 interface PatientTitleProps {
   patient: Patient;
   title: string;
   hideMedicationPlanButton?: boolean;
-  currentState?: "caregiver" | "doctor" | "pharmacy" | "completed";
+  orderState?: OrderState;
 }
 
 const caregiverSteps = {
-  caregiver: "process",
-  doctor: "finish",
-  pharmacy: "finish",
-  completed: "finish",
+  CAREGIVER: "process",
+  DOCTOR: "finish",
+  BOTH: "finish",
+  PHARMACY: "finish",
+  COMPLETED: "finish",
 };
 
-const doctorSteps = { doctor: "process", pharmacy: "finish", completed: "finish" };
+const doctorSteps = { DOCTOR: "process", BOTH: "finish", PHARMACY: "finish", COMPLETED: "finish" };
 
-const pharmacySteps = { pharmacy: "process", completed: "finish" };
+const pharmacySteps = { BOTH: "process", PHARMACY: "process", COMPLETED: "finish" };
 
 export const PatientTitle = (props: PatientTitleProps) => {
   const { t } = useTranslation();
@@ -47,24 +49,32 @@ export const PatientTitle = (props: PatientTitleProps) => {
             </Space>
           </Flex>
         </Col>
-        {props.currentState && (
+        {props.orderState && (
           <Col span={17} style={{ display: "flex", alignItems: "center" }}>
             <Steps
               items={[
                 {
                   title: t("translation:order.steps.caregiver"),
-                  status: caregiverSteps[props.currentState],
-                  icon: props.currentState === "caregiver" ? <LoadingOutlined /> : <UserOutlined />,
+                  status: caregiverSteps[props.orderState],
+                  icon: props.orderState === OrderState.CAREGIVER ? <LoadingOutlined /> : <UserOutlined />,
                 },
                 {
                   title: t("translation:order.steps.doctor"),
-                  status: (doctorSteps as any)[props.currentState] ?? "wait",
-                  icon: props.currentState === "doctor" ? <LoadingOutlined /> : <SolutionOutlined />,
+                  status: (doctorSteps as any)[props.orderState] ?? "wait",
+                  icon: [OrderState.BOTH, OrderState.DOCTOR].includes(props.orderState) ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <SolutionOutlined />
+                  ),
                 },
                 {
                   title: t("translation:order.steps.pharmacy"),
-                  status: (pharmacySteps as any)[props.currentState] ?? "wait",
-                  icon: props.currentState === "pharmacy" ? <LoadingOutlined /> : <MedicineBoxOutlined />,
+                  status: (pharmacySteps as any)[props.orderState] ?? "wait",
+                  icon: [OrderState.BOTH, OrderState.PHARMACY].includes(props.orderState) ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <MedicineBoxOutlined />
+                  ),
                 },
               ]}
             />

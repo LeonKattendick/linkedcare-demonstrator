@@ -71,9 +71,11 @@
 	},
 	"order": {
 		"buttonRow": {
-			"cancel": "Bestellung stornieren",
+			"cancel": "{{amount}} Medikamente stornieren",
+			"complete": "{{amount}} Medikamente als \"Ausgegeben\" markieren",
 			"create": "Bestellung erstellen",
-			"edit": "Bestellung ändern"
+			"edit": "Änderungen speichern",
+			"prescribe": "{{amount}} Medikamente verschreiben"
 		},
 		"create": {
 			"error": "Die Bestellung konnte nicht angelegt werden",

@@ -1,7 +1,15 @@
-import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  MedicineBoxOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
@@ -20,6 +28,7 @@ interface MedicationTableProps {
 
 export const MedicationTable = (props: MedicationTableProps) => {
   const { t } = useTranslation();
+  const perms = usePermissions();
 
   const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
@@ -75,15 +84,17 @@ export const MedicationTable = (props: MedicationTableProps) => {
         title={() => (
           <>
             {t("translation:order.medicationTable.title")}
-            <Button
-              type="primary"
-              style={{ float: "right" }}
-              size="small"
-              icon={<PlusOutlined />}
-              onClick={handleCreate}
-            >
-              {t("translation:order.medicationTable.add")}
-            </Button>
+            {perms.canAddMedication(props.requests) && (
+              <Button
+                type="primary"
+                style={{ float: "right" }}
+                size="small"
+                icon={<PlusOutlined />}
+                onClick={handleCreate}
+              >
+                {t("translation:order.medicationTable.add")}
+              </Button>
+            )}
           </>
         )}
         bordered
@@ -114,11 +125,21 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:general.actions")}
-          render={(_, _record: BaseMedicationRequest, index) => (
+          render={(_, record: BaseMedicationRequest, index) => (
             <Space>
-              <Button type="primary" icon={<EyeOutlined />} size="small" onClick={() => handleView(index)} />
-              <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
-              <Button type="primary" danger icon={<DeleteOutlined />} size="small" />
+              {perms.canViewMedication(record) && (
+                <Button type="primary" icon={<EyeOutlined />} size="small" onClick={() => handleView(index)} />
+              )}
+              {perms.canEditMedication(record) && (
+                <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
+              )}
+              {perms.canPrescribeMedication(record) && <Button type="primary" icon={<CheckOutlined />} size="small" />}
+              {perms.canCompleteMedication(record) && (
+                <Button type="primary" icon={<MedicineBoxOutlined />} size="small" />
+              )}
+              {perms.canDeclineMedication(record) && (
+                <Button type="primary" danger icon={<DeleteOutlined />} size="small" />
+              )}
             </Space>
           )}
         />
