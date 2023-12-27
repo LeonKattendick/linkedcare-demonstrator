@@ -18,8 +18,8 @@ export interface BaseMedicationRequest extends Resource {
   supportingInformation?: Reference<RequestOrchestration>[];
   requester: Reference<Practitioner>; // Requesting Caregiver
   performer: Reference<Practitioner>[]; // Related Doctor
-  dispenseRequest: {
-    dispenser?: Reference<Organization>; // Pharmacy
+  dispenseRequest?: {
+    dispenser: Reference<Organization>; // Pharmacy
   };
   dosageInstruction: Dosage[];
 }

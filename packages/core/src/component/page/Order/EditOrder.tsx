@@ -1,6 +1,7 @@
 import { Button, Space } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
@@ -17,14 +18,19 @@ interface EditOrderProps {
 
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
+  const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
 
-  const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
+  const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
+
+  useEffect(() => {
+    if (!isRequestsLoading) setEditRequests(requests);
+  }, [requests]);
 
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
       <MedicationTable
-        requests={requests}
-        setRequests={setRequests}
+        requests={editRequests}
+        setRequests={setEditRequests}
         patient={props.patient}
         caregiver={props.caregiver}
         doctor={props.doctor}

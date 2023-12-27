@@ -71,7 +71,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
         saveRequest={handleSave}
       />
       <Table
-        dataSource={props.requests}
+        dataSource={props.requests.map((v) => ({ ...v, key: v.id }))}
         title={() => (
           <>
             {t("translation:order.medicationTable.title")}
@@ -105,7 +105,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
         <Table.Column
           title={t("translation:order.medicationTable.pharmacy")}
           render={(_, record: BaseMedicationRequest) =>
-            (record.dispenseRequest.dispenser as ExternalReference)?.display
+            (record.dispenseRequest?.dispenser as ExternalReference)?.display
           }
         />
         <Table.Column

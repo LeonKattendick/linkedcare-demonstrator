@@ -86,12 +86,14 @@ export const MedicationModal = (props: MedicationModalProps) => {
             display: doctor.name[0].text,
           },
         ],
-        dispenseRequest: {
-          dispenser: pharmacy && {
-            identifier: pharmacy.identifier[0],
-            display: pharmacy.name,
-          },
-        },
+        dispenseRequest: pharmacy
+          ? {
+              dispenser: {
+                identifier: pharmacy.identifier[0],
+                display: pharmacy.name,
+              },
+            }
+          : undefined,
         dosageInstruction: [...res.sequences],
       });
       handleCancel();
