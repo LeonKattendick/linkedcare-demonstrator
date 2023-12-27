@@ -100,7 +100,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:order.medicationTable.doctor")}
-          render={(_, record: BaseMedicationRequest) => (record.performer as ExternalReference).display}
+          render={(_, record: BaseMedicationRequest) => (record.performer[0] as ExternalReference).display}
         />
         <Table.Column
           title={t("translation:order.medicationTable.pharmacy")}

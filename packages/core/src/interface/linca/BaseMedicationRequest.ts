@@ -14,10 +14,10 @@ export interface BaseMedicationRequest extends Resource {
   basedOn?: Reference<BaseMedicationRequest>; // Update by the Caregiver or non-modified prescription by the Doctor
   subject: Reference<Patient>;
   medication: Medication;
-  informationSource: Reference<Organization>; // Related Careservice
-  supportingInformation?: Reference<RequestOrchestration>;
+  informationSource: Reference<Organization>[]; // Related Careservice
+  supportingInformation?: Reference<RequestOrchestration>[];
   requester: Reference<Practitioner>; // Requesting Caregiver
-  performer: Reference<Practitioner>; // Related Doctor
+  performer: Reference<Practitioner>[]; // Related Doctor
   dispenseRequest: {
     dispenser?: Reference<Organization>; // Pharmacy
   };

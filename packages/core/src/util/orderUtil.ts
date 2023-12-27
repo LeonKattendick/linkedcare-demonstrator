@@ -42,9 +42,9 @@ export const createNewProposalMedicationRequest = (
         coding: [],
       },
     },
-    informationSource: informationSource,
+    informationSource: [informationSource],
     requester: requester,
-    performer: { identifier: doctorModels[0].identifier[0], display: doctorModels[0].name[0].text },
+    performer: [{ identifier: doctorModels[0].identifier[0], display: doctorModels[0].name[0].text }],
     dispenseRequest: {},
     dosageInstruction: [],
   });

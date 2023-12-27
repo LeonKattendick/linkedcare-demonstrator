@@ -46,7 +46,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
     form.setFieldsValue({
       medicationIndex: props.request?.medication.concept.coding[0]?.code,
       sequences: props.request?.dosageInstruction,
-      doctorIdentifier: (props.request?.performer as ExternalReference)?.identifier?.value,
+      doctorIdentifier: (props.request?.performer[0] as ExternalReference)?.identifier?.value,
       pharmacyIdentifier: (props.request?.dispenseRequest?.dispenser as ExternalReference)?.identifier?.value,
     });
   }, [props.open]);
@@ -80,10 +80,12 @@ export const MedicationModal = (props: MedicationModalProps) => {
             ],
           },
         },
-        performer: {
-          identifier: doctor.identifier[0],
-          display: doctor.name[0].text,
-        },
+        performer: [
+          {
+            identifier: doctor.identifier[0],
+            display: doctor.name[0].text,
+          },
+        ],
         dispenseRequest: {
           dispenser: pharmacy && {
             identifier: pharmacy.identifier[0],
