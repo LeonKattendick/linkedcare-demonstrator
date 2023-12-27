@@ -98,7 +98,7 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
       onReset={() => setSequences([])}
     >
       <Table
-        dataSource={sequences}
+        dataSource={sequences.map((v, i) => ({ ...v, key: i }))}
         title={() => (
           <>
             {t("translation:order.medicationTable.modal.table.title")}
