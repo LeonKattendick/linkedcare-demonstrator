@@ -7,7 +7,7 @@ import { OrderState } from "../util/orderStateUtil";
 
 interface PatientTitleProps {
   patient: Patient;
-  title: string;
+  title: string | JSX.Element;
   hideMedicationPlanButton?: boolean;
   orderState?: OrderState;
 }
