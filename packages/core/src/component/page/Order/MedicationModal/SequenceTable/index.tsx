@@ -88,17 +88,12 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
           message: t("translation:order.medicationTable.modal.errorNoSequence"),
           validator: () => (sequences.length > 0 ? Promise.resolve(sequences) : Promise.reject()),
         },
-        /*{
-          required: true,
-          message: t("translation:order.medicationTable.modal.errorEmptySequenceText"),
-          validator: () =>
-            !sequences.find((v) => v.text.trim().length === 0) ? Promise.resolve(sequences) : Promise.reject(),
-        },*/
       ]}
       onReset={() => setSequences([])}
     >
       <Table
-        dataSource={sequences.map((v, i) => ({ ...v, key: i }))}
+        dataSource={sequences}
+        rowKey={(v) => v.sequence!}
         title={() => (
           <>
             {t("translation:order.medicationTable.modal.table.title")}

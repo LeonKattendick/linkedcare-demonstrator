@@ -18,8 +18,9 @@ export const OrderTable = ({ patient, orders, isOrdersLoading }: OrderTableProps
 
   return (
     <Table
-      dataSource={orders.map((v) => ({ ...v, key: v.id }))}
+      dataSource={orders}
       pagination={{ simple: true, pageSize: 11 }}
+      rowKey={(v) => v.id!}
       size="small"
       loading={isOrdersLoading}
       bordered

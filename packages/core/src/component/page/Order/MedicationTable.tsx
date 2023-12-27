@@ -80,7 +80,8 @@ export const MedicationTable = (props: MedicationTableProps) => {
         saveRequest={handleSave}
       />
       <Table
-        dataSource={props.requests.map((v) => ({ ...v, key: v.id }))}
+        dataSource={props.requests}
+        rowKey={(v) => v.id!}
         title={() => (
           <>
             {t("translation:order.medicationTable.title")}

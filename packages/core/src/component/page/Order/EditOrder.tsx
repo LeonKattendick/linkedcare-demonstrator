@@ -8,7 +8,7 @@ import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
-import { findMedicationRequestsErrors } from "../../../util/matchingUtil";
+import { findMedicationRequestsMatchingErrors } from "../../../util/matchingUtil";
 import { MedicationTable } from "./MedicationTable";
 
 interface EditOrderProps {
@@ -29,7 +29,7 @@ export const EditOrder = (props: EditOrderProps) => {
     if (!isRequestsLoading) setEditRequests(requests.map((v) => structuredClone(v)));
   }, [requests]);
 
-  editRequests.forEach((v, i) => findMedicationRequestsErrors(v, requests[i]));
+  editRequests.forEach((v, i) => findMedicationRequestsMatchingErrors(v, requests[i]));
 
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">

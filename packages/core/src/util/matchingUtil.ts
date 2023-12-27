@@ -36,7 +36,7 @@ export const identifierEqualsReference = (identifier: Identifier, reference: Ref
   return referencesEqual({ identifier, display: "" }, reference);
 };
 
-export const findDosageErrors = (d1: Dosage | undefined, d2: Dosage | undefined) => {
+export const findDosageMatchingErrors = (d1: Dosage | undefined, d2: Dosage | undefined) => {
   if (!d1 || !d2) return [DosageError.EMPTY];
 
   const errors = [];
@@ -78,10 +78,13 @@ export const findDosageErrors = (d1: Dosage | undefined, d2: Dosage | undefined)
 };
 
 export const dosagesEqual = (d1: Dosage | undefined, d2: Dosage | undefined) => {
-  return findDosageErrors(d1, d2).length === 0;
+  return findDosageMatchingErrors(d1, d2).length === 0;
 };
 
-export const findMedicationRequestsErrors = (r1: BaseMedicationRequest | null, r2: BaseMedicationRequest | null) => {
+export const findMedicationRequestsMatchingErrors = (
+  r1: BaseMedicationRequest | null,
+  r2: BaseMedicationRequest | null
+) => {
   if (!r1 || !r2) return [MedicationRequestError.EMPTY];
 
   const errors = [];
@@ -149,5 +152,5 @@ export const findMedicationRequestsErrors = (r1: BaseMedicationRequest | null, r
 };
 
 export const medicationRequestsEqual = (r1: BaseMedicationRequest | null, r2: BaseMedicationRequest | null) => {
-  return findMedicationRequestsErrors(r1, r2).length === 0;
+  return findMedicationRequestsMatchingErrors(r1, r2).length === 0;
 };

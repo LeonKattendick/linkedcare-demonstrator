@@ -35,7 +35,8 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
         <Col span={8}>{t("translation:viewPatient.patientInfo.contacts")}</Col>
         <Col span={16}>
           <Table
-            dataSource={patient.telecom.map((v, i) => ({ key: i, ...v }))}
+            dataSource={patient.telecom}
+            rowKey={(v) => v.system + "#" + v.value}
             size="small"
             bordered
             pagination={false}

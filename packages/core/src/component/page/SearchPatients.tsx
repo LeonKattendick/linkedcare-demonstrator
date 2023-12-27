@@ -29,9 +29,7 @@ export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }
 
   const [search, setSearch] = useState("");
 
-  const filteredPatients = patients
-    .filter((v) => compare(search.toLowerCase().trim(), v))
-    .map((v) => ({ key: v.id, ...v }));
+  const filteredPatients = patients.filter((v) => compare(search.toLowerCase().trim(), v));
 
   return (
     <Card style={{ height: "100%" }}>
@@ -42,7 +40,7 @@ export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }
           onChange={(e) => setSearch(e.target.value)}
           placeholder={t("translation:searchPatients.placeholder")}
         />
-        <Table dataSource={filteredPatients} bordered loading={isPatientsLoading} size="middle">
+        <Table dataSource={filteredPatients} bordered loading={isPatientsLoading} size="middle" rowKey={(v) => v.id!}>
           <Table.Column
             title={t("translation:searchPatients.table.name")}
             render={(_, record: Patient) => (
