@@ -74,7 +74,7 @@
 			"cancel": "{{amount}} Medikamente stornieren",
 			"complete": "{{amount}} Medikamente als \"Ausgegeben\" markieren",
 			"create": "Bestellung erstellen",
-			"edit": "Änderungen speichern",
+			"edit": "{{amount}} Änderungen speichern",
 			"prescribe": "{{amount}} Medikamente verschreiben"
 		},
 		"create": {
@@ -93,7 +93,6 @@
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
 				"doctor": "Zuständiger Hausarzt",
-				"errorEmptySequenceText": "Der Text einer Sequenz ist leer.",
 				"errorNoDoctor": "Es muss eine Medikation aus der Liste ausgewählt werden.",
 				"errorNoMedication": "Es muss ein Hausarzt aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",

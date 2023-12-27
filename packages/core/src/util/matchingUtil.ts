@@ -110,7 +110,7 @@ export const findMedicationRequestsMatchingErrors = (
   if (r1.status !== r2.status) {
     errors.push(MedicationRequestError.STATUS);
   }
-  if (!!r1.basedOn && !!r2.basedOn) {
+  if (!!r1.basedOn || !!r2.basedOn) {
     if (!referencesEqual(r1.basedOn, r2.basedOn)) errors.push(MedicationRequestError.BASED_ON);
   }
   if (!referencesEqual(r1.subject, r2.subject)) {
@@ -131,8 +131,8 @@ export const findMedicationRequestsMatchingErrors = (
   if (!referencesEqual(r1.performer[0], r2.performer[0])) {
     errors.push(MedicationRequestError.PERFORMER);
   }
-  if (!!r1.dispenseRequest && !!r2.dispenseRequest) {
-    if (!referencesEqual(r1.dispenseRequest.dispenser, r2.dispenseRequest.dispenser))
+  if (!!r1.dispenseRequest || !!r2.dispenseRequest) {
+    if (!referencesEqual(r1.dispenseRequest?.dispenser, r2.dispenseRequest?.dispenser))
       errors.push(MedicationRequestError.DISPENSER);
   }
 

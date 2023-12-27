@@ -74,7 +74,7 @@
 			"cancel": "Cancel {{amount}} medication",
 			"complete": "Mark {{amount}} medication as \"dispensed\"",
 			"create": "Create order",
-			"edit": "Save changes",
+			"edit": "Save {{amount}} changes",
 			"prescribe": "Prescribe {{amount}} medication"
 		},
 		"create": {
@@ -93,7 +93,6 @@
 				"createTitle": "Create medication",
 				"detailsDivider": "Medication details",
 				"doctor": "Responsible doctor",
-				"errorEmptySequenceText": "The text of a sequence is empty.",
 				"errorNoDoctor": "A medication must be selected from the list.",
 				"errorNoMedication": "A family doctor must be selected from the list.",
 				"errorNoSequence": "At least one sequence with dosage must be created.",

@@ -8,7 +8,7 @@ import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
-import { findMedicationRequestsMatchingErrors } from "../../../util/matchingUtil";
+import { medicationRequestsEqual } from "../../../util/matchingUtil";
 import { MedicationTable } from "./MedicationTable";
 
 interface EditOrderProps {
@@ -29,7 +29,7 @@ export const EditOrder = (props: EditOrderProps) => {
     if (!isRequestsLoading) setEditRequests(requests.map((v) => structuredClone(v)));
   }, [requests]);
 
-  editRequests.forEach((v, i) => findMedicationRequestsMatchingErrors(v, requests[i]));
+  const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, requests[i]));
 
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
@@ -41,7 +41,11 @@ export const EditOrder = (props: EditOrderProps) => {
         doctor={props.doctor}
       />
       <Space style={{ float: "right" }}>
-        {perms.canEditOrder(requests) && <Button type="primary">{t("translation:order.buttonRow.edit")}</Button>}
+        {perms.canEditOrder(requests) && (
+          <Button type="primary" disabled={changedRequests.length === 0}>
+            {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
+          </Button>
+        )}
         {perms.canPrescribeOrder(requests) && (
           <Button type="primary">
             {t("translation:order.buttonRow.prescribe", {
