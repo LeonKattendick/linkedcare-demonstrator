@@ -10,5 +10,5 @@ export interface PrescriptionMedicationRequest extends BaseMedicationRequest {
   intent: "order";
   status: "active" | "ended" | "stopped" | "entered-in-error";
   priorPrescription?: Reference<ProposalMedicationRequest>; // Used for modification
-  groupIdentifier: Identifier; // eRezeptID
+  groupIdentifier?: Identifier; // eRezeptID
 }

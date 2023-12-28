@@ -10,7 +10,7 @@ export const usePermissions = () => {
 
   const canAddMedication = (r: PermissionMedicineRequest[]) => {
     if (![UserType.CAREGIVER, UserType.DOCTOR].includes(userType)) return false;
-    return r.find((v) => v.intent === "proposal" && v.status === "active");
+    return r.length === 0 || r.find((v) => v.intent === "proposal" && v.status === "active");
   };
 
   const canEditOrder = (r: PermissionMedicineRequest[]) => {

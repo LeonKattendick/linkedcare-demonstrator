@@ -82,8 +82,8 @@ export const dosagesEqual = (d1: Dosage | undefined, d2: Dosage | undefined) => 
 };
 
 export const findMedicationRequestsMatchingErrors = (
-  r1: BaseMedicationRequest | null,
-  r2: BaseMedicationRequest | null
+  r1: BaseMedicationRequest | undefined,
+  r2: BaseMedicationRequest | undefined
 ) => {
   if (!r1 || !r2) return [MedicationRequestError.EMPTY];
 
@@ -99,10 +99,13 @@ export const findMedicationRequestsMatchingErrors = (
       const p1 = r1 as PrescriptionMedicationRequest;
       const p2 = r1 as PrescriptionMedicationRequest;
 
-      if (!referencesEqual(p1.priorPrescription, p2.priorPrescription)) {
+      if (
+        (!!p1.priorPrescription || !!p2.priorPrescription) &&
+        !referencesEqual(p1.priorPrescription, p2.priorPrescription)
+      ) {
         errors.push(MedicationRequestError.PRIOR_PRESCRIPTION);
       }
-      if (p1.groupIdentifier !== p2.groupIdentifier) {
+      if ((!!p1.groupIdentifier || p2.groupIdentifier) && p1.groupIdentifier !== p2.groupIdentifier) {
         errors.push(MedicationRequestError.GROUP_IDENTIFIER);
       }
     }
@@ -122,8 +125,9 @@ export const findMedicationRequestsMatchingErrors = (
   if (!referencesEqual(r1.informationSource[0], r2.informationSource[0])) {
     errors.push(MedicationRequestError.INFORMATION_SOURCE);
   }
-  if (!referencesEqual(r1.supportingInformation?.[0], r2.supportingInformation?.[0])) {
-    errors.push(MedicationRequestError.SUPPORTING_INFORMATION);
+  if (!!r1.supportingInformation || !!r2.supportingInformation) {
+    if (!referencesEqual(r1.supportingInformation?.[0], r2.supportingInformation?.[0]))
+      errors.push(MedicationRequestError.SUPPORTING_INFORMATION);
   }
   if (!referencesEqual(r1.requester, r2.requester)) {
     errors.push(MedicationRequestError.REQUESTER);
@@ -151,6 +155,9 @@ export const findMedicationRequestsMatchingErrors = (
   return errors;
 };
 
-export const medicationRequestsEqual = (r1: BaseMedicationRequest | null, r2: BaseMedicationRequest | null) => {
+export const medicationRequestsEqual = (
+  r1: BaseMedicationRequest | undefined,
+  r2: BaseMedicationRequest | undefined
+) => {
   return findMedicationRequestsMatchingErrors(r1, r2).length === 0;
 };
