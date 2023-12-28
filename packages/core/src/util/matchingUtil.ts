@@ -94,20 +94,18 @@ export const findMedicationRequestsMatchingErrors = (
   }
   if (r1.intent !== r2.intent) {
     errors.push(MedicationRequestError.INTENT);
-  } else {
-    if (isPrescribed(r1) && isPrescribed(r2)) {
-      const p1 = r1 as PrescriptionMedicationRequest;
-      const p2 = r1 as PrescriptionMedicationRequest;
+  } else if (isPrescribed(r1) && isPrescribed(r2)) {
+    const p1 = r1 as PrescriptionMedicationRequest;
+    const p2 = r1 as PrescriptionMedicationRequest;
 
-      if (
-        (!!p1.priorPrescription || !!p2.priorPrescription) &&
-        !referencesEqual(p1.priorPrescription, p2.priorPrescription)
-      ) {
-        errors.push(MedicationRequestError.PRIOR_PRESCRIPTION);
-      }
-      if ((!!p1.groupIdentifier || p2.groupIdentifier) && p1.groupIdentifier !== p2.groupIdentifier) {
-        errors.push(MedicationRequestError.GROUP_IDENTIFIER);
-      }
+    if (
+      (!!p1.priorPrescription || !!p2.priorPrescription) &&
+      !referencesEqual(p1.priorPrescription, p2.priorPrescription)
+    ) {
+      errors.push(MedicationRequestError.PRIOR_PRESCRIPTION);
+    }
+    if ((!!p1.groupIdentifier || p2.groupIdentifier) && p1.groupIdentifier !== p2.groupIdentifier) {
+      errors.push(MedicationRequestError.GROUP_IDENTIFIER);
     }
   }
   if (r1.status !== r2.status) {
