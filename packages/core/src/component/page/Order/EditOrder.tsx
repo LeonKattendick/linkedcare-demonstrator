@@ -1,8 +1,8 @@
 import { Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
-import { useMedicationRequestApiAdapter } from "../../../hook/useMedicationRequestApiAdapter";
 import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
@@ -84,6 +84,11 @@ export const EditOrder = (props: EditOrderProps) => {
             {t("translation:order.buttonRow.cancel", {
               amount: editRequests.filter(perms.canDeclineMedication).length,
             })}
+          </Button>
+        )}
+        {perms.canBeRevoked(editRequests) && props.order.status !== "revoked" && (
+          <Button type="primary" danger>
+            {t("translation:order.buttonRow.revoke")}
           </Button>
         )}
       </Space>

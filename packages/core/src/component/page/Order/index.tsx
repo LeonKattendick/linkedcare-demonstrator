@@ -29,7 +29,7 @@ export const Order = (props: OrderProps) => {
         patient={props.patient}
         hideMedicationPlanButton
         title={isNew ? t("translation:createOrder.title") : t("translation:editOrder.title")}
-        orderState={calculateOrderState(requests)}
+        orderState={calculateOrderState(requests, props.order)}
       />
       <Card style={{ height: "100%" }}>
         {isNew ? (

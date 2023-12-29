@@ -78,7 +78,8 @@
 			"complete": "Mark {{amount}} medication as \"dispensed\"",
 			"create": "Create order",
 			"edit": "Save {{amount}} changes",
-			"prescribe": "Prescribe {{amount}} medication"
+			"prescribe": "Prescribe {{amount}} medication",
+			"revoke": "Revoke order"
 		},
 		"create": {
 			"error": "The order could not be created",

@@ -1,9 +1,9 @@
 import { App } from "antd";
 import { useTranslation } from "react-i18next";
-import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest";
-import { PrescriptionMedicationRequest } from "../interface/linca/PrescriptionMedicationRequest";
-import { createMedicationRequest } from "../service/medicatonRequestService";
-import { useGetAllMedicationRequestsByPatient } from "./useGetAllMedicationRequestsByPatient";
+import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
+import { PrescriptionMedicationRequest } from "../../interface/linca/PrescriptionMedicationRequest";
+import { createMedicationRequest } from "../../service/medicatonRequestService";
+import { useGetAllMedicationRequestsByPatient } from "../useGetAllMedicationRequestsByPatient";
 
 export const useMedicationRequestApiAdapter = () => {
   const { t } = useTranslation();
@@ -20,6 +20,7 @@ export const useMedicationRequestApiAdapter = () => {
         })
       );
       invalidateEveryGetAllMedicationRequestsByPatient();
+
       return res;
     } catch (e) {
       message.error(t("translation:order.create.errorMedication", { name: r.medication.concept.coding[0].display }));
@@ -42,6 +43,7 @@ export const useMedicationRequestApiAdapter = () => {
         })
       );
       invalidateEveryGetAllMedicationRequestsByPatient();
+
       return res;
     } catch (e) {
       message.error(t("translation:order.edit.errorMedication", { name: r.medication.concept.coding[0].display }));
@@ -68,6 +70,7 @@ export const useMedicationRequestApiAdapter = () => {
         })
       );
       invalidateEveryGetAllMedicationRequestsByPatient();
+
       return res;
     } catch (e) {
       message.error(t("translation:order.decline.errorMedication", { name: r.medication.concept.coding[0].display }));

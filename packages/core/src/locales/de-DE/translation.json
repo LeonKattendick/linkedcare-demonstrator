@@ -78,7 +78,8 @@
 			"complete": "{{amount}} Medikamente als \"Ausgegeben\" markieren",
 			"create": "Bestellung erstellen",
 			"edit": "{{amount}} Änderungen speichern",
-			"prescribe": "{{amount}} Medikamente verschreiben"
+			"prescribe": "{{amount}} Medikamente verschreiben",
+			"revoke": "Bestellung zurückziehen"
 		},
 		"create": {
 			"error": "Die Bestellung konnte nicht angelegt werden",

@@ -1,12 +1,12 @@
-import { App, Button, Space } from "antd";
+import { Button, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { useMedicationRequestApiAdapter } from "../../../hook/useMedicationRequestApiAdapter";
+import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
+import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
-import { createRequestOrchestration } from "../../../service/requestOrchestrationService";
 import { createNewRequestOrchestration } from "../../../util/orderUtil";
 import { MedicationTable } from "./MedicationTable";
 
@@ -17,28 +17,25 @@ interface CreateOrderProps {
 
 export const CreateOrder = (props: CreateOrderProps) => {
   const { t } = useTranslation();
-  const { message } = App.useApp();
   const navigate = useNavigate();
+  const { createOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const { createRequestWithInfo } = useMedicationRequestApiAdapter();
 
   const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
-  const handleCreate = () => {
-    createRequestOrchestration(createNewRequestOrchestration(props.caregiver))
-      .then(async (r) => {
-        message.success(t("translation:order.create.success", { id: r.id }));
+  const handleCreate = async () => {
+    const res = await createOrchestrationWithInfo(createNewRequestOrchestration(props.caregiver));
+    if (!res) return;
 
-        const requestsWithId = requests.map((v) => ({
-          ...v,
-          supportingInformation: [{ reference: `RequestOrchestration/${r.id}` }],
-        }));
+    const requestsWithId = requests.map((v) => ({
+      ...v,
+      supportingInformation: [{ reference: `RequestOrchestration/${res.id}` }],
+    }));
 
-        for (const request of requestsWithId) {
-          await createRequestWithInfo(request);
-        }
-        navigate(`/order/${props.patient.id}/${r.id}`);
-      })
-      .catch(() => message.error(t("translation:order.create.error")));
+    for (const request of requestsWithId) {
+      await createRequestWithInfo(request);
+    }
+    navigate(`/order/${props.patient.id}/${res.id}`);
   };
 
   return (
