@@ -2,6 +2,7 @@ import { Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
+import { useMedicationRequestApiAdapter } from "../../../hook/useMedicationRequestApiAdapter";
 import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
@@ -21,15 +22,32 @@ interface EditOrderProps {
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
+  const { createRequestWithInfo, editRequestWithInfo, declineRequestWithInfo } = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
+
+  const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, requests[i]));
 
   useEffect(() => {
     if (!isRequestsLoading) setEditRequests(requests.map((v) => structuredClone(v)));
   }, [requests]);
 
-  const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, requests[i]));
+  const handleEdit = async () => {
+    for (const request of changedRequests) {
+      if (request.id) {
+        await editRequestWithInfo(request);
+      } else {
+        await createRequestWithInfo(request);
+      }
+    }
+  };
+
+  const handleDecline = async () => {
+    for (const request of editRequests) {
+      if (perms.canDeclineMedication(request)) await declineRequestWithInfo(request, "cancelled");
+    }
+  };
 
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
@@ -43,7 +61,7 @@ export const EditOrder = (props: EditOrderProps) => {
       />
       <Space style={{ float: "right" }}>
         {perms.canEditOrder(editRequests) && (
-          <Button type="primary" disabled={changedRequests.length === 0}>
+          <Button type="primary" disabled={changedRequests.length === 0} onClick={handleEdit}>
             {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
           </Button>
         )}
@@ -62,7 +80,7 @@ export const EditOrder = (props: EditOrderProps) => {
           </Button>
         )}
         {perms.canDeclineOrder(editRequests) && (
-          <Button type="primary" danger>
+          <Button type="primary" danger onClick={handleDecline}>
             {t("translation:order.buttonRow.cancel", {
               amount: editRequests.filter(perms.canDeclineMedication).length,
             })}

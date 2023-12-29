@@ -108,6 +108,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
         size="small"
         pagination={false}
       >
+        <Table.Column title="#" dataIndex="id" />
         <Table.Column
           title={t("translation:order.medicationTable.name")}
           render={(_, record: BaseMedicationRequest) => record.medication.concept.coding[0].display}

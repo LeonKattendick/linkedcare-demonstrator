@@ -17,7 +17,7 @@ export const createRequestOrchestration = (orchestration: RequestOrchestration):
 export const getAllRequestOrchestrations = (): Promise<RequestOrchestration[]> => {
   return new Promise((res, rej) => {
     axios
-      .get("/fhir/RequestOrchestration")
+      .get("/fhir/RequestOrchestration", { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<RequestOrchestration>;
         res(bundle.total > 0 ? bundle.entry!.map((v) => v.resource) : []);
@@ -29,7 +29,7 @@ export const getAllRequestOrchestrations = (): Promise<RequestOrchestration[]> =
 export const getRequestOrchestrationById = (id: string): Promise<RequestOrchestration | null> => {
   return new Promise((res, rej) => {
     axios
-      .get(`/fhir/RequestOrchestration?_id=${id}`)
+      .get(`/fhir/RequestOrchestration?_id=${id}`, { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<RequestOrchestration>;
         res(bundle.total === 1 ? bundle.entry![0].resource : null);

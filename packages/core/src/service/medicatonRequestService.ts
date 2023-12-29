@@ -17,7 +17,7 @@ export const createMedicationRequest = (r: BaseMedicationRequest): Promise<BaseM
 export const getAllMedicationRequestsByPatient = (patientId: string): Promise<BaseMedicationRequest[]> => {
   return new Promise((res, rej) => {
     axios
-      .get(`/fhir/MedicationRequest?subject=Patient/${patientId}`)
+      .get(`/fhir/MedicationRequest?subject=Patient/${patientId}`, { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<BaseMedicationRequest>;
         res(bundle.total > 0 ? bundle.entry!.map((v) => v.resource) : []);

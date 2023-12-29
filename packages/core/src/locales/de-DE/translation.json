@@ -86,6 +86,14 @@
 			"success": "Die Bestellung wurde mit ID {{id}} angelegt",
 			"successMedication": "Medikation {{name}} mit der ID {{id}} angelegt"
 		},
+		"decline": {
+			"errorMedication": "Medikation {{name}} konnte nicht storniert werden",
+			"successMedication": "Medikation {{name}} mit der ID {{id}} storniert"
+		},
+		"edit": {
+			"errorMedication": "Medikation {{name}} konnte nicht editiert werden",
+			"successMedication": "Medikation {{name}} mit der ID {{id}} editiert"
+		},
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
 			"doctor": "Zuständiger Hausarzt",

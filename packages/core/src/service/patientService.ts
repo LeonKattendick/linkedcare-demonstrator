@@ -17,7 +17,7 @@ export const createPatient = (patient: Patient): Promise<Patient> => {
 export const getAllPatients = (): Promise<Patient[]> => {
   return new Promise((res, rej) => {
     axios
-      .get("/fhir/Patient")
+      .get("/fhir/Patient", { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<Patient>;
         res(bundle.total > 0 ? bundle.entry!.map((v) => v.resource) : []);
@@ -29,7 +29,7 @@ export const getAllPatients = (): Promise<Patient[]> => {
 export const getPatientById = (id: string): Promise<Patient | null> => {
   return new Promise((res, rej) => {
     axios
-      .get(`/fhir/Patient?_id=${id}`)
+      .get(`/fhir/Patient?_id=${id}`, { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<Patient>;
         res(bundle.total === 1 ? bundle.entry![0].resource : null);

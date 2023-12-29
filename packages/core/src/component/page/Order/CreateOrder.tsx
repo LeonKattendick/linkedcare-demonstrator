@@ -2,10 +2,10 @@ import { App, Button, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { useMedicationRequestApiAdapter } from "../../../hook/useMedicationRequestApiAdapter";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
-import { createMedicationRequest } from "../../../service/medicatonRequestService";
 import { createRequestOrchestration } from "../../../service/requestOrchestrationService";
 import { createNewRequestOrchestration } from "../../../util/orderUtil";
 import { MedicationTable } from "./MedicationTable";
@@ -19,6 +19,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
   const { t } = useTranslation();
   const { message } = App.useApp();
   const navigate = useNavigate();
+  const { createRequestWithInfo } = useMedicationRequestApiAdapter();
 
   const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
@@ -27,27 +28,13 @@ export const CreateOrder = (props: CreateOrderProps) => {
       .then(async (r) => {
         message.success(t("translation:order.create.success", { id: r.id }));
 
-        const promises = [...requests]
-          .map((v) => ({
-            ...v,
-            supportingInformation: [{ reference: `RequestOrchestration/${r.id}` }],
-          }))
-          .map(createMedicationRequest);
+        const requestsWithId = requests.map((v) => ({
+          ...v,
+          supportingInformation: [{ reference: `RequestOrchestration/${r.id}` }],
+        }));
 
-        for (let i = 0; i < promises.length; i++) {
-          try {
-            const res = await promises[i];
-            message.success(
-              t("translation:order.create.successMedication", {
-                name: res.medication.concept.coding[0].display,
-                id: res.id,
-              })
-            );
-          } catch (e) {
-            message.error(
-              t("translation:order.create.errorMedication", { name: requests[i].medication.concept.coding[0].display })
-            );
-          }
+        for (const request of requestsWithId) {
+          await createRequestWithInfo(request);
         }
         navigate(`/order/${props.patient.id}/${r.id}`);
       })

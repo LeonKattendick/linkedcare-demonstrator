@@ -19,7 +19,7 @@ export const useGetAllMedicationRequestsForOrchestration = (
 
     const linkedRequestIds = new Set<string>();
     for (const request of requestsForOrchestration) {
-      const basedOn = request.basedOn as InternalReference;
+      const basedOn = request.basedOn?.[0] as InternalReference;
       const priorPrescription = (request as PrescriptionMedicationRequest).priorPrescription as InternalReference;
 
       if (!!basedOn) linkedRequestIds.add(basedOn.reference!);

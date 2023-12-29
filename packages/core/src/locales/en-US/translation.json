@@ -86,6 +86,14 @@
 			"success": "The order was created with ID {{id}} ",
 			"successMedication": "Medication {{name}} created with ID {{id}} "
 		},
+		"decline": {
+			"errorMedication": "Medication {{name}} could not be canceled",
+			"successMedication": "Medication {{name}} canceled with ID {{id}} "
+		},
+		"edit": {
+			"errorMedication": "Medication {{name}} could not be edited",
+			"successMedication": "Medication {{name}} edited with ID {{id}} "
+		},
 		"medicationTable": {
 			"add": "Add Medication",
 			"doctor": "Responsible doctor",
