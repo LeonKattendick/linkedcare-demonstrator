@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { InternalReference } from "../interface/linca/fhir/Reference";
+import { requestIsFromOrchestration } from "../util/matchingUtil";
 import { useGetAllMedicationRequestsByPatient } from "./useGetAllMedicationRequestsByPatient";
 import { useGetAllRequestOrchestrations } from "./useGetAllRequestOrchestrations";
 
@@ -9,12 +9,7 @@ export const useGetAllRequestOrchestrationsByPatient = (patientId: string | unde
 
   // Memoization is used to not compute this value on every rerender of the component
   const relevantOrchestrations = useMemo(
-    () =>
-      orchestrations.filter((v) =>
-        requests.find(
-          (w) => (w.supportingInformation?.[0] as InternalReference)?.reference === `RequestOrchestration/${v.id}`
-        )
-      ),
+    () => orchestrations.filter((v) => !!requests.find((w) => requestIsFromOrchestration(w, v))),
     [orchestrations, requests]
   );
 

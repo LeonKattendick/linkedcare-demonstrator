@@ -7,6 +7,7 @@ export const useGetCaregiverPatients = () => {
   const { selectedCaregiver } = useSelectedCaregiverAtom();
   const { patients, isPatientsLoading } = useGetAllPatients();
 
+  // Memoization is used to not compute this value on every rerender of the component
   const caregiverPatients = useMemo(
     () => patients.filter((v) => caregiverIsFromOrganization(selectedCaregiver, v.managingOrganization)),
     [patients, selectedCaregiver]

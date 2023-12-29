@@ -2,12 +2,21 @@ import { DosageError } from "../interface/enum/DosageError";
 import { MedicationRequestError } from "../interface/enum/MedicationRequestError";
 import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest";
 import { PrescriptionMedicationRequest } from "../interface/linca/PrescriptionMedicationRequest";
+import { RequestOrchestration } from "../interface/linca/RequestOrchestration";
 import { Dosage } from "../interface/linca/fhir/Dosage";
 import { Identifier } from "../interface/linca/fhir/Identifier";
 import { Organization } from "../interface/linca/fhir/Organization";
 import { ExternalReference, InternalReference, Reference } from "../interface/linca/fhir/Reference";
 import { isPrescribed } from "./medicationRequestUtil";
 import { isInternalReference } from "./referenceUtil";
+
+export const requestIsFromOrchestration = (
+  r: BaseMedicationRequest | undefined,
+  o: RequestOrchestration | undefined
+) => {
+  if (!r || !o) return false;
+  return (r.supportingInformation?.[0] as InternalReference)?.reference === `RequestOrchestration/${o?.id}`;
+};
 
 export const identifiersEqual = (i1: Identifier | undefined, i2: Identifier | undefined) => {
   if (!i1 || !i2) return false;

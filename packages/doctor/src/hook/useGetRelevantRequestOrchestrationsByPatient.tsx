@@ -1,7 +1,6 @@
 import { useGetAllMedicationRequestsByPatient } from "core/src/hook/useGetAllMedicationRequestsByPatient";
 import { useGetAllRequestOrchestrationsByPatient } from "core/src/hook/useGetAllRequestOrchestrationsByPatient";
-import { InternalReference } from "core/src/interface/linca/fhir/Reference";
-import { identifierEqualsReference } from "core/src/util/matchingUtil";
+import { identifierEqualsReference, requestIsFromOrchestration } from "core/src/util/matchingUtil";
 import { useMemo } from "react";
 import { useSelectedDoctorAtom } from "./useSelectedDoctorAtom";
 
@@ -11,14 +10,12 @@ export const useGetRelevantRequestOrchestrationsByPatient = (patientId: string |
   const { orchestrations, isOrchestrationsLoading } = useGetAllRequestOrchestrationsByPatient(patientId);
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsByPatient(patientId);
 
+  // Memoization is used to not compute this value on every rerender of the component
   const relevantOrchestrations = useMemo(() => {
     const relevant = [];
 
     for (const orchestration of orchestrations) {
-      const requestsForOrchestration = requests.filter(
-        (v) =>
-          (v.supportingInformation?.[0] as InternalReference)?.reference === `RequestOrchestration/${orchestration?.id}`
-      );
+      const requestsForOrchestration = requests.filter((v) => !!requestIsFromOrchestration(v, orchestration));
       for (const request of requestsForOrchestration) {
         if (identifierEqualsReference(selectedDoctor?.identifier[0], request.performer[0])) {
           relevant.push(orchestration);
