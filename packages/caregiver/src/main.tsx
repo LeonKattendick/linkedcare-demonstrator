@@ -26,8 +26,8 @@ const navElements: HeaderProps["navElements"] = [
 
 const App = () => {
   const { t } = useTranslation();
-  const { selectedCaregiver } = useSelectedCaregiverAtom();
   const { userType, setUserType } = useUserTypeAtom();
+  const { selectedCaregiver } = useSelectedCaregiverAtom();
 
   useEffect(() => {
     setUserType(UserType.CAREGIVER);

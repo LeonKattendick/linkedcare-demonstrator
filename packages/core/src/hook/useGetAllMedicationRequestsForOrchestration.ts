@@ -13,7 +13,7 @@ export const useGetAllMedicationRequestsForOrchestration = (
   // Memoization is used to not compute this value on every rerender of the component
   const relevantRequests = useMemo(() => {
     const orchestration = orchestrations.find((v) => v.id === orderId);
-    return requests?.filter(
+    return requests.filter(
       (v) =>
         (v.supportingInformation?.[0] as InternalReference)?.reference === `RequestOrchestration/${orchestration?.id}`
     );

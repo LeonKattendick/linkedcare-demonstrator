@@ -1,19 +1,19 @@
 import { Patient } from "core/src/interface/linca/Patient";
-import { useGetAllRequestOrchestrationsByPatient } from "../../../hook/useGetAllRequestOrchestrationsByPatient";
+import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { OrderTable } from "./OrderTable";
 
 interface CompletedOrdersProps {
   patient: Patient;
+  orders: RequestOrchestration[];
+  isOrderLoading: boolean;
 }
 
-export const CompletedOrders = ({ patient }: CompletedOrdersProps) => {
-  const { orchestrations, isOrchestrationsLoading } = useGetAllRequestOrchestrationsByPatient(patient.id);
-
+export const CompletedOrders = ({ patient, orders, isOrderLoading }: CompletedOrdersProps) => {
   return (
     <OrderTable
       patient={patient}
-      orders={orchestrations.filter((v) => v.status !== "active")}
-      isOrdersLoading={isOrchestrationsLoading}
+      orders={orders.filter((v) => v.status !== "active")}
+      isOrdersLoading={isOrderLoading}
     />
   );
 };

@@ -10,5 +10,5 @@ export const useGetAllMedicationRequestsByPatient = (patientId: string | undefin
     }
   );
 
-  return { requests: data ?? null, isRequestsLoading: isLoading };
+  return { requests: data ?? [], isRequestsLoading: isLoading };
 };

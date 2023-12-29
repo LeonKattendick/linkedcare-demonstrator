@@ -11,7 +11,7 @@ export const useGetAllRequestOrchestrationsByPatient = (patientId: string | unde
   const relevantOrchestrations = useMemo(
     () =>
       orchestrations.filter((v) =>
-        requests?.find(
+        requests.find(
           (w) => (w.supportingInformation?.[0] as InternalReference)?.reference === `RequestOrchestration/${v.id}`
         )
       ),
