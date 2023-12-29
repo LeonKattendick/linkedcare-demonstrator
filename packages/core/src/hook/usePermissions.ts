@@ -29,6 +29,10 @@ export const usePermissions = () => {
     return !!r.find(canCompleteMedication);
   };
 
+  const canBeRevoked = (r: PermissionMedicineRequest[]) => {
+    return !!r.every((v) => ["cancelled"].includes(v.status));
+  };
+
   const canEditMedication = (r: PermissionMedicineRequest) => {
     if (![UserType.CAREGIVER, UserType.DOCTOR].includes(userType)) return false;
     return r.intent === "proposal" && r.status === "active";
@@ -64,5 +68,6 @@ export const usePermissions = () => {
     canPrescribeMedication,
     canCompleteMedication,
     canViewMedication,
+    canBeRevoked,
   };
 };

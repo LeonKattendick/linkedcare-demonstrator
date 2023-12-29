@@ -18,6 +18,7 @@ const caregiverSteps = {
   BOTH: "finish",
   PHARMACY: "finish",
   COMPLETED: "finish",
+  REVOKED: "error",
 };
 
 const doctorSteps = { DOCTOR: "process", BOTH: "finish", PHARMACY: "finish", COMPLETED: "finish" };
