@@ -17,16 +17,16 @@ export const useGetAllMedicationRequestsForOrchestration = (
     const orchestration = orchestrations.find((v) => v.id === orderId);
     const requestsForOrchestration = requests.filter((v) => !!requestIsFromOrchestration(v, orchestration));
 
-    const linkedRequestIds: string[] = [];
+    const linkedRequestIds = new Set<string>();
     for (const request of requestsForOrchestration) {
       const basedOn = request.basedOn as InternalReference;
       const priorPrescription = (request as PrescriptionMedicationRequest).priorPrescription as InternalReference;
 
-      if (!!basedOn) linkedRequestIds.push(basedOn.reference!);
-      if (!!priorPrescription) linkedRequestIds.push(priorPrescription.reference!);
+      if (!!basedOn) linkedRequestIds.add(basedOn.reference!);
+      if (!!priorPrescription) linkedRequestIds.add(priorPrescription.reference!);
     }
 
-    return requestsForOrchestration.filter((v) => !linkedRequestIds.includes(`MedicationRequest/${v.id}`));
+    return requestsForOrchestration.filter((v) => !linkedRequestIds.has(`MedicationRequest/${v.id}`));
   }, [orchestrations, requests]);
 
   return { requests: relevantRequests ?? [], isRequestsLoading: isOrchestrationsLoading || isRequestsLoading };

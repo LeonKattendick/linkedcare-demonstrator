@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
+import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
@@ -22,6 +23,7 @@ interface MedicationTableProps {
   patient: Patient;
   caregiver?: Organization;
   doctor?: Practitioner;
+  order?: RequestOrchestration;
   requests: BaseMedicationRequest[];
   setRequests: (r: BaseMedicationRequest[]) => void;
 }
@@ -37,7 +39,11 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const handleCreate = () => {
     setEditRequestIndex(MedicationModalState.CREATE);
     setEditRequest(
-      createNewProposalMedicationRequest(props.patient, { caregiver: props.caregiver, doctor: props.doctor })
+      createNewProposalMedicationRequest(
+        props.patient,
+        { caregiver: props.caregiver, doctor: props.doctor },
+        props.order
+      )
     );
     setModalOpen(true);
   };

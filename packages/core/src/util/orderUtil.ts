@@ -18,7 +18,8 @@ export const createNewRequestOrchestration = (caregiver: Organization): RequestO
 
 export const createNewProposalMedicationRequest = (
   patient: Patient,
-  prescriber: { caregiver?: Organization; doctor?: Practitioner }
+  prescriber: { caregiver?: Organization; doctor?: Practitioner },
+  order?: RequestOrchestration
 ): ProposalMedicationRequest => {
   const careservice = prescriber?.caregiver?.partOf as ExternalReference;
 
@@ -42,6 +43,7 @@ export const createNewProposalMedicationRequest = (
         coding: [],
       },
     },
+    supportingInformation: order ? [{ reference: `RequestOrchestration/${order.id}` }] : undefined,
     informationSource: [informationSource],
     requester: requester,
     performer: [{ identifier: doctorModels[0].identifier[0], display: doctorModels[0].name[0].text }],

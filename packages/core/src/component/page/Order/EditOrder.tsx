@@ -37,32 +37,35 @@ export const EditOrder = (props: EditOrderProps) => {
         requests={editRequests}
         setRequests={setEditRequests}
         patient={props.patient}
+        order={props.order}
         caregiver={props.caregiver}
         doctor={props.doctor}
       />
       <Space style={{ float: "right" }}>
-        {perms.canEditOrder(requests) && (
+        {perms.canEditOrder(editRequests) && (
           <Button type="primary" disabled={changedRequests.length === 0}>
             {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
           </Button>
         )}
-        {perms.canPrescribeOrder(requests) && (
+        {perms.canPrescribeOrder(editRequests) && (
           <Button type="primary">
             {t("translation:order.buttonRow.prescribe", {
-              amount: requests.filter(perms.canPrescribeMedication).length,
+              amount: editRequests.filter(perms.canPrescribeMedication).length,
             })}
           </Button>
         )}
-        {perms.canCompleteOrder(requests) && (
+        {perms.canCompleteOrder(editRequests) && (
           <Button type="primary">
             {t("translation:order.buttonRow.complete", {
-              amount: requests.filter(perms.canCompleteMedication).length,
+              amount: editRequests.filter(perms.canCompleteMedication).length,
             })}
           </Button>
         )}
-        {perms.canDeclineOrder(requests) && (
+        {perms.canDeclineOrder(editRequests) && (
           <Button type="primary" danger>
-            {t("translation:order.buttonRow.cancel", { amount: requests.filter(perms.canDeclineMedication).length })}
+            {t("translation:order.buttonRow.cancel", {
+              amount: editRequests.filter(perms.canDeclineMedication).length,
+            })}
           </Button>
         )}
       </Space>
