@@ -3,6 +3,8 @@ import { ProposalMedicationRequest } from "./ProposalMedicationRequest";
 import { Identifier } from "./fhir/Identifier";
 import { Reference } from "./fhir/Reference";
 
+export const E_REZEPT_ID_SYSTEM = "urn:oid:1.2.40.0.10.1.4.3.3";
+
 /**
  * https://fhir.hl7.at/r5-LinkedCare-main/StructureDefinition-linca-prescription-medication-request.html
  */

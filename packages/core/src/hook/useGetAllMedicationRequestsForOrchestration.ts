@@ -27,7 +27,7 @@ export const useGetAllMedicationRequestsForOrchestration = (
     }
 
     return requestsForOrchestration.filter((v) => !linkedRequestIds.has(`MedicationRequest/${v.id}`));
-  }, [orchestrations, requests]);
+  }, [orderId, orchestrations, requests]);
 
   return { requests: relevantRequests ?? [], isRequestsLoading: isOrchestrationsLoading || isRequestsLoading };
 };

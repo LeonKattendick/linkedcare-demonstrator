@@ -139,6 +139,10 @@
 		},
 		"notFoundSubtitle": "Die Bestellung mit der ID {{id}} konnte nicht in FHIR gefunden werden",
 		"notFoundTitle": "Bestellung nicht gefunden",
+		"prescribe": {
+			"errorMedication": "Medikation {{name}} konnte nicht verschrieben werden",
+			"successMedication": "Medikation {{name}} mit der ID {{id}} verschrieben"
+		},
 		"revoke": {
 			"error": "Die Bestellung {{id}} konnte nicht widerrufen werden",
 			"success": "Die Bestellung {{id}} wurde widerrufen"

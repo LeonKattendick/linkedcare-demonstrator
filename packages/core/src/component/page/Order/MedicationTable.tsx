@@ -115,7 +115,11 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:order.medicationTable.status")}
-          render={(_, record: BaseMedicationRequest) => record.status}
+          render={(_, record: BaseMedicationRequest) => (
+            <>
+              {record.status} ({record.intent})
+            </>
+          )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.doctor")}

@@ -139,6 +139,10 @@
 		},
 		"notFoundSubtitle": "The order with id {{id}} couldn't be found in FHIR",
 		"notFoundTitle": "Order not found",
+		"prescribe": {
+			"errorMedication": "Medication {{name}} could not be prescribed",
+			"successMedication": "Medication {{name}} prescribed with ID {{id}} "
+		},
 		"revoke": {
 			"error": "The order {{id}} could not be revoked",
 			"success": "The order {{id}} has been revoked"

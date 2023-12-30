@@ -19,10 +19,10 @@ interface OrderProps {
 
 export const Order = (props: OrderProps) => {
   const { t } = useTranslation();
-  const isNew = !props.order;
 
   const { requests } = useGetAllMedicationRequestsForOrchestration(props.order?.id, props.patient.id);
 
+  const isNew = !props.order;
   return (
     <Flex gap={16} vertical style={{ height: "100%" }}>
       <PatientTitle

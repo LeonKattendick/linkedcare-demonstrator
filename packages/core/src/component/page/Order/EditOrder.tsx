@@ -24,7 +24,7 @@ export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
   const { revokeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
-  const { createRequestWithInfo, editRequestWithInfo, declineRequestWithInfo } = useMedicationRequestApiAdapter();
+  const requestApi = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
@@ -38,16 +38,28 @@ export const EditOrder = (props: EditOrderProps) => {
   const handleEdit = async () => {
     for (const request of changedRequests) {
       if (request.id) {
-        await editRequestWithInfo(request);
+        await requestApi.editRequestWithInfo(request);
       } else {
-        await createRequestWithInfo(request);
+        await requestApi.createRequestWithInfo(request);
       }
+    }
+  };
+
+  const handlePrescribe = async () => {
+    for (const request of editRequests) {
+      if (perms.canPrescribeMedication(request)) await requestApi.prescribeRequestWithInfo(request);
+    }
+  };
+
+  const handleComplete = async () => {
+    for (const request of editRequests) {
+      if (perms.canCompleteMedication(request)) await requestApi.completeRequestWithInfo(request);
     }
   };
 
   const handleDecline = async () => {
     for (const request of editRequests) {
-      if (perms.canDeclineMedication(request)) await declineRequestWithInfo(request, "cancelled");
+      if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
     }
   };
 
@@ -72,14 +84,14 @@ export const EditOrder = (props: EditOrderProps) => {
           </Button>
         )}
         {perms.canPrescribeOrder(editRequests) && (
-          <Button type="primary">
+          <Button type="primary" onClick={handlePrescribe}>
             {t("translation:order.buttonRow.prescribe", {
               amount: editRequests.filter(perms.canPrescribeMedication).length,
             })}
           </Button>
         )}
         {perms.canCompleteOrder(editRequests) && (
-          <Button type="primary">
+          <Button type="primary" onClick={handleComplete}>
             {t("translation:order.buttonRow.complete", {
               amount: editRequests.filter(perms.canCompleteMedication).length,
             })}
