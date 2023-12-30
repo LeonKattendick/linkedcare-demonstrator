@@ -25,12 +25,21 @@ export const OrderTable = ({ patient, orders, isOrdersLoading }: OrderTableProps
       loading={isOrdersLoading}
       bordered
     >
-      <Table.Column title="#" dataIndex="id" />
+      <Table.Column
+        title="#"
+        dataIndex="id"
+        sorter={(a: RequestOrchestration, b: RequestOrchestration) => a.id!.localeCompare(b.id!)}
+      />
       <Table.Column
         title={t("translation:viewPatient.orders.date")}
         render={(_, record: RequestOrchestration) => dayjs(record.meta?.lastUpdated).format("DD.MM.YYYY HH:mm")}
+        sorter={(a, b) => (dayjs(a.meta?.lastUpdated).isBefore(dayjs(b.meta?.lastUpdated)) ? -1 : 1)}
       />
-      <Table.Column title={t("translation:viewPatient.orders.status")} dataIndex="status" />
+      <Table.Column
+        title={t("translation:viewPatient.orders.status")}
+        dataIndex="status"
+        sorter={(a: RequestOrchestration, b: RequestOrchestration) => a.status.localeCompare(b.status)}
+      />
       <Table.Column
         title={t("translation:general.actions")}
         render={(_, record: RequestOrchestration) => (

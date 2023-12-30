@@ -106,7 +106,7 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
         size="small"
         pagination={false}
       >
-        <Table.Column title={"#"} width="3%" dataIndex="sequence" />
+        <Table.Column title="#" width="3%" dataIndex="sequence" />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.bounds")}
           width="13%"

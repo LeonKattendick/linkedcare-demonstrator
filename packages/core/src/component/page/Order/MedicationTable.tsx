@@ -108,10 +108,17 @@ export const MedicationTable = (props: MedicationTableProps) => {
         size="small"
         pagination={false}
       >
-        <Table.Column title="#" dataIndex="id" />
+        <Table.Column
+          title="#"
+          dataIndex="id"
+          sorter={(a: BaseMedicationRequest, b: BaseMedicationRequest) => (a.id?.localeCompare(b.id ?? "") ? 1 : -1)}
+        />
         <Table.Column
           title={t("translation:order.medicationTable.name")}
           render={(_, record: BaseMedicationRequest) => record.medication.concept.coding[0].display}
+          sorter={(a, b) =>
+            a.medication.concept.coding[0].display.localeCompare(b.medication.concept.coding[0].display)
+          }
         />
         <Table.Column
           title={t("translation:order.medicationTable.status")}
@@ -120,20 +127,30 @@ export const MedicationTable = (props: MedicationTableProps) => {
               {record.status} ({record.intent})
             </>
           )}
+          sorter={(a, b) => `${a.status} (${a.intent})`.localeCompare(`${b.status} (${b.intent})`)}
         />
         <Table.Column
           title={t("translation:order.medicationTable.doctor")}
           render={(_, record: BaseMedicationRequest) => (record.performer[0] as ExternalReference).display}
+          sorter={(a, b) =>
+            (a.performer[0] as ExternalReference).display.localeCompare((b.performer[0] as ExternalReference).display)
+          }
         />
         <Table.Column
           title={t("translation:order.medicationTable.pharmacy")}
           render={(_, record: BaseMedicationRequest) =>
             (record.dispenseRequest?.dispenser as ExternalReference)?.display
           }
+          sorter={(a, b) =>
+            (a.dispenseRequest?.dispenser as ExternalReference)?.display.localeCompare(
+              (b.dispenseRequest?.dispenser as ExternalReference)?.display
+            )
+          }
         />
         <Table.Column
           title={t("translation:order.medicationTable.dosage")}
           render={(_, record: BaseMedicationRequest) => record.dosageInstruction.length}
+          sorter={(a, b) => b.dosageInstruction.length - a.dosageInstruction.length}
         />
         <Table.Column
           title={t("translation:general.actions")}

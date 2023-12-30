@@ -54,7 +54,7 @@ export const usePermissions = () => {
   };
 
   const canViewMedication = (r: PermissionMedicineRequest) => {
-    return r.intent === "order" && r.status === "active";
+    return r.intent === "order" || r.status !== "active";
   };
 
   return {
