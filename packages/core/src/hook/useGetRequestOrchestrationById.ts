@@ -1,7 +1,8 @@
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getRequestOrchestrationById } from "../service/requestOrchestrationService";
 
-export const useGetRequestOrchestrationById = (id: string | undefined) => {
+export const useGetRequestOrchestrationById = (id?: string) => {
+  const client = useQueryClient();
   const { data, isLoading } = useQuery(
     ["useGetRequestOrchestrationById", id],
     () => getRequestOrchestrationById(id as string),
@@ -10,5 +11,9 @@ export const useGetRequestOrchestrationById = (id: string | undefined) => {
     }
   );
 
-  return { orchestration: data ?? null, isOrchestrationLoading: isLoading };
+  const invalidateOrderById = (id: string) => {
+    client.invalidateQueries(["useGetRequestOrchestrationById", id]);
+  };
+
+  return { orchestration: data ?? null, isOrchestrationLoading: isLoading, invalidateOrderById };
 };

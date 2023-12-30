@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import { RequestOrchestration } from "../../interface/linca/RequestOrchestration";
 import { createRequestOrchestration, updateRequestOrchestration } from "../../service/requestOrchestrationService";
 import { useGetAllRequestOrchestrations } from "../useGetAllRequestOrchestrations";
+import { useGetRequestOrchestrationById } from "../useGetRequestOrchestrationById";
 
 export const useRequestOrchestrationApiAdapter = () => {
   const { t } = useTranslation();
   const { message } = App.useApp();
   const { invalidateAllRequestOrchestrations } = useGetAllRequestOrchestrations();
+  const { invalidateOrderById } = useGetRequestOrchestrationById();
 
   const createOrchestrationWithInfo = async (o: RequestOrchestration) => {
     try {
@@ -29,6 +31,7 @@ export const useRequestOrchestrationApiAdapter = () => {
       const res = await updateRequestOrchestration(clone);
       message.success(t("translation:order.complete.success", { id: res.id }));
       invalidateAllRequestOrchestrations();
+      invalidateOrderById(res.id!);
 
       return res;
     } catch (e) {
@@ -44,6 +47,7 @@ export const useRequestOrchestrationApiAdapter = () => {
       const res = await updateRequestOrchestration(clone);
       message.success(t("translation:order.revoke.success", { id: res.id }));
       invalidateAllRequestOrchestrations();
+      invalidateOrderById(res.id!);
 
       return res;
     } catch (e) {
