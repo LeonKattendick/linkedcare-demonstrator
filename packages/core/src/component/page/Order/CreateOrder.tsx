@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
+import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
@@ -20,6 +21,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
   const navigate = useNavigate();
   const { createOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const { createRequestWithInfo } = useMedicationRequestApiAdapter();
+  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
@@ -35,6 +37,8 @@ export const CreateOrder = (props: CreateOrderProps) => {
     for (const request of requestsWithId) {
       await createRequestWithInfo(request);
     }
+
+    invalidateEveryGetAllMedicationRequestsByPatient();
     navigate(`/order/${props.patient.id}/${res.id}`);
   };
 

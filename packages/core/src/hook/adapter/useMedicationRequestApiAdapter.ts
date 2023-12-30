@@ -3,12 +3,10 @@ import { useTranslation } from "react-i18next";
 import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
 import { E_REZEPT_ID_SYSTEM, PrescriptionMedicationRequest } from "../../interface/linca/PrescriptionMedicationRequest";
 import { createMedicationRequest } from "../../service/medicatonRequestService";
-import { useGetAllMedicationRequestsByPatient } from "../useGetAllMedicationRequestsByPatient";
 
 export const useMedicationRequestApiAdapter = () => {
   const { t } = useTranslation();
   const { message } = App.useApp();
-  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const createRequestWithInfo = async (r: BaseMedicationRequest) => {
     try {
@@ -19,7 +17,6 @@ export const useMedicationRequestApiAdapter = () => {
           id: res.id,
         })
       );
-      invalidateEveryGetAllMedicationRequestsByPatient();
 
       return res;
     } catch (e) {
@@ -42,7 +39,6 @@ export const useMedicationRequestApiAdapter = () => {
           id: res.id,
         })
       );
-      invalidateEveryGetAllMedicationRequestsByPatient();
 
       return res;
     } catch (e) {
@@ -71,7 +67,6 @@ export const useMedicationRequestApiAdapter = () => {
           id: res.id,
         })
       );
-      invalidateEveryGetAllMedicationRequestsByPatient();
 
       return res;
     } catch (e) {
@@ -100,7 +95,6 @@ export const useMedicationRequestApiAdapter = () => {
           id: res.id,
         })
       );
-      invalidateEveryGetAllMedicationRequestsByPatient();
 
       return res;
     } catch (e) {

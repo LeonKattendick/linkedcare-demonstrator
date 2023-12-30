@@ -29,10 +29,10 @@ export const updateRequestOrchestration = (orchestration: RequestOrchestration):
 export const getAllRequestOrchestrations = (): Promise<RequestOrchestration[]> => {
   return new Promise((res, rej) => {
     axios
-      .get("/fhir/RequestOrchestration", { headers: { "Cache-Control": "no-cache" } })
+      .get("/fhir/RequestOrchestration?_count=10000", { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<RequestOrchestration>;
-        res(bundle.total > 0 ? bundle.entry!.map((v) => v.resource) : []);
+        res(bundle.entry?.map((v) => v.resource) ?? []);
       })
       .catch(rej);
   });
@@ -41,10 +41,10 @@ export const getAllRequestOrchestrations = (): Promise<RequestOrchestration[]> =
 export const getRequestOrchestrationById = (id: string): Promise<RequestOrchestration | null> => {
   return new Promise((res, rej) => {
     axios
-      .get(`/fhir/RequestOrchestration?_id=${id}`, { headers: { "Cache-Control": "no-cache" } })
+      .get(`/fhir/RequestOrchestration?_id=${id}&_count=10000`, { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<RequestOrchestration>;
-        res(bundle.total === 1 ? bundle.entry![0].resource : null);
+        res(bundle.entry?.[0].resource ?? null);
       })
       .catch(rej);
   });

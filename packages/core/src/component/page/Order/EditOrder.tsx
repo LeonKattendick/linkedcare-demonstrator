@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
+import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
 import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
@@ -26,6 +27,7 @@ export const EditOrder = (props: EditOrderProps) => {
   const { revokeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
+  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
 
@@ -43,24 +45,28 @@ export const EditOrder = (props: EditOrderProps) => {
         await requestApi.createRequestWithInfo(request);
       }
     }
+    invalidateEveryGetAllMedicationRequestsByPatient();
   };
 
   const handlePrescribe = async () => {
     for (const request of editRequests) {
       if (perms.canPrescribeMedication(request)) await requestApi.prescribeRequestWithInfo(request);
     }
+    invalidateEveryGetAllMedicationRequestsByPatient();
   };
 
   const handleComplete = async () => {
     for (const request of editRequests) {
       if (perms.canCompleteMedication(request)) await requestApi.completeRequestWithInfo(request);
     }
+    invalidateEveryGetAllMedicationRequestsByPatient();
   };
 
   const handleDecline = async () => {
     for (const request of editRequests) {
       if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
     }
+    invalidateEveryGetAllMedicationRequestsByPatient();
   };
 
   const handleRevoke = async () => {
