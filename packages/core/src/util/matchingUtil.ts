@@ -124,7 +124,7 @@ export const findMedicationRequestsMatchingErrors = (
     errors.push(MedicationRequestError.STATUS);
   }
   if (!!r1.basedOn || !!r2.basedOn) {
-    if (!referencesEqual(r1.basedOn, r2.basedOn)) errors.push(MedicationRequestError.BASED_ON);
+    if (!referencesEqual(r1.basedOn?.[0], r2.basedOn?.[0])) errors.push(MedicationRequestError.BASED_ON);
   }
   if (!referencesEqual(r1.subject, r2.subject)) {
     errors.push(MedicationRequestError.SUBJECT);
