@@ -1,4 +1,10 @@
-import { LoadingOutlined, MedicineBoxOutlined, SolutionOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  CaretLeftOutlined,
+  LoadingOutlined,
+  MedicineBoxOutlined,
+  SolutionOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Card, Col, Flex, Row, Space, Steps } from "antd";
 import { Patient } from "core/src/interface/linca/Patient";
 import { useTranslation } from "react-i18next";
@@ -37,7 +43,16 @@ export const PatientTitle = (props: PatientTitleProps) => {
             <div style={{ fontSize: 20, fontWeight: "lighter" }}>{props.title}</div>
             <Space size="middle">
               <div style={{ fontSize: 22, fontWeight: "bold" }}>{props.patient.name[0]?.text}</div>
-              {!props.hideMedicationPlanButton && (
+              {props.hideMedicationPlanButton ? (
+                <Button
+                  type="primary"
+                  onClick={() => navigate(`/patient/${props.patient.id}`)}
+                  icon={<CaretLeftOutlined />}
+                  size="small"
+                >
+                  {t("translation:general.back")}
+                </Button>
+              ) : (
                 <Button
                   type="primary"
                   onClick={() => navigate(`/plan/${props.patient.id}`)}

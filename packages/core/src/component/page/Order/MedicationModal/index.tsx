@@ -107,12 +107,14 @@ export const MedicationModal = (props: MedicationModalProps) => {
       title={t(
         props.state === MedicationModalState.CREATE
           ? "translation:order.medicationTable.modal.createTitle"
-          : "translation:order.medicationTable.modal.addTitle"
+          : props.state === MedicationModalState.EDIT
+          ? "translation:order.medicationTable.modal.editTitle"
+          : "translation:order.medicationTable.modal.viewTitle"
       )}
       width="70%"
       footer={[
         <Button key="cancel" onClick={handleCancel}>
-          {t("translation:general.cancel")}
+          {props.state === MedicationModalState.VIEW ? t("translation:general.close") : t("translation:general.cancel")}
         </Button>,
         props.state !== MedicationModalState.VIEW && (
           <Button type="primary" key="save" onClick={handleSave}>

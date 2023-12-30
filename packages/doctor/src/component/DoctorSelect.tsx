@@ -10,8 +10,8 @@ export const DoctorSelect = () => {
   const { selectedDoctor, setSelectedDoctor } = useSelectedDoctorAtom();
 
   useEffect(() => {
-    const localCaregiver = localStorage.getItem("selectedDoctor");
-    if (localCaregiver) handleSetSelectedDoctor(localCaregiver);
+    const localDoctor = localStorage.getItem("selectedDoctor");
+    if (localDoctor) handleSetSelectedDoctor(localDoctor);
   }, []);
 
   useEffect(() => {

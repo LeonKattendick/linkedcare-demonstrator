@@ -23,7 +23,9 @@
 	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
 	"general": {
 		"actions": "Aktionen",
+		"back": "Zurück",
 		"cancel": "Abbrechen",
+		"close": "Schließen",
 		"gender": {
 			"female": "Weiblich",
 			"male": "Männlich",
@@ -105,10 +107,10 @@
 			"dosage": "Dosierung",
 			"modal": {
 				"addSequence": "Sequenz hinzufügen",
-				"addTitle": "Medikation bearbeiten",
 				"createTitle": "Medikation erstellen",
 				"detailsDivider": "Details der Medikation",
 				"doctor": "Zuständiger Hausarzt",
+				"editTitle": "Medikation bearbeiten",
 				"errorNoDoctor": "Es muss eine Medikation aus der Liste ausgewählt werden.",
 				"errorNoMedication": "Es muss ein Hausarzt aus der Liste ausgewählt werden.",
 				"errorNoSequence": "Es muss mindestens eine Sequenz mit Dosierung angelegt werden.",
@@ -130,7 +132,8 @@
 					"sequence": "Sequenz",
 					"title": "Einnahmesequenzen",
 					"weekDays": "Wochentage"
-				}
+				},
+				"viewTitle": "Medikation ansehen"
 			},
 			"name": "Name",
 			"pharmacy": "Zuständige Apotheke",
@@ -157,6 +160,9 @@
 		"medicationPlan": "Medikationsplan",
 		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nicht in FHIR gefunden werden",
 		"notFoundTitle": "Patient nicht gefunden"
+	},
+	"pharmacy": {
+		"selectPlaceholder": "Wähle eine Apotheke"
 	},
 	"searchPatients": {
 		"placeholder": "Vor- / Nachname oder Geburtsdatum eines Patienten eingeben",

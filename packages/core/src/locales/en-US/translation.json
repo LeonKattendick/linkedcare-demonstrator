@@ -23,7 +23,9 @@
 	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
 	"general": {
 		"actions": "Actions",
+		"back": "Back",
 		"cancel": "Cancel",
+		"close": "Close",
 		"gender": {
 			"female": "Female",
 			"male": "Male",
@@ -105,10 +107,10 @@
 			"dosage": "Dosage",
 			"modal": {
 				"addSequence": "Add sequence",
-				"addTitle": "Edit medication",
 				"createTitle": "Create medication",
 				"detailsDivider": "Medication details",
 				"doctor": "Responsible doctor",
+				"editTitle": "Edit medication",
 				"errorNoDoctor": "A medication must be selected from the list.",
 				"errorNoMedication": "A family doctor must be selected from the list.",
 				"errorNoSequence": "At least one sequence with dosage must be created.",
@@ -130,7 +132,8 @@
 					"sequence": "Sequence",
 					"title": "Ingestion sequences",
 					"weekDays": "Weekdays"
-				}
+				},
+				"viewTitle": "View medication"
 			},
 			"name": "Name",
 			"pharmacy": "Responsible pharmacy",
@@ -157,6 +160,9 @@
 		"medicationPlan": "Medication plan",
 		"notFoundSubtitle": "The patient with id {{id}} couldn't be found in FHIR",
 		"notFoundTitle": "Patient not found"
+	},
+	"pharmacy": {
+		"selectPlaceholder": "Select a pharmacy"
 	},
 	"searchPatients": {
 		"placeholder": "Enter a patient's first name, surname or date of birth",
