@@ -79,7 +79,11 @@
 			"create": "Bestellung erstellen",
 			"edit": "{{amount}} Änderungen speichern",
 			"prescribe": "{{amount}} Medikamente verschreiben",
-			"revoke": "Bestellung zurückziehen"
+			"revoke": "Bestellung widerrufen"
+		},
+		"complete": {
+			"error": "Die Bestellung {{id}} konnte nicht abgeschlossen werden",
+			"success": "Die Bestellung {{id}} wurde abgeschlossen"
 		},
 		"create": {
 			"error": "Die Bestellung konnte nicht angelegt werden",
@@ -135,6 +139,10 @@
 		},
 		"notFoundSubtitle": "Die Bestellung mit der ID {{id}} konnte nicht in FHIR gefunden werden",
 		"notFoundTitle": "Bestellung nicht gefunden",
+		"revoke": {
+			"error": "Die Bestellung {{id}} konnte nicht widerrufen werden",
+			"success": "Die Bestellung {{id}} wurde widerrufen"
+		},
 		"steps": {
 			"caregiver": "Bestellung",
 			"doctor": "Verschreibung",

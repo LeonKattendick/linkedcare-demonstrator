@@ -16,11 +16,15 @@ export const useGetRelevantRequestOrchestrationsByPatient = (patientId: string |
 
     for (const orchestration of orchestrations) {
       const requestsForOrchestration = requests.filter((v) => !!requestIsFromOrchestration(v, orchestration));
+
+      let canBeAdded = false;
       for (const request of requestsForOrchestration) {
         if (identifierEqualsReference(selectedDoctor?.identifier[0], request.performer[0])) {
-          relevant.push(orchestration);
+          canBeAdded = true;
+          break;
         }
       }
+      if (canBeAdded) relevant.push(orchestration);
     }
 
     return relevant;

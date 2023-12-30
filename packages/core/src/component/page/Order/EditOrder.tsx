@@ -2,6 +2,7 @@ import { Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
+import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
 import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { usePermissions } from "../../../hook/usePermissions";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
@@ -22,6 +23,7 @@ interface EditOrderProps {
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
+  const { revokeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const { createRequestWithInfo, editRequestWithInfo, declineRequestWithInfo } = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
 
@@ -47,6 +49,10 @@ export const EditOrder = (props: EditOrderProps) => {
     for (const request of editRequests) {
       if (perms.canDeclineMedication(request)) await declineRequestWithInfo(request, "cancelled");
     }
+  };
+
+  const handleRevoke = async () => {
+    await revokeOrchestrationWithInfo(props.order);
   };
 
   return (
@@ -87,7 +93,7 @@ export const EditOrder = (props: EditOrderProps) => {
           </Button>
         )}
         {perms.canBeRevoked(editRequests) && props.order.status !== "revoked" && (
-          <Button type="primary" danger>
+          <Button type="primary" danger onClick={handleRevoke}>
             {t("translation:order.buttonRow.revoke")}
           </Button>
         )}

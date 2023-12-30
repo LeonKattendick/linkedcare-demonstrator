@@ -1,8 +1,13 @@
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getAllRequestOrchestrations } from "../service/requestOrchestrationService";
 
 export const useGetAllRequestOrchestrations = () => {
+  const client = useQueryClient();
   const { data, isLoading } = useQuery("useGetAllRequestOrchestrations", getAllRequestOrchestrations);
 
-  return { orchestrations: data ?? [], isOrchestrationsLoading: isLoading };
+  const invalidateAllRequestOrchestrations = () => {
+    client.invalidateQueries("useGetAllRequestOrchestrations");
+  };
+
+  return { orchestrations: data ?? [], isOrchestrationsLoading: isLoading, invalidateAllRequestOrchestrations };
 };

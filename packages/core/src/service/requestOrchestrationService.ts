@@ -14,6 +14,18 @@ export const createRequestOrchestration = (orchestration: RequestOrchestration):
   });
 };
 
+export const updateRequestOrchestration = (orchestration: RequestOrchestration): Promise<RequestOrchestration> => {
+  return new Promise((res, rej) => {
+    axios
+      .put(`/fhir/RequestOrchestration/${orchestration.id}`, orchestration)
+      .then((r) => res(r.data))
+      .catch((e) => {
+        console.error("updateRequestOrchestration", e);
+        rej(e);
+      });
+  });
+};
+
 export const getAllRequestOrchestrations = (): Promise<RequestOrchestration[]> => {
   return new Promise((res, rej) => {
     axios

@@ -81,6 +81,10 @@
 			"prescribe": "Prescribe {{amount}} medication",
 			"revoke": "Revoke order"
 		},
+		"complete": {
+			"error": "The order {{id}} could not be completed",
+			"success": "The order {{id}} has been completed"
+		},
 		"create": {
 			"error": "The order could not be created",
 			"errorMedication": "Medication {{name}} could not be created",
@@ -135,6 +139,10 @@
 		},
 		"notFoundSubtitle": "The order with id {{id}} couldn't be found in FHIR",
 		"notFoundTitle": "Order not found",
+		"revoke": {
+			"error": "The order {{id}} could not be revoked",
+			"success": "The order {{id}} has been revoked"
+		},
 		"steps": {
 			"caregiver": "Order",
 			"doctor": "Prescription",
