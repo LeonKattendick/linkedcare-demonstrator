@@ -14,7 +14,7 @@ export interface MedicationDispense extends Resource {
   status: "completed";
   medication: Medication;
   subject: Reference<Patient>;
-  performer: Reference<Organization>; // Pharmacy
+  performer: { actor: Reference<Organization> }[]; // Pharmacy
   authorizingPrescription: Reference<PrescriptionMedicationRequest>;
   type: {
     coding: {

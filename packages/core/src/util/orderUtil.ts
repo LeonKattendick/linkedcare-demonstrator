@@ -1,4 +1,6 @@
+import { MedicationDispense } from "../interface/linca/MedicationDispense";
 import { Patient } from "../interface/linca/Patient";
+import { PrescriptionMedicationRequest } from "../interface/linca/PrescriptionMedicationRequest";
 import { ProposalMedicationRequest } from "../interface/linca/ProposalMedicationRequest";
 import { RequestOrchestration } from "../interface/linca/RequestOrchestration";
 import { Organization } from "../interface/linca/fhir/Organization";
@@ -49,5 +51,24 @@ export const createNewProposalMedicationRequest = (
     performer: [{ identifier: doctorModels[0].identifier[0], display: doctorModels[0].name[0].text }],
 
     dosageInstruction: [],
+  });
+};
+
+export const createMedicationDispense = (
+  r: PrescriptionMedicationRequest,
+  pharmacy: Organization,
+  isPartial?: boolean
+): MedicationDispense => {
+  return structuredClone({
+    resourceType: "MedicationDispense",
+    status: "completed",
+    medication: r.medication,
+    subject: r.subject,
+    performer: [{ actor: { identifier: pharmacy.identifier[0], display: pharmacy.name } }],
+    authorizingPrescription: { reference: `MedicationRequest/${r.id}` },
+    type: {
+      coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: isPartial ? "FFP" : "FFC" }],
+    },
+    dosageInstruction: r.dosageInstruction,
   });
 };

@@ -35,6 +35,7 @@ export const usePermissions = () => {
 
   // can be closed as soon as all requests have reached a terminal state
   const canBeClosed = (r: PermissionMedicineRequest[]) => {
+    //TODO -> rest has dispense connected
     return !canBeRevoked(r) && !r.some((v) => v.status === "active");
   };
 
@@ -55,11 +56,12 @@ export const usePermissions = () => {
 
   const canCompleteMedication = (r: PermissionMedicineRequest) => {
     if (![UserType.PHARMACY].includes(userType)) return false;
+    //TODO -> and has no dispense connected
     return r.intent === "order" && r.status === "active";
   };
 
   const canViewMedication = (r: PermissionMedicineRequest) => {
-    return r.intent === "order" || r.status !== "active";
+    return !canEditMedication(r);
   };
 
   return {
