@@ -13,7 +13,7 @@ import { isGerman } from "../util/i18n";
 export const CACHE_TIME = 1000 * 60 * 15;
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME, refetchOnWindowFocus: true } },
+  defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME, refetchOnWindowFocus: "always" } },
 });
 
 export const Providers = (props: React.PropsWithChildren<{}>) => {

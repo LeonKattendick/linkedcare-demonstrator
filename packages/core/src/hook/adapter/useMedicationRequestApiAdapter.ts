@@ -74,7 +74,7 @@ export const useMedicationRequestApiAdapter = () => {
     }
   };
 
-  const completeRequestWithInfo = (_r: BaseMedicationRequest) => {};
+  const completeRequestWithInfo = async (_r: BaseMedicationRequest) => {};
 
   const declineRequestWithInfo = async (
     r: BaseMedicationRequest,

@@ -1,3 +1,4 @@
+import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -85,26 +86,26 @@ export const EditOrder = (props: EditOrderProps) => {
       />
       <Space style={{ float: "right" }}>
         {perms.canEditOrder(editRequests) && (
-          <Button type="primary" disabled={changedRequests.length === 0} onClick={handleEdit}>
+          <Button type="primary" disabled={changedRequests.length === 0} onClick={handleEdit} icon={<EditOutlined />}>
             {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
           </Button>
         )}
         {perms.canPrescribeOrder(editRequests) && (
-          <Button type="primary" onClick={handlePrescribe}>
+          <Button type="primary" onClick={handlePrescribe} icon={<CheckOutlined />}>
             {t("translation:order.buttonRow.prescribe", {
               amount: editRequests.filter(perms.canPrescribeMedication).length,
             })}
           </Button>
         )}
         {perms.canCompleteOrder(editRequests) && (
-          <Button type="primary" onClick={handleComplete}>
+          <Button type="primary" onClick={handleComplete} icon={<CheckOutlined />}>
             {t("translation:order.buttonRow.complete", {
               amount: editRequests.filter(perms.canCompleteMedication).length,
             })}
           </Button>
         )}
         {perms.canDeclineOrder(editRequests) && (
-          <Button type="primary" danger onClick={handleDecline}>
+          <Button type="primary" danger onClick={handleDecline} icon={<DeleteOutlined />}>
             {t("translation:order.buttonRow.cancel", {
               amount: editRequests.filter(perms.canDeclineMedication).length,
             })}

@@ -57,7 +57,8 @@
 			"thu": "Donnerstag",
 			"tue": "Dienstag",
 			"wed": "Mittwoch"
-		}
+		},
+		"yes": "Ja"
 	},
 	"header": {
 		"caregiverTitle": "Pflegedienst LINCA Demo",
@@ -96,6 +97,14 @@
 		"decline": {
 			"errorMedication": "Medikation {{name}} konnte nicht storniert werden",
 			"successMedication": "Medikation {{name}} mit der ID {{id}} storniert"
+		},
+		"declineModal": {
+			"ended": "Einnahme nach Verbrauch der derzeitigen Packung beenden",
+			"error": "Falsche Eingabe",
+			"ok": "Stornieren",
+			"placeholder": "Wählen Sie einen Grund für die Stornierung aus",
+			"stopped": "Einnahme sofort beenden",
+			"title": "Medikation stornieren"
 		},
 		"edit": {
 			"errorMedication": "Medikation {{name}} konnte nicht editiert werden",
@@ -137,6 +146,11 @@
 			},
 			"name": "Name",
 			"pharmacy": "Zuständige Apotheke",
+			"popconfirm": {
+				"complete": "Wollen Sie die Ausgabe der Medikation abschließen?",
+				"decline": "Wollen Sie die Medikation stornieren?",
+				"prescribe": "Wollen Sie die Medikation verschreiben?"
+			},
 			"status": "Status",
 			"title": "Medikation"
 		},

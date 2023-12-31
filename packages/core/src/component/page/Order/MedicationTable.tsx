@@ -6,10 +6,13 @@ import {
   MedicineBoxOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { Button, Space, Table } from "antd";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
+import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
+import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
@@ -17,6 +20,7 @@ import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
+import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationModal, MedicationModalState } from "./MedicationModal";
 
 interface MedicationTableProps {
@@ -31,10 +35,16 @@ interface MedicationTableProps {
 export const MedicationTable = (props: MedicationTableProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
+  const { userType } = useUserTypeAtom();
+  const requestApi = useMedicationRequestApiAdapter();
+  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
   const [modalOpen, setModalOpen] = useState(false);
+
+  const [declineRequestIndex, setDeclineRequestIndex] = useState<number>();
+  const [declineModalOpen, setDeclineModalOpen] = useState(false);
 
   const handleCreate = () => {
     setEditRequestIndex(MedicationModalState.CREATE);
@@ -58,6 +68,26 @@ export const MedicationTable = (props: MedicationTableProps) => {
     setEditRequestIndex(index);
     setEditRequest(structuredClone(props.requests[index]));
     setModalOpen(true);
+  };
+
+  const handlePrescribe = async (index: number) => {
+    await requestApi.prescribeRequestWithInfo(props.requests[index]);
+    invalidateEveryGetAllMedicationRequestsByPatient();
+  };
+
+  const handleComplete = async (index: number) => {
+    await requestApi.completeRequestWithInfo(props.requests[index]);
+    invalidateEveryGetAllMedicationRequestsByPatient();
+  };
+
+  const handleDecline = async (index: number) => {
+    if (userType === UserType.CAREGIVER) {
+      await requestApi.declineRequestWithInfo(props.requests[index], "cancelled");
+      invalidateEveryGetAllMedicationRequestsByPatient();
+    } else {
+      setDeclineRequestIndex(index);
+      setDeclineModalOpen(true);
+    }
   };
 
   const handleSave = (r: BaseMedicationRequest) => {
@@ -84,6 +114,11 @@ export const MedicationTable = (props: MedicationTableProps) => {
         }
         request={editRequest}
         saveRequest={handleSave}
+      />
+      <DeclineStatusModal
+        open={declineModalOpen}
+        setOpen={setDeclineModalOpen}
+        requests={props.requests.filter((_, i) => i === declineRequestIndex)}
       />
       <Table
         dataSource={props.requests}
@@ -162,12 +197,46 @@ export const MedicationTable = (props: MedicationTableProps) => {
               {perms.canEditMedication(record) && (
                 <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
               )}
-              {perms.canPrescribeMedication(record) && <Button type="primary" icon={<CheckOutlined />} size="small" />}
+              {perms.canPrescribeMedication(record) && (
+                <Popconfirm
+                  title={t("translation:order.medicationTable.popconfirm.prescribe")}
+                  onConfirm={() => handlePrescribe(index)}
+                  placement="topRight"
+                  okText={t("translation:general.yes")}
+                  arrow={{ pointAtCenter: true }}
+                >
+                  <Button type="primary" icon={<CheckOutlined />} size="small" />
+                </Popconfirm>
+              )}
               {perms.canCompleteMedication(record) && (
-                <Button type="primary" icon={<MedicineBoxOutlined />} size="small" />
+                <Popconfirm
+                  title={t("translation:order.medicationTable.popconfirm.complete")}
+                  onConfirm={() => handleComplete(index)}
+                  icon={<MedicineBoxOutlined />}
+                  placement="topRight"
+                  okText={t("translation:general.yes")}
+                  arrow={{ pointAtCenter: true }}
+                >
+                  <Button type="primary" icon={<MedicineBoxOutlined />} size="small" />
+                </Popconfirm>
               )}
               {perms.canDeclineMedication(record) && (
-                <Button type="primary" danger icon={<DeleteOutlined />} size="small" />
+                <Popconfirm
+                  title={t("translation:order.medicationTable.popconfirm.decline")}
+                  onConfirm={() => handleDecline(index)}
+                  disabled={userType !== UserType.CAREGIVER}
+                  placement="topRight"
+                  okText={t("translation:general.yes")}
+                  arrow={{ pointAtCenter: true }}
+                >
+                  <Button
+                    type="primary"
+                    danger
+                    icon={<DeleteOutlined />}
+                    size="small"
+                    onClick={() => userType !== UserType.CAREGIVER && handleDecline(index)}
+                  />
+                </Popconfirm>
               )}
             </Space>
           )}

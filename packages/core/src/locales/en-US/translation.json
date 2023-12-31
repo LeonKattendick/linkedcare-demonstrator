@@ -57,7 +57,8 @@
 			"thu": "Thursday",
 			"tue": "Tuesday",
 			"wed": "Wednesday"
-		}
+		},
+		"yes": "Yes"
 	},
 	"header": {
 		"caregiverTitle": "Careservice LINCA Demo",
@@ -96,6 +97,14 @@
 		"decline": {
 			"errorMedication": "Medication {{name}} could not be canceled",
 			"successMedication": "Medication {{name}} canceled with ID {{id}} "
+		},
+		"declineModal": {
+			"ended": "Stop taking after using the current pack",
+			"error": "Incorrect entry",
+			"ok": "Decline",
+			"placeholder": "Select a reason for cancellation",
+			"stopped": "Stop taking it immediately",
+			"title": "Decline medication"
 		},
 		"edit": {
 			"errorMedication": "Medication {{name}} could not be edited",
@@ -137,6 +146,11 @@
 			},
 			"name": "Name",
 			"pharmacy": "Responsible pharmacy",
+			"popconfirm": {
+				"complete": "Do you want to complete dispensing the medication?",
+				"decline": "Do you want to cancel the medication?",
+				"prescribe": "Do you want to prescribe the medication?"
+			},
 			"status": "Status",
 			"title": "Medication"
 		},
