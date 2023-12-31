@@ -77,11 +77,16 @@
 	},
 	"order": {
 		"buttonRow": {
-			"cancel": "{{amount}} Medikamente stornieren",
 			"close": "Bestellung abschließen",
 			"complete": "{{amount}} Medikamente als \"Ausgegeben\" markieren",
 			"create": "Bestellung erstellen",
+			"decline": "{{amount}} Medikamente stornieren",
 			"edit": "{{amount}} Änderungen speichern",
+			"popconfirm": {
+				"complete": "Wollen Sie {{amount}} Medikamente als \"Ausgegeben\" markieren?",
+				"decline": "Wollen Sie {{amount}} Medikamente stornieren?",
+				"prescribe": "Wollen Sie {{amount}} Medikamente verschreiben?"
+			},
 			"prescribe": "{{amount}} Medikamente verschreiben",
 			"revoke": "Bestellung widerrufen"
 		},

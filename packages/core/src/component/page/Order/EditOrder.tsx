@@ -1,5 +1,5 @@
 import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
+import { Button, Popconfirm, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
@@ -7,12 +7,14 @@ import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequ
 import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
 import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { usePermissions } from "../../../hook/usePermissions";
+import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { medicationRequestsEqual } from "../../../util/matchingUtil";
+import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationTable } from "./MedicationTable";
 
 interface EditOrderProps {
@@ -25,14 +27,21 @@ interface EditOrderProps {
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
+  const { userType } = useUserTypeAtom();
   const { revokeOrchestrationWithInfo, completeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
   const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
+  const [declineModalOpen, setDeclineModalOpen] = useState(false);
 
   const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, requests[i]));
+  const declineRequests = editRequests.filter((v) => !!v.id);
+
+  const prescribeAmount = editRequests.filter(perms.canPrescribeMedication).length;
+  const completeAmount = editRequests.filter(perms.canCompleteMedication).length;
+  const declineAmount = editRequests.filter(perms.canDeclineMedication).length;
 
   useEffect(() => {
     if (!isRequestsLoading) setEditRequests(requests.map((v) => structuredClone(v)));
@@ -64,10 +73,14 @@ export const EditOrder = (props: EditOrderProps) => {
   };
 
   const handleDecline = async () => {
-    for (const request of editRequests) {
-      if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
+    if (userType === UserType.CAREGIVER) {
+      for (const request of declineRequests) {
+        if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
+      }
+      invalidateEveryGetAllMedicationRequestsByPatient();
+    } else {
+      setDeclineModalOpen(true);
     }
-    invalidateEveryGetAllMedicationRequestsByPatient();
   };
 
   const handleRevoke = async () => {
@@ -79,53 +92,78 @@ export const EditOrder = (props: EditOrderProps) => {
   };
 
   return (
-    <Space style={{ width: "100%" }} direction="vertical" size="middle">
-      <MedicationTable
-        requests={editRequests}
-        setRequests={setEditRequests}
-        patient={props.patient}
-        order={props.order}
-        caregiver={props.caregiver}
-        doctor={props.doctor}
-      />
-      <Space style={{ float: "right" }}>
-        {perms.canEditOrder(editRequests) && (
-          <Button type="primary" disabled={changedRequests.length === 0} onClick={handleEdit} icon={<EditOutlined />}>
-            {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
-          </Button>
-        )}
-        {perms.canPrescribeOrder(editRequests) && (
-          <Button type="primary" onClick={handlePrescribe} icon={<CheckOutlined />}>
-            {t("translation:order.buttonRow.prescribe", {
-              amount: editRequests.filter(perms.canPrescribeMedication).length,
-            })}
-          </Button>
-        )}
-        {perms.canCompleteOrder(editRequests) && (
-          <Button type="primary" onClick={handleComplete} icon={<CheckOutlined />}>
-            {t("translation:order.buttonRow.complete", {
-              amount: editRequests.filter(perms.canCompleteMedication).length,
-            })}
-          </Button>
-        )}
-        {perms.canDeclineOrder(editRequests) && (
-          <Button type="primary" danger onClick={handleDecline} icon={<DeleteOutlined />}>
-            {t("translation:order.buttonRow.cancel", {
-              amount: editRequests.filter(perms.canDeclineMedication).length,
-            })}
-          </Button>
-        )}
-        {perms.canBeRevoked(editRequests) && props.order.status !== "revoked" && (
-          <Button type="primary" danger onClick={handleRevoke}>
-            {t("translation:order.buttonRow.revoke")}
-          </Button>
-        )}
-        {perms.canBeClosed(editRequests) && props.order.status !== "completed" && (
-          <Button type="primary" onClick={handleClose}>
-            {t("translation:order.buttonRow.close")}
-          </Button>
-        )}
+    <>
+      <DeclineStatusModal open={declineModalOpen} setOpen={setDeclineModalOpen} requests={declineRequests} />
+      <Space style={{ width: "100%" }} direction="vertical" size="middle">
+        <MedicationTable
+          requests={editRequests}
+          setRequests={setEditRequests}
+          patient={props.patient}
+          order={props.order}
+          caregiver={props.caregiver}
+          doctor={props.doctor}
+        />
+        <Space style={{ float: "right" }}>
+          {perms.canEditOrder(editRequests) && (
+            <Button type="primary" disabled={changedRequests.length === 0} onClick={handleEdit} icon={<EditOutlined />}>
+              {t("translation:order.buttonRow.edit", { amount: changedRequests.length })}
+            </Button>
+          )}
+          {perms.canPrescribeOrder(editRequests) && (
+            <Popconfirm
+              title={t("translation:order.buttonRow.popconfirm.prescribe", { amount: prescribeAmount })}
+              onConfirm={handlePrescribe}
+              okText={t("translation:general.yes")}
+              arrow={{ pointAtCenter: true }}
+            >
+              <Button type="primary" icon={<CheckOutlined />}>
+                {t("translation:order.buttonRow.prescribe", {
+                  amount: prescribeAmount,
+                })}
+              </Button>
+            </Popconfirm>
+          )}
+          {perms.canCompleteOrder(editRequests) && (
+            <Popconfirm
+              title={t("translation:order.buttonRow.popconfirm.complete", { amount: completeAmount })}
+              onConfirm={handleComplete}
+              okText={t("translation:general.yes")}
+              arrow={{ pointAtCenter: true }}
+            >
+              <Button type="primary" icon={<CheckOutlined />}>
+                {t("translation:order.buttonRow.complete", {
+                  amount: completeAmount,
+                })}
+              </Button>
+            </Popconfirm>
+          )}
+          {perms.canDeclineOrder(editRequests) && (
+            <Popconfirm
+              title={t("translation:order.buttonRow.popconfirm.decline", { amount: declineAmount })}
+              onConfirm={handleDecline}
+              placement="topRight"
+              okText={t("translation:general.yes")}
+              arrow={{ pointAtCenter: true }}
+            >
+              <Button type="primary" danger icon={<DeleteOutlined />}>
+                {t("translation:order.buttonRow.decline", {
+                  amount: declineAmount,
+                })}
+              </Button>
+            </Popconfirm>
+          )}
+          {perms.canBeRevoked(editRequests) && props.order.status !== "revoked" && (
+            <Button type="primary" danger onClick={handleRevoke}>
+              {t("translation:order.buttonRow.revoke")}
+            </Button>
+          )}
+          {perms.canBeClosed(editRequests) && props.order.status !== "completed" && (
+            <Button type="primary" onClick={handleClose}>
+              {t("translation:order.buttonRow.close")}
+            </Button>
+          )}
+        </Space>
       </Space>
-    </Space>
+    </>
   );
 };

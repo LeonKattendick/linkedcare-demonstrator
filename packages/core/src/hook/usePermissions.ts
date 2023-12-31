@@ -33,6 +33,7 @@ export const usePermissions = () => {
     return !!r.every((v) => v.status === "cancelled");
   };
 
+  // can be closed as soon as all requests have reached a terminal state
   const canBeClosed = (r: PermissionMedicineRequest[]) => {
     return !canBeRevoked(r) && !r.some((v) => v.status === "active");
   };

@@ -81,6 +81,11 @@ export const MedicationTable = (props: MedicationTableProps) => {
   };
 
   const handleDecline = async (index: number) => {
+    if (!props.requests[index].id) {
+      props.setRequests([...props.requests].filter((_, i) => i !== index));
+      return;
+    }
+
     if (userType === UserType.CAREGIVER) {
       await requestApi.declineRequestWithInfo(props.requests[index], "cancelled");
       invalidateEveryGetAllMedicationRequestsByPatient();
@@ -224,7 +229,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
                 <Popconfirm
                   title={t("translation:order.medicationTable.popconfirm.decline")}
                   onConfirm={() => handleDecline(index)}
-                  disabled={userType !== UserType.CAREGIVER}
+                  disabled={userType !== UserType.CAREGIVER || !props.requests[index].id}
                   placement="topRight"
                   okText={t("translation:general.yes")}
                   arrow={{ pointAtCenter: true }}
@@ -234,7 +239,9 @@ export const MedicationTable = (props: MedicationTableProps) => {
                     danger
                     icon={<DeleteOutlined />}
                     size="small"
-                    onClick={() => userType !== UserType.CAREGIVER && handleDecline(index)}
+                    onClick={() =>
+                      (userType !== UserType.CAREGIVER || !props.requests[index].id) && handleDecline(index)
+                    }
                   />
                 </Popconfirm>
               )}

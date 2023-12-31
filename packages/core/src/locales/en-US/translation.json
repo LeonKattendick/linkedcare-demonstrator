@@ -77,11 +77,16 @@
 	},
 	"order": {
 		"buttonRow": {
-			"cancel": "Cancel {{amount}} medication",
 			"close": "Complete Order",
 			"complete": "Mark {{amount}} medication as \"dispensed\"",
 			"create": "Create order",
+			"decline": "Decline {{amount}} medication",
 			"edit": "Save {{amount}} changes",
+			"popconfirm": {
+				"complete": "Do you want to mark {{amount}} medications as “dispensed”?",
+				"decline": "Do you want to decline {{amount}} medication?",
+				"prescribe": "Do you want to prescribe {{amount}} medication?"
+			},
 			"prescribe": "Prescribe {{amount}} medication",
 			"revoke": "Revoke order"
 		},
