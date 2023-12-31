@@ -30,7 +30,11 @@ export const usePermissions = () => {
   };
 
   const canBeRevoked = (r: PermissionMedicineRequest[]) => {
-    return !!r.every((v) => ["cancelled"].includes(v.status));
+    return !!r.every((v) => v.status === "cancelled");
+  };
+
+  const canBeClosed = (r: PermissionMedicineRequest[]) => {
+    return !canBeRevoked(r) && !r.some((v) => v.status === "active");
   };
 
   const canEditMedication = (r: PermissionMedicineRequest) => {
@@ -69,5 +73,6 @@ export const usePermissions = () => {
     canCompleteMedication,
     canViewMedication,
     canBeRevoked,
+    canBeClosed,
   };
 };

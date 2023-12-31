@@ -78,6 +78,7 @@
 	"order": {
 		"buttonRow": {
 			"cancel": "{{amount}} Medikamente stornieren",
+			"close": "Bestellung abschließen",
 			"complete": "{{amount}} Medikamente als \"Ausgegeben\" markieren",
 			"create": "Bestellung erstellen",
 			"edit": "{{amount}} Änderungen speichern",

@@ -25,7 +25,7 @@ interface EditOrderProps {
 export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
-  const { revokeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
+  const { revokeOrchestrationWithInfo, completeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
   const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
   const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
@@ -74,6 +74,10 @@ export const EditOrder = (props: EditOrderProps) => {
     await revokeOrchestrationWithInfo(props.order);
   };
 
+  const handleClose = async () => {
+    await completeOrchestrationWithInfo(props.order);
+  };
+
   return (
     <Space style={{ width: "100%" }} direction="vertical" size="middle">
       <MedicationTable
@@ -114,6 +118,11 @@ export const EditOrder = (props: EditOrderProps) => {
         {perms.canBeRevoked(editRequests) && props.order.status !== "revoked" && (
           <Button type="primary" danger onClick={handleRevoke}>
             {t("translation:order.buttonRow.revoke")}
+          </Button>
+        )}
+        {perms.canBeClosed(editRequests) && props.order.status !== "completed" && (
+          <Button type="primary" onClick={handleClose}>
+            {t("translation:order.buttonRow.close")}
           </Button>
         )}
       </Space>
