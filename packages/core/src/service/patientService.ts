@@ -20,7 +20,7 @@ export const getAllPatients = (): Promise<Patient[]> => {
       .get("/fhir/Patient", { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<Patient>;
-        res(bundle.total > 0 ? bundle.entry!.map((v) => v.resource) : []);
+        res(bundle.entry?.map((v) => v.resource) ?? []);
       })
       .catch(rej);
   });
@@ -32,7 +32,7 @@ export const getPatientById = (id: string): Promise<Patient | null> => {
       .get(`/fhir/Patient?_id=${id}`, { headers: { "Cache-Control": "no-cache" } })
       .then((r) => {
         const bundle = r.data as Bundle<Patient>;
-        res(bundle.total === 1 ? bundle.entry![0].resource : null);
+        res(bundle.entry?.[0].resource ?? null);
       })
       .catch(rej);
   });
