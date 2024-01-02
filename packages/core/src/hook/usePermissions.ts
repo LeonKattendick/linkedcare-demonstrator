@@ -1,3 +1,7 @@
+import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest";
+import { Organization } from "../interface/linca/fhir/Organization";
+import { Practitioner } from "../interface/linca/fhir/Practitioner";
+import { identifierEqualsReference } from "../util/matchingUtil";
 import { UserType, useUserTypeAtom } from "./useUserTypeAtom";
 
 interface PermissionMedicineRequest {
@@ -66,6 +70,16 @@ export const usePermissions = () => {
     return !canEditMedication(r);
   };
 
+  const canDoctorSeeRequest = (r: BaseMedicationRequest, doctor: Practitioner | null) => {
+    if (!doctor) return false;
+    return identifierEqualsReference(doctor.identifier[0], r.performer[0]);
+  };
+
+  const canPharmacySeeRequest = (r: BaseMedicationRequest, pharmacy: Organization | null) => {
+    if (!pharmacy) return false;
+    return !r.dispenseRequest || identifierEqualsReference(pharmacy.identifier[0], r.dispenseRequest?.dispenser);
+  };
+
   return {
     canAddMedication,
     canEditOrder,
@@ -79,5 +93,7 @@ export const usePermissions = () => {
     canViewMedication,
     canBeRevoked,
     canBeClosed,
+    canDoctorSeeRequest,
+    canPharmacySeeRequest,
   };
 };

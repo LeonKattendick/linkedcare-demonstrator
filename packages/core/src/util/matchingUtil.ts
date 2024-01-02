@@ -171,10 +171,3 @@ export const medicationRequestsEqual = (
 ) => {
   return findMedicationRequestsMatchingErrors(r1, r2).length === 0;
 };
-
-export const isPharmacyAbleToDispense = (r: BaseMedicationRequest[], pharmacy: Organization | null) => {
-  if (!pharmacy) return false;
-  return !!r.find(
-    (v) => !v.dispenseRequest || identifierEqualsReference(pharmacy.identifier[0], v.dispenseRequest?.dispenser)
-  );
-};
