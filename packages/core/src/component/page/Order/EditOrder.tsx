@@ -1,6 +1,5 @@
 import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Space } from "antd";
-import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/filter/useGetAllValidMedicationRequestsForOrchestration";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
@@ -20,6 +19,7 @@ import { MedicationTable } from "./MedicationTable";
 interface EditOrderProps {
   patient: Patient;
   order: RequestOrchestration;
+  requests: BaseMedicationRequest[];
   caregiver?: Organization;
   doctor?: Practitioner;
   pharmacy?: Organization;
@@ -33,16 +33,12 @@ export const EditOrder = (props: EditOrderProps) => {
   const { revokeOrchestrationWithInfo, completeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
 
-  const { requests, isRequestsLoading } = useGetAllValidMedicationRequestsForOrchestration(
-    props.order.id,
-    props.patient.id
-  );
   const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
 
-  const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, requests[i]));
+  const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, props.requests[i]));
   const declineRequests = editRequests.filter((v) => !!v.id);
 
   const prescribeAmount = editRequests.filter(perms.canPrescribeMedication).length;
@@ -50,8 +46,8 @@ export const EditOrder = (props: EditOrderProps) => {
   const declineAmount = editRequests.filter(perms.canDeclineMedication).length;
 
   useEffect(() => {
-    if (!isRequestsLoading) setEditRequests(requests.map((v) => structuredClone(v)));
-  }, [requests]);
+    setEditRequests(props.requests.map((v) => structuredClone(v)));
+  }, [props.requests]);
 
   const handleEdit = async () => {
     for (const request of changedRequests) {

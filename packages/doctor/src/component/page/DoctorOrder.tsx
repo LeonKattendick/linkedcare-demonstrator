@@ -26,5 +26,5 @@ export const DoctorOrder = () => {
     return <Navigate to="/" />;
   }
 
-  return <Order patient={patient} order={orchestration} doctor={selectedDoctor!} />;
+  return <Order patient={patient} order={orchestration} requests={requests} doctor={selectedDoctor!} />;
 };

@@ -5,7 +5,7 @@ import { Order } from "core/src/component/page/Order";
 import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/filter/useGetAllValidMedicationRequestsForOrchestration";
 import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useGetRequestOrchestrationById } from "core/src/hook/query/useGetRequestOrchestrationById";
-import { identifierEqualsReference } from "core/src/util/matchingUtil";
+import { isPharmacyAbleToDispense } from "core/src/util/matchingUtil";
 import { Navigate, useParams } from "react-router";
 import { useSelectedPharmacyAtom } from "../../hook/useSelectedPharmacyAtom";
 
@@ -22,14 +22,7 @@ export const PharmacyOrder = () => {
   if (!patient) return <PatientNotFoundError patientId={patientId} />;
 
   if (!orchestration) return <OrderNotFoundError orderId={orderId} />;
-  if (
-    !requests.find(
-      (v) =>
-        !v.dispenseRequest || identifierEqualsReference(selectedPharmacy?.identifier[0], v.dispenseRequest?.dispenser)
-    )
-  ) {
-    return <Navigate to="/" />;
-  }
+  if (!isPharmacyAbleToDispense(requests, selectedPharmacy)) return <Navigate to="/" />;
 
-  return <Order patient={patient} order={orchestration} pharmacy={selectedPharmacy!} />;
+  return <Order patient={patient} order={orchestration} requests={requests} pharmacy={selectedPharmacy!} />;
 };

@@ -2,6 +2,7 @@ import { OrderNotFoundError } from "core/src/component/Error/OrderNotFoundError"
 import { PatientNotFoundError } from "core/src/component/Error/PatientNotFoundError";
 import { Loading } from "core/src/component/Loading";
 import { Order } from "core/src/component/page/Order";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/filter/useGetAllValidMedicationRequestsForOrchestration";
 import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useGetRequestOrchestrationById } from "core/src/hook/query/useGetRequestOrchestrationById";
 import { caregiverIsFromOrganization, identifierEqualsReference } from "core/src/util/matchingUtil";
@@ -15,8 +16,9 @@ export const CaregiverOrder = () => {
   const { patient, isPatientLoading } = useGetPatientById(patientId);
 
   const { orchestration, isOrchestrationLoading } = useGetRequestOrchestrationById(orderId);
+  const { requests, isRequestsLoading } = useGetAllValidMedicationRequestsForOrchestration(orderId, patientId);
 
-  if (isPatientLoading || isOrchestrationLoading) return <Loading />;
+  if (isPatientLoading || isOrchestrationLoading || isRequestsLoading) return <Loading />;
   if (!patient) return <PatientNotFoundError patientId={patientId} />;
   if (!caregiverIsFromOrganization(selectedCaregiver, patient.managingOrganization)) return <Navigate to="/" />;
 
@@ -25,5 +27,5 @@ export const CaregiverOrder = () => {
     if (!identifierEqualsReference(selectedCaregiver!.identifier[0], orchestration.subject)) return <Navigate to="/" />;
   }
 
-  return <Order patient={patient} order={orchestration} caregiver={selectedCaregiver!} />;
+  return <Order patient={patient} order={orchestration} requests={requests} caregiver={selectedCaregiver!} />;
 };
