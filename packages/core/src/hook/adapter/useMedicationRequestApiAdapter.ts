@@ -1,7 +1,11 @@
 import { App } from "antd";
 import { useTranslation } from "react-i18next";
 import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
-import { E_REZEPT_ID_SYSTEM, PrescriptionMedicationRequest } from "../../interface/linca/PrescriptionMedicationRequest";
+import {
+  E_MED_ID_SYSTEM,
+  E_REZEPT_ID_SYSTEM,
+  PrescriptionMedicationRequest,
+} from "../../interface/linca/PrescriptionMedicationRequest";
 import { createMedicationRequest } from "../../service/medicatonRequestService";
 
 export const useMedicationRequestApiAdapter = () => {
@@ -46,12 +50,18 @@ export const useMedicationRequestApiAdapter = () => {
     }
   };
 
-  const prescribeRequestWithInfo = async (r: BaseMedicationRequest, eRezeptId?: string, modificated?: boolean) => {
+  const prescribeRequestWithInfo = async (
+    r: BaseMedicationRequest,
+    eRezeptId?: string,
+    eMedId?: string,
+    modificated?: boolean
+  ) => {
     const isCreate = !r.id;
     const clone = structuredClone(r) as PrescriptionMedicationRequest;
 
     clone.id = undefined;
     clone.intent = "order";
+    clone.identifier = eMedId ? [{ system: E_MED_ID_SYSTEM, value: eMedId }] : undefined;
     clone.groupIdentifier = eRezeptId ? { system: E_REZEPT_ID_SYSTEM, value: eRezeptId } : undefined;
 
     if (!isCreate) {
