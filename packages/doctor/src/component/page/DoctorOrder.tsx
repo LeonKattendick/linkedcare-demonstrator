@@ -2,7 +2,7 @@ import { OrderNotFoundError } from "core/src/component/Error/OrderNotFoundError"
 import { PatientNotFoundError } from "core/src/component/Error/PatientNotFoundError";
 import { Loading } from "core/src/component/Loading";
 import { Order } from "core/src/component/page/Order";
-import { useGetAllMedicationRequestsForOrchestration } from "core/src/hook/useGetAllMedicationRequestsForOrchestration";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/useGetAllValidMedicationRequestsForOrchestration";
 import { useGetPatientById } from "core/src/hook/useGetPatientById";
 import { useGetRequestOrchestrationById } from "core/src/hook/useGetRequestOrchestrationById";
 import { identifierEqualsReference } from "core/src/util/matchingUtil";
@@ -16,7 +16,7 @@ export const DoctorOrder = () => {
   const { patient, isPatientLoading } = useGetPatientById(patientId);
 
   const { orchestration, isOrchestrationLoading } = useGetRequestOrchestrationById(orderId);
-  const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(orderId, patientId);
+  const { requests, isRequestsLoading } = useGetAllValidMedicationRequestsForOrchestration(orderId, patientId);
 
   if (isPatientLoading || isOrchestrationLoading || isRequestsLoading) return <Loading />;
   if (!patient) return <PatientNotFoundError patientId={patientId} />;

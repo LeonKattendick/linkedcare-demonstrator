@@ -1,11 +1,11 @@
 import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Space } from "antd";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/useGetAllValidMedicationRequestsForOrchestration";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
 import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
-import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { usePermissions } from "../../../hook/usePermissions";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
@@ -28,10 +28,15 @@ export const EditOrder = (props: EditOrderProps) => {
   const { t } = useTranslation();
   const perms = usePermissions();
   const { userType } = useUserTypeAtom();
+
   const { revokeOrchestrationWithInfo, completeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
-  const { requests, isRequestsLoading } = useGetAllMedicationRequestsForOrchestration(props.order.id, props.patient.id);
-  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
+
+  const { requests, isRequestsLoading } = useGetAllValidMedicationRequestsForOrchestration(
+    props.order.id,
+    props.patient.id
+  );
+  const { invalidateAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
@@ -55,21 +60,21 @@ export const EditOrder = (props: EditOrderProps) => {
         await requestApi.createRequestWithInfo(request);
       }
     }
-    invalidateEveryGetAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequestsByPatient();
   };
 
   const handlePrescribe = async () => {
     for (const request of editRequests) {
       if (perms.canPrescribeMedication(request)) await requestApi.prescribeRequestWithInfo(request);
     }
-    invalidateEveryGetAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequestsByPatient();
   };
 
   const handleComplete = async () => {
     for (const request of editRequests) {
       if (perms.canCompleteMedication(request)) await requestApi.completeRequestWithInfo(request);
     }
-    invalidateEveryGetAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequestsByPatient();
   };
 
   const handleDecline = async () => {
@@ -77,7 +82,7 @@ export const EditOrder = (props: EditOrderProps) => {
       for (const request of declineRequests) {
         if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
       }
-      invalidateEveryGetAllMedicationRequestsByPatient();
+      invalidateAllMedicationRequestsByPatient();
     } else {
       setDeclineModalOpen(true);
     }

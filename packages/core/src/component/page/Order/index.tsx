@@ -1,7 +1,7 @@
 import { Card, Flex } from "antd";
 import { PatientTitle } from "core/src/component/PatientTitle";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/useGetAllValidMedicationRequestsForOrchestration";
 import { useTranslation } from "react-i18next";
-import { useGetAllMedicationRequestsForOrchestration } from "../../../hook/useGetAllMedicationRequestsForOrchestration";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
@@ -20,7 +20,7 @@ interface OrderProps {
 export const Order = (props: OrderProps) => {
   const { t } = useTranslation();
 
-  const { requests } = useGetAllMedicationRequestsForOrchestration(props.order?.id, props.patient.id);
+  const { requests } = useGetAllValidMedicationRequestsForOrchestration(props.order?.id, props.patient.id);
 
   const isNew = !props.order;
   return (

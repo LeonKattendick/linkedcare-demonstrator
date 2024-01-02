@@ -1,14 +1,17 @@
-import { useGetAllMedicationRequestsByPatient } from "core/src/hook/useGetAllMedicationRequestsByPatient";
 import { useGetAllRequestOrchestrationsByPatient } from "core/src/hook/useGetAllRequestOrchestrationsByPatient";
+import { useGetAllValidMedicationRequestsByPatient } from "core/src/hook/useGetAllValidMedicationRequestsByPatient";
 import { identifierEqualsReference, requestIsFromOrchestration } from "core/src/util/matchingUtil";
 import { useMemo } from "react";
 import { useSelectedDoctorAtom } from "./useSelectedDoctorAtom";
 
+/*
+ * All RequestOrchestrations that have one MedicationRequest where the current doctor is linked as performer
+ */
 export const useGetRelevantRequestOrchestrationsByPatient = (patientId: string | undefined) => {
   const { selectedDoctor } = useSelectedDoctorAtom();
 
   const { orchestrations, isOrchestrationsLoading } = useGetAllRequestOrchestrationsByPatient(patientId);
-  const { requests, isRequestsLoading } = useGetAllMedicationRequestsByPatient(patientId);
+  const { requests, isRequestsLoading } = useGetAllValidMedicationRequestsByPatient(patientId);
 
   // Memoization is used to not compute this value on every rerender of the component
   const relevantOrchestrations = useMemo(() => {

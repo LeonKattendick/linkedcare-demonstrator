@@ -12,9 +12,9 @@ export const useGetAllMedicationRequestsByPatient = (patientId?: string) => {
     }
   );
 
-  const invalidateEveryGetAllMedicationRequestsByPatient = () => {
+  const invalidateAllMedicationRequestsByPatient = () => {
     client.invalidateQueries({ predicate: (query) => query.queryKey[0] === "useGetAllMedicationRequestsByPatient" });
   };
 
-  return { requests: data ?? [], isRequestsLoading: isLoading, invalidateEveryGetAllMedicationRequestsByPatient };
+  return { requests: data ?? [], isRequestsLoading: isLoading, invalidateAllMedicationRequestsByPatient };
 };

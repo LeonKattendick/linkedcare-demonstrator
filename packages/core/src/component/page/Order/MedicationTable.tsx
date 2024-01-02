@@ -37,7 +37,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const perms = usePermissions();
   const { userType } = useUserTypeAtom();
   const requestApi = useMedicationRequestApiAdapter();
-  const { invalidateEveryGetAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
 
   const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
@@ -72,12 +72,12 @@ export const MedicationTable = (props: MedicationTableProps) => {
 
   const handlePrescribe = async (index: number) => {
     await requestApi.prescribeRequestWithInfo(props.requests[index]);
-    invalidateEveryGetAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequestsByPatient();
   };
 
   const handleComplete = async (index: number) => {
     await requestApi.completeRequestWithInfo(props.requests[index]);
-    invalidateEveryGetAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequestsByPatient();
   };
 
   const handleDecline = async (index: number) => {
@@ -88,7 +88,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
 
     if (userType === UserType.CAREGIVER) {
       await requestApi.declineRequestWithInfo(props.requests[index], "cancelled");
-      invalidateEveryGetAllMedicationRequestsByPatient();
+      invalidateAllMedicationRequestsByPatient();
     } else {
       setDeclineRequestIndex(index);
       setDeclineModalOpen(true);
