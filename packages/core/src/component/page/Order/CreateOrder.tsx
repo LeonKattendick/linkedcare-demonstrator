@@ -21,7 +21,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
   const navigate = useNavigate();
   const { createOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const { createRequestWithInfo } = useMedicationRequestApiAdapter();
-  const { invalidateAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
 
   const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 
@@ -38,7 +38,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
       await createRequestWithInfo(request);
     }
 
-    invalidateAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequests();
     navigate(`/order/${props.patient.id}/${res.id}`);
   };
 

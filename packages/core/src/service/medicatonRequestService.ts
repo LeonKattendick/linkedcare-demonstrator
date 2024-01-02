@@ -14,6 +14,20 @@ export const createMedicationRequest = (r: BaseMedicationRequest): Promise<BaseM
   });
 };
 
+export const getAllMedicationRequests = (): Promise<BaseMedicationRequest[]> => {
+  return new Promise((res, rej) => {
+    axios
+      .get(`/fhir/MedicationRequest?_count=10000`, {
+        headers: { "Cache-Control": "no-cache" },
+      })
+      .then((r) => {
+        const bundle = r.data as Bundle<BaseMedicationRequest>;
+        res(bundle.entry?.map((v) => v.resource) ?? []);
+      })
+      .catch(rej);
+  });
+};
+
 export const getAllMedicationRequestsByPatient = (patientId: string): Promise<BaseMedicationRequest[]> => {
   return new Promise((res, rej) => {
     axios
@@ -22,7 +36,6 @@ export const getAllMedicationRequestsByPatient = (patientId: string): Promise<Ba
       })
       .then((r) => {
         const bundle = r.data as Bundle<BaseMedicationRequest>;
-        console.log(bundle);
         res(bundle.entry?.map((v) => v.resource) ?? []);
       })
       .catch(rej);

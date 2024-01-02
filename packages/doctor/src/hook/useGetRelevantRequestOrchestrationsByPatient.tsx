@@ -15,22 +15,11 @@ export const useGetRelevantRequestOrchestrationsByPatient = (patientId: string |
 
   // Memoization is used to not compute this value on every rerender of the component
   const relevantOrchestrations = useMemo(() => {
-    const relevant = [];
+    const validRequests = requests.filter((v) =>
+      identifierEqualsReference(selectedDoctor?.identifier[0], v.performer[0])
+    );
 
-    for (const orchestration of orchestrations) {
-      const requestsForOrchestration = requests.filter((v) => !!requestIsFromOrchestration(v, orchestration));
-
-      let canBeAdded = false;
-      for (const request of requestsForOrchestration) {
-        if (identifierEqualsReference(selectedDoctor?.identifier[0], request.performer[0])) {
-          canBeAdded = true;
-          break;
-        }
-      }
-      if (canBeAdded) relevant.push(orchestration);
-    }
-
-    return relevant;
+    return orchestrations.filter((v) => validRequests.find((w) => requestIsFromOrchestration(w, v)));
   }, [selectedDoctor, orchestrations, requests]);
 
   return {

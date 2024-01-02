@@ -13,7 +13,7 @@ interface DeclineStatusModalProps extends ModalProps {
 export const DeclineStatusModal = (props: DeclineStatusModalProps) => {
   const { t } = useTranslation();
   const requestApi = useMedicationRequestApiAdapter();
-  const { invalidateAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
 
   const [reason, setReason] = useState<"ended" | "stopped" | "entered-in-error">();
 
@@ -28,7 +28,7 @@ export const DeclineStatusModal = (props: DeclineStatusModalProps) => {
       await requestApi.declineRequestWithInfo(request, reason);
     }
 
-    invalidateAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequests();
     handleCancel();
   };
 

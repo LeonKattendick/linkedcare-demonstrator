@@ -36,7 +36,7 @@ export const EditOrder = (props: EditOrderProps) => {
     props.order.id,
     props.patient.id
   );
-  const { invalidateAllMedicationRequestsByPatient } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
@@ -60,21 +60,21 @@ export const EditOrder = (props: EditOrderProps) => {
         await requestApi.createRequestWithInfo(request);
       }
     }
-    invalidateAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequests();
   };
 
   const handlePrescribe = async () => {
     for (const request of editRequests) {
       if (perms.canPrescribeMedication(request)) await requestApi.prescribeRequestWithInfo(request);
     }
-    invalidateAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequests();
   };
 
   const handleComplete = async () => {
     for (const request of editRequests) {
       if (perms.canCompleteMedication(request)) await requestApi.completeRequestWithInfo(request);
     }
-    invalidateAllMedicationRequestsByPatient();
+    invalidateAllMedicationRequests();
   };
 
   const handleDecline = async () => {
@@ -82,7 +82,7 @@ export const EditOrder = (props: EditOrderProps) => {
       for (const request of declineRequests) {
         if (perms.canDeclineMedication(request)) await requestApi.declineRequestWithInfo(request, "cancelled");
       }
-      invalidateAllMedicationRequestsByPatient();
+      invalidateAllMedicationRequests();
     } else {
       setDeclineModalOpen(true);
     }

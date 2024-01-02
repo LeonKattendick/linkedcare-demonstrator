@@ -1,8 +1,8 @@
 import { Orders } from "core/src/component/page/Orders";
-import { useGetAllRequestOrchestrations } from "core/src/hook/query/useGetAllRequestOrchestrations";
+import { useGetRelevantRequestOrchestrations } from "../../hook/useGetRelevantRequestOrchestrations";
 
 export const DoctorOrders = () => {
-  const { orchestrations } = useGetAllRequestOrchestrations();
+  const { orchestrations, isOrchestrationsLoading } = useGetRelevantRequestOrchestrations();
 
-  return <Orders orders={orchestrations} />;
+  return <Orders orders={orchestrations} isOrdersLoading={isOrchestrationsLoading} />;
 };

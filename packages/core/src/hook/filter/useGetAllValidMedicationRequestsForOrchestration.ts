@@ -3,6 +3,9 @@ import { requestIsFromOrchestration } from "../../util/matchingUtil";
 import { useGetAllRequestOrchestrations } from "../query/useGetAllRequestOrchestrations";
 import { useGetAllValidMedicationRequestsByPatient } from "./useGetAllValidMedicationRequestsByPatient";
 
+/*
+ * All valid MedicationRequests for a RequestOrchestration
+ */
 export const useGetAllValidMedicationRequestsForOrchestration = (
   orderId: string | undefined,
   patientId: string | undefined

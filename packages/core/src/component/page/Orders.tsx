@@ -3,6 +3,7 @@ import { RequestOrchestration } from "../../interface/linca/RequestOrchestration
 
 interface OrdersProps {
   orders: RequestOrchestration[];
+  isOrdersLoading: boolean;
 }
 
 export const Orders = (props: OrdersProps) => {
