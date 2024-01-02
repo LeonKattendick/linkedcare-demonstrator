@@ -1,7 +1,7 @@
 import { PatientNotFoundError } from "core/src/component/Error/PatientNotFoundError";
 import { Loading } from "core/src/component/Loading";
 import { ViewPatient } from "core/src/component/page/ViewPatient";
-import { useGetPatientById } from "core/src/hook/useGetPatientById";
+import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useParams } from "react-router";
 import { useGetRelevantRequestOrchestrationsByPatient } from "../../hook/useGetRelevantRequestOrchestrationsByPatient";
 

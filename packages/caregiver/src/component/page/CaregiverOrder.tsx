@@ -2,8 +2,8 @@ import { OrderNotFoundError } from "core/src/component/Error/OrderNotFoundError"
 import { PatientNotFoundError } from "core/src/component/Error/PatientNotFoundError";
 import { Loading } from "core/src/component/Loading";
 import { Order } from "core/src/component/page/Order";
-import { useGetPatientById } from "core/src/hook/useGetPatientById";
-import { useGetRequestOrchestrationById } from "core/src/hook/useGetRequestOrchestrationById";
+import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
+import { useGetRequestOrchestrationById } from "core/src/hook/query/useGetRequestOrchestrationById";
 import { caregiverIsFromOrganization, identifierEqualsReference } from "core/src/util/matchingUtil";
 import { Navigate, useParams } from "react-router";
 import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";

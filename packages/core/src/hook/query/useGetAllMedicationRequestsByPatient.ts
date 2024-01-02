@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "react-query";
-import { getAllMedicationRequestsByPatient } from "../service/medicatonRequestService";
+import { getAllMedicationRequestsByPatient } from "../../service/medicatonRequestService";
 
 export const useGetAllMedicationRequestsByPatient = (patientId?: string) => {
   const client = useQueryClient();

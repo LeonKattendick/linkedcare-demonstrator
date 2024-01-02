@@ -1,6 +1,6 @@
 import { Card, Flex } from "antd";
 import { PatientTitle } from "core/src/component/PatientTitle";
-import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/useGetAllValidMedicationRequestsForOrchestration";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/filter/useGetAllValidMedicationRequestsForOrchestration";
 import { useTranslation } from "react-i18next";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";

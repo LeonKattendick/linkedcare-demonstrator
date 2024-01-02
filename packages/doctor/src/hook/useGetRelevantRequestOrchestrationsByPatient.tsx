@@ -1,5 +1,5 @@
-import { useGetAllRequestOrchestrationsByPatient } from "core/src/hook/useGetAllRequestOrchestrationsByPatient";
-import { useGetAllValidMedicationRequestsByPatient } from "core/src/hook/useGetAllValidMedicationRequestsByPatient";
+import { useGetAllRequestOrchestrationsByPatient } from "core/src/hook/filter/useGetAllRequestOrchestrationsByPatient";
+import { useGetAllValidMedicationRequestsByPatient } from "core/src/hook/filter/useGetAllValidMedicationRequestsByPatient";
 import { identifierEqualsReference, requestIsFromOrchestration } from "core/src/util/matchingUtil";
 import { useMemo } from "react";
 import { useSelectedDoctorAtom } from "./useSelectedDoctorAtom";

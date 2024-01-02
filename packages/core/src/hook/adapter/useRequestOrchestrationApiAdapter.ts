@@ -2,8 +2,8 @@ import { App } from "antd";
 import { useTranslation } from "react-i18next";
 import { RequestOrchestration } from "../../interface/linca/RequestOrchestration";
 import { createRequestOrchestration, updateRequestOrchestration } from "../../service/requestOrchestrationService";
-import { useGetAllRequestOrchestrations } from "../useGetAllRequestOrchestrations";
-import { useGetRequestOrchestrationById } from "../useGetRequestOrchestrationById";
+import { useGetAllRequestOrchestrations } from "../query/useGetAllRequestOrchestrations";
+import { useGetRequestOrchestrationById } from "../query/useGetRequestOrchestrationById";
 
 export const useRequestOrchestrationApiAdapter = () => {
   const { t } = useTranslation();

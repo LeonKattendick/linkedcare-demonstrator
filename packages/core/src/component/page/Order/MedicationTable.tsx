@@ -10,7 +10,7 @@ import { Button, Popconfirm, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
+import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";

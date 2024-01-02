@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { requestIsFromOrchestration } from "../util/matchingUtil";
-import { useGetAllRequestOrchestrations } from "./useGetAllRequestOrchestrations";
+import { requestIsFromOrchestration } from "../../util/matchingUtil";
+import { useGetAllRequestOrchestrations } from "../query/useGetAllRequestOrchestrations";
 import { useGetAllValidMedicationRequestsByPatient } from "./useGetAllValidMedicationRequestsByPatient";
 
 export const useGetAllRequestOrchestrationsByPatient = (patientId: string | undefined) => {

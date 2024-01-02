@@ -1,11 +1,11 @@
 import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Space } from "antd";
-import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/useGetAllValidMedicationRequestsForOrchestration";
+import { useGetAllValidMedicationRequestsForOrchestration } from "core/src/hook/filter/useGetAllValidMedicationRequestsForOrchestration";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/useGetAllMedicationRequestsByPatient";
+import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";

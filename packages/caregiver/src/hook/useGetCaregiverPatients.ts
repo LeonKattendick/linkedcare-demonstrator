@@ -1,4 +1,4 @@
-import { useGetAllPatients } from "core/src/hook/useGetAllPatients";
+import { useGetAllPatients } from "core/src/hook/query/useGetAllPatients";
 import { caregiverIsFromOrganization } from "core/src/util/matchingUtil";
 import { useMemo } from "react";
 import { useSelectedCaregiverAtom } from "./useSelectedCaregiverAtom";

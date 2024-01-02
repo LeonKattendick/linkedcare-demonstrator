@@ -1,7 +1,7 @@
 import { PatientNotFoundError } from "core/src/component/Error/PatientNotFoundError";
 import { Loading } from "core/src/component/Loading";
 import { MedicationPlan } from "core/src/component/page/MedicationPlan";
-import { useGetPatientById } from "core/src/hook/useGetPatientById";
+import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useParams } from "react-router";
 
 export const DoctorMedicationPlan = () => {

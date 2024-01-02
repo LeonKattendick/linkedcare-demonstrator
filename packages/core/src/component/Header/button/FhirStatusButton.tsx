@@ -1,7 +1,7 @@
 import { FireTwoTone } from "@ant-design/icons";
 import { Button, Tooltip, theme } from "antd";
 import { useTranslation } from "react-i18next";
-import { useGetMetadata } from "../../../hook/useGetMetadata";
+import { useGetMetadata } from "../../../hook/query/useGetMetadata";
 
 export const FhirStatusButton = () => {
   const { metadata, isMetadataSuccess } = useGetMetadata();

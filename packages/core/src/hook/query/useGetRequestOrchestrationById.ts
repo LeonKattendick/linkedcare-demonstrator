@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "react-query";
-import { getRequestOrchestrationById } from "../service/requestOrchestrationService";
+import { getRequestOrchestrationById } from "../../service/requestOrchestrationService";
 
 export const useGetRequestOrchestrationById = (id?: string) => {
   const client = useQueryClient();
