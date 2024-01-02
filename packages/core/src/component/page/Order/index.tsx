@@ -15,6 +15,7 @@ interface OrderProps {
   order: RequestOrchestration | null;
   caregiver?: Organization;
   doctor?: Practitioner;
+  pharmacy?: Organization;
 }
 
 export const Order = (props: OrderProps) => {
@@ -35,7 +36,13 @@ export const Order = (props: OrderProps) => {
         {isNew ? (
           <CreateOrder patient={props.patient} caregiver={props.caregiver!} />
         ) : (
-          <EditOrder patient={props.patient} order={props.order!} caregiver={props.caregiver} doctor={props.doctor} />
+          <EditOrder
+            patient={props.patient}
+            order={props.order!}
+            caregiver={props.caregiver}
+            doctor={props.doctor}
+            pharmacy={props.pharmacy}
+          />
         )}
       </Card>
     </Flex>

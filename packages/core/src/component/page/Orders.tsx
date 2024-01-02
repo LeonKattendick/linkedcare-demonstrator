@@ -4,13 +4,17 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useGetAllValidMedicationRequests } from "../../hook/filter/useGetAllValidMedicationRequests";
+import { useGetAllPatients } from "../../hook/query/useGetAllPatients";
 import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
+import { Patient } from "../../interface/linca/Patient";
 import { RequestOrchestration } from "../../interface/linca/RequestOrchestration";
 import { InternalReference } from "../../interface/linca/fhir/Reference";
 import { requestIsFromOrchestration } from "../../util/matchingUtil";
+import { renderAddress, renderBirthDate } from "../../util/renderUtil";
 
 interface OrderWithRequests {
   order: RequestOrchestration;
+  patient?: Patient;
   requests: BaseMedicationRequest[];
 }
 
@@ -24,17 +28,22 @@ export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
   const navigate = useNavigate();
 
   const { requests, isRequestsLoading } = useGetAllValidMedicationRequests();
+  const { patients, isPatientsLoading } = useGetAllPatients();
 
-  const ordersWithRequests: OrderWithRequests[] = orders.map((v) => ({
-    order: v,
-    requests: requests.filter((w) => requestIsFromOrchestration(w, v)),
-  }));
+  const ordersWithRequests: OrderWithRequests[] = orders.map((v) => {
+    const orderRequests = requests.filter((w) => requestIsFromOrchestration(w, v));
+    return {
+      order: v,
+      patient: patients.find((v) => (orderRequests[0].subject as InternalReference).reference === `Patient/${v.id}`),
+      requests: orderRequests,
+    };
+  });
 
   return (
     <Card style={{ height: "100%" }}>
       <Table
         dataSource={ordersWithRequests}
-        loading={isOrdersLoading || isRequestsLoading}
+        loading={isOrdersLoading || isRequestsLoading || isPatientsLoading}
         size="middle"
         bordered
         rowKey={(v) => v.order.id!}
@@ -52,7 +61,27 @@ export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
         <Table.Column
           title={t("translation:orders.status")}
           render={(_, record: OrderWithRequests) => record.order.status}
-          sorter={(a: OrderWithRequests, b: OrderWithRequests) => a.order.status.localeCompare(b.order.status)}
+          sorter={(a, b) => a.order.status.localeCompare(b.order.status)}
+        />
+        <Table.Column
+          title={t("translation:orders.patient")}
+          render={(_, record: OrderWithRequests) => record.patient?.name[0].text}
+          sorter={(a, b) => a.order.status.localeCompare(b.order.status)}
+        />
+        <Table.Column
+          title={t("translation:orders.gender")}
+          render={(_, record: OrderWithRequests) => t(`general.gender.${record.patient?.gender}`)}
+          sorter={(a, b) => a.patient!.gender.localeCompare(b.patient!.gender)}
+        />
+        <Table.Column
+          title={t("translation:orders.birthDate")}
+          render={(_, record: OrderWithRequests) => renderBirthDate(record.patient?.birthDate)}
+          sorter={(a, b) => (dayjs(a.patient?.birthDate).isBefore(dayjs(b.patient?.birthDate)) ? -1 : 1)}
+        />
+        <Table.Column
+          title={t("translation:orders.address")}
+          render={(_, record: OrderWithRequests) => renderAddress(record.patient?.address[0])}
+          sorter={(a, b) => renderAddress(a.patient?.address[0]).localeCompare(renderAddress(b.patient?.address[0]))}
         />
         <Table.Column
           title={t("translation:general.actions")}
@@ -61,10 +90,7 @@ export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
               type="primary"
               icon={<EyeOutlined />}
               size="small"
-              onClick={() => {
-                const patientId = (record.requests[0].subject as InternalReference).reference?.replace("Patient/", "");
-                navigate(`/order/${patientId}/${record.order.id}`);
-              }}
+              onClick={() => navigate(`/order/${record.patient?.id}/${record.order.id}`)}
             />
           )}
         />

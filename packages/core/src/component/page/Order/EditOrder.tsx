@@ -22,6 +22,7 @@ interface EditOrderProps {
   order: RequestOrchestration;
   caregiver?: Organization;
   doctor?: Practitioner;
+  pharmacy?: Organization;
 }
 
 export const EditOrder = (props: EditOrderProps) => {
@@ -107,6 +108,7 @@ export const EditOrder = (props: EditOrderProps) => {
           order={props.order}
           caregiver={props.caregiver}
           doctor={props.doctor}
+          pharmacy={props.pharmacy}
         />
         <Space style={{ float: "right" }}>
           {perms.canEditOrder(editRequests) && (

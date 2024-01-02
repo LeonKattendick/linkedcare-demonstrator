@@ -177,7 +177,11 @@
 		}
 	},
 	"orders": {
+		"address": "Adresse",
+		"birthDate": "Geburtsdatum",
 		"date": "Datum",
+		"gender": "Geschlecht",
+		"patient": "Patient",
 		"status": "Status"
 	},
 	"patient": {

@@ -27,6 +27,7 @@ interface MedicationTableProps {
   patient: Patient;
   caregiver?: Organization;
   doctor?: Practitioner;
+  pharmacy?: Organization;
   order?: RequestOrchestration;
   requests: BaseMedicationRequest[];
   setRequests: (r: BaseMedicationRequest[]) => void;

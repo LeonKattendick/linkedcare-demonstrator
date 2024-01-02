@@ -63,6 +63,7 @@ export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }
           <Table.Column
             title={t("translation:searchPatients.table.address")}
             render={(_, record: Patient) => renderAddress(record.address[0])}
+            sorter={(a, b) => renderAddress(a.address[0]).localeCompare(renderAddress(b.address[0]))}
           />
           <Table.Column
             title={t("translation:general.actions")}
