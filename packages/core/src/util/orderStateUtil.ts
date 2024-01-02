@@ -11,12 +11,12 @@ export enum OrderState {
   REVOKED = "REVOKED",
 }
 
-export const calculateOrderState = (r: BaseMedicationRequest[], order: RequestOrchestration | null) => {
-  if (r.length === 0) return OrderState.CAREGIVER;
+export const calculateOrderState = (requests: BaseMedicationRequest[], order: RequestOrchestration | null) => {
+  if (requests.length === 0) return OrderState.CAREGIVER;
 
-  const isRevoked = order?.status === "revoked" || r.every((v) => v.status === "cancelled");
-  const activeProposals = r.filter((v) => v.intent === "proposal" && v.status === "active");
-  const activeOrders = r.filter((v) => v.intent === "order" && v.status === "active");
+  const isRevoked = order?.status === "revoked" || requests.every((v) => v.status === "cancelled");
+  const activeProposals = requests.filter((v) => v.intent === "proposal" && v.status === "active");
+  const activeOrders = requests.filter((v) => v.intent === "order" && v.status === "active");
 
   if (isRevoked) return OrderState.REVOKED;
   if (activeOrders.length > 0 && activeProposals.length > 0) return OrderState.BOTH;

@@ -1,6 +1,7 @@
 import { UserType, useUserTypeAtom } from "./useUserTypeAtom";
 
 interface PermissionMedicineRequest {
+  resourceType: "MedicationRequest";
   intent: "proposal" | "order";
   status: "active" | any;
 }
@@ -51,6 +52,7 @@ export const usePermissions = () => {
 
   const canPrescribeMedication = (r: PermissionMedicineRequest) => {
     if (![UserType.DOCTOR].includes(userType)) return false;
+    console.log(r);
     return r.intent === "proposal" && r.status === "active";
   };
 

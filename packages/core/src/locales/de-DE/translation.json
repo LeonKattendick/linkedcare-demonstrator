@@ -176,6 +176,10 @@
 			"pharmacy": "Ausgabe"
 		}
 	},
+	"orders": {
+		"date": "Datum",
+		"status": "Status"
+	},
 	"patient": {
 		"medicationPlan": "Medikationsplan",
 		"notFoundSubtitle": "Der Patient mit der ID {{id}} konnte nicht in FHIR gefunden werden",

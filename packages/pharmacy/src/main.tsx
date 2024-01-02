@@ -14,7 +14,10 @@ import { PharmacyOrder } from "./component/page/PharmacyOrder";
 import { PharmacyOrders } from "./component/page/PharmacyOrders";
 import { useSelectedPharmacyAtom } from "./hook/useSelectedPharmacyAtom";
 
-const navElements: HeaderProps["navElements"] = [{ key: "", label: "header.orderOverview" }];
+const navElements: HeaderProps["navElements"] = [
+  { key: "", label: "header.orderOverview" },
+  { key: "order", label: "header.viewOrder", showOnVisit: true },
+];
 
 const App = () => {
   const { t } = useTranslation();

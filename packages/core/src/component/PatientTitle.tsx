@@ -44,12 +44,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
             <Space size="middle">
               <div style={{ fontSize: 22, fontWeight: "bold" }}>{props.patient.name[0]?.text}</div>
               {props.hideMedicationPlanButton ? (
-                <Button
-                  type="primary"
-                  onClick={() => navigate(`/patient/${props.patient.id}`)}
-                  icon={<CaretLeftOutlined />}
-                  size="small"
-                >
+                <Button type="primary" onClick={() => history.back()} icon={<CaretLeftOutlined />} size="small">
                   {t("translation:general.back")}
                 </Button>
               ) : (
