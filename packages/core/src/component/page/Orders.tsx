@@ -1,8 +1,9 @@
 import { EyeOutlined } from "@ant-design/icons";
-import { Button, Card, Table } from "antd";
+import { Button, Card, Table, Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { useGetAllValidMedicationRequests } from "../../hook/filter/useGetAllValidMedicationRequests";
 import { useGetAllPatients } from "../../hook/query/useGetAllPatients";
 import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
@@ -21,9 +22,10 @@ interface OrderWithRequests {
 interface OrdersProps {
   orders: RequestOrchestration[];
   isOrdersLoading: boolean;
+  showClickablePatient?: boolean;
 }
 
-export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
+export const Orders = ({ orders, isOrdersLoading, showClickablePatient }: OrdersProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -65,7 +67,15 @@ export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
         />
         <Table.Column
           title={t("translation:orders.patient")}
-          render={(_, record: OrderWithRequests) => record.patient?.name[0].text}
+          render={(_, record: OrderWithRequests) =>
+            showClickablePatient ? (
+              <Tooltip title={t("translation:orders.tooltipViewPatient")}>
+                <Link to={`/patient/${record.patient?.id}`}>{record.patient?.name[0]?.text}</Link>
+              </Tooltip>
+            ) : (
+              record.patient?.name[0].text
+            )
+          }
           sorter={(a, b) => a.order.status.localeCompare(b.order.status)}
         />
         <Table.Column
@@ -86,12 +96,14 @@ export const Orders = ({ orders, isOrdersLoading }: OrdersProps) => {
         <Table.Column
           title={t("translation:general.actions")}
           render={(_, record: OrderWithRequests) => (
-            <Button
-              type="primary"
-              icon={<EyeOutlined />}
-              size="small"
-              onClick={() => navigate(`/order/${record.patient?.id}/${record.order.id}`)}
-            />
+            <Tooltip title={t("translation:orders.tooltipView")}>
+              <Button
+                type="primary"
+                icon={<EyeOutlined />}
+                size="small"
+                onClick={() => navigate(`/order/${record.patient?.id}/${record.order.id}`)}
+              />
+            </Tooltip>
           )}
         />
       </Table>

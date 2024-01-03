@@ -1,5 +1,5 @@
 import { EyeOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { Button, Table, Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -43,12 +43,14 @@ export const OrderTable = ({ patient, orders, isOrdersLoading }: OrderTableProps
       <Table.Column
         title={t("translation:general.actions")}
         render={(_, record: RequestOrchestration) => (
-          <Button
-            type="primary"
-            icon={<EyeOutlined />}
-            size="small"
-            onClick={() => navigate(`/order/${patient.id}/${record.id}`)}
-          />
+          <Tooltip title={t("translation:viewPatient.orders.tooltipView")}>
+            <Button
+              type="primary"
+              icon={<EyeOutlined />}
+              size="small"
+              onClick={() => navigate(`/order/${patient.id}/${record.id}`)}
+            />
+          </Tooltip>
         )}
       />
     </Table>

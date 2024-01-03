@@ -182,7 +182,9 @@
 		"date": "Datum",
 		"gender": "Geschlecht",
 		"patient": "Patient",
-		"status": "Status"
+		"status": "Status",
+		"tooltipView": "Bestellung einsehen",
+		"tooltipViewPatient": "Patient einsehen"
 	},
 	"patient": {
 		"medicationPlan": "Medikationsplan",
@@ -210,7 +212,8 @@
 			"completedTitle": "Abgeschlossene Bestellungen",
 			"date": "Datum",
 			"status": "Status",
-			"title": "Offene Bestellungen"
+			"title": "Offene Bestellungen",
+			"tooltipView": "Bestellung einsehen"
 		},
 		"patientInfo": {
 			"address": "Adresse",

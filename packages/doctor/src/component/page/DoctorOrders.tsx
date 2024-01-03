@@ -4,5 +4,5 @@ import { useGetRelevantRequestOrchestrations } from "../../hook/useGetRelevantRe
 export const DoctorOrders = () => {
   const { orchestrations, isOrchestrationsLoading } = useGetRelevantRequestOrchestrations();
 
-  return <Orders orders={orchestrations} isOrdersLoading={isOrchestrationsLoading} />;
+  return <Orders orders={orchestrations} isOrdersLoading={isOrchestrationsLoading} showClickablePatient />;
 };

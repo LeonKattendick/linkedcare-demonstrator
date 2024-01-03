@@ -182,7 +182,9 @@
 		"date": "Date",
 		"gender": "Gender",
 		"patient": "Patient",
-		"status": "Status"
+		"status": "Status",
+		"tooltipView": "View order",
+		"tooltipViewPatient": "View patient"
 	},
 	"patient": {
 		"medicationPlan": "Medication plan",
@@ -210,7 +212,8 @@
 			"completedTitle": "Completed orders",
 			"date": "Date",
 			"status": "Status",
-			"title": "Open orders"
+			"title": "Open orders",
+			"tooltipView": "View order"
 		},
 		"patientInfo": {
 			"address": "Address",
