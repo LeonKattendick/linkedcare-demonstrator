@@ -22,6 +22,7 @@ import { ExternalReference } from "../../../interface/linca/fhir/Reference";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationModal, MedicationModalState } from "./MedicationModal";
+import { PrescribeModal } from "./PrescribeModal";
 
 interface MedicationTableProps {
   patient: Patient;
@@ -46,6 +47,9 @@ export const MedicationTable = (props: MedicationTableProps) => {
 
   const [declineRequestIndex, setDeclineRequestIndex] = useState<number>();
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
+
+  const [prescribeRequestIndex, setPrescribeRequestIndex] = useState<number>();
+  const [prescribeModalOpen, setPrescribeModalOpen] = useState(false);
 
   const handleCreate = () => {
     setEditRequestIndex(MedicationModalState.CREATE);
@@ -72,8 +76,8 @@ export const MedicationTable = (props: MedicationTableProps) => {
   };
 
   const handlePrescribe = async (index: number) => {
-    await requestApi.prescribeRequestWithInfo(props.requests[index]);
-    invalidateAllMedicationRequests();
+    setPrescribeRequestIndex(index);
+    setPrescribeModalOpen(true);
   };
 
   const handleComplete = async (index: number) => {
@@ -125,6 +129,11 @@ export const MedicationTable = (props: MedicationTableProps) => {
         open={declineModalOpen}
         setOpen={setDeclineModalOpen}
         requests={props.requests.filter((_, i) => i === declineRequestIndex)}
+      />
+      <PrescribeModal
+        open={prescribeModalOpen}
+        setOpen={setPrescribeModalOpen}
+        requests={props.requests.filter((_, i) => i === prescribeRequestIndex)}
       />
       <Table
         dataSource={props.requests}

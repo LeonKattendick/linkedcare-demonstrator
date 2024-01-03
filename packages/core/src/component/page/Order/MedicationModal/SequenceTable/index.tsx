@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import dosageData from "../../../../../data/dosage.json";
 import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
+import { createNewDosage } from "../../../../../util/orderUtil";
 import { BoundsColumn } from "./BoundsColumn";
 import { DoseColumn } from "./DoseColumn";
 import { DoseRateColumn } from "./DoseRateColumn";
@@ -34,30 +35,7 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
   }, [sequences]);
 
   const handleAdd = () => {
-    setSequences([
-      ...sequences,
-      {
-        sequence: sequences.length + 1,
-        text: "",
-        timing: {
-          repeat: { boundsDuration: { value: 1, code: "mo" }, frequency: 1, period: 1, periodUnit: "d", dayOfWeek: [] },
-        },
-        doseAndRate: [
-          {
-            type: {
-              coding: [
-                { system: "http://terminology.hl7.org/CodeSystem/dose-rate-type", code: "ordered", display: "Ordered" },
-              ],
-            },
-            doseQuantity: {
-              system: "https://termgit.elga.gv.at/ValueSet/elga-medikationdarreichungsform",
-              value: 1,
-              code: dosageData[0].code,
-            },
-          },
-        ],
-      },
-    ]);
+    setSequences([...sequences, createNewDosage(sequences.length + 1, dosageData[0].code)]);
   };
 
   const handleDelete = (index: number) => {

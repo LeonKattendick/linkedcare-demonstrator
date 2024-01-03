@@ -166,6 +166,12 @@
 			"errorMedication": "Medikation {{name}} konnte nicht verschrieben werden",
 			"successMedication": "Medikation {{name}} mit der ID {{id}} verschrieben"
 		},
+		"prescribeModal": {
+			"med": "eMedID eingeben (optional)",
+			"ok": "Verschreiben",
+			"recipe": "eRezeptID eingeben (optional)",
+			"title": "Medikation verschreiben"
+		},
 		"revoke": {
 			"error": "Die Bestellung {{id}} konnte nicht widerrufen werden",
 			"success": "Die Bestellung {{id}} wurde widerrufen"

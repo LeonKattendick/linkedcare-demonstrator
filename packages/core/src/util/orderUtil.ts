@@ -3,6 +3,7 @@ import { Patient } from "../interface/linca/Patient";
 import { PrescriptionMedicationRequest } from "../interface/linca/PrescriptionMedicationRequest";
 import { ProposalMedicationRequest } from "../interface/linca/ProposalMedicationRequest";
 import { RequestOrchestration } from "../interface/linca/RequestOrchestration";
+import { Dosage } from "../interface/linca/fhir/Dosage";
 import { Organization } from "../interface/linca/fhir/Organization";
 import { Practitioner } from "../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../interface/linca/fhir/Reference";
@@ -70,5 +71,29 @@ export const createMedicationDispense = (
       coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: isPartial ? "FFP" : "FFC" }],
     },
     dosageInstruction: r.dosageInstruction,
+  });
+};
+
+export const createNewDosage = (sequence: number, code: string): Dosage => {
+  return structuredClone({
+    sequence,
+    text: "",
+    timing: {
+      repeat: { boundsDuration: { value: 1, code: "mo" }, frequency: 1, period: 1, periodUnit: "d", dayOfWeek: [] },
+    },
+    doseAndRate: [
+      {
+        type: {
+          coding: [
+            { system: "http://terminology.hl7.org/CodeSystem/dose-rate-type", code: "ordered", display: "Ordered" },
+          ],
+        },
+        doseQuantity: {
+          system: "https://termgit.elga.gv.at/ValueSet/elga-medikationdarreichungsform",
+          value: 1,
+          code,
+        },
+      },
+    ],
   });
 };

@@ -166,6 +166,12 @@
 			"errorMedication": "Medication {{name}} could not be prescribed",
 			"successMedication": "Medication {{name}} prescribed with ID {{id}} "
 		},
+		"prescribeModal": {
+			"med": "Enter eMedID (optional)",
+			"ok": "Prescribe",
+			"recipe": "Enter eRezeptID (optional)",
+			"title": "Prescribe medication"
+		},
 		"revoke": {
 			"error": "The order {{id}} could not be revoked",
 			"success": "The order {{id}} has been revoked"

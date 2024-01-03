@@ -15,6 +15,7 @@ import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { medicationRequestsEqual } from "../../../util/matchingUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationTable } from "./MedicationTable";
+import { PrescribeModal } from "./PrescribeModal";
 
 interface EditOrderProps {
   patient: Patient;
@@ -37,11 +38,12 @@ export const EditOrder = (props: EditOrderProps) => {
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
+  const [prescribeModalOpen, setPrescribeModalOpen] = useState(false);
 
   const changedRequests = editRequests.filter((v, i) => !medicationRequestsEqual(v, props.requests[i]));
   const declineRequests = editRequests.filter((v) => !!v.id);
+  const prescribeRequests = editRequests.filter(perms.canPrescribeMedication);
 
-  const prescribeAmount = editRequests.filter(perms.canPrescribeMedication).length;
   const completeAmount = editRequests.filter(perms.canCompleteMedication).length;
   const declineAmount = editRequests.filter(perms.canDeclineMedication).length;
 
@@ -60,11 +62,8 @@ export const EditOrder = (props: EditOrderProps) => {
     invalidateAllMedicationRequests();
   };
 
-  const handlePrescribe = async () => {
-    for (const request of editRequests) {
-      if (perms.canPrescribeMedication(request)) await requestApi.prescribeRequestWithInfo(request);
-    }
-    invalidateAllMedicationRequests();
+  const handlePrescribe = () => {
+    setPrescribeModalOpen(true);
   };
 
   const handleComplete = async () => {
@@ -96,6 +95,7 @@ export const EditOrder = (props: EditOrderProps) => {
   return (
     <>
       <DeclineStatusModal open={declineModalOpen} setOpen={setDeclineModalOpen} requests={declineRequests} />
+      <PrescribeModal open={prescribeModalOpen} setOpen={setPrescribeModalOpen} requests={prescribeRequests} />
       <Space style={{ width: "100%" }} direction="vertical" size="middle">
         <MedicationTable
           requests={editRequests}
@@ -114,14 +114,14 @@ export const EditOrder = (props: EditOrderProps) => {
           )}
           {perms.canPrescribeOrder(editRequests) && (
             <Popconfirm
-              title={t("translation:order.buttonRow.popconfirm.prescribe", { amount: prescribeAmount })}
+              title={t("translation:order.buttonRow.popconfirm.prescribe", { amount: prescribeRequests.length })}
               onConfirm={handlePrescribe}
               okText={t("translation:general.yes")}
               arrow={{ pointAtCenter: true }}
             >
               <Button type="primary" icon={<CheckOutlined />}>
                 {t("translation:order.buttonRow.prescribe", {
-                  amount: prescribeAmount,
+                  amount: prescribeRequests.length,
                 })}
               </Button>
             </Popconfirm>
