@@ -2,7 +2,7 @@ import { InputNumber, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { SequenceTableColumnProps } from ".";
 
-export const BoundsColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
+export const BoundsColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const { t } = useTranslation();
 
   const handleChangeNumber = (value: number | null) => {
@@ -35,6 +35,12 @@ export const BoundsColumn = ({ dosage, handleChangeSequence }: SequenceTableColu
       },
     });
   };
+
+  if (isReadOnly) {
+    return `${dosage.timing?.repeat.boundsDuration.value} ${t(
+      `translation:general.time.${dosage.timing?.repeat.boundsDuration.code}`
+    )}`;
+  }
 
   return (
     <InputNumber

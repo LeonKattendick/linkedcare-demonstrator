@@ -20,7 +20,7 @@
 	"editOrder": {
 		"title": "Bestellung bearbeiten"
 	},
-	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> ©2023 FH Technikum Wien",
+	"footer": "Demonstrator für <LinkedCare>Linked Care</LinkedCare> © 2024 FH Technikum Wien",
 	"general": {
 		"actions": "Aktionen",
 		"back": "Zurück",
@@ -43,11 +43,11 @@
 			"wed": "Mi"
 		},
 		"time": {
-			"a": "Jahr",
-			"d": "Tag",
-			"h": "Stunde",
-			"mo": "Monat",
-			"wk": "Woche"
+			"a": "Jahre",
+			"d": "Tage",
+			"h": "Stunden",
+			"mo": "Monate",
+			"wk": "Wochen"
 		},
 		"weekDays": {
 			"fri": "Freitag",

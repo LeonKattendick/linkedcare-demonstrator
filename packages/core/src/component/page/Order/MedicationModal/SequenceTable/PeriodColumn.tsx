@@ -2,7 +2,7 @@ import { InputNumber, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { SequenceTableColumnProps } from ".";
 
-export const PeriodColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
+export const PeriodColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const { t } = useTranslation();
 
   const handleChangeNumber = (value: number | null) => {
@@ -29,6 +29,10 @@ export const PeriodColumn = ({ dosage, handleChangeSequence }: SequenceTableColu
       },
     });
   };
+
+  if (isReadOnly) {
+    return `${dosage.timing?.repeat.period} ${t(`translation:general.time.${dosage.timing?.repeat.periodUnit}`)}`;
+  }
 
   return (
     <InputNumber

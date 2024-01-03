@@ -15,16 +15,10 @@ import { WeekDayColumn } from "./WeekDayColumn";
 export interface SequenceTableColumnProps {
   dosage: Dosage;
   handleChangeSequence: (d: Dosage) => void;
+  isReadOnly: boolean;
 }
 
-const calculateFreeSequence = (numbers: number[]) => {
-  let i = 0;
-  while (++i) {
-    if (!numbers.includes(i)) return i;
-  }
-};
-
-export const SequenceTable = ({ form }: { form: FormInstance }) => {
+export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isReadOnly: boolean }) => {
   const { t } = useTranslation();
 
   const [sequences, setSequences] = useState<Dosage[]>([]);
@@ -43,7 +37,7 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
     setSequences([
       ...sequences,
       {
-        sequence: calculateFreeSequence(sequences.map((v) => v.sequence!)),
+        sequence: sequences.length + 1,
         text: "",
         timing: {
           repeat: { boundsDuration: { value: 1, code: "mo" }, frequency: 1, period: 1, periodUnit: "d", dayOfWeek: [] },
@@ -68,7 +62,7 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
 
   const handleDelete = (index: number) => {
     const temp = [...sequences];
-    setSequences(temp.filter((_, i) => i !== index));
+    setSequences(temp.filter((_, i) => i !== index).map((v, i) => ({ ...v, sequence: i + 1 })));
   };
 
   const createHandleChangeSequence = (index: number) => {
@@ -111,57 +105,93 @@ export const SequenceTable = ({ form }: { form: FormInstance }) => {
           title={t("translation:order.medicationTable.modal.table.bounds")}
           width="13%"
           render={(_, record: Dosage, index) => (
-            <BoundsColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <BoundsColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.frequency")}
           width="7%"
           render={(_, record: Dosage, index) => (
-            <FrequencyColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <FrequencyColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.period")}
           width="13%"
           render={(_, record: Dosage, index) => (
-            <PeriodColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <PeriodColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.weekDays")}
           width="20%"
           render={(_, record: Dosage, index) => (
-            <WeekDayColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <WeekDayColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.dose")}
           width="7%"
           render={(_, record: Dosage, index) => (
-            <DoseColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <DoseColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.doseType")}
           render={(_, record: Dosage, index) => (
-            <DoseTypeColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <DoseTypeColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
         <Table.Column
           title={t("translation:order.medicationTable.modal.table.doseRate")}
           width="12%"
           render={(_, record: Dosage, index) => (
-            <DoseRateColumn dosage={record} handleChangeSequence={createHandleChangeSequence(index)} />
+            <DoseRateColumn
+              dosage={record}
+              handleChangeSequence={createHandleChangeSequence(index)}
+              isReadOnly={isReadOnly}
+            />
           )}
         />
-        <Table.Column
-          title={t("translation:general.actions")}
-          width="7%"
-          render={(_, _record: Dosage, index) => (
-            <Button type="primary" danger icon={<DeleteOutlined />} size="small" onClick={() => handleDelete(index)} />
-          )}
-        />
+        {!isReadOnly && (
+          <Table.Column
+            title={t("translation:general.actions")}
+            width="7%"
+            render={(_, _record: Dosage, index) => (
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                size="small"
+                onClick={() => handleDelete(index)}
+              />
+            )}
+          />
+        )}
       </Table>
     </Form.Item>
   );

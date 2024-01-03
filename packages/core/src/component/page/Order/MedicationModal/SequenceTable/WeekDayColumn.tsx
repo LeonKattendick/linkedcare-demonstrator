@@ -4,7 +4,7 @@ import { SequenceTableColumnProps } from ".";
 
 const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
-export const WeekDayColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
+export const WeekDayColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const { t } = useTranslation();
 
   const handleChange = (value: ("mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun")[]) => {
@@ -18,6 +18,10 @@ export const WeekDayColumn = ({ dosage, handleChangeSequence }: SequenceTableCol
       },
     });
   };
+
+  if (isReadOnly) {
+    return dosage.timing?.repeat.dayOfWeek?.map((v) => t(`translation:general.shortWeekDays.${v}`)).join(", ");
+  }
 
   return (
     <Select

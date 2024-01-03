@@ -6,7 +6,7 @@ const compare = (input: string, label: string) => {
   return input.split(" ").filter((v) => !label.includes(v)).length === 0;
 };
 
-export const DoseTypeColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
+export const DoseTypeColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const handleChange = (code: string) => {
     handleChangeSequence({
       ...dosage,
@@ -21,6 +21,8 @@ export const DoseTypeColumn = ({ dosage, handleChangeSequence }: SequenceTableCo
       ],
     });
   };
+
+  if (isReadOnly) return dosageData.find((v) => v.code === dosage.doseAndRate?.[0].doseQuantity.code)?.display;
 
   return (
     <Select

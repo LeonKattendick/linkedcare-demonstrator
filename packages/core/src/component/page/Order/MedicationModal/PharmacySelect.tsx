@@ -2,7 +2,7 @@ import { Form, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { pharmacyModels } from "../../../../model/pharmacyModels";
 
-export const PharmacySelect = () => {
+export const PharmacySelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();
 
   return (
@@ -19,6 +19,7 @@ export const PharmacySelect = () => {
           label: v.name,
         }))}
         allowClear
+        disabled={isReadOnly}
       />
     </Form.Item>
   );

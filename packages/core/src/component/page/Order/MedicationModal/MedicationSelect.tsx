@@ -6,7 +6,7 @@ const compare = (input: string, label: string) => {
   return input.split(" ").filter((v) => !label.includes(v)).length === 0;
 };
 
-export const MedicationSelect = () => {
+export const MedicationSelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();
 
   return (
@@ -25,6 +25,7 @@ export const MedicationSelect = () => {
         }))}
         showSearch
         filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
+        disabled={isReadOnly}
       />
     </Form.Item>
   );

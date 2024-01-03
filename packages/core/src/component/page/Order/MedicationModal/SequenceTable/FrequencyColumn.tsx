@@ -1,7 +1,7 @@
 import { InputNumber } from "antd";
 import { SequenceTableColumnProps } from ".";
 
-export const FrequencyColumn = ({ dosage, handleChangeSequence }: SequenceTableColumnProps) => {
+export const FrequencyColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const handleChange = (value: number | null) => {
     if (!value) return;
     handleChangeSequence({
@@ -14,6 +14,8 @@ export const FrequencyColumn = ({ dosage, handleChangeSequence }: SequenceTableC
       },
     });
   };
+
+  if (isReadOnly) return dosage.timing?.repeat.frequency;
 
   return (
     <InputNumber

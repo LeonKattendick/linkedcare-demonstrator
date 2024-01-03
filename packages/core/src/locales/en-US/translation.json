@@ -20,7 +20,7 @@
 	"editOrder": {
 		"title": "Edit order"
 	},
-	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> ©2023 UAS Technikum Wien",
+	"footer": "Demonstrator for <LinkedCare>Linked Care</LinkedCare> © 2024 UAS Technikum Wien",
 	"general": {
 		"actions": "Actions",
 		"back": "Back",
@@ -43,11 +43,11 @@
 			"wed": "Wed"
 		},
 		"time": {
-			"a": "Year",
-			"d": "Day",
-			"h": "Hour",
-			"mo": "Month",
-			"wk": "Week"
+			"a": "Years",
+			"d": "Days",
+			"h": "Hours",
+			"mo": "Months",
+			"wk": "Weeks"
 		},
 		"weekDays": {
 			"fri": "Friday",

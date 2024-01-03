@@ -133,11 +133,11 @@ export const MedicationModal = (props: MedicationModalProps) => {
       )}
       <Form form={form}>
         <Divider orientation="left">{t("translation:order.medicationTable.modal.responsibleDivider")}</Divider>
-        <DoctorSelect />
-        <PharmacySelect />
+        <DoctorSelect isReadOnly={props.state === MedicationModalState.VIEW} />
+        <PharmacySelect isReadOnly={props.state === MedicationModalState.VIEW} />
         <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
-        <MedicationSelect />
-        <SequenceTable form={form} />
+        <MedicationSelect isReadOnly={props.state === MedicationModalState.VIEW} />
+        <SequenceTable form={form} isReadOnly={props.state === MedicationModalState.VIEW} />
       </Form>
     </Modal>
   );

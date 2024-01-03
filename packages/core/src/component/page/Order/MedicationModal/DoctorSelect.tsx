@@ -2,7 +2,7 @@ import { Form, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { doctorModels } from "../../../../model/doctorModels";
 
-export const DoctorSelect = () => {
+export const DoctorSelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();
 
   return (
@@ -19,6 +19,7 @@ export const DoctorSelect = () => {
           value: v.identifier[0].value,
           label: v.name[0].text,
         }))}
+        disabled={isReadOnly}
       />
     </Form.Item>
   );
