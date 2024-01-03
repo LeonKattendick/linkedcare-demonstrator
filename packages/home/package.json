@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --strictPort --open",
-    "build": "vite build  --base=/home/ --outDir=../../dist/home/ --emptyOutDir",
+    "build": "vite build --outDir=../../dist/home/ --emptyOutDir",
     "preview": "vite preview"
   },
   "devDependencies": {
