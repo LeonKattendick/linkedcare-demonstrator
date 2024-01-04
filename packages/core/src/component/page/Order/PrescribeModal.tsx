@@ -3,8 +3,8 @@ import { Input, Modal, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
+import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { ModalProps } from "../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 
@@ -17,7 +17,7 @@ export const PrescribeModal = (props: PrescribeModalProps) => {
   const perms = usePermissions();
   const requestApi = useMedicationRequestApiAdapter();
 
-  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useQueryInvalidations();
 
   const [rezeptId, setRezeptId] = useState("");
   const [medId, setMedId] = useState("");

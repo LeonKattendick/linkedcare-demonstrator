@@ -5,9 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
 import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
-import { useGetAllMedicationDispensesByPatient } from "../../../hook/query/useGetAllMedicationDispensesByPatient";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
+import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
@@ -35,9 +34,8 @@ export const EditOrder = (props: EditOrderProps) => {
 
   const { revokeOrchestrationWithInfo, completeOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const requestApi = useMedicationRequestApiAdapter();
+  const { invalidateAllMedicationRequests, invalidateAllMedicationDispenses } = useQueryInvalidations();
 
-  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
-  const { invalidateAllMedicationDispenses } = useGetAllMedicationDispensesByPatient();
   const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);

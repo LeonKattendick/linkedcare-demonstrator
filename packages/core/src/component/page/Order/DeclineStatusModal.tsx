@@ -3,7 +3,7 @@ import { Modal, Select } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
+import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { ModalProps } from "../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 
@@ -14,7 +14,7 @@ interface DeclineStatusModalProps extends ModalProps {
 export const DeclineStatusModal = (props: DeclineStatusModalProps) => {
   const { t } = useTranslation();
   const requestApi = useMedicationRequestApiAdapter();
-  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useQueryInvalidations();
 
   const [reason, setReason] = useState<"ended" | "stopped" | "entered-in-error">();
 

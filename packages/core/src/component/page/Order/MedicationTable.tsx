@@ -11,9 +11,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
-import { useGetAllMedicationDispensesByPatient } from "../../../hook/query/useGetAllMedicationDispensesByPatient";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
+import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
@@ -43,8 +42,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const { userType } = useUserTypeAtom();
   const requestApi = useMedicationRequestApiAdapter();
 
-  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
-  const { invalidateAllMedicationDispenses } = useGetAllMedicationDispensesByPatient();
+  const { invalidateAllMedicationRequests, invalidateAllMedicationDispenses } = useQueryInvalidations();
   const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
 
   const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);

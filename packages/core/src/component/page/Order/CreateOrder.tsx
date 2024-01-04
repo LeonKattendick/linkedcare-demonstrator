@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
-import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
+import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { Organization } from "../../../interface/linca/fhir/Organization";
@@ -21,7 +21,7 @@ export const CreateOrder = (props: CreateOrderProps) => {
   const navigate = useNavigate();
   const { createOrchestrationWithInfo } = useRequestOrchestrationApiAdapter();
   const { createRequestWithInfo } = useMedicationRequestApiAdapter();
-  const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationRequests } = useQueryInvalidations();
 
   const [requests, setRequests] = useState<BaseMedicationRequest[]>([]);
 

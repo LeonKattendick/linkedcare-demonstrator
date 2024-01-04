@@ -1,9 +1,7 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getAllMedicationRequestsByPatient } from "../../service/medicatonRequestService";
 
 export const useGetAllMedicationRequestsByPatient = (patientId?: string) => {
-  const client = useQueryClient();
-
   const { data, isLoading } = useQuery(
     ["useGetAllMedicationRequestsByPatient", patientId],
     () => getAllMedicationRequestsByPatient(patientId as string),
@@ -12,10 +10,5 @@ export const useGetAllMedicationRequestsByPatient = (patientId?: string) => {
     }
   );
 
-  const invalidateAllMedicationRequests = () => {
-    client.invalidateQueries("useGetAllMedicationRequests");
-    client.invalidateQueries({ predicate: (query) => query.queryKey[0] === "useGetAllMedicationRequestsByPatient" });
-  };
-
-  return { requests: data ?? [], isRequestsLoading: isLoading, invalidateAllMedicationRequests };
+  return { requests: data ?? [], isRequestsLoading: isLoading };
 };
