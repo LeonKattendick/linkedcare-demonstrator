@@ -157,6 +157,16 @@
 				"complete": "Wollen Sie die Ausgabe der Medikation abschließen?",
 				"decline": "Wollen Sie die Medikation stornieren?"
 			},
+			"state": {
+				"active": "Aktiv",
+				"cancelled": "Abgebrochen",
+				"completed": "Abgeschlossen",
+				"ended": "Einnahme beenden",
+				"entered-in-error": "Falsch eingegeben",
+				"order": "Verschrieben",
+				"proposal": "Bestellt",
+				"stopped": "Sofort beenden"
+			},
 			"status": "Status",
 			"title": "Medikation"
 		},

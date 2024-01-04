@@ -157,6 +157,16 @@
 				"complete": "Do you want to complete dispensing the medication?",
 				"decline": "Do you want to cancel the medication?"
 			},
+			"state": {
+				"active": "Active",
+				"cancelled": "Cancelled",
+				"completed": "Completed",
+				"ended": "Ended",
+				"entered-in-error": "Entered in error",
+				"order": "Prescribed",
+				"proposal": "Ordered",
+				"stopped": "Stopped"
+			},
 			"status": "Status",
 			"title": "Medication"
 		},

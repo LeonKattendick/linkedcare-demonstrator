@@ -6,7 +6,7 @@ import {
   MedicineBoxOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { Button, Popconfirm, Space, Table } from "antd";
+import { Button, Popconfirm, Space, Table, Tooltip } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
@@ -178,12 +178,13 @@ export const MedicationTable = (props: MedicationTableProps) => {
           title={t("translation:order.medicationTable.status")}
           render={(_, record: BaseMedicationRequest) => {
             const dispense = dispenses.find((v) => isAuthorizingPrescription(v, record));
-            if (dispense) return dispense.status;
+            if (dispense) return t(`translation:order.medicationTable.state.${dispense.status}`);
 
             return (
-              <>
-                {record.status} ({record.intent})
-              </>
+              <Tooltip title={`FHIR Status: ${record.status} (${record.intent})`}>
+                {t(`translation:order.medicationTable.state.${record.status}`)} (
+                {t(`translation:order.medicationTable.state.${record.intent}`)})
+              </Tooltip>
             );
           }}
           sorter={(a, b) => `${a.status} (${a.intent})`.localeCompare(`${b.status} (${b.intent})`)}
