@@ -23,13 +23,20 @@ const caregiverSteps = {
   DOCTOR: "finish",
   BOTH: "finish",
   PHARMACY: "finish",
+  WAIT_FOR_COMPLETED: "finish",
   COMPLETED: "finish",
   REVOKED: "error",
 };
 
-const doctorSteps = { DOCTOR: "process", BOTH: "finish", PHARMACY: "finish", COMPLETED: "finish" };
+const doctorSteps = {
+  DOCTOR: "process",
+  BOTH: "finish",
+  PHARMACY: "finish",
+  WAIT_FOR_COMPLETED: "finish",
+  COMPLETED: "finish",
+};
 
-const pharmacySteps = { BOTH: "process", PHARMACY: "process", COMPLETED: "finish" };
+const pharmacySteps = { BOTH: "process", PHARMACY: "process", WAIT_FOR_COMPLETED: "finish", COMPLETED: "finish" };
 
 export const PatientTitle = (props: PatientTitleProps) => {
   const { t } = useTranslation();
@@ -67,7 +74,11 @@ export const PatientTitle = (props: PatientTitleProps) => {
                 {
                   title: t("translation:order.steps.caregiver"),
                   status: caregiverSteps[props.orderState],
-                  icon: props.orderState === OrderState.CAREGIVER ? <LoadingOutlined /> : <UserOutlined />,
+                  icon: [OrderState.CAREGIVER, OrderState.WAIT_FOR_COMPLETED].includes(props.orderState) ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <UserOutlined />
+                  ),
                 },
                 {
                   title: t("translation:order.steps.doctor"),

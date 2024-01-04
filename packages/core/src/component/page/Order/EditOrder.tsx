@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
-import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
 import { usePermissions } from "../../../hook/usePermissions";
 import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
+import { MedicationDispense } from "../../../interface/linca/MedicationDispense";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
@@ -22,6 +22,7 @@ interface EditOrderProps {
   patient: Patient;
   order: RequestOrchestration;
   requests: BaseMedicationRequest[];
+  dispenses: MedicationDispense[];
   caregiver?: Organization;
   doctor?: Practitioner;
   pharmacy?: Organization;
@@ -36,8 +37,6 @@ export const EditOrder = (props: EditOrderProps) => {
   const requestApi = useMedicationRequestApiAdapter();
   const { invalidateAllMedicationRequests, invalidateAllMedicationDispenses } = useQueryInvalidations();
 
-  const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
-
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
   const [prescribeModalOpen, setPrescribeModalOpen] = useState(false);
@@ -46,7 +45,7 @@ export const EditOrder = (props: EditOrderProps) => {
   const declineRequests = editRequests.filter((v) => !!v.id);
   const prescribeRequests = editRequests.filter(perms.canPrescribeMedication);
 
-  const completeAmount = editRequests.filter((v) => perms.canCompleteMedication(v, dispenses)).length;
+  const completeAmount = editRequests.filter((v) => perms.canCompleteMedication(v, props.dispenses)).length;
   const declineAmount = editRequests.filter(perms.canDeclineMedication).length;
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export const EditOrder = (props: EditOrderProps) => {
 
   const handleComplete = async () => {
     for (const request of editRequests) {
-      if (!perms.canCompleteMedication(request, dispenses)) continue;
+      if (!perms.canCompleteMedication(request, props.dispenses)) continue;
       await requestApi.completeRequestWithInfo(request, props.pharmacy!);
     }
     invalidateAllMedicationDispenses();
@@ -122,11 +121,12 @@ export const EditOrder = (props: EditOrderProps) => {
               })}
             </Button>
           )}
-          {perms.canCompleteOrder(editRequests, dispenses) && (
+          {perms.canCompleteOrder(editRequests, props.dispenses) && (
             <Popconfirm
               title={t("translation:order.buttonRow.popconfirm.complete", { amount: completeAmount })}
               onConfirm={handleComplete}
               okText={t("translation:general.yes")}
+              placement="topRight"
               arrow={{ pointAtCenter: true }}
             >
               <Button type="primary" icon={<CheckOutlined />}>
@@ -162,7 +162,7 @@ export const EditOrder = (props: EditOrderProps) => {
               {t("translation:order.buttonRow.revoke")}
             </Button>
           )}
-          {perms.canBeClosed(editRequests, dispenses) && props.order.status !== "completed" && (
+          {perms.canBeClosed(editRequests, props.dispenses) && props.order.status !== "completed" && (
             <Button type="primary" onClick={handleClose}>
               {t("translation:order.buttonRow.close")}
             </Button>

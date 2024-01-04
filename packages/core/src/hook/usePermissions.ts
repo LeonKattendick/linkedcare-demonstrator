@@ -37,13 +37,14 @@ export const usePermissions = () => {
   };
 
   const canBeRevoked = (r: PermissionMedicineRequest[]) => {
+    if (![UserType.CAREGIVER].includes(userType)) return false;
     return !!r.every((v) => v.status === "cancelled");
   };
 
   // can be closed as soon as all requests have reached a terminal state
   const canBeClosed = (r: PermissionMedicineRequest[], d: MedicationDispense[]) => {
-    //TODO -> rest has dispense connected
-    return !canBeRevoked(r) && !r.some((v) => canPrescribeMedication(v) || canCompleteMedication(v, d));
+    if (![UserType.CAREGIVER].includes(userType)) return false;
+    return !canBeRevoked(r) && !r.some((v) => v.status === "active" && !d.find((w) => isAuthorizingPrescription(w, v)));
   };
 
   const canEditMedication = (r: PermissionMedicineRequest) => {

@@ -1,6 +1,7 @@
 import { Card, Flex } from "antd";
 import { PatientTitle } from "core/src/component/PatientTitle";
 import { useTranslation } from "react-i18next";
+import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
@@ -22,6 +23,8 @@ interface OrderProps {
 export const Order = (props: OrderProps) => {
   const { t } = useTranslation();
 
+  const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
+
   const isNew = !props.order;
   return (
     <Flex gap={16} vertical style={{ height: "100%" }}>
@@ -29,7 +32,7 @@ export const Order = (props: OrderProps) => {
         patient={props.patient}
         hideMedicationPlanButton
         title={isNew ? t("translation:createOrder.title") : t("translation:editOrder.title")}
-        orderState={calculateOrderState(props.requests, props.order)}
+        orderState={calculateOrderState(props.requests, dispenses, props.order)}
       />
       <Card style={{ height: "100%" }}>
         {isNew ? (
@@ -39,6 +42,7 @@ export const Order = (props: OrderProps) => {
             patient={props.patient}
             order={props.order!}
             requests={props.requests}
+            dispenses={dispenses}
             caregiver={props.caregiver}
             doctor={props.doctor}
             pharmacy={props.pharmacy}
