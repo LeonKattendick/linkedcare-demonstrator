@@ -55,7 +55,7 @@ export const createNewProposalMedicationRequest = (
   });
 };
 
-export const createMedicationDispense = (
+export const createNewMedicationDispense = (
   r: PrescriptionMedicationRequest,
   pharmacy: Organization,
   isPartial?: boolean
@@ -66,7 +66,7 @@ export const createMedicationDispense = (
     medication: r.medication,
     subject: r.subject,
     performer: [{ actor: { identifier: pharmacy.identifier[0], display: pharmacy.name } }],
-    authorizingPrescription: { reference: `MedicationRequest/${r.id}` },
+    authorizingPrescription: [{ reference: `MedicationRequest/${r.id}` }],
     type: {
       coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: isPartial ? "FFP" : "FFC" }],
     },

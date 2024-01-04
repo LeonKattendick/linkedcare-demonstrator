@@ -10,6 +10,8 @@ import { Button, Popconfirm, Space, Table } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
+import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
+import { useGetAllMedicationDispensesByPatient } from "../../../hook/query/useGetAllMedicationDispensesByPatient";
 import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
@@ -39,7 +41,10 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const perms = usePermissions();
   const { userType } = useUserTypeAtom();
   const requestApi = useMedicationRequestApiAdapter();
+
   const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationDispenses } = useGetAllMedicationDispensesByPatient();
+  const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
 
   const [editRequestIndex, setEditRequestIndex] = useState<MedicationModalState | number>(MedicationModalState.CREATE);
   const [editRequest, setEditRequest] = useState<BaseMedicationRequest>();
@@ -81,8 +86,8 @@ export const MedicationTable = (props: MedicationTableProps) => {
   };
 
   const handleComplete = async (index: number) => {
-    await requestApi.completeRequestWithInfo(props.requests[index]);
-    invalidateAllMedicationRequests();
+    await requestApi.completeRequestWithInfo(props.requests[index], props.pharmacy!);
+    invalidateAllMedicationDispenses();
   };
 
   const handleDecline = async (index: number) => {
@@ -215,7 +220,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
               {perms.canPrescribeMedication(record) && (
                 <Button type="primary" icon={<CheckOutlined />} size="small" onClick={() => handlePrescribe(index)} />
               )}
-              {perms.canCompleteMedication(record) && (
+              {perms.canCompleteMedication(record, dispenses) && (
                 <Popconfirm
                   title={t("translation:order.medicationTable.popconfirm.complete")}
                   onConfirm={() => handleComplete(index)}

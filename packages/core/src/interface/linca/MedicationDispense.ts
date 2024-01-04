@@ -15,7 +15,7 @@ export interface MedicationDispense extends Resource {
   medication: Medication;
   subject: Reference<Patient>;
   performer: { actor: Reference<Organization> }[]; // Pharmacy
-  authorizingPrescription: Reference<PrescriptionMedicationRequest>;
+  authorizingPrescription: Reference<PrescriptionMedicationRequest>[];
   type: {
     coding: {
       system: "http://terminology.hl7.org/CodeSystem/v3-ActCode";

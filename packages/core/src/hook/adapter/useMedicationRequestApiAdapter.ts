@@ -6,7 +6,10 @@ import {
   E_REZEPT_ID_SYSTEM,
   PrescriptionMedicationRequest,
 } from "../../interface/linca/PrescriptionMedicationRequest";
+import { Organization } from "../../interface/linca/fhir/Organization";
+import { createMedicationDispense } from "../../service/medicationDispenseService";
 import { createMedicationRequest } from "../../service/medicatonRequestService";
+import { createNewMedicationDispense } from "../../util/orderUtil";
 
 export const useMedicationRequestApiAdapter = () => {
   const { t } = useTranslation();
@@ -84,7 +87,23 @@ export const useMedicationRequestApiAdapter = () => {
     }
   };
 
-  const completeRequestWithInfo = async (_r: BaseMedicationRequest) => {};
+  const completeRequestWithInfo = async (r: BaseMedicationRequest, pharmacy: Organization) => {
+    const dispense = createNewMedicationDispense(r as PrescriptionMedicationRequest, pharmacy, false);
+
+    try {
+      const res = await createMedicationDispense(dispense);
+      message.success(
+        t("translation:order.complete.successMedication", {
+          name: res.medication.concept.coding[0].display,
+          id: res.id,
+        })
+      );
+
+      return res;
+    } catch (e) {
+      message.error(t("translation:order.complete.errorMedication", { name: r.medication.concept.coding[0].display }));
+    }
+  };
 
   const declineRequestWithInfo = async (
     r: BaseMedicationRequest,

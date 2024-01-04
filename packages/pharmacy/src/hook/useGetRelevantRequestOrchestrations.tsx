@@ -1,3 +1,4 @@
+import { useGetAllMedicationDispensesByRequests } from "core/src/hook/filter/useGetAllMedicationDispensesByRequests";
 import { useGetAllValidMedicationRequests } from "core/src/hook/filter/useGetAllValidMedicationRequests";
 import { useGetAllRequestOrchestrations } from "core/src/hook/query/useGetAllRequestOrchestrations";
 import { usePermissions } from "core/src/hook/usePermissions";
@@ -11,11 +12,12 @@ export const useGetRelevantRequestOrchestrations = () => {
 
   const { orchestrations, isOrchestrationsLoading } = useGetAllRequestOrchestrations();
   const { requests, isRequestsLoading } = useGetAllValidMedicationRequests();
+  const { dispenses, isDispensesLoading } = useGetAllMedicationDispensesByRequests(requests);
 
   // Memoization is used to not compute this value on every rerender of the component
   const relevantOrchestrations = useMemo(() => {
     const validRequests = requests.filter(
-      (v) => perms.canPharmacySeeRequest(v, selectedPharmacy) && perms.canCompleteMedication(v)
+      (v) => perms.canPharmacySeeRequest(v, selectedPharmacy) && perms.canCompleteMedication(v, dispenses)
     );
 
     return orchestrations.filter((v) => validRequests.find((w) => requestIsFromOrchestration(w, v)));
@@ -23,6 +25,6 @@ export const useGetRelevantRequestOrchestrations = () => {
 
   return {
     orchestrations: relevantOrchestrations ?? [],
-    isOrchestrationsLoading: isOrchestrationsLoading || isRequestsLoading,
+    isOrchestrationsLoading: isOrchestrationsLoading || isRequestsLoading || isDispensesLoading,
   };
 };

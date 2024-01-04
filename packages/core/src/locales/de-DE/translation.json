@@ -91,7 +91,9 @@
 		},
 		"complete": {
 			"error": "Die Bestellung {{id}} konnte nicht abgeschlossen werden",
-			"success": "Die Bestellung {{id}} wurde abgeschlossen"
+			"errorMedication": "Medikation {{name}} konnte nicht abgeschlossen werden",
+			"success": "Die Bestellung {{id}} wurde abgeschlossen",
+			"successMedication": "Medikation {{name}} mit der ID {{id}} abgeschlossen"
 		},
 		"create": {
 			"error": "Die Bestellung konnte nicht angelegt werden",

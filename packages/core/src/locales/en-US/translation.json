@@ -91,7 +91,9 @@
 		},
 		"complete": {
 			"error": "The order {{id}} could not be completed",
-			"success": "The order {{id}} has been completed"
+			"errorMedication": "Medication {{name}} could not be completed",
+			"success": "The order {{id}} has been completed",
+			"successMedication": "Medication {{name}} completed with ID {{id}} "
 		},
 		"create": {
 			"error": "The order could not be created",

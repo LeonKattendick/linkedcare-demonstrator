@@ -1,11 +1,14 @@
 import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest";
+import { MedicationDispense } from "../interface/linca/MedicationDispense";
 import { Organization } from "../interface/linca/fhir/Organization";
 import { Practitioner } from "../interface/linca/fhir/Practitioner";
+import { InternalReference } from "../interface/linca/fhir/Reference";
 import { identifierEqualsReference } from "../util/matchingUtil";
 import { UserType, useUserTypeAtom } from "./useUserTypeAtom";
 
 interface PermissionMedicineRequest {
   resourceType: "MedicationRequest";
+  id?: string;
   intent: "proposal" | "order";
   status: "active" | any;
 }
@@ -30,8 +33,8 @@ export const usePermissions = () => {
     return !!r.find(canPrescribeMedication);
   };
 
-  const canCompleteOrder = (r: PermissionMedicineRequest[]) => {
-    return !!r.find(canCompleteMedication);
+  const canCompleteOrder = (r: PermissionMedicineRequest[], d: MedicationDispense[]) => {
+    return !!r.find((v) => canCompleteMedication(v, d));
   };
 
   const canBeRevoked = (r: PermissionMedicineRequest[]) => {
@@ -39,9 +42,9 @@ export const usePermissions = () => {
   };
 
   // can be closed as soon as all requests have reached a terminal state
-  const canBeClosed = (r: PermissionMedicineRequest[]) => {
+  const canBeClosed = (r: PermissionMedicineRequest[], d: MedicationDispense[]) => {
     //TODO -> rest has dispense connected
-    return !canBeRevoked(r) && !r.some((v) => v.status === "active");
+    return !canBeRevoked(r) && !r.some((v) => canPrescribeMedication(v) || canCompleteMedication(v, d));
   };
 
   const canEditMedication = (r: PermissionMedicineRequest) => {
@@ -60,9 +63,17 @@ export const usePermissions = () => {
     return r.intent === "proposal" && r.status === "active";
   };
 
-  const canCompleteMedication = (r: PermissionMedicineRequest) => {
+  const canCompleteMedication = (r: PermissionMedicineRequest, d: MedicationDispense[]) => {
     if (![UserType.PHARMACY].includes(userType)) return false;
-    //TODO -> and has no dispense connected
+    if (
+      d.find(
+        (v) =>
+          (v.authorizingPrescription[0] as InternalReference).reference === `MedicationRequest/${r.id}` &&
+          v.type.coding[0].code === "FFC"
+      )
+    ) {
+      return false;
+    }
     return r.intent === "order" && r.status === "active";
   };
 

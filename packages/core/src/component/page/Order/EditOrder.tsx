@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useRequestOrchestrationApiAdapter } from "../../../hook/adapter/useRequestOrchestrationApiAdapter";
+import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
+import { useGetAllMedicationDispensesByPatient } from "../../../hook/query/useGetAllMedicationDispensesByPatient";
 import { useGetAllMedicationRequestsByPatient } from "../../../hook/query/useGetAllMedicationRequestsByPatient";
 import { usePermissions } from "../../../hook/usePermissions";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
@@ -35,6 +37,8 @@ export const EditOrder = (props: EditOrderProps) => {
   const requestApi = useMedicationRequestApiAdapter();
 
   const { invalidateAllMedicationRequests } = useGetAllMedicationRequestsByPatient();
+  const { invalidateAllMedicationDispenses } = useGetAllMedicationDispensesByPatient();
+  const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
 
   const [editRequests, setEditRequests] = useState<BaseMedicationRequest[]>([]);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
@@ -44,7 +48,7 @@ export const EditOrder = (props: EditOrderProps) => {
   const declineRequests = editRequests.filter((v) => !!v.id);
   const prescribeRequests = editRequests.filter(perms.canPrescribeMedication);
 
-  const completeAmount = editRequests.filter(perms.canCompleteMedication).length;
+  const completeAmount = editRequests.filter((v) => perms.canCompleteMedication(v, dispenses)).length;
   const declineAmount = editRequests.filter(perms.canDeclineMedication).length;
 
   useEffect(() => {
@@ -68,9 +72,10 @@ export const EditOrder = (props: EditOrderProps) => {
 
   const handleComplete = async () => {
     for (const request of editRequests) {
-      if (perms.canCompleteMedication(request)) await requestApi.completeRequestWithInfo(request);
+      if (!perms.canCompleteMedication(request, dispenses)) continue;
+      await requestApi.completeRequestWithInfo(request, props.pharmacy!);
     }
-    invalidateAllMedicationRequests();
+    invalidateAllMedicationDispenses();
   };
 
   const handleDecline = async () => {
@@ -119,7 +124,7 @@ export const EditOrder = (props: EditOrderProps) => {
               })}
             </Button>
           )}
-          {perms.canCompleteOrder(editRequests) && (
+          {perms.canCompleteOrder(editRequests, dispenses) && (
             <Popconfirm
               title={t("translation:order.buttonRow.popconfirm.complete", { amount: completeAmount })}
               onConfirm={handleComplete}
@@ -159,7 +164,7 @@ export const EditOrder = (props: EditOrderProps) => {
               {t("translation:order.buttonRow.revoke")}
             </Button>
           )}
-          {perms.canBeClosed(editRequests) && props.order.status !== "completed" && (
+          {perms.canBeClosed(editRequests, dispenses) && props.order.status !== "completed" && (
             <Button type="primary" onClick={handleClose}>
               {t("translation:order.buttonRow.close")}
             </Button>

@@ -12,6 +12,7 @@ export enum OrderState {
 }
 
 export const calculateOrderState = (requests: BaseMedicationRequest[], order: RequestOrchestration | null) => {
+  if (order?.status === "completed") return OrderState.COMPLETED;
   if (requests.length === 0) return OrderState.CAREGIVER;
 
   const isRevoked = order?.status === "revoked" || requests.every((v) => v.status === "cancelled");
