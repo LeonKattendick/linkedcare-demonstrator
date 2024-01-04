@@ -117,6 +117,12 @@
 			"errorMedication": "Medication {{name}} could not be edited",
 			"successMedication": "Medication {{name}} edited with ID {{id}} "
 		},
+		"info": {
+			"creator": "Creator",
+			"intent": "Intent",
+			"lastUpdate": "Last update",
+			"title": "Order {{id}} information"
+		},
 		"medicationTable": {
 			"add": "Add Medication",
 			"doctor": "Responsible doctor",

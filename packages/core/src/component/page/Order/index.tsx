@@ -10,6 +10,7 @@ import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { calculateOrderState } from "../../../util/orderStateUtil";
 import { CreateOrder } from "./CreateOrder";
 import { EditOrder } from "./EditOrder";
+import { OrderInfo } from "./OrderInfo";
 
 interface OrderProps {
   patient: Patient;
@@ -31,7 +32,7 @@ export const Order = (props: OrderProps) => {
       <PatientTitle
         patient={props.patient}
         hideMedicationPlanButton
-        title={isNew ? t("translation:createOrder.title") : t("translation:editOrder.title")}
+        title={isNew ? t("translation:createOrder.title") : <OrderInfo order={props.order} />}
         orderState={calculateOrderState(props.requests, dispenses, props.order)}
       />
       <Card style={{ height: "100%" }}>

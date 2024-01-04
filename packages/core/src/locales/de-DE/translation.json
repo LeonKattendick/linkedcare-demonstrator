@@ -117,6 +117,12 @@
 			"errorMedication": "Medikation {{name}} konnte nicht editiert werden",
 			"successMedication": "Medikation {{name}} mit der ID {{id}} editiert"
 		},
+		"info": {
+			"creator": "Ersteller",
+			"intent": "Absicht",
+			"lastUpdate": "Letztes Update",
+			"title": "Informationen zur Bestellung {{id}}"
+		},
 		"medicationTable": {
 			"add": "Medikation hinzufügen",
 			"doctor": "Zuständiger Hausarzt",
