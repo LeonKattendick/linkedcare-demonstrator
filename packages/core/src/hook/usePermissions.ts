@@ -2,8 +2,7 @@ import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest"
 import { MedicationDispense } from "../interface/linca/MedicationDispense";
 import { Organization } from "../interface/linca/fhir/Organization";
 import { Practitioner } from "../interface/linca/fhir/Practitioner";
-import { InternalReference } from "../interface/linca/fhir/Reference";
-import { identifierEqualsReference } from "../util/matchingUtil";
+import { identifierEqualsReference, isAuthorizingPrescription } from "../util/matchingUtil";
 import { UserType, useUserTypeAtom } from "./useUserTypeAtom";
 
 interface PermissionMedicineRequest {
@@ -65,13 +64,7 @@ export const usePermissions = () => {
 
   const canCompleteMedication = (r: PermissionMedicineRequest, d: MedicationDispense[]) => {
     if (![UserType.PHARMACY].includes(userType)) return false;
-    if (
-      d.find(
-        (v) =>
-          (v.authorizingPrescription[0] as InternalReference).reference === `MedicationRequest/${r.id}` &&
-          v.type.coding[0].code === "FFC"
-      )
-    ) {
+    if (d.find((v) => isAuthorizingPrescription(v, r) && v.type.coding[0].code === "FFC")) {
       return false;
     }
     return r.intent === "order" && r.status === "active";

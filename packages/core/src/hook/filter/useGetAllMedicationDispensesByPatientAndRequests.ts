@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { BaseMedicationRequest } from "../../interface/linca/BaseMedicationRequest";
-import { InternalReference } from "../../interface/linca/fhir/Reference";
+import { isAuthorizingPrescription } from "../../util/matchingUtil";
 import { useGetAllMedicationDispensesByPatient } from "../query/useGetAllMedicationDispensesByPatient";
 
 export const useGetAllMedicationDispensesByPatientAndRequests = (
@@ -10,11 +10,7 @@ export const useGetAllMedicationDispensesByPatientAndRequests = (
   const { dispenses, isDispensesLoading } = useGetAllMedicationDispensesByPatient(patientId);
 
   const relevantDispenses = useMemo(() => {
-    return dispenses.filter((v) =>
-      requests.find(
-        (w) => (v.authorizingPrescription[0] as InternalReference).reference === `MedicationRequest/${w.id}`
-      )
-    );
+    return dispenses.filter((v) => requests.find((w) => isAuthorizingPrescription(v, w)));
   }, [requests, dispenses]);
 
   return { dispenses: relevantDispenses, isDispensesLoading };

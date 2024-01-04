@@ -21,6 +21,7 @@ import { RequestOrchestration } from "../../../interface/linca/RequestOrchestrat
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
+import { isAuthorizingPrescription } from "../../../util/matchingUtil";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationModal, MedicationModalState } from "./MedicationModal";
@@ -177,11 +178,16 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:order.medicationTable.status")}
-          render={(_, record: BaseMedicationRequest) => (
-            <>
-              {record.status} ({record.intent})
-            </>
-          )}
+          render={(_, record: BaseMedicationRequest) => {
+            const dispense = dispenses.find((v) => isAuthorizingPrescription(v, record));
+            if (dispense) return dispense.status;
+
+            return (
+              <>
+                {record.status} ({record.intent})
+              </>
+            );
+          }}
           sorter={(a, b) => `${a.status} (${a.intent})`.localeCompare(`${b.status} (${b.intent})`)}
         />
         <Table.Column
@@ -193,9 +199,12 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:order.medicationTable.pharmacy")}
-          render={(_, record: BaseMedicationRequest) =>
-            (record.dispenseRequest?.dispenser as ExternalReference)?.display
-          }
+          render={(_, record: BaseMedicationRequest) => {
+            const dispense = dispenses.find((v) => isAuthorizingPrescription(v, record));
+            if (dispense) return (dispense.performer[0].actor as ExternalReference).display;
+
+            return (record.dispenseRequest?.dispenser as ExternalReference)?.display;
+          }}
           sorter={(a, b) =>
             (a.dispenseRequest?.dispenser as ExternalReference)?.display.localeCompare(
               (b.dispenseRequest?.dispenser as ExternalReference)?.display

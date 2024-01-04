@@ -1,6 +1,7 @@
 import { DosageError } from "../interface/enum/DosageError";
 import { MedicationRequestError } from "../interface/enum/MedicationRequestError";
 import { BaseMedicationRequest } from "../interface/linca/BaseMedicationRequest";
+import { MedicationDispense } from "../interface/linca/MedicationDispense";
 import { PrescriptionMedicationRequest } from "../interface/linca/PrescriptionMedicationRequest";
 import { RequestOrchestration } from "../interface/linca/RequestOrchestration";
 import { Dosage } from "../interface/linca/fhir/Dosage";
@@ -170,4 +171,8 @@ export const medicationRequestsEqual = (
   r2: BaseMedicationRequest | undefined
 ) => {
   return findMedicationRequestsMatchingErrors(r1, r2).length === 0;
+};
+
+export const isAuthorizingPrescription = (d: MedicationDispense, r: { id?: string }) => {
+  return (d.authorizingPrescription[0] as InternalReference).reference === `MedicationRequest/${r.id}`;
 };
