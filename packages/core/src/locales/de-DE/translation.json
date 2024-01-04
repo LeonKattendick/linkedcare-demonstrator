@@ -84,8 +84,7 @@
 			"edit": "{{amount}} Änderungen speichern",
 			"popconfirm": {
 				"complete": "Wollen Sie {{amount}} Medikamente als \"Ausgegeben\" markieren?",
-				"decline": "Wollen Sie {{amount}} Medikamente stornieren?",
-				"prescribe": "Wollen Sie {{amount}} Medikamente verschreiben?"
+				"decline": "Wollen Sie {{amount}} Medikamente stornieren?"
 			},
 			"prescribe": "{{amount}} Medikamente verschreiben",
 			"revoke": "Bestellung widerrufen"
@@ -107,7 +106,7 @@
 		"declineModal": {
 			"ended": "Einnahme nach Verbrauch der derzeitigen Packung beenden",
 			"error": "Falsche Eingabe",
-			"ok": "Stornieren",
+			"ok": "{{amount}} Medikamente stornieren",
 			"placeholder": "Wählen Sie einen Grund für die Stornierung aus",
 			"stopped": "Einnahme sofort beenden",
 			"title": "Medikation stornieren"
@@ -154,8 +153,7 @@
 			"pharmacy": "Zuständige Apotheke",
 			"popconfirm": {
 				"complete": "Wollen Sie die Ausgabe der Medikation abschließen?",
-				"decline": "Wollen Sie die Medikation stornieren?",
-				"prescribe": "Wollen Sie die Medikation verschreiben?"
+				"decline": "Wollen Sie die Medikation stornieren?"
 			},
 			"status": "Status",
 			"title": "Medikation"
@@ -168,7 +166,7 @@
 		},
 		"prescribeModal": {
 			"med": "eMedID eingeben (optional)",
-			"ok": "Verschreiben",
+			"ok": "{{amount}} Medikamente verschreiben",
 			"recipe": "eRezeptID eingeben (optional)",
 			"title": "Medikation verschreiben"
 		},

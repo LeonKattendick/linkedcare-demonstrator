@@ -213,15 +213,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
                 <Button type="primary" icon={<EditOutlined />} size="small" onClick={() => handleEdit(index)} />
               )}
               {perms.canPrescribeMedication(record) && (
-                <Popconfirm
-                  title={t("translation:order.medicationTable.popconfirm.prescribe")}
-                  onConfirm={() => handlePrescribe(index)}
-                  placement="topRight"
-                  okText={t("translation:general.yes")}
-                  arrow={{ pointAtCenter: true }}
-                >
-                  <Button type="primary" icon={<CheckOutlined />} size="small" />
-                </Popconfirm>
+                <Button type="primary" icon={<CheckOutlined />} size="small" onClick={() => handlePrescribe(index)} />
               )}
               {perms.canCompleteMedication(record) && (
                 <Popconfirm

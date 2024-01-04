@@ -1,3 +1,4 @@
+import { CheckOutlined } from "@ant-design/icons";
 import { Input, Modal, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -41,7 +42,8 @@ export const PrescribeModal = (props: PrescribeModalProps) => {
       onCancel={handleCancel}
       title={t("translation:order.prescribeModal.title")}
       destroyOnClose
-      okText={t("translation:order.prescribeModal.ok")}
+      okButtonProps={{ icon: <CheckOutlined /> }}
+      okText={t("translation:order.prescribeModal.ok", { amount: props.requests.length })}
       onOk={handlePrescribe}
     >
       <Space direction="vertical" style={{ width: "100%" }}>

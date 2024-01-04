@@ -113,18 +113,11 @@ export const EditOrder = (props: EditOrderProps) => {
             </Button>
           )}
           {perms.canPrescribeOrder(editRequests) && (
-            <Popconfirm
-              title={t("translation:order.buttonRow.popconfirm.prescribe", { amount: prescribeRequests.length })}
-              onConfirm={handlePrescribe}
-              okText={t("translation:general.yes")}
-              arrow={{ pointAtCenter: true }}
-            >
-              <Button type="primary" icon={<CheckOutlined />}>
-                {t("translation:order.buttonRow.prescribe", {
-                  amount: prescribeRequests.length,
-                })}
-              </Button>
-            </Popconfirm>
+            <Button type="primary" icon={<CheckOutlined />} onClick={handlePrescribe}>
+              {t("translation:order.buttonRow.prescribe", {
+                amount: prescribeRequests.length,
+              })}
+            </Button>
           )}
           {perms.canCompleteOrder(editRequests) && (
             <Popconfirm
@@ -144,11 +137,17 @@ export const EditOrder = (props: EditOrderProps) => {
             <Popconfirm
               title={t("translation:order.buttonRow.popconfirm.decline", { amount: declineAmount })}
               onConfirm={handleDecline}
+              disabled={userType !== UserType.CAREGIVER}
               placement="topRight"
               okText={t("translation:general.yes")}
               arrow={{ pointAtCenter: true }}
             >
-              <Button type="primary" danger icon={<DeleteOutlined />}>
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() => userType !== UserType.CAREGIVER && handleDecline()}
+              >
                 {t("translation:order.buttonRow.decline", {
                   amount: declineAmount,
                 })}

@@ -1,3 +1,4 @@
+import { DeleteOutlined } from "@ant-design/icons";
 import { Modal, Select } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,8 +38,8 @@ export const DeclineStatusModal = (props: DeclineStatusModalProps) => {
       open={props.open}
       onCancel={handleCancel}
       title={t("translation:order.declineModal.title")}
-      okButtonProps={{ danger: true, disabled: !reason }}
-      okText={t("translation:order.declineModal.ok")}
+      okButtonProps={{ danger: true, disabled: !reason, icon: <DeleteOutlined /> }}
+      okText={t("translation:order.declineModal.ok", { amount: props.requests.length })}
       onOk={handleDecline}
       destroyOnClose
     >

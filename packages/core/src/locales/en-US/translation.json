@@ -84,8 +84,7 @@
 			"edit": "Save {{amount}} changes",
 			"popconfirm": {
 				"complete": "Do you want to mark {{amount}} medications as “dispensed”?",
-				"decline": "Do you want to decline {{amount}} medication?",
-				"prescribe": "Do you want to prescribe {{amount}} medication?"
+				"decline": "Do you want to decline {{amount}} medication?"
 			},
 			"prescribe": "Prescribe {{amount}} medication",
 			"revoke": "Revoke order"
@@ -107,7 +106,7 @@
 		"declineModal": {
 			"ended": "Stop taking after using the current pack",
 			"error": "Incorrect entry",
-			"ok": "Decline",
+			"ok": "Decline {{amount}} medication",
 			"placeholder": "Select a reason for cancellation",
 			"stopped": "Stop taking it immediately",
 			"title": "Decline medication"
@@ -154,8 +153,7 @@
 			"pharmacy": "Responsible pharmacy",
 			"popconfirm": {
 				"complete": "Do you want to complete dispensing the medication?",
-				"decline": "Do you want to cancel the medication?",
-				"prescribe": "Do you want to prescribe the medication?"
+				"decline": "Do you want to cancel the medication?"
 			},
 			"status": "Status",
 			"title": "Medication"
@@ -168,7 +166,7 @@
 		},
 		"prescribeModal": {
 			"med": "Enter eMedID (optional)",
-			"ok": "Prescribe",
+			"ok": "Prescribe {{amount}} medication",
 			"recipe": "Enter eRezeptID (optional)",
 			"title": "Prescribe medication"
 		},
