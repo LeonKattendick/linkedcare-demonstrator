@@ -1,9 +1,7 @@
 import { Layout, theme } from "antd";
 import "antd/dist/reset.css";
-import { Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Header, HeaderProps } from "./Header";
-import { Loading } from "./Loading";
 
 type PageProps = HeaderProps;
 
@@ -22,7 +20,7 @@ export const Page = (props: React.PropsWithChildren<PageProps>) => {
               color: token.colorText,
             }}
           >
-            <Suspense fallback={<Loading />}>{props.children}</Suspense>
+            {props.children}
           </div>
         </Layout>
       </Layout.Content>

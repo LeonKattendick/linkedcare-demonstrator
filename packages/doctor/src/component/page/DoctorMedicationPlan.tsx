@@ -4,7 +4,7 @@ import { MedicationPlan } from "core/src/component/page/MedicationPlan";
 import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useParams } from "react-router";
 
-const DoctorMedicationPlan = () => {
+export const DoctorMedicationPlan = () => {
   const { patientId } = useParams();
 
   const { patient, isPatientLoading } = useGetPatientById(patientId);
@@ -14,5 +14,3 @@ const DoctorMedicationPlan = () => {
 
   return <MedicationPlan patient={patient} />;
 };
-
-export default DoctorMedicationPlan;

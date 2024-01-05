@@ -5,7 +5,7 @@ import { useGetPatientById } from "core/src/hook/query/useGetPatientById";
 import { useParams } from "react-router";
 import { useGetRelevantRequestOrchestrationsByPatient } from "../../hook/useGetRelevantRequestOrchestrationsByPatient";
 
-const DoctorViewPatient = () => {
+export const DoctorViewPatient = () => {
   const { patientId } = useParams();
 
   const { patient, isPatientLoading } = useGetPatientById(patientId);
@@ -17,5 +17,3 @@ const DoctorViewPatient = () => {
 
   return <ViewPatient patient={patient} shownOrders={orchestrations} isShownOrdersLoading={isOrchestrationsLoading} />;
 };
-
-export default DoctorViewPatient;

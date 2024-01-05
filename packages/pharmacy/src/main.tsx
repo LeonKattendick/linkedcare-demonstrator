@@ -4,21 +4,20 @@ import { Loading } from "core/src/component/Loading";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { UserType, useUserTypeAtom } from "core/src/hook/useUserTypeAtom";
-import { lazy, useEffect } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
 import { RecoilRoot } from "recoil";
 import { PharmacySelect } from "./component/PharmacySelect";
+import { PharmacyOrder } from "./component/page/PharmacyOrder";
+import { PharmacyOrders } from "./component/page/PharmacyOrders";
 import { useSelectedPharmacyAtom } from "./hook/useSelectedPharmacyAtom";
 
 const navElements: HeaderProps["navElements"] = [
   { key: "", label: "header.orderOverview" },
   { key: "order", label: "header.viewOrder", showOnVisit: true },
 ];
-
-const PharmacyOrders = lazy(() => import("./component/page/PharmacyOrders"));
-const PharmacyOrder = lazy(() => import("./component/page/PharmacyOrder"));
 
 const App = () => {
   const { t } = useTranslation();

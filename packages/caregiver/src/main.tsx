@@ -4,12 +4,16 @@ import { Loading } from "core/src/component/Loading";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { UserType, useUserTypeAtom } from "core/src/hook/useUserTypeAtom";
-import { lazy, useEffect } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
 import { RecoilRoot } from "recoil";
 import { CaregiverSelect } from "./component/CaregiverSelect";
+import { CaregiverMedicationPlan } from "./component/page/CaregiverMedicationPlan";
+import { CaregiverOrder } from "./component/page/CaregiverOrder";
+import { CaregiverSearchPatients } from "./component/page/CaregiverSearchPatients";
+import { CaregiverViewPatient } from "./component/page/CaregiverViewPatient";
 import { useSelectedCaregiverAtom } from "./hook/useSelectedCaregiverAtom";
 
 const navElements: HeaderProps["navElements"] = [
@@ -19,11 +23,6 @@ const navElements: HeaderProps["navElements"] = [
   { key: "create", label: "header.newOrder", showOnVisit: true },
   { key: "order", label: "header.viewOrder", showOnVisit: true },
 ];
-
-const CaregiverSearchPatients = lazy(() => import("./component/page/CaregiverSearchPatients"));
-const CaregiverViewPatient = lazy(() => import("./component/page/CaregiverViewPatient"));
-const CaregiverMedicationPlan = lazy(() => import("./component/page/CaregiverMedicationPlan"));
-const CaregiverOrder = lazy(() => import("./component/page/CaregiverOrder"));
 
 const App = () => {
   const { t } = useTranslation();
