@@ -69,9 +69,17 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
         title={() => (
           <>
             {t("translation:order.medicationTable.modal.table.title")}
-            <Button type="primary" style={{ float: "right" }} size="small" icon={<PlusOutlined />} onClick={handleAdd}>
-              {t("translation:order.medicationTable.modal.addSequence")}
-            </Button>
+            {!isReadOnly && (
+              <Button
+                type="primary"
+                style={{ float: "right" }}
+                size="small"
+                icon={<PlusOutlined />}
+                onClick={handleAdd}
+              >
+                {t("translation:order.medicationTable.modal.addSequence")}
+              </Button>
+            )}
           </>
         )}
         bordered
