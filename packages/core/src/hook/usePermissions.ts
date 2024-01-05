@@ -82,6 +82,7 @@ export const usePermissions = () => {
 
   const canPharmacySeeRequest = (r: BaseMedicationRequest, pharmacy: Organization | null) => {
     if (!pharmacy) return false;
+    if (["ended", "stopped", "entered-in-error", "cancelled"].includes(r.status)) return false;
     return !r.dispenseRequest || identifierEqualsReference(pharmacy.identifier[0], r.dispenseRequest?.dispenser);
   };
 
