@@ -176,3 +176,9 @@ export const medicationRequestsEqual = (
 export const isAuthorizingPrescription = (d: MedicationDispense, r: { id?: string }) => {
   return (d.authorizingPrescription[0] as InternalReference).reference === `MedicationRequest/${r.id}`;
 };
+
+export const hasRezeptOrMedId = (r: BaseMedicationRequest) => {
+  if (!r || !isPrescribed(r)) return false;
+  const prescribed = r as PrescriptionMedicationRequest;
+  return !!prescribed.groupIdentifier || (prescribed.identifier?.length ?? 0) > 0;
+};

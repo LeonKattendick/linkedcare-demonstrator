@@ -153,6 +153,7 @@
 					"doseType": "Dosistyp",
 					"frequency": "Frequenz",
 					"frequencyTooltip": "Wie oft pro Periode soll die Medikation eingenommen werden.",
+					"ids": "eRezeptID & eMedID",
 					"period": "Periode",
 					"sequence": "Sequenz",
 					"title": "Einnahmesequenzen",

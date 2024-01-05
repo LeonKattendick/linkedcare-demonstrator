@@ -16,11 +16,13 @@ import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
+import { PrescriptionMedicationRequest } from "../../../interface/linca/PrescriptionMedicationRequest";
 import { RequestOrchestration } from "../../../interface/linca/RequestOrchestration";
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
-import { isAuthorizingPrescription } from "../../../util/matchingUtil";
+import { hasRezeptOrMedId, isAuthorizingPrescription } from "../../../util/matchingUtil";
+import { isPrescribed } from "../../../util/medicationRequestUtil";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationModal, MedicationModalState } from "./MedicationModal";
@@ -189,6 +191,16 @@ export const MedicationTable = (props: MedicationTableProps) => {
           }}
           sorter={(a, b) => `${a.status} (${a.intent})`.localeCompare(`${b.status} (${b.intent})`)}
         />
+        {!!props.requests.find(hasRezeptOrMedId) && (
+          <Table.Column
+            title={t("translation:order.medicationTable.modal.table.ids")}
+            render={(_, record: BaseMedicationRequest) => {
+              if (!isPrescribed(record)) return null;
+              const prescribed = record as PrescriptionMedicationRequest;
+              return [prescribed.groupIdentifier?.value, prescribed.identifier?.[0].value].filter(Boolean).join(", ");
+            }}
+          />
+        )}
         <Table.Column
           title={t("translation:order.medicationTable.doctor")}
           render={(_, record: BaseMedicationRequest) => (record.performer[0] as ExternalReference).display}
