@@ -7,7 +7,7 @@ import { caregiverIsFromOrganization } from "core/src/util/matchingUtil";
 import { Navigate, useParams } from "react-router";
 import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
 
-export const CaregiverViewPatient = () => {
+const CaregiverViewPatient = () => {
   const { patientId } = useParams();
 
   const { selectedCaregiver } = useSelectedCaregiverAtom();
@@ -28,3 +28,5 @@ export const CaregiverViewPatient = () => {
     />
   );
 };
+
+export default CaregiverViewPatient;

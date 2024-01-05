@@ -10,7 +10,7 @@ import { useMemo } from "react";
 import { Navigate, useParams } from "react-router";
 import { useSelectedDoctorAtom } from "../../hook/useSelectedDoctorAtom";
 
-export const DoctorOrder = () => {
+const DoctorOrder = () => {
   const { patientId, orderId } = useParams();
   const perms = usePermissions();
 
@@ -33,3 +33,5 @@ export const DoctorOrder = () => {
 
   return <Order patient={patient} order={orchestration} requests={doctorRequests} doctor={selectedDoctor!} />;
 };
+
+export default DoctorOrder;

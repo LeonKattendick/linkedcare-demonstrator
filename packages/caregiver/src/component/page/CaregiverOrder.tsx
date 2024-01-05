@@ -9,7 +9,7 @@ import { caregiverIsFromOrganization, identifierEqualsReference } from "core/src
 import { Navigate, useParams } from "react-router";
 import { useSelectedCaregiverAtom } from "../../hook/useSelectedCaregiverAtom";
 
-export const CaregiverOrder = () => {
+const CaregiverOrder = () => {
   const { patientId, orderId } = useParams();
 
   const { selectedCaregiver } = useSelectedCaregiverAtom();
@@ -29,3 +29,5 @@ export const CaregiverOrder = () => {
 
   return <Order patient={patient} order={orchestration} requests={requests} caregiver={selectedCaregiver!} />;
 };
+
+export default CaregiverOrder;

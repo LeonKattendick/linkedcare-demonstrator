@@ -10,7 +10,7 @@ import { useMemo } from "react";
 import { Navigate, useParams } from "react-router";
 import { useSelectedPharmacyAtom } from "../../hook/useSelectedPharmacyAtom";
 
-export const PharmacyOrder = () => {
+const PharmacyOrder = () => {
   const { patientId, orderId } = useParams();
   const perms = usePermissions();
 
@@ -33,3 +33,5 @@ export const PharmacyOrder = () => {
 
   return <Order patient={patient} order={orchestration} requests={pharmacyRequests} pharmacy={selectedPharmacy!} />;
 };
+
+export default PharmacyOrder;

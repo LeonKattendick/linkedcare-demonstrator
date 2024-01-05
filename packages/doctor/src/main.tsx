@@ -4,17 +4,12 @@ import { Loading } from "core/src/component/Loading";
 import { Page } from "core/src/component/Page";
 import { Providers } from "core/src/component/Providers";
 import { UserType, useUserTypeAtom } from "core/src/hook/useUserTypeAtom";
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
 import { RecoilRoot } from "recoil";
 import { DoctorSelect } from "./component/DoctorSelect";
-import { DoctorMedicationPlan } from "./component/page/DoctorMedicationPlan";
-import { DoctorOrder } from "./component/page/DoctorOrder";
-import { DoctorOrders } from "./component/page/DoctorOrders";
-import { DoctorSearchPatients } from "./component/page/DoctorSearchPatients";
-import { DoctorViewPatient } from "./component/page/DoctorViewPatient";
 import { useSelectedDoctorAtom } from "./hook/useSelectedDoctorAtom";
 
 const navElements: HeaderProps["navElements"] = [
@@ -24,6 +19,12 @@ const navElements: HeaderProps["navElements"] = [
   { key: "plan", label: "header.medicationPlan", showOnVisit: true },
   { key: "order", label: "header.viewOrder", showOnVisit: true },
 ];
+
+const DoctorSearchPatients = lazy(() => import("./component/page/DoctorSearchPatients"));
+const DoctorOrders = lazy(() => import("./component/page/DoctorOrders"));
+const DoctorViewPatient = lazy(() => import("./component/page/DoctorViewPatient"));
+const DoctorMedicationPlan = lazy(() => import("./component/page/DoctorMedicationPlan"));
+const DoctorOrder = lazy(() => import("./component/page/DoctorOrder"));
 
 const App = () => {
   const { t } = useTranslation();
