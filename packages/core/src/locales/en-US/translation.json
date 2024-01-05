@@ -142,18 +142,22 @@
 				"selectsDivider": "Fill out medication",
 				"table": {
 					"bounds": "Take-In duration",
+					"boundsTooltip": "How long the patient can take in the medication",
 					"dose": "Dose",
 					"doseRate": "Dose rate",
 					"doseRateTypes": {
 						"calculated": "Calculated",
 						"ordered": "Ordered"
 					},
+					"doseTooltip": "How much of the medication should be taken.",
 					"doseType": "Dose type",
 					"frequency": "Frequency",
+					"frequencyTooltip": "How often per period should the medication be taken.",
 					"period": "Period",
 					"sequence": "Sequence",
 					"title": "Ingestion sequences",
-					"weekDays": "Weekdays"
+					"weekDays": "Weekdays",
+					"weekDaysTooltip": "On which days of the week should the medication be taken."
 				},
 				"viewTitle": "View medication"
 			},

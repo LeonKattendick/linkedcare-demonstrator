@@ -6,6 +6,7 @@ import dosageData from "../../../../../data/dosage.json";
 import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
 import { createNewDosage } from "../../../../../util/orderUtil";
 import { BoundsColumn } from "./BoundsColumn";
+import { ColumnInfo } from "./ColumnInfo";
 import { DoseColumn } from "./DoseColumn";
 import { DoseRateColumn } from "./DoseRateColumn";
 import { DoseTypeColumn } from "./DoseTypeColumn";
@@ -88,7 +89,12 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
       >
         <Table.Column title="#" width="3%" dataIndex="sequence" />
         <Table.Column
-          title={t("translation:order.medicationTable.modal.table.bounds")}
+          title={
+            <ColumnInfo
+              title={t("translation:order.medicationTable.modal.table.bounds")}
+              tooltip={t("translation:order.medicationTable.modal.table.boundsTooltip")}
+            />
+          }
           width="13%"
           render={(_, record: Dosage, index) => (
             <BoundsColumn
@@ -99,7 +105,12 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
           )}
         />
         <Table.Column
-          title={t("translation:order.medicationTable.modal.table.frequency")}
+          title={
+            <ColumnInfo
+              title={t("translation:order.medicationTable.modal.table.frequency")}
+              tooltip={t("translation:order.medicationTable.modal.table.frequencyTooltip")}
+            />
+          }
           width="7%"
           render={(_, record: Dosage, index) => (
             <FrequencyColumn
@@ -121,7 +132,12 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
           )}
         />
         <Table.Column
-          title={t("translation:order.medicationTable.modal.table.weekDays")}
+          title={
+            <ColumnInfo
+              title={t("translation:order.medicationTable.modal.table.weekDays")}
+              tooltip={t("translation:order.medicationTable.modal.table.weekDaysTooltip")}
+            />
+          }
           width="20%"
           render={(_, record: Dosage, index) => (
             <WeekDayColumn
@@ -132,7 +148,12 @@ export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isRead
           )}
         />
         <Table.Column
-          title={t("translation:order.medicationTable.modal.table.dose")}
+          title={
+            <ColumnInfo
+              title={t("translation:order.medicationTable.modal.table.dose")}
+              tooltip={t("translation:order.medicationTable.modal.table.doseTooltip")}
+            />
+          }
           width="7%"
           render={(_, record: Dosage, index) => (
             <DoseColumn

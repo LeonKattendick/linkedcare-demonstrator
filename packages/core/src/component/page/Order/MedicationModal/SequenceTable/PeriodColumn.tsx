@@ -44,7 +44,7 @@ export const PeriodColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
           size="small"
           options={["h", "d", "wk", "mo", "a"].map((v) => ({ value: v, label: t(`translation:general.time.${v}`) }))}
           onChange={handleChangeSelect}
-          style={{ width: 85, textAlign: "left" }}
+          style={{ width: 90, textAlign: "left" }}
         />
       }
       onChange={handleChangeNumber}
