@@ -1,10 +1,7 @@
 import { Form, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
-
-const compare = (input: string, label: string) => {
-  return input.split(" ").filter((v) => !label.includes(v)).length === 0;
-};
+import { compare } from "../../../../util/matchingUtil";
 
 export const MedicationSelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();

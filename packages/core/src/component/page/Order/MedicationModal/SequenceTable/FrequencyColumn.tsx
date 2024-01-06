@@ -23,7 +23,7 @@ export const FrequencyColumn = ({ dosage, handleChangeSequence, isReadOnly }: Se
       size="small"
       style={{ width: "100%" }}
       onChange={handleChange}
-      min={1}
+      min={0}
     />
   );
 };

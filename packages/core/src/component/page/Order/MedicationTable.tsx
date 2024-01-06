@@ -121,6 +121,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
       <MedicationModal
         open={modalOpen}
         setOpen={setModalOpen}
+        patient={props.patient}
         state={
           editRequestIndex === MedicationModalState.VIEW
             ? MedicationModalState.VIEW

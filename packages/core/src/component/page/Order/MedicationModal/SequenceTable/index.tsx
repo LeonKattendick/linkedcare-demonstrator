@@ -1,6 +1,5 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, FormInstance, Table } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Form, Table } from "antd";
 import { useTranslation } from "react-i18next";
 import dosageData from "../../../../../data/dosage.json";
 import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
@@ -14,26 +13,20 @@ import { FrequencyColumn } from "./FrequencyColumn";
 import { PeriodColumn } from "./PeriodColumn";
 import { WeekDayColumn } from "./WeekDayColumn";
 
+interface SequenceTableProps {
+  sequences: Dosage[];
+  setSequences: (d: Dosage[]) => void;
+  isReadOnly: boolean;
+}
+
 export interface SequenceTableColumnProps {
   dosage: Dosage;
   handleChangeSequence: (d: Dosage) => void;
   isReadOnly: boolean;
 }
 
-export const SequenceTable = ({ form, isReadOnly }: { form: FormInstance; isReadOnly: boolean }) => {
+export const SequenceTable = ({ sequences, setSequences, isReadOnly }: SequenceTableProps) => {
   const { t } = useTranslation();
-
-  const [sequences, setSequences] = useState<Dosage[]>([]);
-
-  // sets initial values of form into the useState
-  useEffect(() => {
-    setSequences(form.getFieldValue("sequences") ?? []);
-  }, [form]);
-
-  // sets changed values back into the form
-  useEffect(() => {
-    form.setFieldValue("sequences", sequences);
-  }, [sequences]);
 
   const handleAdd = () => {
     setSequences([...sequences, createNewDosage(sequences.length + 1, dosageData[0].code)]);

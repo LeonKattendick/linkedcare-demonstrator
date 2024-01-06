@@ -153,6 +153,11 @@
 				"medication": "Medication",
 				"pharmacy": "Responsible pharmacy",
 				"responsibleDivider": "Responsible parties",
+				"select": {
+					"placeholderMedicationPlan": "Select a medication from the patient's medication plan",
+					"placeholderOtherOrders": "Select a medication from other orders",
+					"takeOver": "Take over"
+				},
 				"selectsDivider": "Fill out medication",
 				"table": {
 					"bounds": "Take-In duration",

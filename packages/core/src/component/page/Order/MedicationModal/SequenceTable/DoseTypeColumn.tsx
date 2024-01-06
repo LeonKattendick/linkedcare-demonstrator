@@ -1,10 +1,7 @@
 import { Select } from "antd";
 import { SequenceTableColumnProps } from ".";
 import dosageData from "../../../../../data/dosage.json";
-
-const compare = (input: string, label: string) => {
-  return input.split(" ").filter((v) => !label.includes(v)).length === 0;
-};
+import { compare } from "../../../../../util/matchingUtil";
 
 export const DoseTypeColumn = ({ dosage, handleChangeSequence, isReadOnly }: SequenceTableColumnProps) => {
   const handleChange = (code: string) => {

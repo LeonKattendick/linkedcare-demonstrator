@@ -153,6 +153,11 @@
 				"medication": "Medikation",
 				"pharmacy": "Zuständige Apotheke",
 				"responsibleDivider": "Verantwortliche Parteien",
+				"select": {
+					"placeholderMedicationPlan": "Wählen Sie eine Medikation aus dem Medikationsplan des Patienten aus",
+					"placeholderOtherOrders": "Wählen Sie eine Medikation aus anderen Bestellungen aus",
+					"takeOver": "Übernehmen"
+				},
 				"selectsDivider": "Medikation ausfüllen",
 				"table": {
 					"bounds": "Einnahmegrenze",

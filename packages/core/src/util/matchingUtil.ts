@@ -11,6 +11,10 @@ import { ExternalReference, InternalReference, Reference } from "../interface/li
 import { isPrescribed } from "./medicationRequestUtil";
 import { isInternalReference } from "./referenceUtil";
 
+export const compare = (input: string, label: string) => {
+  return input.split(" ").filter((v) => !label.includes(v)).length === 0;
+};
+
 export const requestIsFromOrchestration = (
   r: BaseMedicationRequest | undefined,
   o: RequestOrchestration | undefined

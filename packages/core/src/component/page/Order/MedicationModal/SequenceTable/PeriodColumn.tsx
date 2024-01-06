@@ -48,7 +48,7 @@ export const PeriodColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
         />
       }
       onChange={handleChangeNumber}
-      min={1}
+      min={0}
     />
   );
 };

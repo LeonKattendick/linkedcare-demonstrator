@@ -1,10 +1,11 @@
-import { Button, Divider, Form, Modal } from "antd";
+import { Button, Divider, Form, Modal, Space } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
 import { ModalProps } from "../../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
+import { Patient } from "../../../../interface/linca/Patient";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { ExternalReference } from "../../../../interface/linca/fhir/Reference";
 import { doctorModels } from "../../../../model/doctorModels";
@@ -23,6 +24,7 @@ export enum MedicationModalState {
 }
 
 interface MedicationModalProps extends ModalProps {
+  patient: Patient;
   state: MedicationModalState;
   request?: BaseMedicationRequest;
   saveRequest: (r: BaseMedicationRequest) => void;
@@ -40,19 +42,32 @@ export const MedicationModal = (props: MedicationModalProps) => {
 
   const [form] = useForm();
 
+  const [sequences, setSequences] = useState<Dosage[]>([]);
+
   useEffect(() => {
     if (!props.open) return;
 
     form.setFieldsValue({
       medicationIndex: props.request?.medication.concept.coding[0]?.code,
-      sequences: props.request?.dosageInstruction,
       doctorIdentifier: (props.request?.performer[0] as ExternalReference)?.identifier?.value,
       pharmacyIdentifier: (props.request?.dispenseRequest?.dispenser as ExternalReference)?.identifier?.value,
     });
+    setSequences(structuredClone(props.request?.dosageInstruction ?? []));
   }, [props.open]);
+
+  useEffect(() => {
+    form.setFieldValue("sequences", sequences);
+  }, [sequences]);
 
   const handleCancel = () => {
     props.setOpen(false);
+  };
+
+  const handleSelectPreset = (medicationCode: string, dosages: Dosage[]) => {
+    form.setFieldsValue({
+      medicationIndex: medicationCode,
+    });
+    setSequences(structuredClone(dosages));
   };
 
   const handleSave = () => {
@@ -127,8 +142,10 @@ export const MedicationModal = (props: MedicationModalProps) => {
       {props.state === MedicationModalState.CREATE && (
         <>
           <Divider orientation="left">{t("translation:order.medicationTable.modal.selectsDivider")}</Divider>
-          <SelectFromOtherOrders />
-          <SelectFromMedicationPlan />
+          <Space direction="vertical">
+            <SelectFromOtherOrders patient={props.patient} selectPreset={handleSelectPreset} />
+            <SelectFromMedicationPlan selectPreset={handleSelectPreset} />
+          </Space>
         </>
       )}
       <Form form={form}>
@@ -137,7 +154,11 @@ export const MedicationModal = (props: MedicationModalProps) => {
         <PharmacySelect isReadOnly={props.state === MedicationModalState.VIEW} />
         <Divider orientation="left">{t("translation:order.medicationTable.modal.detailsDivider")}</Divider>
         <MedicationSelect isReadOnly={props.state === MedicationModalState.VIEW} />
-        <SequenceTable form={form} isReadOnly={props.state === MedicationModalState.VIEW} />
+        <SequenceTable
+          sequences={sequences}
+          setSequences={setSequences}
+          isReadOnly={props.state === MedicationModalState.VIEW}
+        />
       </Form>
     </Modal>
   );
