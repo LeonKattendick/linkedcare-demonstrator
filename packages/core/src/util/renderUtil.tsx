@@ -17,7 +17,7 @@ export const renderMedicationRequest = (r: { medication: Medication; dosageInstr
   return `${r.medication.concept.coding[0].display} [${renderDosage(r.dosageInstruction, t)}]`;
 };
 
-const renderDosage = (dosages: Dosage[], t: any) => {
+export const renderDosage = (dosages: Dosage[], t: any) => {
   if (dosages.length !== 1) return t("translation:general.multipleDosages", { amount: dosages.length });
 
   const d = dosages[0];

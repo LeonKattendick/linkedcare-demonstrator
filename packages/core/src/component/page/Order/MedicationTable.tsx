@@ -24,6 +24,7 @@ import { ExternalReference } from "../../../interface/linca/fhir/Reference";
 import { hasRezeptOrMedId, isAuthorizingPrescription } from "../../../util/matchingUtil";
 import { isPrescribed } from "../../../util/medicationRequestUtil";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
+import { renderDosage } from "../../../util/renderUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
 import { MedicationModal, MedicationModalState } from "./MedicationModal";
 import { PrescribeModal } from "./PrescribeModal";
@@ -225,8 +226,8 @@ export const MedicationTable = (props: MedicationTableProps) => {
         />
         <Table.Column
           title={t("translation:order.medicationTable.dosage")}
-          render={(_, record: BaseMedicationRequest) => record.dosageInstruction.length}
-          sorter={(a, b) => b.dosageInstruction.length - a.dosageInstruction.length}
+          render={(_, record: BaseMedicationRequest) => renderDosage(record.dosageInstruction, t)}
+          sorter={(a, b) => renderDosage(a.dosageInstruction, t).localeCompare(renderDosage(b.dosageInstruction, t))}
         />
         <Table.Column
           title={t("translation:general.actions")}
