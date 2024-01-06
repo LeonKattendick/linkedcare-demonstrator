@@ -37,7 +37,7 @@ export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOther
 
   const handleTakeOver = () => {
     if (selectedItem === undefined) return;
-    const item = requests[selectedItem];
+    const item = uniqueRequests[selectedItem];
     selectPreset(item.medication.concept.coding[0].code!, item.dosageInstruction);
     setSelectedItem(undefined);
   };
