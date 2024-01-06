@@ -75,6 +75,20 @@
 		"subtitle": "To continue the process, you must log in by selecting an already created user",
 		"title": "Select a user"
 	},
+	"medicationPlan": {
+		"bounds": "Take-In duration",
+		"dose": "Dose",
+		"doseRateTypes": {
+			"calculated": "Calculated",
+			"ordered": "Ordered"
+		},
+		"doseRender": "{{dose}}x {{doseType}} ({{doseRate}})",
+		"frequencyAndPeriod": "Take-In",
+		"frequencyAndPeriodRender": "{{frequency}}x all {{period}} {{periodUnit}}",
+		"longTermMedication": "Long-term medication",
+		"medication": "Medication",
+		"weekDays": "Weekdays"
+	},
 	"order": {
 		"buttonRow": {
 			"close": "Complete Order",

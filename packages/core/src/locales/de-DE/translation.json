@@ -75,6 +75,20 @@
 		"subtitle": "Um den Vorgang fortzusetzen, müssen Sie sich einloggen, indem Sie einen bereits erstellten Benutzer auswählen",
 		"title": "Wählen Sie einen Benutzer aus"
 	},
+	"medicationPlan": {
+		"bounds": "Einnahmegrenze",
+		"dose": "Dosis",
+		"doseRateTypes": {
+			"calculated": "Berechnet",
+			"ordered": "Bestellt"
+		},
+		"doseRender": "{{dose}}x {{doseType}} ({{doseRate}})",
+		"frequencyAndPeriod": "Einnahme",
+		"frequencyAndPeriodRender": "{{frequency}}x alle {{period}} {{periodUnit}}",
+		"longTermMedication": "Dauermedikation",
+		"medication": "Medikation",
+		"weekDays": "Wochentage"
+	},
 	"order": {
 		"buttonRow": {
 			"close": "Bestellung abschließen",
