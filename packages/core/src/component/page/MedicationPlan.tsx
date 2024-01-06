@@ -36,7 +36,7 @@ export const MedicationPlan = ({ patient }: MedicationPlanProps) => {
               const period = record.dosageInstruction[0].timing?.repeat.period;
               if (frequency === 0 && period === 0) return t("translation:medicationPlan.longTermMedication");
 
-              return t("translation:medicationPlan.frequencyAndPeriodRender", {
+              return t("translation:general.frequencyAndPeriodRender", {
                 frequency,
                 period,
                 periodUnit: t(`translation:general.time.${record.dosageInstruction[0].timing?.repeat.periodUnit}`),
@@ -54,7 +54,7 @@ export const MedicationPlan = ({ patient }: MedicationPlanProps) => {
           <Table.Column
             title={t("translation:medicationPlan.dose")}
             render={(_, record: MedicationPlanItem) =>
-              t("translation:medicationPlan.doseRender", {
+              t("translation:general.doseRender", {
                 dose: record.dosageInstruction[0].doseAndRate?.[0].doseQuantity.value,
                 doseType: dosageData.find(
                   (v) => v.code === record.dosageInstruction[0].doseAndRate?.[0].doseQuantity.code

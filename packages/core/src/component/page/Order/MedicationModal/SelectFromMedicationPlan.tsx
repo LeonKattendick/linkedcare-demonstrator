@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { medicationPlanItemModels } from "../../../../model/medicationPlanItemModels";
-import { renderDosage } from "../../../../util/renderUtil";
+import { renderMedicationRequest } from "../../../../util/renderUtil";
 
 interface SelectFromMedicationPlanProps {
   selectPreset: (medicationCode: string, dosages: Dosage[]) => void;
@@ -24,11 +24,11 @@ export const SelectFromMedicationPlan = ({ selectPreset }: SelectFromMedicationP
   return (
     <Space>
       <Select
-        style={{ width: 600 }}
+        style={{ width: 800 }}
         placeholder={t("translation:order.medicationTable.modal.select.placeholderMedicationPlan")}
         options={medicationPlanItemModels.map((v, i) => ({
           value: i,
-          label: `${v.medication.concept.coding[0].display}, ${renderDosage(v.dosageInstruction[0])}`,
+          label: renderMedicationRequest(v, t),
         }))}
         value={selectedItem}
         onSelect={setSelectedItem}

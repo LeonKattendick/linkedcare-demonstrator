@@ -26,12 +26,19 @@
 		"back": "Back",
 		"cancel": "Cancel",
 		"close": "Close",
+		"doseRateTypes": {
+			"calculated": "Calculated",
+			"ordered": "Ordered"
+		},
+		"doseRender": "{{dose}}x {{doseType}} ({{doseRate}})",
+		"frequencyAndPeriodRender": "{{frequency}}x all {{period}} {{periodUnit}}",
 		"gender": {
 			"female": "Female",
 			"male": "Male",
 			"other": "Diverse",
 			"unknown": "Unknown"
 		},
+		"multipleDosages": "{{amount}} dosages",
 		"save": "Save",
 		"shortWeekDays": {
 			"fri": "Fri",
@@ -78,13 +85,7 @@
 	"medicationPlan": {
 		"bounds": "Take-In duration",
 		"dose": "Dose",
-		"doseRateTypes": {
-			"calculated": "Calculated",
-			"ordered": "Ordered"
-		},
-		"doseRender": "{{dose}}x {{doseType}} ({{doseRate}})",
 		"frequencyAndPeriod": "Take-In",
-		"frequencyAndPeriodRender": "{{frequency}}x all {{period}} {{periodUnit}}",
 		"longTermMedication": "Long-term medication",
 		"medication": "Medication",
 		"weekDays": "Weekdays"

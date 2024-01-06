@@ -2,19 +2,15 @@ import { Button, Select, Space } from "antd";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetAllValidMedicationRequestsByPatient } from "../../../../hook/filter/useGetAllValidMedicationRequestsByPatient";
-import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../../interface/linca/Patient";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { compare } from "../../../../util/matchingUtil";
-import { renderDosage } from "../../../../util/renderUtil";
+import { renderMedicationRequest } from "../../../../util/renderUtil";
 
 interface SelectFromOtherOrdersProps {
   patient: Patient;
   selectPreset: (medicationCode: string, dosages: Dosage[]) => void;
 }
-
-const renderRequest = (r: BaseMedicationRequest) =>
-  `${r.medication.concept.coding[0].display}, ${renderDosage(r.dosageInstruction[0])}`;
 
 export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOtherOrdersProps) => {
   const { t } = useTranslation();
@@ -27,7 +23,7 @@ export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOther
     const uniqueNames = new Set<string>();
 
     for (const request of requests) {
-      const name = renderRequest(request);
+      const name = renderMedicationRequest(request, t);
       if (uniqueNames.has(name)) continue;
 
       uniqueIds.push(request.id!);
@@ -36,8 +32,8 @@ export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOther
 
     return requests
       .filter((v) => uniqueIds.includes(v.id!))
-      .sort((a, b) => renderRequest(a).localeCompare(renderRequest(b)));
-  }, [requests]);
+      .sort((a, b) => renderMedicationRequest(a, t).localeCompare(renderMedicationRequest(b, t)));
+  }, [requests, t]);
 
   const handleTakeOver = () => {
     if (selectedItem === undefined) return;
@@ -49,12 +45,12 @@ export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOther
   return (
     <Space>
       <Select
-        style={{ width: 600 }}
+        style={{ width: 800 }}
         placeholder={t("translation:order.medicationTable.modal.select.placeholderOtherOrders")}
         loading={isRequestsLoading}
         options={uniqueRequests.map((v, i) => ({
           value: i,
-          label: renderRequest(v),
+          label: renderMedicationRequest(v, t),
         }))}
         value={selectedItem}
         onSelect={setSelectedItem}
