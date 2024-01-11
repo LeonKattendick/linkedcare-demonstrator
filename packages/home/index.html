@@ -8,7 +8,23 @@
     <title>LINCA Demonstrator</title>
   </head>
   <body class="h-screen bg-zinc-300">
-    <div class="flex justify-center flex-col gap-10 h-[45%] bg-zinc-800">
+    <div class="flex justify-center flex-col gap-10 h-[55%] bg-zinc-800">
+      <div class="absolute top-4 left-2">
+        <a
+          class="bg-zinc-200 py-2 px-5 mr-3 rounded text-zinc-900 shadow-sm hover:shadow-xl duration-100 font-semibold"
+          href="https://www.linkedcare.at/"
+          target="_blank"
+        >
+          Linked Care Homepage
+        </a>
+        <a
+          class="bg-zinc-200 py-2 px-5 rounded text-zinc-900 shadow-sm hover:shadow-xl duration-100 font-semibold"
+          href="https://www.hl7.org/fhir/"
+          target="_blank"
+        >
+          HL7 FHIR
+        </a>
+      </div>
       <div class="flex justify-center items-center flex-col">
         <span class="text-3xl font-semibold text-zinc-100 mb-1">Linked Care Demonstrator</span>
         <span class="text-1xl font-thin text-zinc-300 font-mono">
@@ -17,21 +33,21 @@
       </div>
       <div class="flex justify-center items-center gap-4">
         <a
-          class="bg-blue-600 py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
+          class="bg-[#1677ff] py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
           href="/caregiver"
           target="_blank"
         >
           Caregiver
         </a>
         <a
-          class="bg-blue-600 py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
+          class="bg-[#27ae60] py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
           href="/doctor"
           target="_blank"
         >
           Doctor
         </a>
         <a
-          class="bg-blue-600 py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
+          class="bg-[#d48806] py-2 px-5 rounded text-zinc-200 shadow-sm hover:shadow-xl duration-100 font-semibold"
           href="/pharmacy"
           target="_blank"
         >
@@ -45,25 +61,22 @@
         <div class="flex flex-col w-[20%] bg-zinc-700 rounded px-4 py-4 hover:shadow-xl duration-100">
           <span class="text-zinc-200 text-xl mb-4 font-semibold tracking-wider text-center">Caregiver</span>
           <span class="text-white font-light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum reprehenderit natus asperiores quod saepe
-            recusandae officiis, ab sed blanditiis impedit iste aperiam fugit placeat vel similique ut amet molestias
-            sunt!
+            The caregiver application is the starting point of the process. Here you can <b>create</b>, <b>edit</b> and
+            <b>view</b> orders. A list of related patients is provided for each caregiver in a table.
           </span>
         </div>
         <div class="flex flex-col w-[20%] bg-zinc-700 rounded px-4 py-4 hover:shadow-xl duration-100">
           <span class="text-zinc-200 text-xl mb-4 font-semibold tracking-wider text-center">Doctor</span>
           <span class="text-white font-light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum reprehenderit natus asperiores quod saepe
-            recusandae officiis, ab sed blanditiis impedit iste aperiam fugit placeat vel similique ut amet molestias
-            sunt!
+            The doctor application is used to <b>edit</b> and <b>prescribe</b> orders, that were sent to them. If some
+            order doesn't meet their requirement, they can also <b>decline</b> it with a reason.
           </span>
         </div>
         <div class="flex flex-col w-[20%] bg-zinc-700 rounded px-4 py-4 hover:shadow-xl duration-100">
           <span class="text-zinc-200 text-xl mb-4 font-semibold tracking-wider text-center">Pharmacy</span>
           <span class="text-white font-light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum reprehenderit natus asperiores quod saepe
-            recusandae officiis, ab sed blanditiis impedit iste aperiam fugit placeat vel similique ut amet molestias
-            sunt!
+            The pharmacy application provides the final step in the order, giving out the medication. A pharmacist can
+            mark a order item as <b>completed</b> as soon as the medication was given out to the caregiver.
           </span>
         </div>
       </div>
