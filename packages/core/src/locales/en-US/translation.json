@@ -1,8 +1,17 @@
 {
 	"admin": {
+		"createCaregiverError": "Caregiver {{name}} couldn't be created",
+		"createCaregiverSuccess": "Caregiver {{name}} has been created with ID {{id}}",
+		"createCaregivers": "Create caregiver in FHIR",
+		"createDoctorError": "Doctor {{name}} couldn't be created",
+		"createDoctorSuccess": "Doctor {{name}} has been created with ID {{id}}",
+		"createDoctors": "Create doctor in FHIR",
 		"createPatientError": "Patient {{name}} couldn't be created",
 		"createPatientSuccess": "Patient {{name}} has been created with ID {{id}}",
-		"createPatients": "Create patient",
+		"createPatients": "Create patient in FHIR",
+		"createPharmacies": "Create pharmacy in FHIR",
+		"createPharmacyError": "Pharmacy {{name}} couldn't be created",
+		"createPharmacySuccess": "Pharmacy {{name}} has been created with ID {{id}}",
 		"title": "Administrative settings"
 	},
 	"caregiver": {

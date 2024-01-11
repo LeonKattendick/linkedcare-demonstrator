@@ -1,10 +1,7 @@
-import { PATIENT_PROFILE_LINK, Patient } from "../interface/linca/Patient";
+import { Patient } from "../interface/linca/Patient";
 
 const guenterGuertelthier: Patient = {
   resourceType: "Patient",
-  meta: {
-    profile: [PATIENT_PROFILE_LINK],
-  },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "2410011234" }],
   active: true,
   name: [
@@ -39,9 +36,6 @@ const guenterGuertelthier: Patient = {
 
 const patriziaPlatypus: Patient = {
   resourceType: "Patient",
-  meta: {
-    profile: [PATIENT_PROFILE_LINK],
-  },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "0707711234" }],
   active: true,
   name: [
@@ -76,9 +70,6 @@ const patriziaPlatypus: Patient = {
 
 const renateRuesselOlifant: Patient = {
   resourceType: "Patient",
-  meta: {
-    profile: [PATIENT_PROFILE_LINK],
-  },
   identifier: [{ system: "urn:oid:1.2.40.0.10.1.4.3.1", value: "1238100866" }],
   active: true,
   name: [

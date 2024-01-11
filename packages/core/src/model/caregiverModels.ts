@@ -14,12 +14,12 @@ const immerdar: Organization = {
     },
   ],
   name: "DGKP Susanne Allzeit",
+  type: "prov",
   partOf: {
     identifier: {
       system: "urn:oid:1.2.40.0.34.5.2",
       value: "2.999.40.0.34.1.1.3",
     },
-
     display: "Pflegedienst Immerdar",
   },
 };
@@ -33,12 +33,12 @@ const vogelsang: Organization = {
     },
   ],
   name: "DGKP Walter Specht",
+  type: "prov",
   partOf: {
     identifier: {
       system: "urn:oid:1.2.40.0.34.5.2",
       value: "2.999.40.0.34.1.1.1",
     },
-
     display: "Haus Vogelsang",
   },
 };

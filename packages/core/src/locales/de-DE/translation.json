@@ -1,8 +1,17 @@
 {
 	"admin": {
+		"createCaregiverError": "Pflegedienst {{name}} konnte nicht angelegt werden",
+		"createCaregiverSuccess": "Pflegedienst {{name}} wurde mit ID {{id}} angelegt",
+		"createCaregivers": "Pflegedienst in FHIR anlegen",
+		"createDoctorError": "Hausarzt {{name}} konnte nicht angelegt werden",
+		"createDoctorSuccess": "Hausarzt {{name}} wurde mit ID {{id}} angelegt",
+		"createDoctors": "Hausarzt in FHIR anlegen",
 		"createPatientError": "Patient {{name}} konnte nicht angelegt werden",
 		"createPatientSuccess": "Patient {{name}} wurde mit ID {{id}} angelegt",
-		"createPatients": "Patient anlegen",
+		"createPatients": "Patient in FHIR anlegen",
+		"createPharmacies": "Apotheke in FHIR anlegen",
+		"createPharmacyError": "Apotheke {{name}} konnte nicht angelegt werden",
+		"createPharmacySuccess": "Apotheke {{name}} wurde mit ID {{id}} angelegt",
 		"title": "Administrative Einstellungen"
 	},
 	"caregiver": {
