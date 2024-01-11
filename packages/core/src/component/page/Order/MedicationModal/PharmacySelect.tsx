@@ -1,9 +1,10 @@
 import { Form, Select } from "antd";
 import { useTranslation } from "react-i18next";
-import { pharmacyModels } from "../../../../model/pharmacyModels";
+import { useGetAllPharmacies } from "../../../../hook/filter/useGetAllPharmacies";
 
 export const PharmacySelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();
+  const { pharmacies, isPharmaciesLoading } = useGetAllPharmacies();
 
   return (
     <Form.Item
@@ -14,12 +15,13 @@ export const PharmacySelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
       labelAlign="left"
     >
       <Select
-        options={pharmacyModels.map((v) => ({
+        options={pharmacies.map((v) => ({
           value: v.identifier[0].value,
           label: v.name,
         }))}
         allowClear
         disabled={isReadOnly}
+        loading={isPharmaciesLoading}
       />
     </Form.Item>
   );

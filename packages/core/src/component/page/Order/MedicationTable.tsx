@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMedicationRequestApiAdapter } from "../../../hook/adapter/useMedicationRequestApiAdapter";
 import { useGetAllMedicationDispensesByPatientAndRequests } from "../../../hook/filter/useGetAllMedicationDispensesByPatientAndRequests";
+import { useGetAllPractitioners } from "../../../hook/query/useGetAllPractitioners";
 import { usePermissions } from "../../../hook/usePermissions";
 import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
@@ -45,6 +46,7 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const { userType } = useUserTypeAtom();
   const requestApi = useMedicationRequestApiAdapter();
 
+  const { practitioners } = useGetAllPractitioners();
   const { invalidateAllMedicationRequests, invalidateAllMedicationDispenses } = useQueryInvalidations();
   const { dispenses } = useGetAllMedicationDispensesByPatientAndRequests(props.patient.id, props.requests);
 
@@ -59,10 +61,16 @@ export const MedicationTable = (props: MedicationTableProps) => {
   const [prescribeModalOpen, setPrescribeModalOpen] = useState(false);
 
   const handleCreate = () => {
+    if (practitioners.length === 0) {
+      console.error("Practitioners not loaded or empty!");
+      return;
+    }
+
     setEditRequestIndex(MedicationModalState.CREATE);
     setEditRequest(
       createNewProposalMedicationRequest(
         props.patient,
+        practitioners[0],
         { caregiver: props.caregiver, doctor: props.doctor },
         props.order
       )

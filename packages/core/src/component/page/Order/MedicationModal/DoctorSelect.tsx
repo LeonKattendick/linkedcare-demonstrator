@@ -1,9 +1,10 @@
 import { Form, Select } from "antd";
 import { useTranslation } from "react-i18next";
-import { doctorModels } from "../../../../model/doctorModels";
+import { useGetAllPractitioners } from "../../../../hook/query/useGetAllPractitioners";
 
 export const DoctorSelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
   const { t } = useTranslation();
+  const { practitioners, isPractitionersLoading } = useGetAllPractitioners();
 
   return (
     <Form.Item
@@ -15,11 +16,12 @@ export const DoctorSelect = ({ isReadOnly }: { isReadOnly: boolean }) => {
       rules={[{ required: true, message: t("translation:order.medicationTable.modal.errorNoDoctor") }]}
     >
       <Select
-        options={doctorModels.map((v) => ({
+        options={practitioners.map((v) => ({
           value: v.identifier[0].value,
           label: v.name[0].text,
         }))}
         disabled={isReadOnly}
+        loading={isPractitionersLoading}
       />
     </Form.Item>
   );

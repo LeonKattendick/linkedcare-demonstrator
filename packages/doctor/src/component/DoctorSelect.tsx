@@ -1,5 +1,5 @@
 import { Select } from "antd";
-import { doctorModels } from "core/src/model/doctorModels";
+import { useGetAllPractitioners } from "core/src/hook/query/useGetAllPractitioners";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelectedDoctorAtom } from "../hook/useSelectedDoctorAtom";
@@ -7,6 +7,7 @@ import { useSelectedDoctorAtom } from "../hook/useSelectedDoctorAtom";
 export const DoctorSelect = () => {
   const { t } = useTranslation();
 
+  const { practitioners, isPractitionersLoading } = useGetAllPractitioners();
   const { selectedDoctor, setSelectedDoctor } = useSelectedDoctorAtom();
 
   useEffect(() => {
@@ -22,13 +23,13 @@ export const DoctorSelect = () => {
   }, [selectedDoctor]);
 
   const handleSetSelectedDoctor = (id: string) => {
-    setSelectedDoctor(doctorModels.find((v) => v.identifier[0].value == id) ?? null);
+    setSelectedDoctor(practitioners.find((v) => v.identifier[0].value == id) ?? null);
   };
 
   return (
     <Select
       style={{ width: 230, textAlign: "left" }}
-      options={doctorModels.map((v) => ({
+      options={practitioners.map((v) => ({
         value: v.identifier[0].value,
         label: `${v.name[0].text}`,
       }))}
@@ -37,6 +38,7 @@ export const DoctorSelect = () => {
       value={selectedDoctor?.identifier[0].value}
       onClear={() => setSelectedDoctor(null)}
       placeholder={t("translation:doctor.selectPlaceholder")}
+      loading={isPractitionersLoading}
     />
   );
 };

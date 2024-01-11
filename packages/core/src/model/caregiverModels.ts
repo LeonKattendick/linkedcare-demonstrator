@@ -14,7 +14,7 @@ const immerdar: Organization = {
     },
   ],
   name: "DGKP Susanne Allzeit",
-  type: "prov",
+  type: { coding: [{ code: "prov" }] },
   partOf: {
     identifier: {
       system: "urn:oid:1.2.40.0.34.5.2",
@@ -33,7 +33,7 @@ const vogelsang: Organization = {
     },
   ],
   name: "DGKP Walter Specht",
-  type: "prov",
+  type: { coding: [{ code: "prov" }] },
   partOf: {
     identifier: {
       system: "urn:oid:1.2.40.0.34.5.2",

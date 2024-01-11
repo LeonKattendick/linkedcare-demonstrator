@@ -3,13 +3,13 @@ import { useForm } from "antd/lib/form/Form";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import medicationData from "../../../../data/medication.json";
+import { useGetAllPharmacies } from "../../../../hook/filter/useGetAllPharmacies";
+import { useGetAllPractitioners } from "../../../../hook/query/useGetAllPractitioners";
 import { ModalProps } from "../../../../interface/ModalProps";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../../interface/linca/Patient";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { ExternalReference } from "../../../../interface/linca/fhir/Reference";
-import { doctorModels } from "../../../../model/doctorModels";
-import { pharmacyModels } from "../../../../model/pharmacyModels";
 import { DoctorSelect } from "./DoctorSelect";
 import { MedicationSelect } from "./MedicationSelect";
 import { PharmacySelect } from "./PharmacySelect";
@@ -39,6 +39,8 @@ interface FormResult {
 
 export const MedicationModal = (props: MedicationModalProps) => {
   const { t } = useTranslation();
+  const { practitioners } = useGetAllPractitioners();
+  const { pharmacies } = useGetAllPharmacies();
 
   const [form] = useForm();
 
@@ -77,10 +79,10 @@ export const MedicationModal = (props: MedicationModalProps) => {
       const medication = medicationData.find((v) => v.code === res.medicationIndex);
       if (!medication) return;
 
-      const doctor = doctorModels.find((v) => v.identifier[0].value === res.doctorIdentifier);
+      const doctor = practitioners.find((v) => v.identifier[0].value === res.doctorIdentifier);
       if (!doctor) return;
 
-      const pharmacy = pharmacyModels.find((v) => v.identifier[0].value === res.pharmacyIdentifier);
+      const pharmacy = pharmacies.find((v) => v.identifier[0].value === res.pharmacyIdentifier);
 
       props.saveRequest({
         ...props.request,

@@ -1,6 +1,6 @@
 import { Select } from "antd";
+import { useGetAllCaregivers } from "core/src/hook/filter/useGetAllCaregivers";
 import { ExternalReference } from "core/src/interface/linca/fhir/Reference";
-import { caregiverModels } from "core/src/model/caregiverModels";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelectedCaregiverAtom } from "../hook/useSelectedCaregiverAtom";
@@ -8,6 +8,7 @@ import { useSelectedCaregiverAtom } from "../hook/useSelectedCaregiverAtom";
 export const CaregiverSelect = () => {
   const { t } = useTranslation();
 
+  const { caregivers, isCaregiversLoading } = useGetAllCaregivers();
   const { selectedCaregiver, setSelectedCaregiver } = useSelectedCaregiverAtom();
 
   useEffect(() => {
@@ -23,13 +24,13 @@ export const CaregiverSelect = () => {
   }, [selectedCaregiver]);
 
   const handleSetSelectedCaregiver = (id: string) => {
-    setSelectedCaregiver(caregiverModels.find((v) => v.identifier[0].value == id) ?? null);
+    setSelectedCaregiver(caregivers.find((v) => v.identifier[0].value == id) ?? null);
   };
 
   return (
     <Select
       style={{ width: 335, textAlign: "left" }}
-      options={caregiverModels.map((v) => ({
+      options={caregivers.map((v) => ({
         value: v.identifier[0].value,
         label: `${v.name} (${(v.partOf as ExternalReference).display})`,
       }))}
@@ -38,6 +39,7 @@ export const CaregiverSelect = () => {
       value={selectedCaregiver?.identifier[0].value}
       onClear={() => setSelectedCaregiver(null)}
       placeholder={t("translation:caregiver.selectPlaceholder")}
+      loading={isCaregiversLoading}
     />
   );
 };

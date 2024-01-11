@@ -1,5 +1,5 @@
 import { Select } from "antd";
-import { pharmacyModels } from "core/src/model/pharmacyModels";
+import { useGetAllPharmacies } from "core/src/hook/filter/useGetAllPharmacies";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelectedPharmacyAtom } from "../hook/useSelectedPharmacyAtom";
@@ -7,6 +7,7 @@ import { useSelectedPharmacyAtom } from "../hook/useSelectedPharmacyAtom";
 export const PharmacySelect = () => {
   const { t } = useTranslation();
 
+  const { pharmacies, isPharmaciesLoading } = useGetAllPharmacies();
   const { selectedPharmacy, setSelectedPharmacy } = useSelectedPharmacyAtom();
 
   useEffect(() => {
@@ -22,13 +23,13 @@ export const PharmacySelect = () => {
   }, [selectedPharmacy]);
 
   const handleSetSelectedPharmacy = (id: string) => {
-    setSelectedPharmacy(pharmacyModels.find((v) => v.identifier[0].value == id) ?? null);
+    setSelectedPharmacy(pharmacies.find((v) => v.identifier[0].value == id) ?? null);
   };
 
   return (
     <Select
       style={{ width: 280, textAlign: "left" }}
-      options={pharmacyModels.map((v) => ({
+      options={pharmacies.map((v) => ({
         value: v.identifier[0].value,
         label: `${v.name}`,
       }))}
@@ -37,6 +38,7 @@ export const PharmacySelect = () => {
       value={selectedPharmacy?.identifier[0].value}
       onClear={() => setSelectedPharmacy(null)}
       placeholder={t("translation:pharmacy.selectPlaceholder")}
+      loading={isPharmaciesLoading}
     />
   );
 };

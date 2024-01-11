@@ -9,7 +9,7 @@ const vogel: Organization = {
     },
   ],
   name: "Apotheke 'Zum frühen Vogel'",
-  type: "other",
+  type: { coding: [{ code: "other" }] },
 };
 
 export const pharmacyModels = [vogel];

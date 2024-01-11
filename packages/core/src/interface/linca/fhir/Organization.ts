@@ -9,6 +9,8 @@ export interface Organization extends Resource {
   resourceType: "Organization";
   identifier: Identifier[];
   name: string;
-  type: "prov" | "other";
+  type: {
+    coding: { code: "prov" | "other" }[];
+  };
   partOf?: Reference<Organization>; // Caregiver - Careservice linking
 }
