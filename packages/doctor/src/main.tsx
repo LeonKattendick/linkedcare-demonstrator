@@ -1,3 +1,4 @@
+import { ConfigProvider } from "antd";
 import { SelectionError } from "core/src/component/Error/SelectionError";
 import { HeaderProps } from "core/src/component/Header";
 import { Loading } from "core/src/component/Loading";
@@ -35,24 +36,26 @@ const App = () => {
   }, []);
 
   return (
-    <Page title={t("translation:header.doctorTitle")} rightMenu={<DoctorSelect />} navElements={navElements}>
-      {userType ? (
-        selectedDoctor ? (
-          <Routes>
-            <Route path="/" element={<DoctorSearchPatients />} />
-            <Route path="/orders" element={<DoctorOrders />} />
-            <Route path="/patient/:patientId" element={<DoctorViewPatient />} />
-            <Route path="/plan/:patientId" element={<DoctorMedicationPlan />} />
-            <Route path="/order/:patientId/:orderId" element={<DoctorOrder />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+    <ConfigProvider theme={{ token: { colorPrimary: "#27ae60" } }}>
+      <Page title={t("translation:header.doctorTitle")} rightMenu={<DoctorSelect />} navElements={navElements}>
+        {userType ? (
+          selectedDoctor ? (
+            <Routes>
+              <Route path="/" element={<DoctorSearchPatients />} />
+              <Route path="/orders" element={<DoctorOrders />} />
+              <Route path="/patient/:patientId" element={<DoctorViewPatient />} />
+              <Route path="/plan/:patientId" element={<DoctorMedicationPlan />} />
+              <Route path="/order/:patientId/:orderId" element={<DoctorOrder />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          ) : (
+            <SelectionError extra={<DoctorSelect />} />
+          )
         ) : (
-          <SelectionError extra={<DoctorSelect />} />
-        )
-      ) : (
-        <Loading />
-      )}
-    </Page>
+          <Loading />
+        )}
+      </Page>
+    </ConfigProvider>
   );
 };
 

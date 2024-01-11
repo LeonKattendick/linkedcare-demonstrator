@@ -1,5 +1,5 @@
 import { EyeOutlined } from "@ant-design/icons";
-import { Button, Card, Table, Tooltip } from "antd";
+import { Button, Card, Table, Tooltip, theme } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -28,6 +28,7 @@ interface OrdersProps {
 export const Orders = ({ orders, isOrdersLoading, showClickablePatient }: OrdersProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { token } = theme.useToken();
 
   const { requests, isRequestsLoading } = useGetAllValidMedicationRequests();
   const { patients, isPatientsLoading } = useGetAllPatients();
@@ -70,7 +71,9 @@ export const Orders = ({ orders, isOrdersLoading, showClickablePatient }: Orders
           render={(_, record: OrderWithRequests) =>
             showClickablePatient ? (
               <Tooltip title={t("translation:orders.tooltipViewPatient")}>
-                <Link to={`/patient/${record.patient?.id}`}>{record.patient?.name[0]?.text}</Link>
+                <Link style={{ color: token.colorPrimary }} to={`/patient/${record.patient?.id}`}>
+                  {record.patient?.name[0]?.text}
+                </Link>
               </Tooltip>
             ) : (
               record.patient?.name[0].text

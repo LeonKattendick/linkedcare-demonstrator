@@ -1,5 +1,5 @@
 import { EyeOutlined, FileAddOutlined } from "@ant-design/icons";
-import { Button, Card, Input, Space, Table, Tooltip } from "antd";
+import { Button, Card, Input, Space, Table, Tooltip, theme } from "antd";
 import { Patient } from "core/src/interface/linca/Patient";
 import { renderAddress, renderBirthDate } from "core/src/util/renderUtil";
 import dayjs from "dayjs";
@@ -26,6 +26,7 @@ const compare = (search: string, patient: Patient) => {
 export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }: SearchPatientsProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { token } = theme.useToken();
 
   const [search, setSearch] = useState("");
 
@@ -45,7 +46,9 @@ export const SearchPatients = ({ patients, isPatientsLoading, showCreateButton }
             title={t("translation:searchPatients.table.name")}
             render={(_, record: Patient) => (
               <Tooltip title={t("translation:searchPatients.table.tooltipView")}>
-                <Link to={`/patient/${record.id}`}>{record.name[0]?.text}</Link>
+                <Link style={{ color: token.colorPrimary }} to={`/patient/${record.id}`}>
+                  {record.name[0]?.text}
+                </Link>
               </Tooltip>
             )}
             sorter={(a, b) => a.name[0]?.text.localeCompare(b.name[0]?.text)}

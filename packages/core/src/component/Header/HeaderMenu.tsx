@@ -16,7 +16,7 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
     <Menu
       theme="dark"
       mode="horizontal"
-      style={{ flexGrow: 1 }}
+      style={{ flexGrow: 1, backgroundColor: "transparent" }}
       selectedKeys={selectedKeys}
       onSelect={(v) => navigate(v.key)}
       items={props.navElements

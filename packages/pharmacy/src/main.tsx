@@ -1,3 +1,4 @@
+import { ConfigProvider } from "antd";
 import { SelectionError } from "core/src/component/Error/SelectionError";
 import { HeaderProps } from "core/src/component/Header";
 import { Loading } from "core/src/component/Loading";
@@ -29,21 +30,23 @@ const App = () => {
   }, []);
 
   return (
-    <Page title={t("translation:header.pharmacyTitle")} rightMenu={<PharmacySelect />} navElements={navElements}>
-      {userType ? (
-        selectedPharmacy ? (
-          <Routes>
-            <Route path="/" element={<PharmacyOrders />} />
-            <Route path="/order/:patientId/:orderId" element={<PharmacyOrder />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+    <ConfigProvider theme={{ token: { colorPrimary: "#d48806" } }}>
+      <Page title={t("translation:header.pharmacyTitle")} rightMenu={<PharmacySelect />} navElements={navElements}>
+        {userType ? (
+          selectedPharmacy ? (
+            <Routes>
+              <Route path="/" element={<PharmacyOrders />} />
+              <Route path="/order/:patientId/:orderId" element={<PharmacyOrder />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          ) : (
+            <SelectionError extra={<PharmacySelect />} />
+          )
         ) : (
-          <SelectionError extra={<PharmacySelect />} />
-        )
-      ) : (
-        <Loading />
-      )}
-    </Page>
+          <Loading />
+        )}
+      </Page>
+    </ConfigProvider>
   );
 };
 
