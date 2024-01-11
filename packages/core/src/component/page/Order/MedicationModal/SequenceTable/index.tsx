@@ -2,6 +2,7 @@ import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Table } from "antd";
 import { useTranslation } from "react-i18next";
 import dosageData from "../../../../../data/dosage.json";
+import { UserType, useUserTypeAtom } from "../../../../../hook/useUserTypeAtom";
 import { Dosage } from "../../../../../interface/linca/fhir/Dosage";
 import { createNewDosage } from "../../../../../util/orderUtil";
 import { BoundsColumn } from "./BoundsColumn";
@@ -27,6 +28,7 @@ export interface SequenceTableColumnProps {
 
 export const SequenceTable = ({ sequences, setSequences, isReadOnly }: SequenceTableProps) => {
   const { t } = useTranslation();
+  const { userType } = useUserTypeAtom();
 
   const handleAdd = () => {
     setSequences([...sequences, createNewDosage(sequences.length + 1, dosageData[0].code)]);
@@ -166,17 +168,19 @@ export const SequenceTable = ({ sequences, setSequences, isReadOnly }: SequenceT
             />
           )}
         />
-        <Table.Column
-          title={t("translation:order.medicationTable.modal.table.doseRate")}
-          width="12%"
-          render={(_, record: Dosage, index) => (
-            <DoseRateColumn
-              dosage={record}
-              handleChangeSequence={createHandleChangeSequence(index)}
-              isReadOnly={isReadOnly}
-            />
-          )}
-        />
+        {(isReadOnly || userType === UserType.DOCTOR) && (
+          <Table.Column
+            title={t("translation:order.medicationTable.modal.table.doseRate")}
+            width="12%"
+            render={(_, record: Dosage, index) => (
+              <DoseRateColumn
+                dosage={record}
+                handleChangeSequence={createHandleChangeSequence(index)}
+                isReadOnly={isReadOnly}
+              />
+            )}
+          />
+        )}
         {!isReadOnly && (
           <Table.Column
             title={t("translation:general.actions")}

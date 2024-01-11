@@ -21,7 +21,7 @@ import { RequestOrchestration } from "../../../interface/linca/RequestOrchestrat
 import { Organization } from "../../../interface/linca/fhir/Organization";
 import { Practitioner } from "../../../interface/linca/fhir/Practitioner";
 import { ExternalReference } from "../../../interface/linca/fhir/Reference";
-import { hasRezeptOrMedId, isAuthorizingPrescription } from "../../../util/matchingUtil";
+import { hasMedId, hasRezeptId, isAuthorizingPrescription } from "../../../util/matchingUtil";
 import { isPrescribed } from "../../../util/medicationRequestUtil";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { renderDosage } from "../../../util/renderUtil";
@@ -193,13 +193,23 @@ export const MedicationTable = (props: MedicationTableProps) => {
           }}
           sorter={(a, b) => `${a.status} (${a.intent})`.localeCompare(`${b.status} (${b.intent})`)}
         />
-        {!!props.requests.find(hasRezeptOrMedId) && (
+        {!!props.requests.find(hasRezeptId) && (
           <Table.Column
-            title={t("translation:order.medicationTable.modal.table.ids")}
+            title={t("translation:order.medicationTable.modal.table.eRezeptId")}
             render={(_, record: BaseMedicationRequest) => {
               if (!isPrescribed(record)) return null;
               const prescribed = record as PrescriptionMedicationRequest;
-              return [prescribed.groupIdentifier?.value, prescribed.identifier?.[0].value].filter(Boolean).join(", ");
+              return prescribed.groupIdentifier?.value;
+            }}
+          />
+        )}
+        {!!props.requests.find(hasMedId) && (
+          <Table.Column
+            title={t("translation:order.medicationTable.modal.table.eMedId")}
+            render={(_, record: BaseMedicationRequest) => {
+              if (!isPrescribed(record)) return null;
+              const prescribed = record as PrescriptionMedicationRequest;
+              return prescribed.identifier?.[0].value;
             }}
           />
         )}
