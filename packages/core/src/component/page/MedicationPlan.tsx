@@ -60,7 +60,7 @@ export const MedicationPlan = ({ patient }: MedicationPlanProps) => {
                   (v) => v.code === record.dosageInstruction[0].doseAndRate?.[0].doseQuantity.code
                 )?.display,
                 doseRate: t(
-                  `translation:medicationPlan.doseRateTypes.${record.dosageInstruction[0].doseAndRate?.[0].type.coding[0].code}`
+                  `translation:general.doseRateTypes.${record.dosageInstruction[0].doseAndRate?.[0].type.coding[0].code}`
                 ),
               })
             }
