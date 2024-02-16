@@ -1,8 +1,8 @@
 import {
   CaretLeftOutlined,
-  LoadingOutlined,
   MedicineBoxOutlined,
   SolutionOutlined,
+  SyncOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Card, Col, Flex, Row, Space, Steps } from "antd";
@@ -75,7 +75,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                   title: t("translation:order.steps.caregiver"),
                   status: caregiverSteps[props.orderState],
                   icon: [OrderState.CAREGIVER, OrderState.WAIT_FOR_COMPLETED].includes(props.orderState) ? (
-                    <LoadingOutlined />
+                    <SyncOutlined />
                   ) : (
                     <UserOutlined />
                   ),
@@ -84,7 +84,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                   title: t("translation:order.steps.doctor"),
                   status: (doctorSteps as any)[props.orderState] ?? "wait",
                   icon: [OrderState.BOTH, OrderState.DOCTOR].includes(props.orderState) ? (
-                    <LoadingOutlined />
+                    <SyncOutlined />
                   ) : (
                     <SolutionOutlined />
                   ),
@@ -93,7 +93,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                   title: t("translation:order.steps.pharmacy"),
                   status: (pharmacySteps as any)[props.orderState] ?? "wait",
                   icon: [OrderState.BOTH, OrderState.PHARMACY].includes(props.orderState) ? (
-                    <LoadingOutlined />
+                    <SyncOutlined />
                   ) : (
                     <MedicineBoxOutlined />
                   ),

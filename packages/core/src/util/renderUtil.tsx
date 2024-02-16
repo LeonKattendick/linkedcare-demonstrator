@@ -1,3 +1,4 @@
+import { Flex, Tag } from "antd";
 import dayjs from "dayjs";
 import dosageData from "../data/dosage.json";
 import { Medication } from "../interface/linca/Medication";
@@ -15,6 +16,14 @@ export const renderAddress = (a: Address | undefined) => {
 
 export const renderMedicationRequest = (r: { medication: Medication; dosageInstruction: Dosage[] }, t: any) => {
   return `${r.medication.concept.coding[0].display} [${renderDosage(r.dosageInstruction, t)}]`;
+};
+
+export const renderMedicationRequestLabel = (r: { medication: Medication; dosageInstruction: Dosage[] }, t: any) => {
+  return (
+    <Flex justify="space-between" align="center">
+      {r.medication.concept.coding[0].display} <Tag>{renderDosage(r.dosageInstruction, t)}</Tag>
+    </Flex>
+  );
 };
 
 export const renderDosage = (dosages: Dosage[], t: any) => {

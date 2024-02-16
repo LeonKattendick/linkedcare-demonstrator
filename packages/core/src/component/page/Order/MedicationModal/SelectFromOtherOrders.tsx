@@ -5,7 +5,7 @@ import { useGetAllValidMedicationRequestsByPatient } from "../../../../hook/filt
 import { Patient } from "../../../../interface/linca/Patient";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
 import { compare } from "../../../../util/matchingUtil";
-import { renderMedicationRequest } from "../../../../util/renderUtil";
+import { renderMedicationRequest, renderMedicationRequestLabel } from "../../../../util/renderUtil";
 
 interface SelectFromOtherOrdersProps {
   patient: Patient;
@@ -50,12 +50,17 @@ export const SelectFromOtherOrders = ({ patient, selectPreset }: SelectFromOther
         loading={isRequestsLoading}
         options={uniqueRequests.map((v, i) => ({
           value: i,
-          label: renderMedicationRequest(v, t),
+          label: renderMedicationRequestLabel(v, t),
         }))}
         value={selectedItem}
         onSelect={setSelectedItem}
         showSearch
-        filterOption={(input, option) => compare(input.toLowerCase(), (option?.label ?? "").toLowerCase())}
+        filterOption={(input, option) =>
+          compare(
+            input.toLowerCase(),
+            (option ? renderMedicationRequest(uniqueRequests[option.value], t) : "").toLowerCase()
+          )
+        }
       />
       <Button type="primary" disabled={selectedItem === undefined} onClick={handleTakeOver}>
         {t("translation:order.medicationTable.modal.select.takeOver")}
