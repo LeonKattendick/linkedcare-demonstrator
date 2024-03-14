@@ -5,5 +5,5 @@ import { BaseMedicationRequest } from "./BaseMedicationRequest";
  */
 export interface ProposalMedicationRequest extends BaseMedicationRequest {
   intent: "proposal";
-  status: "active" | "cancelled" | "unknown";
+  status: "active" | "cancelled";
 }

@@ -10,7 +10,7 @@ import { Resource } from "./fhir/Resource";
 export interface BaseMedicationRequest extends Resource {
   resourceType: "MedicationRequest";
   intent: "proposal" | "order";
-  status: "active" | "ended" | "stopped" | "entered-in-error" | "cancelled" | "unknown";
+  status: "active" | "ended" | "stopped" | "entered-in-error" | "cancelled";
   basedOn?: Reference<BaseMedicationRequest>[]; // Update by the Caregiver or non-modified prescription by the Doctor
   subject: Reference<Patient>;
   medication: Medication;
