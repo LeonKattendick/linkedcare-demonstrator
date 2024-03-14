@@ -16,6 +16,5 @@ export interface Resource {
   meta?: {
     versionId?: string;
     lastUpdated?: string;
-    profile: string[]; // contains link to structure definition
   };
 }
