@@ -26,11 +26,11 @@ export const createNewProposalMedicationRequest = (
 ): ProposalMedicationRequest => {
   const careservice = prescriber?.caregiver?.partOf as ExternalReference;
 
-  const informationSource = !!prescriber.caregiver
+  const informationSource = prescriber.caregiver
     ? { ...careservice }
     : { identifier: prescriber.doctor!.identifier[0], display: prescriber.doctor!.name[0].text };
 
-  const requester = !!prescriber.caregiver
+  const requester = prescriber.caregiver
     ? { identifier: prescriber.caregiver.identifier[0], display: prescriber.caregiver.name }
     : { identifier: prescriber.doctor!.identifier[0], display: prescriber.doctor!.name[0].text };
 

@@ -31,7 +31,7 @@ export const MedicationPlan = ({ patient }: MedicationPlanProps) => {
           />
           <Table.Column
             title={t("translation:medicationPlan.frequencyAndPeriod")}
-            render={(_, record: MedicationPlanItem): any => {
+            render={(_, record: MedicationPlanItem) => {
               const frequency = record.dosageInstruction[0].timing?.repeat.frequency;
               const period = record.dosageInstruction[0].timing?.repeat.period;
               if (frequency === 0 && period === 0) return t("translation:medicationPlan.longTermMedication");

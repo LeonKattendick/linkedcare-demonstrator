@@ -19,7 +19,7 @@ export const useGetRelevantRequestOrchestrations = () => {
     );
 
     return orchestrations.filter((v) => validRequests.find((w) => requestIsFromOrchestration(w, v)));
-  }, [selectedDoctor, orchestrations, requests]);
+  }, [selectedDoctor, orchestrations, requests, perms]);
 
   return {
     orchestrations: relevantOrchestrations ?? [],

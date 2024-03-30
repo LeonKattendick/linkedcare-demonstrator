@@ -6,6 +6,7 @@ import medicationData from "../../../../data/medication.json";
 import { useGetAllPharmacies } from "../../../../hook/filter/useGetAllPharmacies";
 import { useGetAllPractitioners } from "../../../../hook/query/useGetAllPractitioners";
 import { ModalProps } from "../../../../interface/ModalProps";
+import { MedicationModalState } from "../../../../interface/enum/MedicationModalState";
 import { BaseMedicationRequest } from "../../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../../interface/linca/Patient";
 import { Dosage } from "../../../../interface/linca/fhir/Dosage";
@@ -16,12 +17,6 @@ import { PharmacySelect } from "./PharmacySelect";
 import { SelectFromMedicationPlan } from "./SelectFromMedicationPlan";
 import { SelectFromOtherOrders } from "./SelectFromOtherOrders";
 import { SequenceTable } from "./SequenceTable";
-
-export enum MedicationModalState {
-  VIEW = -2,
-  CREATE = -1,
-  EDIT = 0,
-}
 
 interface MedicationModalProps extends ModalProps {
   patient: Patient;
@@ -55,11 +50,11 @@ export const MedicationModal = (props: MedicationModalProps) => {
       pharmacyIdentifier: (props.request?.dispenseRequest?.dispenser as ExternalReference)?.identifier?.value,
     });
     setSequences(structuredClone(props.request?.dosageInstruction ?? []));
-  }, [props.open]);
+  }, [form, props]);
 
   useEffect(() => {
     form.setFieldValue("sequences", sequences);
-  }, [sequences]);
+  }, [form, sequences]);
 
   const handleCancel = () => {
     props.setOpen(false);

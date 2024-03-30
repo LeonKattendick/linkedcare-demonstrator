@@ -22,7 +22,7 @@ export const CaregiverOrder = () => {
   if (!patient) return <PatientNotFoundError patientId={patientId} />;
   if (!caregiverIsFromOrganization(selectedCaregiver, patient.managingOrganization)) return <Navigate to="/" />;
 
-  if (!!orderId) {
+  if (orderId) {
     if (!orchestration) return <OrderNotFoundError orderId={orderId} />;
     if (!identifierEqualsReference(selectedCaregiver!.identifier[0], orchestration.subject)) return <Navigate to="/" />;
   }

@@ -20,7 +20,7 @@ export const useGetRelevantRequestOrchestrationsByPatient = (patientId: string |
     const validRequests = requests.filter((v) => perms.canDoctorSeeRequest(v, selectedDoctor));
 
     return orchestrations.filter((v) => validRequests.find((w) => requestIsFromOrchestration(w, v)));
-  }, [selectedDoctor, orchestrations, requests]);
+  }, [selectedDoctor, orchestrations, requests, perms]);
 
   return {
     orchestrations: relevantOrchestrations,

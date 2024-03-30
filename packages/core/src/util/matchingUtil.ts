@@ -28,7 +28,7 @@ export const identifiersEqual = (i1: Identifier | undefined, i2: Identifier | un
   return i1.system === i2.system && i1.value === i2.value;
 };
 
-export const referencesEqual = (r1: Reference<any> | undefined, r2: Reference<any> | undefined) => {
+export const referencesEqual = (r1: Reference<unknown> | undefined, r2: Reference<unknown> | undefined) => {
   if (!r1 || !r2) return false;
 
   if (isInternalReference(r1) && isInternalReference(r2)) {
@@ -47,7 +47,7 @@ export const caregiverIsFromOrganization = (caregiver: Organization | null, orga
 
 export const identifierEqualsReference = (
   identifier: Identifier | undefined,
-  reference: Reference<any> | undefined
+  reference: Reference<unknown> | undefined
 ) => {
   if (!identifier || !reference) return false;
   return referencesEqual({ identifier, display: "" }, reference);

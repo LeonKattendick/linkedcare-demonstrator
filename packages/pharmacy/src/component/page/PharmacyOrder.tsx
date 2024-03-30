@@ -22,7 +22,7 @@ export const PharmacyOrder = () => {
 
   const pharmacyRequests = useMemo(
     () => requests.filter((v) => perms.canPharmacySeeRequest(v, selectedPharmacy)),
-    [requests, selectedPharmacy]
+    [requests, selectedPharmacy, perms]
   );
 
   if (isPatientLoading || isOrchestrationLoading || isRequestsLoading) return <Loading />;

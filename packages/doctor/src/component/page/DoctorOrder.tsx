@@ -22,7 +22,7 @@ export const DoctorOrder = () => {
 
   const doctorRequests = useMemo(
     () => requests.filter((v) => perms.canDoctorSeeRequest(v, selectedDoctor)),
-    [requests, selectedDoctor]
+    [requests, selectedDoctor, perms]
   );
 
   if (isPatientLoading || isOrchestrationLoading || isRequestsLoading) return <Loading />;

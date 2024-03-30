@@ -11,10 +11,10 @@ export const BoundsColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           boundsDuration: {
             value: value,
-            code: dosage.timing?.repeat.boundsDuration.code!,
+            code: dosage.timing!.repeat.boundsDuration.code,
           },
         },
       },
@@ -26,10 +26,10 @@ export const BoundsColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           boundsDuration: {
             code: code,
-            value: dosage.timing?.repeat.boundsDuration.value!,
+            value: dosage.timing!.repeat.boundsDuration.value,
           },
         },
       },

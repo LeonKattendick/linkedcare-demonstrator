@@ -9,7 +9,7 @@ interface PermissionMedicineRequest {
   resourceType: "MedicationRequest";
   id?: string;
   intent: "proposal" | "order";
-  status: "active" | any;
+  status: "active" | string;
 }
 
 export const usePermissions = () => {

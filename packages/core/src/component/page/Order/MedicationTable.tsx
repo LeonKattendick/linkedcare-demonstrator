@@ -15,6 +15,7 @@ import { useGetAllPractitioners } from "../../../hook/query/useGetAllPractitione
 import { usePermissions } from "../../../hook/usePermissions";
 import { useQueryInvalidations } from "../../../hook/useQueryInvalidations";
 import { UserType, useUserTypeAtom } from "../../../hook/useUserTypeAtom";
+import { MedicationModalState } from "../../../interface/enum/MedicationModalState";
 import { BaseMedicationRequest } from "../../../interface/linca/BaseMedicationRequest";
 import { Patient } from "../../../interface/linca/Patient";
 import { PrescriptionMedicationRequest } from "../../../interface/linca/PrescriptionMedicationRequest";
@@ -27,7 +28,7 @@ import { isPrescribed } from "../../../util/medicationRequestUtil";
 import { createNewProposalMedicationRequest } from "../../../util/orderUtil";
 import { renderDosage } from "../../../util/renderUtil";
 import { DeclineStatusModal } from "./DeclineStatusModal";
-import { MedicationModal, MedicationModalState } from "./MedicationModal";
+import { MedicationModal } from "./MedicationModal";
 import { PrescribeModal } from "./PrescribeModal";
 
 interface MedicationTableProps {

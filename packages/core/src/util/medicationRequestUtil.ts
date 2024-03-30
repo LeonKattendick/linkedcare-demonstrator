@@ -13,8 +13,8 @@ export const filterValidRequests = (requests: BaseMedicationRequest[]) => {
     const basedOn = request.basedOn?.[0] as InternalReference;
     const priorPrescription = (request as PrescriptionMedicationRequest).priorPrescription as InternalReference;
 
-    if (!!basedOn) linkedRequestIds.add(basedOn.reference!);
-    if (!!priorPrescription) linkedRequestIds.add(priorPrescription.reference!);
+    if (basedOn) linkedRequestIds.add(basedOn.reference!);
+    if (priorPrescription) linkedRequestIds.add(priorPrescription.reference!);
   }
 
   return requests.filter((v) => !linkedRequestIds.has(`MedicationRequest/${v.id}`));

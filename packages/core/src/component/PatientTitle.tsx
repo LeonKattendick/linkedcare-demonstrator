@@ -73,7 +73,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
               items={[
                 {
                   title: t("translation:order.steps.caregiver"),
-                  status: caregiverSteps[props.orderState],
+                  status: (caregiverSteps as never)[props.orderState],
                   icon: [OrderState.CAREGIVER, OrderState.WAIT_FOR_COMPLETED].includes(props.orderState) ? (
                     <SyncOutlined />
                   ) : (
@@ -82,7 +82,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                 },
                 {
                   title: t("translation:order.steps.doctor"),
-                  status: (doctorSteps as any)[props.orderState] ?? "wait",
+                  status: (doctorSteps as never)[props.orderState] ?? "wait",
                   icon: [OrderState.BOTH, OrderState.DOCTOR].includes(props.orderState) ? (
                     <SyncOutlined />
                   ) : (
@@ -91,7 +91,7 @@ export const PatientTitle = (props: PatientTitleProps) => {
                 },
                 {
                   title: t("translation:order.steps.pharmacy"),
-                  status: (pharmacySteps as any)[props.orderState] ?? "wait",
+                  status: (pharmacySteps as never)[props.orderState] ?? "wait",
                   icon: [OrderState.BOTH, OrderState.PHARMACY].includes(props.orderState) ? (
                     <SyncOutlined />
                   ) : (

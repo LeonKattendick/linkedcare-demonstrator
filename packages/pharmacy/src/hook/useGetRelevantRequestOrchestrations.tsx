@@ -21,7 +21,7 @@ export const useGetRelevantRequestOrchestrations = () => {
     );
 
     return orchestrations.filter((v) => validRequests.find((w) => requestIsFromOrchestration(w, v)));
-  }, [selectedPharmacy, orchestrations, requests, dispenses]);
+  }, [selectedPharmacy, orchestrations, requests, dispenses, perms]);
 
   return {
     orchestrations: relevantOrchestrations ?? [],

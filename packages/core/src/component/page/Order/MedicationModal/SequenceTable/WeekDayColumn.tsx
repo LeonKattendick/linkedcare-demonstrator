@@ -12,7 +12,7 @@ export const WeekDayColumn = ({ dosage, handleChangeSequence, isReadOnly }: Sequ
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           dayOfWeek: value.sort((a, b) => weekDays.indexOf(a) - weekDays.indexOf(b)),
         },
       },

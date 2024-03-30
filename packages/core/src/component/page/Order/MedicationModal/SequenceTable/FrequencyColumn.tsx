@@ -8,7 +8,7 @@ export const FrequencyColumn = ({ dosage, handleChangeSequence, isReadOnly }: Se
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           frequency: value,
         },
       },

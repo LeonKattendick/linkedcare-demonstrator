@@ -22,7 +22,7 @@ export const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     document.title = t(props.title);
-  }, [i18n.language]);
+  }, [i18n.language, props.title, t]);
 
   return (
     <Layout.Header style={{ display: "flex", alignItems: "center", color: "white" }}>

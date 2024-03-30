@@ -16,14 +16,14 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: CACHE_TIME, refetchOnWindowFocus: "always" } },
 });
 
-export const Providers = (props: React.PropsWithChildren<{}>) => {
+export const Providers = (props: React.PropsWithChildren) => {
   const { globalTheme, setGlobalTheme, isLightTheme } = useGlobalThemeAtom();
   const { i18n } = useTranslation();
 
   useEffect(() => {
     const localTheme = localStorage.getItem("antdTheme");
     if (localTheme) setGlobalTheme(localTheme);
-  }, []);
+  }, [setGlobalTheme]);
 
   useEffect(() => {
     localStorage.setItem("antdTheme", globalTheme);

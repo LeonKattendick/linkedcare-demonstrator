@@ -11,7 +11,7 @@ export const PeriodColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           period: value,
         },
       },
@@ -23,7 +23,7 @@ export const PeriodColumn = ({ dosage, handleChangeSequence, isReadOnly }: Seque
       ...dosage,
       timing: {
         repeat: {
-          ...dosage.timing?.repeat!,
+          ...dosage.timing!.repeat,
           periodUnit: unit,
         },
       },

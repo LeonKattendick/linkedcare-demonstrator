@@ -6,7 +6,8 @@
   ],
   "scripts": {
     "dev": "npx lerna run dev",
-    "build": "rimraf ./dist/ && npx lerna run build"
+    "build": "rimraf ./dist/ && npx lerna run build",
+    "lint": "npx lerna run lint"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
