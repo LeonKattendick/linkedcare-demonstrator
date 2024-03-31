@@ -114,6 +114,7 @@ export const MedicationModal = (props: MedicationModalProps) => {
 
   return (
     <Modal
+      forceRender
       open={props.open}
       onCancel={handleCancel}
       title={t(

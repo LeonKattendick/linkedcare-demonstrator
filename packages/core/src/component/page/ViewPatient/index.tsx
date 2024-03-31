@@ -36,7 +36,12 @@ export const ViewPatient = (props: ViewPatientProps) => {
           ]}
           tabBarExtraContent={
             props.showCreateButton && (
-              <Button type="primary" icon={<FileAddOutlined />} onClick={() => navigate(`/create/${props.patient.id}`)}>
+              <Button
+                type="primary"
+                icon={<FileAddOutlined />}
+                onClick={() => navigate(`/create/${props.patient.id}`)}
+                role="tab"
+              >
                 {t("translation:viewPatient.orders.add")}
               </Button>
             )

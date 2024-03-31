@@ -42,6 +42,7 @@ export const CaregiverSelect = () => {
       allowClear
       value={selectedCaregiver?.identifier[0].value}
       onClear={() => setSelectedCaregiver(null)}
+      aria-label="Select caregiver"
       placeholder={t("translation:caregiver.selectPlaceholder")}
       loading={isCaregiversLoading}
     />

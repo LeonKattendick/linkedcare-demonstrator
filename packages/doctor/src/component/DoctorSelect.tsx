@@ -41,6 +41,7 @@ export const DoctorSelect = () => {
       allowClear
       value={selectedDoctor?.identifier[0].value}
       onClear={() => setSelectedDoctor(null)}
+      aria-label="Select doctor"
       placeholder={t("translation:doctor.selectPlaceholder")}
       loading={isPractitionersLoading}
     />

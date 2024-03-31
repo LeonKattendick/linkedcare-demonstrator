@@ -41,6 +41,7 @@ export const PharmacySelect = () => {
       allowClear
       value={selectedPharmacy?.identifier[0].value}
       onClear={() => setSelectedPharmacy(null)}
+      aria-label="Select pharmacy"
       placeholder={t("translation:pharmacy.selectPlaceholder")}
       loading={isPharmaciesLoading}
     />

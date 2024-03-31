@@ -18,19 +18,19 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
       <Row gutter={[0, 16]}>
         <Col span={8}>{t("translation:viewPatient.patientInfo.socialSecurityNumber")}</Col>
         <Col span={16}>
-          <Input value={patient.identifier[0].value} readOnly />
+          <Input value={patient.identifier[0].value} readOnly aria-label="Social security number" />
         </Col>
         <Col span={8}>{t("translation:viewPatient.patientInfo.name")}</Col>
         <Col span={16}>
-          <Input value={patient.name[0].text} readOnly />
+          <Input value={patient.name[0].text} readOnly aria-label="Name" />
         </Col>
         <Col span={8}>{t("translation:viewPatient.patientInfo.gender")}</Col>
         <Col span={16}>
-          <Input value={t(`general.gender.${patient.gender}`)} readOnly />
+          <Input value={t(`general.gender.${patient.gender}`)} readOnly aria-label="Gender" />
         </Col>
         <Col span={8}>{t("translation:viewPatient.patientInfo.birthDate")}</Col>
         <Col span={16}>
-          <Input value={renderBirthDate(patient.birthDate)} readOnly />
+          <Input value={renderBirthDate(patient.birthDate)} readOnly aria-label="Birthdate" />
         </Col>
         <Col span={8}>{t("translation:viewPatient.patientInfo.contacts")}</Col>
         <Col span={16}>
@@ -59,6 +59,7 @@ export const PatientInfo = ({ patient }: PatientInfoProps) => {
             value={`${address.line.join("\n")}\n${address.postalCode} ${address.city} (${address.country})`}
             autoSize
             readOnly
+            aria-label="Addresses"
           />
         </Col>
       </Row>
