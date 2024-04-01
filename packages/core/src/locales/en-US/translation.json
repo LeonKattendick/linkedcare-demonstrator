@@ -102,15 +102,15 @@
 	"order": {
 		"buttonRow": {
 			"close": "Complete Order",
-			"complete": "Mark {{amount}} medication as \"dispensed\"",
+			"complete": "Mark {{amount}} medications as \"dispensed\"",
 			"create": "Create order",
-			"decline": "Decline {{amount}} medication",
+			"decline": "Decline {{amount}} medications",
 			"edit": "Save {{amount}} changes",
 			"popconfirm": {
 				"complete": "Do you want to mark {{amount}} medications as “dispensed”?",
-				"decline": "Do you want to decline {{amount}} medication?"
+				"decline": "Do you want to decline {{amount}} medications?"
 			},
-			"prescribe": "Prescribe {{amount}} medication",
+			"prescribe": "Prescribe {{amount}} medications",
 			"revoke": "Revoke order"
 		},
 		"complete": {
@@ -132,7 +132,7 @@
 		"declineModal": {
 			"ended": "Stop taking after using the current pack",
 			"error": "Incorrect entry",
-			"ok": "Decline {{amount}} medication",
+			"ok": "Decline {{amount}} medications",
 			"placeholder": "Select a reason for cancellation",
 			"stopped": "Stop taking it immediately",
 			"title": "Decline medication"
@@ -219,7 +219,7 @@
 		},
 		"prescribeModal": {
 			"med": "Enter eMedID (optional)",
-			"ok": "Prescribe {{amount}} medication",
+			"ok": "Prescribe {{amount}} medications",
 			"recipe": "Enter eRezeptID (optional)",
 			"title": "Prescribe medication"
 		},
